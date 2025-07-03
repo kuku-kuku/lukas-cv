@@ -1,0 +1,7 @@
+{
+  "projectId": "prj_w1AG66tCqPeydgQB2R5CXL73PYDh",
+  "orgId": "team_vwoRQYIOeNTTOMqBPjdf5pIJ",
+  "settings": {
+    "buildCommand": "npm install --legacy-peer-deps && npm run build"
+  }
+}
