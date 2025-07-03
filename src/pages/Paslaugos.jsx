@@ -9,7 +9,7 @@ export default function Paslaugos() {
 
   return (
     <motion.div
-      key={t("services")} // re-key on language change
+      key={t("services")}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -39,12 +39,18 @@ export default function Paslaugos() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: i * 0.05 }}
-            className="p-6 border border-gray-300 dark:border-gray-700 rounded-xl shadow hover:shadow-lg cursor-pointer bg-white dark:bg-gray-800 transition-colors duration-500"
+            className="p-6 border border-gray-300 dark:border-gray-700 rounded-xl shadow hover:shadow-lg cursor-pointer bg-white dark:bg-gray-800 transition-colors duration-500 flex flex-col justify-between"
           >
-            <h3 className="text-2xl font-semibold mb-2">{t(`service_${i}_title`)}</h3>
-            <p className="mb-2 text-gray-700 dark:text-gray-300">{t(`service_${i}_short`)}</p>
-            <p className="font-bold text-indigo-600 dark:text-indigo-400">
-              {t("price_label")}: {t(`service_${i}_price`)}
+            <div>
+              <h3 className="text-2xl font-semibold mb-2">
+                {t(`service_${i}_title`)}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                {t(`service_${i}_short`)}
+              </p>
+            </div>
+            <p className="mt-6 text-right font-bold text-indigo-600 dark:text-indigo-400">
+              {t(`service_${i}_price`)}
             </p>
           </motion.div>
         ))}
@@ -72,9 +78,11 @@ export default function Paslaugos() {
                 &times;
               </button>
               <h3 className="text-3xl font-bold mb-4">{active.title}</h3>
-              <p className="mb-4 text-gray-800 dark:text-gray-300">{active.long}</p>
+              <p className="mb-4 text-gray-800 dark:text-gray-300">
+                {active.long}
+              </p>
               <p className="font-semibold text-indigo-600 dark:text-indigo-400">
-                {t("price_label")}: {active.price}
+                {active.price}
               </p>
             </motion.div>
           </motion.div>

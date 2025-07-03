@@ -12,17 +12,18 @@ export default function Navbar() {
   // Užkraunam temą pirmą kartą
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    const initialTheme = savedTheme || "light";
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle("dark", initialTheme === "dark");
+    setTheme(savedTheme || "light");
   }, []);
+
+  // Sekam kai pasikeičia tema ir pritaikom klasę bei išsaugom
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   // Temų perjungimas
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem("theme", newTheme);
+    setTheme(prev => (prev === "dark" ? "light" : "dark"));
   };
 
   // Kalbos keitimas
@@ -53,17 +54,18 @@ export default function Navbar() {
               <Link
                 key={to}
                 to={to}
-                className={`hover:text-indigo-600 transition-colors duration-200 ${
+                className={`relative flex items-center justify-center h-full hover:text-indigo-600 transition-colors duration-200 ${
                   location.pathname === to ? "text-indigo-600 font-semibold" : ""
                 }`}
               >
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.span
-                    key={i18n.language + label}
+                    key={i18n.language + label + theme}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
+                    className="text-gray-800 dark:text-white transition-transform duration-200 hover:scale-105"
                   >
                     {label}
                   </motion.span>

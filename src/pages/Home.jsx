@@ -20,7 +20,6 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
         <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
           {t('heroText')} <br />
-          <span className="text-indigo-400">Lukas</span>
         </h1>
 
         <div className="h-6 md:h-10" />
