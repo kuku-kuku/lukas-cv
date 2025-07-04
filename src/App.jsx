@@ -1,15 +1,21 @@
 // App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Apie from "./pages/Apie";
 import Paslaugos from "./pages/Paslaugos";
 import Kontaktai from "./pages/Kontaktai";
 import Darbai from "./pages/Darbai";
 import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
 import "./styles.css";
 import { AnimatePresence, motion } from "framer-motion";
-import "./i18n"; // <-- i18next integracija
+import "./i18n"; // i18next integracija
 
 function AppContent() {
   const location = useLocation();
@@ -17,7 +23,10 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white font-poppins transition">
+      <ScrollToTop />
+
       {!isHome && <Navbar />}
+
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
