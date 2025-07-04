@@ -22,5 +22,5 @@ yarn-error.log*
 
 # editor / Vercel
 .vscode/
-.vercel
 .idea/
+

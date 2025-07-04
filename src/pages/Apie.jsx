@@ -18,12 +18,10 @@ export default function Apie() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]); // ← pataisyta čia
 
   return (
     <section className="relative pt-16 pb-20 px-4 md:px-8 text-gray-900 dark:text-gray-100 min-h-screen font-poppins transition-colors duration-500 flex items-center">
-
-      {/* Turinys be background fono, bet su sukiojamomis nuotraukomis šone */}
       <div className="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-center gap-16">
 
         {/* Tekstas */}
@@ -44,7 +42,7 @@ export default function Apie() {
           </div>
         </motion.div>
 
-        {/* Nuotraukos šalia teksto (išliko) */}
+        {/* Nuotraukos šalia teksto */}
         <div className="relative w-full md:w-1/2 flex justify-center">
           <div className="w-[80%] h-[500px] sm:h-[540px] md:h-[560px] relative">
             <AnimatePresence mode="wait">

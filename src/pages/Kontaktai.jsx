@@ -30,7 +30,7 @@ export default function Kontaktai() {
 
     emailjs
       .sendForm(
-        "service_j1paduv",
+        "service_5gekaqp",
         "template_p67o8xe",
         formRef.current,
         "XcHeNZOOUKJAmAR4p"
