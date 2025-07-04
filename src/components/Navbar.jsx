@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../assets/logo-beneta.png";
+import { ArrowLeft } from "lucide-react"; // ← graži rodyklė
 
 export default function Navbar() {
   const location = useLocation();
@@ -40,9 +40,13 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-50 font-poppins text-gray-800 dark:text-white transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/">
-            <img src={logo} alt="Beneta logotipas" className="h-10 w-auto" />
+          {/* ← Rodyklė vietoj logotipo */}
+          <Link
+            to="/"
+            className="flex items-center gap-2 hover:text-indigo-600 transition-colors duration-300"
+          >
+            <ArrowLeft className="w-6 h-6" />
+            <span className="hidden sm:inline text-sm font-medium">{t("back") || "Back"}</span>
           </Link>
 
           {/* Desktop nav */}
@@ -103,11 +107,11 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            exit={{ scaleY: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white dark:bg-gray-900 shadow-inner overflow-hidden px-6 py-4 space-y-4 text-lg font-medium"
+            className="md:hidden origin-top bg-white dark:bg-gray-900 shadow-inner overflow-hidden px-6 py-4 space-y-4 text-lg font-medium"
           >
             {navLinks.map(({ to, label }) => (
               <Link
