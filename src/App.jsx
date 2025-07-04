@@ -1,5 +1,5 @@
 // App.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,11 +15,22 @@ import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import "./styles.css";
 import { AnimatePresence, motion } from "framer-motion";
-import "./i18n"; // i18next integracija
+import "./i18n";
+import { initGA, trackPageview } from "./ga";
 
 function AppContent() {
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  // Inicijuojam Google Analytics vieną kartą
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  // Sekam kiekvieną puslapio pasikeitimą
+  useEffect(() => {
+    trackPageview(location.pathname);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white font-poppins transition">
