@@ -8,25 +8,22 @@ export default function Navbar() {
   const location = useLocation();
   const { i18n, t } = useTranslation();
   const [theme, setTheme] = useState("light");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Užkraunam temą pirmą kartą
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     setTheme(savedTheme || "light");
   }, []);
 
-  // Sekam kai pasikeičia tema ir pritaikom klasę bei išsaugom
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Temų perjungimas
   const toggleTheme = () => {
     setTheme(prev => (prev === "dark" ? "light" : "dark"));
   };
 
-  // Kalbos keitimas
   const toggleLanguage = () => {
     const newLang = i18n.language === "lt" ? "en" : "lt";
     i18n.changeLanguage(newLang);
@@ -48,7 +45,7 @@ export default function Navbar() {
             <img src={logo} alt="Beneta logotipas" className="h-10 w-auto" />
           </Link>
 
-          {/* Navigacija */}
+          {/* Desktop nav */}
           <div className="hidden md:flex space-x-10 text-lg font-medium">
             {navLinks.map(({ to, label }) => (
               <Link
@@ -74,9 +71,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Mygtukai */}
-          <div className="flex items-center gap-3 ml-4">
-            {/* Tema */}
+          {/* Buttons */}
+          <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
               className="text-xl hover:scale-110 transition"
@@ -84,17 +80,50 @@ export default function Navbar() {
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
-
-            {/* Kalba */}
             <button
               onClick={toggleLanguage}
               className="px-3 py-1 border border-gray-800 dark:border-white rounded hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black text-sm transition-colors duration-300"
             >
               {i18n.language === "lt" ? "EN" : "LT"}
             </button>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden ml-2 text-2xl focus:outline-none"
+              title="Meniu"
+            >
+              {menuOpen ? "✖" : "☰"}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile nav */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-white dark:bg-gray-900 shadow-inner overflow-hidden px-6 py-4 space-y-4 text-lg font-medium"
+          >
+            {navLinks.map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                onClick={() => setMenuOpen(false)}
+                className={`block hover:text-indigo-600 transition-colors duration-200 ${
+                  location.pathname === to ? "text-indigo-600 font-semibold" : ""
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
