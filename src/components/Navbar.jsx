@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft } from "lucide-react"; // ← graži rodyklė
+import { ChevronLeftCircle } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
@@ -21,7 +21,7 @@ export default function Navbar() {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === "dark" ? "light" : "dark"));
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   const toggleLanguage = () => {
@@ -40,16 +40,15 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-50 font-poppins text-gray-800 dark:text-white transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* ← Rodyklė vietoj logotipo */}
+          {/* Elegantiška rodyklė į pradžią */}
           <Link
             to="/"
-            className="flex items-center gap-2 hover:text-indigo-600 transition-colors duration-300"
+            className="group flex items-center hover:text-indigo-600 transition duration-300"
           >
-            <ArrowLeft className="w-6 h-6" />
-            <span className="hidden sm:inline text-sm font-medium">{t("back") || "Back"}</span>
+            <ChevronLeftCircle className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop navigacija */}
           <div className="hidden md:flex space-x-10 text-lg font-medium">
             {navLinks.map(({ to, label }) => (
               <Link
@@ -66,7 +65,7 @@ export default function Navbar() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="text-gray-800 dark:text-white transition-transform duration-200 hover:scale-105"
+                    className="transition-transform duration-200 hover:scale-105"
                   >
                     {label}
                   </motion.span>
@@ -75,8 +74,9 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Buttons */}
+          {/* Tema / Kalba / Meniu */}
           <div className="flex items-center gap-3">
+            {/* Tema */}
             <button
               onClick={toggleTheme}
               className="text-xl hover:scale-110 transition"
@@ -84,6 +84,8 @@ export default function Navbar() {
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
+
+            {/* Kalba */}
             <button
               onClick={toggleLanguage}
               className="px-3 py-1 border border-gray-800 dark:border-white rounded hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black text-sm transition-colors duration-300"
@@ -91,7 +93,7 @@ export default function Navbar() {
               {i18n.language === "lt" ? "EN" : "LT"}
             </button>
 
-            {/* Mobile menu button */}
+            {/* Burger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="md:hidden ml-2 text-2xl focus:outline-none"
@@ -103,22 +105,23 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile nav */}
+      {/* Mobilus meniu su animacija */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ scaleY: 0, opacity: 0 }}
+            key="mobile-menu"
+            initial={{ scaleY: 0.95, opacity: 0 }}
             animate={{ scaleY: 1, opacity: 1 }}
-            exit={{ scaleY: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden origin-top bg-white dark:bg-gray-900 shadow-inner overflow-hidden px-6 py-4 space-y-4 text-lg font-medium"
+            exit={{ scaleY: 0.95, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="md:hidden origin-top bg-white dark:bg-gray-900 shadow-inner overflow-hidden px-6 py-6 flex flex-col items-center gap-4 text-lg font-medium"
           >
             {navLinks.map(({ to, label }) => (
               <Link
                 key={to}
                 to={to}
                 onClick={() => setMenuOpen(false)}
-                className={`block hover:text-indigo-600 transition-colors duration-200 ${
+                className={`w-full text-center hover:text-indigo-600 transition-colors duration-200 ${
                   location.pathname === to ? "text-indigo-600 font-semibold" : ""
                 }`}
               >

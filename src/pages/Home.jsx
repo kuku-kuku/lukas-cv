@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence, motion } from "framer-motion";
 import me from "../assets/me.jpg";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
   const [theme, setTheme] = useState("light");
+  const [langKey, setLangKey] = useState(i18n.language);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -20,20 +22,19 @@ export default function Home() {
   const toggleLanguage = () => {
     const newLang = i18n.language === "lt" ? "en" : "lt";
     i18n.changeLanguage(newLang);
+    setLangKey(newLang); // Trigger AnimatePresence key change
   };
 
   return (
     <div className="relative h-screen w-full font-poppins">
-      {/* Fonas */}
+      {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${me})` }}
       ></div>
-
-      {/* Gradientas */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50"></div>
 
-      {/* Kalbos mygtukas viršuje */}
+      {/* Language Switcher */}
       <div className="absolute top-6 right-6 z-20">
         <button
           onClick={toggleLanguage}
@@ -43,42 +44,50 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Hero turinys */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-          {t("heroText")}
-        </h1>
+      {/* Hero content with animation */}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={langKey}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4"
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+            {t("heroText")}
+          </h1>
 
-        <div className="h-6 md:h-10" />
+          <div className="h-6 md:h-10" />
 
-        {/* Mygtukai */}
-        <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4 w-full max-w-md">
-          <Link
-            to="/apie"
-            className="w-full sm:w-auto text-center bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition"
-          >
-            {t("about")}
-          </Link>
-          <Link
-            to="/paslaugos"
-            className="w-full sm:w-auto text-center bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition"
-          >
-            {t("services")}
-          </Link>
-          <Link
-            to="/darbai"
-            className="w-full sm:w-auto text-center bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition"
-          >
-            {t("works")}
-          </Link>
-          <Link
-            to="/kontaktai"
-            className="w-full sm:w-auto text-center bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition"
-          >
-            {t("contact")}
-          </Link>
-        </div>
-      </div>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+            <Link
+              to="/apie"
+              className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
+            >
+              {t("about")}
+            </Link>
+            <Link
+              to="/paslaugos"
+              className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
+            >
+              {t("services")}
+            </Link>
+            <Link
+              to="/darbai"
+              className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
+            >
+              {t("works")}
+            </Link>
+            <Link
+              to="/kontaktai"
+              className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
+            >
+              {t("contact")}
+            </Link>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
