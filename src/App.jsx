@@ -22,12 +22,10 @@ function AppContent() {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
-  // Inicijuojam Google Analytics vieną kartą
   useEffect(() => {
     initGA();
   }, []);
 
-  // Sekam kiekvieną puslapio pasikeitimą
   useEffect(() => {
     trackPageview(location.pathname);
   }, [location]);
@@ -38,6 +36,21 @@ function AppContent() {
 
       {!isHome && <Navbar />}
       <BackgroundImage />
+
+      {/* Tik Homepage rodom video ir overlay */}
+      {isHome && (
+        <>
+          <video
+            className="absolute top-0 left-0 w-full h-full object-cover object-left md:object-center z-0"
+            src="/hero.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50 z-10 pointer-events-none" />
+        </>
+      )}
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
