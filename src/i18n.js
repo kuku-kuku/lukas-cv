@@ -73,7 +73,7 @@ const resources = {
     translation: {
       // General
       title: 'Lukas Beneta – Services',
-      heroText: 'Welcome to my website!',
+      heroText: 'Hi! I’m Lukas, the creator of your website.',
       about: 'About me',
       services: 'Services',
       works: 'My Portfolio',
