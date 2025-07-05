@@ -28,7 +28,7 @@ export default function Home() {
     <div className="relative h-screen w-full font-poppins">
       {/* Fono video */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        className="absolute top-0 left-0 w-full h-full object-cover object-left md:object-center z-0"
         src="/hero.mp4"
         autoPlay
         loop
