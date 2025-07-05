@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <div className="relative h-screen w-full font-poppins">
-      {/* Kalbos keitimo mygtukas */}
+      {/* Kalbos mygtukas */}
       <div className="absolute top-6 right-6 z-30">
         <button
           onClick={toggleLanguage}
@@ -36,19 +36,16 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Hero turinys su blur+fade efektu */}
+      {/* Tik tekstas keičiasi su animacija, visa kita – instant */}
       <motion.div
         key={langKey}
-        initial={{ opacity: 0, filter: "blur(4px)" }}
-        animate={{ opacity: 1, filter: "blur(0px)" }}
-        exit={{ opacity: 0, filter: "blur(4px)" }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
         className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4"
       >
-        <h1
-          className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg"
-          style={{ willChange: "opacity, filter" }}
-        >
+        <h1 className="text-4xl md:text-6xl font-bold mb-6">
           {t("heroText")}
         </h1>
 

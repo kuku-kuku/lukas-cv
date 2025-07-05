@@ -33,11 +33,10 @@ function AppContent() {
   return (
     <div className="min-h-screen text-white font-poppins transition relative">
       <ScrollToTop />
-
       {!isHome && <Navbar />}
       <BackgroundImage />
 
-      {/* Tik Homepage rodom video ir overlay */}
+      {/* Hero video ir overlay rodomi tik Home puslapyje */}
       {isHome && (
         <>
           <video
@@ -54,19 +53,10 @@ function AppContent() {
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Home />
-              </motion.div>
-            }
-          />
+          {/* Home be animacijos */}
+          <Route path="/" element={<Home />} />
+
+          {/* Kiti puslapiai su fade-in/fade-out */}
           <Route
             path="/apie"
             element={

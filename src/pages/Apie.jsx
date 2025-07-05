@@ -60,7 +60,7 @@ export default function Apie() {
                 key={currentIndex}
                 src={images[currentIndex]}
                 alt="Lukas Beneta"
-                className="absolute top-0 left-0 w-full h-full object-cover object-left sm:object-cover object-top rounded-xl shadow-xl border border-white/40"
+                className="absolute top-0 left-0 w-full h-full object-cover object-left-top rounded-xl shadow-xl border border-white/40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
