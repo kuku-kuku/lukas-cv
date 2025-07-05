@@ -13,7 +13,7 @@ export default function Darbai() {
         <img
           src={bg}
           alt="Background"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-left sm:object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />
       </div>

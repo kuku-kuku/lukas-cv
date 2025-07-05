@@ -80,7 +80,11 @@ export default function Kontaktai() {
     >
       {/* Fonas */}
       <div className="absolute top-0 left-0 w-full h-full -z-10">
-        <img src={bg} alt="Background" className="w-full h-full object-cover" />
+        <img
+          src={bg}
+          alt="Background"
+          className="w-full h-full object-cover object-left sm:object-cover"
+        />
         <div className="absolute inset-0 bg-black/70" />
       </div>
 
@@ -110,7 +114,7 @@ export default function Kontaktai() {
           {t("contact_button")}
         </button>
 
-        {/* Sėkmės pranešimas – atsiranda po mygtuko, kai forma pasislėpia */}
+        {/* Sėkmės pranešimas */}
         <AnimatePresence>
           {!formVisible && formSuccess && (
             <motion.div
@@ -165,7 +169,7 @@ export default function Kontaktai() {
                 className="p-3 rounded border resize-none"
               ></textarea>
 
-              {/* Klaidos pranešimas – virš ReCAPTCHA */}
+              {/* Klaidos pranešimas */}
               <AnimatePresence>
                 {formError && (
                   <motion.div

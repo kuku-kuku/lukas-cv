@@ -54,13 +54,13 @@ export default function Apie() {
 
         {/* Nuotraukų karuselė */}
         <div className="relative w-full md:w-1/2 flex justify-center">
-          <div className="w-[80%] h-[500px] sm:h-[540px] md:h-[560px] relative">
+          <div className="w-full sm:w-[80%] h-[500px] sm:h-[540px] md:h-[560px] relative">
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentIndex}
                 src={images[currentIndex]}
                 alt="Lukas Beneta"
-                className="absolute top-0 left-0 w-full h-full object-cover object-top rounded-xl shadow-xl border border-white/40"
+                className="absolute top-0 left-0 w-full h-full object-cover object-left sm:object-cover object-top rounded-xl shadow-xl border border-white/40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

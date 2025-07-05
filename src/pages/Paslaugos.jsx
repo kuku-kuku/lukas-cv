@@ -16,12 +16,12 @@ export default function Paslaugos() {
       transition={{ duration: 0.5 }}
       className="pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins transition-colors duration-500 relative"
     >
-      {/* Background */}
+      {/* Background su object-left mobiliai versijai */}
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <img
           src={require("../assets/background.jpg")}
           alt="bg"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-left sm:object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />
       </div>
