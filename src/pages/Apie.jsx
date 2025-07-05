@@ -21,7 +21,7 @@ export default function Apie() {
   }, [images.length]); // ← pataisyta čia
 
   return (
-    <section className="relative pt-16 pb-20 px-4 md:px-8 text-gray-900 dark:text-gray-100 min-h-screen font-poppins transition-colors duration-500 flex items-center">
+    <section className="relative pt-28 md:pt-24 pb-20 px-4 md:px-8 text-gray-900 dark:text-gray-100 min-h-screen font-poppins transition-colors duration-500 flex items-center">
       <div className="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-center gap-16">
 
         {/* Tekstas */}
