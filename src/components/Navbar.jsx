@@ -1,28 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeftCircle } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
   const { i18n, t } = useTranslation();
-  const [theme, setTheme] = useState("light");
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    setTheme(savedTheme || "light");
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
 
   const toggleLanguage = () => {
     const newLang = i18n.language === "lt" ? "en" : "lt";
@@ -37,13 +22,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-50 font-poppins text-gray-800 dark:text-white transition-colors duration-500">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-md text-white shadow-md font-poppins transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Elegantiška rodyklė į pradžią */}
+          {/* Rodyklė į pradžią */}
           <Link
             to="/"
-            className="group flex items-center hover:text-indigo-600 transition duration-300"
+            className="group flex items-center hover:text-blue-500 transition duration-300"
           >
             <ChevronLeftCircle className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
           </Link>
@@ -54,13 +39,15 @@ export default function Navbar() {
               <Link
                 key={to}
                 to={to}
-                className={`relative flex items-center justify-center h-full hover:text-indigo-600 transition-colors duration-200 ${
-                  location.pathname === to ? "text-indigo-600 font-semibold" : ""
+                className={`relative flex items-center justify-center h-full transition-colors duration-200 ${
+                  location.pathname === to
+                    ? "text-blue-500 font-semibold"
+                    : "hover:text-blue-500"
                 }`}
               >
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
-                    key={i18n.language + label + theme}
+                    key={i18n.language + label}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -74,26 +61,15 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Tema / Kalba / Meniu */}
+          {/* Kalbos perjungimas + burger */}
           <div className="flex items-center gap-3">
-            {/* Tema */}
-            <button
-              onClick={toggleTheme}
-              className="text-xl hover:scale-110 transition"
-              title="Perjungti temą"
-            >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
-
-            {/* Kalba */}
             <button
               onClick={toggleLanguage}
-              className="px-3 py-1 border border-gray-800 dark:border-white rounded hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black text-sm transition-colors duration-300"
+              className="px-3 py-1 border border-white rounded hover:bg-white hover:text-black text-sm transition-colors duration-300"
             >
               {i18n.language === "lt" ? "EN" : "LT"}
             </button>
 
-            {/* Burger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="md:hidden ml-2 text-2xl focus:outline-none"
@@ -105,7 +81,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobilus meniu su animacija */}
+      {/* Mobilus meniu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -114,15 +90,17 @@ export default function Navbar() {
             animate={{ scaleY: 1, opacity: 1 }}
             exit={{ scaleY: 0.95, opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden origin-top bg-white dark:bg-gray-900 shadow-inner overflow-hidden px-6 py-6 flex flex-col items-center gap-4 text-lg font-medium"
+            className="md:hidden origin-top bg-black/70 backdrop-blur-md shadow-inner overflow-hidden px-6 py-6 flex flex-col items-center gap-4 text-lg font-medium text-white"
           >
             {navLinks.map(({ to, label }) => (
               <Link
                 key={to}
                 to={to}
                 onClick={() => setMenuOpen(false)}
-                className={`w-full text-center hover:text-indigo-600 transition-colors duration-200 ${
-                  location.pathname === to ? "text-indigo-600 font-semibold" : ""
+                className={`w-full text-center transition-colors duration-200 ${
+                  location.pathname === to
+                    ? "text-blue-500 font-semibold"
+                    : "hover:text-blue-500"
                 }`}
               >
                 {label}

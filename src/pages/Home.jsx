@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
-import me from "../assets/me.jpg";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
@@ -22,20 +21,26 @@ export default function Home() {
   const toggleLanguage = () => {
     const newLang = i18n.language === "lt" ? "en" : "lt";
     i18n.changeLanguage(newLang);
-    setLangKey(newLang); // Trigger AnimatePresence key change
+    setLangKey(newLang);
   };
 
   return (
     <div className="relative h-screen w-full font-poppins">
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${me})` }}
-      ></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50"></div>
+      {/* Fono video */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        src="/hero.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
 
-      {/* Language Switcher */}
-      <div className="absolute top-6 right-6 z-20">
+      {/* Tamsinimas */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50 z-10 pointer-events-none" />
+
+      {/* Kalbos keitimo mygtukas */}
+      <div className="absolute top-6 right-6 z-30">
         <button
           onClick={toggleLanguage}
           className="px-3 py-1 border border-white rounded hover:bg-white hover:text-black text-sm text-white transition"
@@ -44,7 +49,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Hero content with animation */}
+      {/* Hero turinys */}
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={langKey}
@@ -52,7 +57,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4"
+          className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
             {t("heroText")}

@@ -1,10 +1,9 @@
-// App.jsx
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Apie from "./pages/Apie";
@@ -13,6 +12,7 @@ import Kontaktai from "./pages/Kontaktai";
 import Darbai from "./pages/Darbai";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
+import BackgroundImage from "./components/BackgroundImage";
 import "./styles.css";
 import { AnimatePresence, motion } from "framer-motion";
 import "./i18n";
@@ -33,10 +33,11 @@ function AppContent() {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white font-poppins transition">
+    <div className="min-h-screen text-white font-poppins transition relative">
       <ScrollToTop />
 
       {!isHome && <Navbar />}
+      <BackgroundImage />
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>

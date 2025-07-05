@@ -3,27 +3,31 @@ import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
+import bg from "../assets/background.jpg";
 
 export default function Kontaktai() {
   const { t } = useTranslation();
   const [formVisible, setFormVisible] = useState(false);
   const [sending, setSending] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [popup, setPopup] = useState({ message: "", type: "" });
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
   const formRef = useRef();
 
   const toggleForm = () => {
     setFormVisible((prev) => !prev);
-    setPopup({ message: "", type: "" });
+    setFormError("");
+    setFormSuccess("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSending(true);
-    setPopup({ message: "", type: "" });
+    setFormError("");
+    setFormSuccess("");
 
     if (!verified) {
-      setPopup({ message: t("form_verify"), type: "error" });
+      setFormError(t("form_verify"));
       setSending(false);
       return;
     }
@@ -36,29 +40,34 @@ export default function Kontaktai() {
         "XcHeNZOOUKJAmAR4p"
       )
       .then(() => {
-        setPopup({ message: t("form_sent_placeholder"), type: "success" });
         formRef.current.reset();
         setVerified(false);
-        setFormVisible(false);
         setSending(false);
+        setFormVisible(false);
+
+        setTimeout(() => {
+          setFormSuccess(t("form_sent_placeholder"));
+        }, 500);
       })
       .catch((error) => {
-        setPopup({
-          message: "Klaida siunčiant žinutę: " + error.text,
-          type: "error",
-        });
+        setFormError("Klaida siunčiant žinutę: " + error.text);
         setSending(false);
       });
   };
 
   useEffect(() => {
-    if (popup.message) {
-      const timer = setTimeout(() => {
-        setPopup({ message: "", type: "" });
-      }, 3000);
+    if (formError) {
+      const timer = setTimeout(() => setFormError(""), 4000);
       return () => clearTimeout(timer);
     }
-  }, [popup]);
+  }, [formError]);
+
+  useEffect(() => {
+    if (formSuccess) {
+      const timer = setTimeout(() => setFormSuccess(""), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [formSuccess]);
 
   return (
     <motion.div
@@ -67,36 +76,15 @@ export default function Kontaktai() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative pt-28 pb-20 px-4 md:px-8 bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white min-h-screen font-poppins transition-colors duration-500"
+      className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-hidden"
     >
-      {/* Gražus pranešimas */}
-      <AnimatePresence>
-        {popup.message && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4 }}
-            className={`fixed ${
-              formVisible ? "top-52" : "top-60"
-            } inset-x-0 z-50 mx-auto max-w-md w-full px-6 py-4 rounded-2xl border shadow-xl
-            bg-white dark:bg-gray-800 text-center text-base font-normal md:text-lg tracking-wide text-gray-900 dark:text-gray-100`}
-          >
-            <div className="flex justify-between items-center">
-              <span className="flex-1 text-center">{popup.message}</span>
-              <button
-                onClick={() => setPopup({ message: "", type: "" })}
-                className="ml-4 text-lg font-bold hover:scale-110 transition-transform text-gray-700 dark:text-gray-300"
-              >
-                ✕
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Fonas */}
+      <div className="absolute top-0 left-0 w-full h-full -z-10">
+        <img src={bg} alt="Background" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/70" />
+      </div>
 
-      {/* Turinys */}
-      <div className="max-w-3xl mx-auto text-center">
+      <div className="max-w-3xl mx-auto text-center relative z-10">
         <motion.h2
           className="text-4xl font-bold mb-6"
           initial={{ opacity: 0, y: -10 }}
@@ -122,6 +110,28 @@ export default function Kontaktai() {
           {t("contact_button")}
         </button>
 
+        {/* Sėkmės pranešimas – atsiranda po mygtuko, kai forma pasislėpia */}
+        <AnimatePresence>
+          {!formVisible && formSuccess && (
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ duration: 0.4 }}
+              className="mt-6 max-w-md mx-auto bg-white text-green-700 text-center font-semibold rounded-xl px-6 py-4 shadow-md border border-green-400 flex justify-between items-center"
+            >
+              <span className="flex-1">{formSuccess}</span>
+              <button
+                onClick={() => setFormSuccess("")}
+                className="ml-4 text-lg font-bold hover:scale-110 transition-transform text-green-600"
+              >
+                ✕
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Forma */}
         <AnimatePresence>
           {formVisible && (
             <motion.form
@@ -131,29 +141,52 @@ export default function Kontaktai() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="mt-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg max-w-xl mx-auto text-left flex flex-col gap-4"
+              className="mt-10 bg-white/90 text-gray-900 p-6 rounded-xl shadow-lg max-w-xl mx-auto text-left flex flex-col gap-4"
             >
               <input
                 type="text"
                 name="name"
                 placeholder={t("form_name")}
                 required
-                className="p-3 rounded border dark:bg-gray-900 dark:border-gray-700"
+                className="p-3 rounded border"
               />
               <input
                 type="email"
                 name="email"
                 placeholder={t("form_email")}
                 required
-                className="p-3 rounded border dark:bg-gray-900 dark:border-gray-700"
+                className="p-3 rounded border"
               />
               <textarea
                 name="message"
                 placeholder={t("form_message")}
                 rows="4"
                 required
-                className="p-3 rounded border resize-none dark:bg-gray-900 dark:border-gray-700"
+                className="p-3 rounded border resize-none"
               ></textarea>
+
+              {/* Klaidos pranešimas – virš ReCAPTCHA */}
+              <AnimatePresence>
+                {formError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-white text-red-600 text-center font-medium rounded-md shadow px-4 py-3 border border-red-300"
+                  >
+                    <div className="flex justify-between items-center">
+                      <span className="flex-1">{formError}</span>
+                      <button
+                        onClick={() => setFormError("")}
+                        className="ml-4 text-lg font-bold hover:scale-110 transition-transform text-red-600"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div className="self-center">
                 <ReCAPTCHA
