@@ -67,6 +67,11 @@ const resources = {
       form_sending: "Siunčiama...",
       form_sent_placeholder: "Žinutė sėkmingai išsiųsta!",
       form_verify: "Prašome patvirtinti, kad nesate robotas.",
+
+      // Nerastas puslapis
+      not_found_title: "Toks puslapis neegzistuoja",
+      not_found_subtitle: "Puslapis, kurio ieškai, nerastas.",
+      back_home: "Grįžti į pradžą",
     },
   },
   en: {
@@ -134,6 +139,11 @@ const resources = {
       form_sent_placeholder: "Message sent successfully!",
       form_sending: "Sending...",
       form_verify: "Please confirm that you’re not a robot.",
+
+      // Not Found
+      not_found_title: "Page not found",
+      not_found_subtitle: "The page you're looking for doesn't exist.",
+      back_home: "Back to homepage",
     },
   },
 };

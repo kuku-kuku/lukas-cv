@@ -10,6 +10,7 @@ import Apie from "./pages/Apie";
 import Paslaugos from "./pages/Paslaugos";
 import Kontaktai from "./pages/Kontaktai";
 import Darbai from "./pages/Darbai";
+import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import BackgroundImage from "./components/BackgroundImage";
@@ -33,9 +34,13 @@ function AppContent() {
   return (
     <div className="min-h-screen text-white font-poppins transition relative">
       <ScrollToTop />
+
+      {/* Rodyti Navbar tik jei ne Home puslapyje */}
       {!isHome && <Navbar />}
+
       <BackgroundImage />
 
+      {/* Home puslapio video background */}
       {isHome && (
         <>
           <video
@@ -67,6 +72,7 @@ function AppContent() {
               </motion.div>
             }
           />
+
           <Route
             path="/paslaugos"
             element={
@@ -80,6 +86,7 @@ function AppContent() {
               </motion.div>
             }
           />
+
           <Route
             path="/kontaktai"
             element={
@@ -93,6 +100,7 @@ function AppContent() {
               </motion.div>
             }
           />
+
           <Route
             path="/darbai"
             element={
@@ -103,6 +111,20 @@ function AppContent() {
                 transition={{ duration: 0.5 }}
               >
                 <Darbai />
+              </motion.div>
+            }
+          />
+
+          <Route
+            path="*"
+            element={
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <NotFound />
               </motion.div>
             }
           />
