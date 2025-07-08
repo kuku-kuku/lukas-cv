@@ -1,14 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import bg from "../assets/background.jpg"; // bendras fonas
+import bg from "../assets/background.jpg";
 
 export default function Darbai() {
   const { t, i18n } = useTranslation();
 
   return (
     <section className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins transition overflow-hidden">
-      {/* Fonas */}
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <img
           src={bg}

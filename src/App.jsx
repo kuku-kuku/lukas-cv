@@ -36,7 +36,6 @@ function AppContent() {
       {!isHome && <Navbar />}
       <BackgroundImage />
 
-      {/* Hero video ir overlay rodomi tik Home puslapyje */}
       {isHome && (
         <>
           <video
@@ -53,10 +52,8 @@ function AppContent() {
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          {/* Home be animacijos */}
           <Route path="/" element={<Home />} />
 
-          {/* Kiti puslapiai su fade-in/fade-out */}
           <Route
             path="/apie"
             element={

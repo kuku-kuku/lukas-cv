@@ -22,7 +22,6 @@ export default function Apie() {
 
   return (
     <section className="relative pt-28 md:pt-24 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins transition-colors duration-500 flex items-center overflow-hidden">
-      {/* Fono nuotrauka su patamsinimu */}
       <div className="absolute top-0 left-0 w-full h-full z-0">
         <img
           src={bg}

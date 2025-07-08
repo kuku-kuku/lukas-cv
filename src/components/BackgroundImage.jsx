@@ -5,7 +5,6 @@ import bg from "../assets/background.jpg";
 export default function BackgroundImage() {
   const location = useLocation();
 
-  // Nerodyti pagrindiniame puslapyje
   if (location.pathname === "/") return null;
 
   return (

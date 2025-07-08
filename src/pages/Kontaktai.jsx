@@ -78,7 +78,6 @@ export default function Kontaktai() {
       transition={{ duration: 0.5 }}
       className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-hidden"
     >
-      {/* Fonas */}
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <img
           src={bg}

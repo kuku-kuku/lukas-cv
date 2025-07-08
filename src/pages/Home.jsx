@@ -36,7 +36,6 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Tik tekstas keičiasi su animacija, visa kita – instant */}
       <motion.div
         key={langKey}
         initial={{ opacity: 0 }}
