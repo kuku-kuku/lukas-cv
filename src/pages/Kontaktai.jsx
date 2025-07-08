@@ -34,10 +34,10 @@ export default function Kontaktai() {
 
     emailjs
       .sendForm(
-        "service_5gekaqp",
-        "template_p67o8xe",
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
         formRef.current,
-        "XcHeNZOOUKJAmAR4p"
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
         formRef.current.reset();
@@ -113,7 +113,6 @@ export default function Kontaktai() {
           {t("contact_button")}
         </button>
 
-        {/* Sėkmės pranešimas */}
         <AnimatePresence>
           {!formVisible && formSuccess && (
             <motion.div
@@ -134,7 +133,6 @@ export default function Kontaktai() {
           )}
         </AnimatePresence>
 
-        {/* Forma */}
         <AnimatePresence>
           {formVisible && (
             <motion.form
@@ -168,7 +166,6 @@ export default function Kontaktai() {
                 className="p-3 rounded border resize-none"
               ></textarea>
 
-              {/* Klaidos pranešimas */}
               <AnimatePresence>
                 {formError && (
                   <motion.div
@@ -193,7 +190,7 @@ export default function Kontaktai() {
 
               <div className="self-center">
                 <ReCAPTCHA
-                  sitekey="6Ld1vHYrAAAAAPuyK6bnW_UMKpT2pGv3qsza9yox"
+                  sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
                   onChange={() => setVerified(true)}
                 />
               </div>
