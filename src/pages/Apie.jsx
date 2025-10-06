@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import me from "../assets/me.jpg";
 import futbolas from "../assets/lukas-futbolas.jpg";
 import baras from "../assets/lukas-baras.jpg";
-import bg from "../assets/background.jpg";
 
 export default function Apie() {
   const { t, i18n } = useTranslation();
@@ -22,14 +21,7 @@ export default function Apie() {
 
   return (
     <section className="relative pt-28 md:pt-24 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins transition-colors duration-500 flex items-center overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full z-0">
-        <img
-          src={bg}
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </div>
+      {/* Fono neberodome lokaliai – jį teikia globalus <BackgroundImage /> */}
 
       {/* Turinys */}
       <div className="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-center gap-16">

@@ -2,17 +2,20 @@ import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import ReCAPTCHA from "react-google-recaptcha";
-import bg from "../assets/background.jpg";
+import { Mail, Send, User, MessageSquare, Check, AlertCircle, Sparkles, X } from "lucide-react";
 
 export default function Kontaktai() {
   const { t } = useTranslation();
+
   const [formVisible, setFormVisible] = useState(false);
   const [sending, setSending] = useState(false);
-  const [verified, setVerified] = useState(false);
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState("");
-  const formRef = useRef();
+  const formRef = useRef(null);
+
+  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY  = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
   const toggleForm = () => {
     setFormVisible((prev) => !prev);
@@ -20,39 +23,40 @@ export default function Kontaktai() {
     setFormSuccess("");
   };
 
-  const handleSubmit = (e) => {
+  function safeErrorMessage(err) {
+    if (!err) return "Nežinoma klaida";
+    if (typeof err === "string") return err;
+    return (
+      err?.text ||
+      err?.message ||
+      err?.response?.data?.error ||
+      err?.response?.data?.message ||
+      err?.status ||
+      "Nežinoma klaida"
+    );
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (sending) return;
     setSending(true);
     setFormError("");
     setFormSuccess("");
 
-    if (!verified) {
-      setFormError(t("form_verify"));
+    try {
+      if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+        throw new Error("Neteisingai sukonfigūruoti EmailJS aplinkos kintamieji (REACT_APP_*).");
+      }
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, { publicKey: PUBLIC_KEY });
+      formRef.current?.reset();
+      setFormVisible(false);
+      setTimeout(() => setFormSuccess(t("form_sent_placeholder")), 300);
+    } catch (err) {
+      console.error("Email send error:", err);
+      setFormError("Klaida siunčiant žinutę: " + safeErrorMessage(err));
+    } finally {
       setSending(false);
-      return;
     }
-
-    emailjs
-      .sendForm(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(() => {
-        formRef.current.reset();
-        setVerified(false);
-        setSending(false);
-        setFormVisible(false);
-
-        setTimeout(() => {
-          setFormSuccess(t("form_sent_placeholder"));
-        }, 500);
-      })
-      .catch((error) => {
-        setFormError("Klaida siunčiant žinutę: " + error.text);
-        setSending(false);
-      });
   };
 
   useEffect(() => {
@@ -78,131 +82,214 @@ export default function Kontaktai() {
       transition={{ duration: 0.5 }}
       className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-hidden"
     >
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
-        <img
-          src={bg}
-          alt="Background"
-          className="w-full h-full object-cover object-left sm:object-cover"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </div>
+      {/* Dekoro „glow“ (globalus fonas tvarkomas atskiru komponentu) */}
+      <div className="absolute top-32 right-10 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
+      <div className="absolute bottom-32 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: "1s" }} />
 
-      <div className="max-w-3xl mx-auto text-center relative z-10">
-        <motion.h2
-          className="text-4xl font-bold mb-6"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          {t("contact")}
-        </motion.h2>
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
+            <Sparkles className="w-4 h-4 text-violet-400" />
+            <span className="text-sm text-white/80">{t("lets_connect")}</span>
+          </div>
 
-        <motion.p
-          className="text-lg mb-10 whitespace-pre-line"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          {t("contact_intro")}
-        </motion.p>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-violet-200 to-white bg-clip-text text-transparent">
+            {t("contact")}
+          </h2>
 
-        <button
+          <motion.p
+            className="text-lg md:text-xl text-white/70 whitespace-pre-line max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            {t("contact_intro")}
+          </motion.p>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.button
           onClick={toggleForm}
-          className="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-full hover:bg-indigo-700 transition-all"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold px-8 py-4 rounded-2xl hover:from-violet-500 hover:to-indigo-500 transition-all shadow-lg hover:shadow-violet-500/50 overflow-hidden"
         >
-          {t("contact_button")}
-        </button>
+          <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          <Mail className="w-5 h-5 relative z-10" />
+          <span className="relative z-10">{t("contact_button")}</span>
+        </motion.button>
 
+        {/* Success toast */}
         <AnimatePresence>
           {!formVisible && formSuccess && (
             <motion.div
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              transition={{ duration: 0.4 }}
-              className="mt-6 max-w-md mx-auto bg-white text-green-700 text-center font-semibold rounded-xl px-6 py-4 shadow-md border border-green-400 flex justify-between items-center"
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="mt-8 max-w-md mx-auto"
             >
-              <span className="flex-1">{formSuccess}</span>
-              <button
-                onClick={() => setFormSuccess("")}
-                className="ml-4 text-lg font-bold hover:scale-110 transition-transform text-green-600"
-              >
-                ✕
-              </button>
+              <div className="relative bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-2xl px-6 py-4 shadow-xl border border-emerald-400/30 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent pointer-events-none" />
+                <div className="relative flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-full">
+                    <Check className="w-5 h-5" />
+                  </div>
+                  <span className="flex-1 font-semibold text-left">{formSuccess}</span>
+                  <button onClick={() => setFormSuccess("")} className="p-1 hover:bg-white/20 rounded-full transition-colors">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
+        {/* Modal form (RESPONSIVE) */}
         <AnimatePresence>
           {formVisible && (
-            <motion.form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="mt-10 bg-white/90 text-gray-900 p-6 rounded-xl shadow-lg max-w-xl mx-auto text-left flex flex-col gap-4"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto"
+              onClick={toggleForm}
+              role="dialog"
+              aria-modal="true"
+              onKeyDown={(e) => e.key === "Escape" && setFormVisible(false)}
             >
-              <input
-                type="text"
-                name="name"
-                placeholder={t("form_name")}
-                required
-                className="p-3 rounded border"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder={t("form_email")}
-                required
-                className="p-3 rounded border"
-              />
-              <textarea
-                name="message"
-                placeholder={t("form_message")}
-                rows="4"
-                required
-                className="p-3 rounded border resize-none"
-              ></textarea>
+              {/* Centering wrapper su saugiu padding */}
+              <div className="min-h-full w-full flex items-center justify-center p-4 sm:p-6">
+                <motion.form
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 10 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-lg sm:max-w-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-white/10 overflow-hidden"
+                >
+                  {/* Vidinis scroll’as ir mažesni padding’ai mobile */}
+                  <div className="max-h-[90vh] overflow-y-auto p-5 sm:p-8">
+                    {/* Dekoras (už contento) */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl pointer-events-none z-0" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none z-0" />
 
-              <AnimatePresence>
-                {formError && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-white text-red-600 text-center font-medium rounded-md shadow px-4 py-3 border border-red-300"
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="flex-1">{formError}</span>
-                      <button
-                        onClick={() => setFormError("")}
-                        className="ml-4 text-lg font-bold hover:scale-110 transition-transform text-red-600"
+                    {/* Close (visada pasiekiamas) */}
+                    <button
+                      type="button"
+                      onClick={() => setFormVisible(false)}
+                      className="absolute top-3 right-3 sm:top-6 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/10 z-20"
+                      aria-label={t("close")}
+                    >
+                      <X className="w-5 h-5 text-white/90" />
+                    </button>
+
+                    <div className="relative z-10">
+                      {/* Title */}
+                      <div className="mb-6 sm:mb-8">
+                        <h3 className="text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                          {t("contact_dialog_title")}
+                        </h3>
+                        <p className="text-white/60">{t("contact_dialog_subtitle")}</p>
+                      </div>
+
+                      {/* Fields */}
+                      <div className="space-y-5 mb-6">
+                        <div className="group">
+                          <label className="block text-sm font-medium text-white/80 mb-2">{t("form_name")}</label>
+                          <div className="relative">
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-violet-400 transition-colors" />
+                            <input
+                              type="text"
+                              name="name"
+                              placeholder={t("form_name_placeholder")}
+                              required
+                              className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 focus:border-violet-400/50 focus:bg-white/10 transition-all outline-none text-white placeholder:text-white/40"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="group">
+                          <label className="block text-sm font-medium text-white/80 mb-2">{t("form_email")}</label>
+                          <div className="relative">
+                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-violet-400 transition-colors" />
+                            <input
+                              type="email"
+                              name="email"
+                              placeholder={t("form_email_placeholder")}
+                              required
+                              className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 focus:border-violet-400/50 focus:bg-white/10 transition-all outline-none text-white placeholder:text-white/40"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="group">
+                          <label className="block text-sm font-medium text-white/80 mb-2">{t("form_message")}</label>
+                          <div className="relative">
+                            <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-white/40 group-focus-within:text-violet-400 transition-colors" />
+                            <textarea
+                              name="message"
+                              placeholder={t("form_message_placeholder")}
+                              rows={5}
+                              required
+                              className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 focus:border-violet-400/50 focus:bg-white/10 transition-all outline-none text-white placeholder:text-white/40 resize-none"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Error */}
+                      <AnimatePresence>
+                        {formError && (
+                          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="mb-6">
+                            <div className="relative bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-xl px-4 py-3 border border-red-400/30 overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent pointer-events-none" />
+                              <div className="relative flex items-center gap-3">
+                                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                                <span className="flex-1 text-sm font-medium">{formError}</span>
+                                <button type="button" onClick={() => setFormError("")} className="p-1 hover:bg-white/20 rounded-full transition-colors flex-shrink-0">
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Submit */}
+                      <motion.button
+                        type="submit"
+                        disabled={sending}
+                        whileHover={{ scale: sending ? 1 : 1.02 }}
+                        whileTap={{ scale: sending ? 1 : 0.98 }}
+                        className="w-full relative group bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold py-4 rounded-xl hover:from-violet-500 hover:to-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-violet-500/50 overflow-hidden"
                       >
-                        ✕
-                      </button>
+                        <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                        <span className="relative flex items-center justify-center gap-2 z-10">
+                          {sending ? (
+                            <>
+                              <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full" />
+                              {t("form_sending")}
+                            </>
+                          ) : (
+                            <>
+                              <Send className="w-5 h-5" />
+                              {t("form_send")}
+                            </>
+                          )}
+                        </span>
+                      </motion.button>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="self-center">
-                <ReCAPTCHA
-                  sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                  onChange={() => setVerified(true)}
-                />
+                  </div>
+                </motion.form>
               </div>
-
-              <button
-                type="submit"
-                disabled={sending}
-                className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition disabled:opacity-50"
-              >
-                {sending ? t("form_sending") : t("form_send")}
-              </button>
-            </motion.form>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>

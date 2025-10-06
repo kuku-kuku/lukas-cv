@@ -17,7 +17,7 @@ import AdminPanel from "./pages/AdminPanel";
 import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
-import BackgroundImage from "./components/BackgroundImage";
+import BackgroundImage from "./components/BackgroundImage"; // 👈 grąžinam, bet valdom sąlyga
 import "./styles.css";
 import { AnimatePresence, motion } from "framer-motion";
 import "./i18n";
@@ -26,7 +26,7 @@ import { initGA, trackPageview } from "./ga";
 function AppContent() {
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const isDemo = location.pathname.startsWith("/demo"); // 👈 pridėta
+  const isDemo = location.pathname.startsWith("/demo");
 
   useEffect(() => {
     initGA();
@@ -37,17 +37,20 @@ function AppContent() {
   }, [location]);
 
   return (
-    <div className="min-h-screen text-white font-poppins transition relative">
+    <div className="min-h-screen text-white font-poppins transition relative overflow-hidden">
       <ScrollToTop />
+
+      {/* Globalus fonas tik ne Home puslapio metu */}
+      {!isHome && <BackgroundImage />}
 
       {/* Nerodyti Navbar nei Home, nei Demo puslapiuose */}
       {!isHome && !isDemo && <Navbar />}
-      <BackgroundImage />
 
+      {/* Home turi savo video/overlay */}
       {isHome && (
         <>
           <video
-            className="absolute top-0 left-0 w-full h-full object-cover object-left md:object-center z-0"
+            className="absolute top-0 left-0 w-full h-full object-cover object-center z-0"
             src="/hero.mp4"
             autoPlay
             loop
@@ -65,12 +68,7 @@ function AppContent() {
           <Route
             path="/apie"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <Apie />
               </motion.div>
             }
@@ -79,12 +77,7 @@ function AppContent() {
           <Route
             path="/paslaugos"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <Paslaugos />
               </motion.div>
             }
@@ -93,12 +86,7 @@ function AppContent() {
           <Route
             path="/kontaktai"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <Kontaktai />
               </motion.div>
             }
@@ -107,12 +95,7 @@ function AppContent() {
           <Route
             path="/darbai"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <Darbai />
               </motion.div>
             }
@@ -121,12 +104,7 @@ function AppContent() {
           <Route
             path="/demo"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <Demo />
               </motion.div>
             }
@@ -135,12 +113,7 @@ function AppContent() {
           <Route
             path="/demo/admin"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <AdminLogin />
               </motion.div>
             }
@@ -148,26 +121,15 @@ function AppContent() {
           <Route
             path="/demo/cart"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <Cart />
               </motion.div>
             }
           />
-
           <Route
             path="/demo/admin-panel"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <AdminPanel />
               </motion.div>
             }
@@ -176,12 +138,7 @@ function AppContent() {
           <Route
             path="*"
             element={
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
                 <NotFound />
               </motion.div>
             }
