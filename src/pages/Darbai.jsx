@@ -75,13 +75,23 @@ export default function Darbai() {
 
   return (
     <section
-      className="relative text-white min-h-screen font-poppins overflow-x-clip"
+      className="relative text-white font-poppins overflow-x-clip"
       style={{
+        // dinaminis viewportas, kad iOS apačios baras „nesuvalgytų“ turinio
+        minHeight: "100dvh",
+        // viršus: navbar + tarpas
         paddingTop: "calc(var(--navbar-h, 64px) + 2rem)",
-        paddingBottom: "calc(4rem + env(safe-area-inset-bottom, 0px))",
+        // apačia: papildomas tarpas + iOS safe area
+        paddingBottom: "calc(4rem + env(safe-area-inset-bottom, 0px) + 24px)",
+        // sutvarkom iOS bounce, kad neapkarpytų apačios
+        overscrollBehaviorY: "contain",
       }}
     >
-      <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 md:px-8 pb-8 sm:pb-12">
+      <div
+        className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 md:px-8"
+        // ir vidiniam konteineriui duodam safe-area tarpelį
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 24px)" }}
+      >
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
@@ -117,9 +127,9 @@ export default function Darbai() {
             return (
               <motion.article
                 key={p.id}
-                variants={{ 
-                  hidden: { opacity: 0, y: 30, scale: 0.95 }, 
-                  show: { opacity: 1, y: 0, scale: 1 } 
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.95 },
+                  show: { opacity: 1, y: 0, scale: 1 },
                 }}
                 whileHover={isTouch ? {} : { y: -8 }}
                 whileTap={isTouch ? { scale: 0.98 } : {}}
@@ -219,6 +229,9 @@ export default function Darbai() {
             );
           })}
         </motion.div>
+
+        {/* Mažas „spacer“, jei iOS safe-area dar nupjautų apačią */}
+        <div aria-hidden="true" className="pointer-events-none" style={{ height: "env(safe-area-inset-bottom, 0px)" }} />
       </div>
     </section>
   );
