@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -7,19 +7,26 @@ import { Sparkles, ArrowRight, X, Check, Zap } from "lucide-react";
 export default function Paslaugos({ openContactModal }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
   const [active, setActive] = useState(null);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [isTouch, setIsTouch] = useState(false);
+
   const services = [1, 2, 3, 4, 5, 6];
 
-  const contactPath = i18n.language?.startsWith("lt") ? "/kontaktai" : "/contact";
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia) {
+      setIsTouch(window.matchMedia("(hover: none)").matches);
+    }
+  }, []);
 
   const handleGetStarted = (e) => {
-    e?.stopPropagation();
+    e && e.stopPropagation();
     setActive(null);
     if (typeof openContactModal === "function") {
-      openContactModal();
+      openContactModal(); // turi prioritetą
     } else {
-      navigate(contactPath);
+      navigate("/kontaktai"); // EN ir LT – tas pats kelias
     }
   };
 
@@ -27,11 +34,38 @@ export default function Paslaugos({ openContactModal }) {
   const formatPrice = (i) => {
     const raw = t(`service_${i}_price`);
     if (i === 6) return raw;
-    const lower = raw.trim().toLowerCase();
+    const lower = (raw || "").trim().toLowerCase();
     const alreadyHasPrefix = lower.startsWith("nuo ") || lower.startsWith("from ");
-    const prefix = i18n.language?.startsWith("lt") ? "Nuo " : "From ";
+    const prefix = i18n.language && i18n.language.startsWith("lt") ? "Nuo " : "From ";
     return alreadyHasPrefix ? raw : `${prefix}${raw}`;
   };
+
+  // Globalus horizontalus „clip“, kad mobile neplėstų pločio
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    html.classList.add("overflow-x-clip");
+    body.classList.add("overflow-x-clip");
+    return () => {
+      html.classList.remove("overflow-x-clip");
+      body.classList.remove("overflow-x-clip");
+    };
+  }, []);
+
+  // Body scroll lock modalui
+  useEffect(() => {
+    const body = document.body;
+    if (active) {
+      const prevOverflow = body.style.overflow;
+      const prevPosition = body.style.position;
+      body.style.overflow = "hidden";
+      body.style.position = "relative";
+      return () => {
+        body.style.overflow = prevOverflow;
+        body.style.position = prevPosition;
+      };
+    }
+  }, [active]);
 
   return (
     <motion.div
@@ -40,19 +74,21 @@ export default function Paslaugos({ openContactModal }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins transition-colors duration-500 overflow-hidden"
+      className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins transition-colors duration-500 overflow-x-clip transform-gpu"
     >
-      {/* Dekoro „glow“ burbulai */}
-      <div className="absolute top-20 right-10 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000 pointer-events-none" />
+      {/* Dekorai – suklipyti, kad neplėstų pločio */}
+      <div className="pointer-events-none absolute inset-0 overflow-x-clip">
+        <div className="absolute top-20 right-10 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+      </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-screen-xl mx-auto relative z-10">
         {/* Header mini badge */}
         <motion.div
           className="text-center mb-10"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          initial={isTouch ? false : { opacity: 0, y: -20 }}
+          animate={isTouch ? {} : { opacity: 1, y: 0 }}
+          transition={{ delay: isTouch ? 0 : 0.2 }}
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
             <Sparkles className="w-4 h-4 text-violet-400" />
@@ -61,7 +97,7 @@ export default function Paslaugos({ openContactModal }) {
         </motion.div>
 
         {/* Service Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-clip">
           {services.map((i) => (
             <motion.div
               key={`${i}-${i18n.language}`}
@@ -75,11 +111,12 @@ export default function Paslaugos({ openContactModal }) {
               }
               onMouseEnter={() => setHoveredCard(i)}
               onMouseLeave={() => setHoveredCard(null)}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="group relative p-6 rounded-2xl cursor-pointer bg-gradient-to-br from-white/[0.08] to-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-white/20 shadow-xl hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              initial={isTouch ? false : { opacity: 0, y: 20 }}
+              animate={isTouch ? {} : { opacity: 1, y: 0 }}
+              whileHover={isTouch ? {} : { y: -8, scale: 1.02 }}
+              transition={{ duration: isTouch ? 0 : 0.4, delay: isTouch ? 0 : i * 0.05 }}
+              className="group relative p-6 rounded-2xl cursor-pointer bg-gradient-to-br from-white/[0.08] to-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-white/20 shadow-xl hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300 flex flex-col justify-between overflow-hidden transform-gpu"
+              style={{ willChange: "transform" }}
             >
               {/* Hover overlay */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
@@ -119,9 +156,19 @@ export default function Paslaugos({ openContactModal }) {
                 </motion.div>
               </div>
 
-              {/* Shine effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000" />
+              {/* Shine effect – klipuotas kortelės viduje */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  <div
+                    className="
+                      absolute top-0 bottom-0 w-[150%]
+                      bg-gradient-to-r from-transparent via-white/5 to-transparent
+                      skew-x-12
+                      translate-x-full group-hover:-translate-x-full
+                      transition-transform duration-1000
+                    "
+                  />
+                </div>
               </div>
             </motion.div>
           ))}
@@ -129,9 +176,9 @@ export default function Paslaugos({ openContactModal }) {
 
         {/* Trust Indicators */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          initial={isTouch ? false : { opacity: 0, y: 20 }}
+          animate={isTouch ? {} : { opacity: 1, y: 0 }}
+          transition={{ delay: isTouch ? 0 : 0.6 }}
           className="mt-16 flex flex-wrap items-center justify-center gap-8 text-white/60 text-sm"
         >
           <div className="flex items-center gap-2">
@@ -153,7 +200,7 @@ export default function Paslaugos({ openContactModal }) {
       <AnimatePresence>
         {active && (
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 overflow-y-auto"
+            className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 overflow-y-auto overscroll-contain"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -172,11 +219,13 @@ export default function Paslaugos({ openContactModal }) {
                 onClick={(e) => e.stopPropagation()}
                 className="relative w-full max-w-lg sm:max-w-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-white/10 overflow-hidden"
               >
-                {/* vidinis scrollas – kad mobile neveiktų „užsipilimas“ */}
+                {/* vidinis scrollas */}
                 <div className="max-h-[90vh] overflow-y-auto p-5 sm:p-8">
-                  {/* Dekoras */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl pointer-events-none z-0" />
-                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none z-0" />
+                  {/* Dekoras modal viduje – klipuotas */}
+                  <div className="absolute inset-0 pointer-events-none overflow-x-clip z-0">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
+                  </div>
 
                   {/* Close */}
                   <button
@@ -191,7 +240,9 @@ export default function Paslaugos({ openContactModal }) {
                   {/* Content */}
                   <div className="relative z-10">
                     <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-violet-500/30 to-blue-500/30 border border-white/20 mb-5 sm:mb-6">
-                      <span className="text-xl sm:text-2xl font-bold text-white">0{active.index}</span>
+                      <span className="text-xl sm:text-2xl font-bold text-white">
+                        0{active.index}
+                      </span>
                     </div>
 
                     <h3 className="text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">

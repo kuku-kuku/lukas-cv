@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import {
@@ -65,11 +65,16 @@ const STATUS_STYLE = {
 
 export default function Darbai() {
   const { t } = useTranslation();
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia) {
+      setIsTouch(window.matchMedia("(hover: none)").matches);
+    }
+  }, []);
 
   return (
-    <section className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-hidden">
-      {/* Fono nenaudojame lokaliai – jį teikia globalus <BackgroundImage /> */}
-
+    <section className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-x-clip">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header badge */}
         <motion.div
@@ -92,7 +97,7 @@ export default function Darbai() {
             hidden: { opacity: 0 },
             show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
           }}
-          className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8 overflow-x-clip"
         >
           {PROJECTS.map((p, idx) => {
             const Icon = TYPE_ICON[p.typeKey] || MonitorSmartphone;
@@ -106,10 +111,11 @@ export default function Darbai() {
             return (
               <motion.article
                 key={p.id}
-                variants={{ hidden: { opacity: 0, y: 20, scale: 0.95 }, show: { opacity: 1, y: 0, scale: 1 } }}
-                whileHover={{ y: -8 }}
+                variants={{ hidden: { opacity: 0, y: 20, scale: 0.98 }, show: { opacity: 1, y: 0, scale: 1 } }}
+                whileHover={isTouch ? {} : { y: -8 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] shadow-2xl hover:shadow-violet-500/10 hover:border-white/20 flex flex-col h-full"
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] shadow-2xl hover:shadow-violet-500/10 hover:border-white/20 flex flex-col h-full transform-gpu"
+                style={{ willChange: "transform" }}
               >
                 {/* Hover glow overlay */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
@@ -121,13 +127,13 @@ export default function Darbai() {
                   <img
                     src={p.image}
                     alt={title}
-                    className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
+                    className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 will-change-transform"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
 
                   {/* Badges */}
-                  <div className="absolute top-4 left-4 right-4 flex items-start justify-between">
+                  <div className="absolute top-4 left-4 right-4 flex items-start justify-between gap-2">
                     <span
                       className={`text-xs px-3 py-1.5 rounded-full font-semibold border backdrop-blur-md ${style.color} ${style.glow} shadow-lg`}
                     >
@@ -159,9 +165,9 @@ export default function Darbai() {
                     {p.tech.map((tch, i) => (
                       <motion.span
                         key={`${p.id}-${tch}`}
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: idx * 0.1 + i * 0.05 }}
+                        transition={{ delay: idx * 0.08 + i * 0.04 }}
                         className="text-xs px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 hover:border-white/20 transition-all"
                       >
                         {tch}
@@ -170,13 +176,13 @@ export default function Darbai() {
                   </div>
 
                   {/* Actions */}
-                  <div className="mt-auto flex items-center gap-3">
+                  <div className="mt-auto flex flex-wrap items-center gap-3">
                     {p.liveUrl && (
                       <a
                         href={p.liveUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 text-sm px-4 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-white/90 transition-all shadow-lg hover:shadow-xl hover:scale-105 transform"
+                        className="flex-1 min-w-[10rem] inline-flex items-center justify-center gap-2 text-sm px-4 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-white/90 transition-all shadow-lg hover:shadow-xl hover:scale-105 transform"
                       >
                         <Globe className="w-4 h-4" />
                         {t("visit_live")}
@@ -188,7 +194,7 @@ export default function Darbai() {
                         href={p.repoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center justify-center gap-2 text-sm px-4 py-3 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all backdrop-blur-sm"
+                        className="min-w-[9rem] inline-flex items-center justify-center gap-2 text-sm px-4 py-3 rounded-xl border border-white/20 bg-white/5 hover:bg:white/10 hover:border-white/30 transition-all backdrop-blur-sm"
                       >
                         <Github className="w-4 h-4" />
                         {t("view_code")}
@@ -198,7 +204,7 @@ export default function Darbai() {
                 </div>
 
                 {/* Corner accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-violet-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-violet-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </motion.article>
             );
           })}

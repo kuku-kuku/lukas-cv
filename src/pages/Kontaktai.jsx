@@ -59,6 +59,7 @@ export default function Kontaktai() {
     }
   };
 
+  // auto hide toasts
   useEffect(() => {
     if (formError) {
       const timer = setTimeout(() => setFormError(""), 4000);
@@ -73,6 +74,32 @@ export default function Kontaktai() {
     }
   }, [formSuccess]);
 
+  // global horizontal clip
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    html.classList.add("overflow-x-clip");
+    body.classList.add("overflow-x-clip");
+    return () => {
+      html.classList.remove("overflow-x-clip");
+      body.classList.remove("overflow-x-clip");
+    };
+  }, []);
+
+  // body scroll lock kai modalas atidarytas
+  useEffect(() => {
+    if (!formVisible) return;
+    const body = document.body;
+    const prevOverflow = body.style.overflow;
+    const prevPosition = body.style.position;
+    body.style.overflow = "hidden";
+    body.style.position = "relative";
+    return () => {
+      body.style.overflow = prevOverflow;
+      body.style.position = prevPosition;
+    };
+  }, [formVisible]);
+
   return (
     <motion.div
       key={t("contact")}
@@ -80,11 +107,11 @@ export default function Kontaktai() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-hidden"
+      className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-x-clip"
     >
-      {/* Dekoro „glow“ (globalus fonas tvarkomas atskiru komponentu) */}
-      <div className="absolute top-32 right-10 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
-      <div className="absolute bottom-32 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: "1s" }} />
+      {/* Dekorai (klipuoti) */}
+      <div className="absolute top-32 right-10 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl animate-pulse pointer-events-none overflow-x-clip" />
+      <div className="absolute bottom-32 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse pointer-events-none overflow-x-clip" style={{ animationDelay: "1s" }} />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
         {/* Header */}
@@ -149,21 +176,31 @@ export default function Kontaktai() {
           )}
         </AnimatePresence>
 
-        {/* Modal form (RESPONSIVE) */}
+        {/* Modal form */}
         <AnimatePresence>
           {formVisible && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[120] overflow-y-auto overscroll-contain"
               onClick={toggleForm}
               role="dialog"
               aria-modal="true"
               onKeyDown={(e) => e.key === "Escape" && setFormVisible(false)}
+              style={{ height: "100dvh" }} /* pilnas aukštis mobiluose */
             >
-              {/* Centering wrapper su saugiu padding */}
-              <div className="min-h-full w-full flex items-center justify-center p-4 sm:p-6">
+              {/* 
+                Mobile: items-start (prasideda žemiau navbar/Notch)
+                Desktop (md+): items-center (tiksliai centruojam)
+              */}
+              <div
+                className="min-h-full w-full flex justify-center p-4 sm:p-6 items-start md:items-center"
+                style={{
+                  paddingTop: "max(env(safe-area-inset-top), var(--navbar-h, 64px))",
+                  paddingBottom: "max(env(safe-area-inset-bottom), 16px)",
+                }}
+              >
                 <motion.form
                   ref={formRef}
                   onSubmit={handleSubmit}
@@ -174,24 +211,27 @@ export default function Kontaktai() {
                   onClick={(e) => e.stopPropagation()}
                   className="relative w-full max-w-lg sm:max-w-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-white/10 overflow-hidden"
                 >
-                  {/* Vidinis scroll’as ir mažesni padding’ai mobile */}
-                  <div className="max-h-[90vh] overflow-y-auto p-5 sm:p-8">
-                    {/* Dekoras (už contento) */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl pointer-events-none z-0" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none z-0" />
+                  {/* Vidinis scroll: mobile – iki (100dvh - viršutinis/apatinis tarpas); desktop – 90vh */}
+                  <div className="max-h-[calc(100dvh-120px)] sm:max-h-[90vh] overflow-y-auto p-5 sm:p-8">
+                    {/* Dekorai – klipuoti */}
+                    <div className="absolute inset-0 pointer-events-none overflow-x-clip z-0">
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl" />
+                      <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
+                    </div>
 
-                    {/* Close (visada pasiekiamas) */}
+                    {/* Close – visada matomas, su safe-area margin */}
                     <button
                       type="button"
                       onClick={() => setFormVisible(false)}
                       className="absolute top-3 right-3 sm:top-6 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/10 z-20"
                       aria-label={t("close")}
+                      style={{ marginTop: "env(safe-area-inset-top)" }}
                     >
                       <X className="w-5 h-5 text-white/90" />
                     </button>
 
+                    {/* Content */}
                     <div className="relative z-10">
-                      {/* Title */}
                       <div className="mb-6 sm:mb-8">
                         <h3 className="text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                           {t("contact_dialog_title")}
@@ -269,6 +309,7 @@ export default function Kontaktai() {
                         whileHover={{ scale: sending ? 1 : 1.02 }}
                         whileTap={{ scale: sending ? 1 : 0.98 }}
                         className="w-full relative group bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold py-4 rounded-xl hover:from-violet-500 hover:to-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-violet-500/50 overflow-hidden"
+                        style={{ paddingBottom: "max(env(safe-area-inset-bottom), 1rem)" }}
                       >
                         <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                         <span className="relative flex items-center justify-center gap-2 z-10">
