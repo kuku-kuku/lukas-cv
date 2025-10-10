@@ -24,7 +24,7 @@ export default function Paslaugos({ openContactModal }) {
   const formatPrice = (i) => {
     const raw = t(`service_${i}_price`);
     if (i === 6) return raw;
-    const lower = raw.trim().toLowerCase();
+    const lower = String(raw).trim().toLowerCase();
     const alreadyHasPrefix = lower.startsWith("nuo ") || lower.startsWith("from ");
     const prefix = i18n.language?.startsWith("lt") ? "Nuo " : "From ";
     return alreadyHasPrefix ? raw : `${prefix}${raw}`;
@@ -37,7 +37,11 @@ export default function Paslaugos({ openContactModal }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative pt-20 sm:pt-28 pb-12 sm:pb-20 px-4 sm:px-6 md:px-8 text-white min-h-screen font-poppins transition-colors duration-500 overflow-hidden"
+      className="relative pt-20 sm:pt-28 pb-12 sm:pb-20 px-4 sm:px-6 md:px-8 text-white font-poppins transition-colors duration-500 overflow-hidden"
+      style={{
+        minHeight: "100dvh",
+        paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 24px)",
+      }}
     >
       {/* Background glow effects */}
       <div className="absolute top-10 sm:top-20 right-5 sm:right-10 w-48 sm:w-72 h-48 sm:h-72 bg-violet-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
@@ -76,11 +80,7 @@ export default function Paslaugos({ openContactModal }) {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -8, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
               className="group relative p-5 sm:p-6 rounded-2xl cursor-pointer bg-gradient-to-br from-white/[0.08] to-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-white/20 active:border-white/30 shadow-xl hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300 flex flex-col justify-between overflow-hidden touch-manipulation"
             >
               {/* Hover overlay */}
@@ -135,6 +135,7 @@ export default function Paslaugos({ openContactModal }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
           className="mt-12 sm:mt-16 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-white/60 text-xs sm:text-sm"
+          style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
         >
           <div className="flex items-center gap-1.5 sm:gap-2">
             <Zap className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-violet-400" />
@@ -163,9 +164,16 @@ export default function Paslaugos({ openContactModal }) {
             role="dialog"
             aria-modal="true"
             onKeyDown={(e) => e.key === "Escape" && setActive(null)}
+            style={{
+              paddingBottom: "env(safe-area-inset-bottom, 0px)",
+              overscrollBehaviorY: "contain",
+            }}
           >
             {/* Centering wrapper with proper padding */}
-            <div className="min-h-full w-full flex items-start sm:items-center justify-center p-3 sm:p-6">
+            <div
+              className="min-h-full w-full flex items-start sm:items-center justify-center p-3 sm:p-6"
+              style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 8px)" }}
+            >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -175,7 +183,13 @@ export default function Paslaugos({ openContactModal }) {
                 className="relative w-full max-w-lg sm:max-w-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-white/10 overflow-hidden my-3 sm:my-0"
               >
                 {/* Inner scrollable content */}
-                <div className="max-h-[calc(100vh-24px)] sm:max-h-[90vh] overflow-y-auto overscroll-contain">
+                <div
+                  className="overflow-y-auto overscroll-contain"
+                  style={{
+                    maxHeight: "calc(100dvh - 24px)",
+                    paddingBottom: "env(safe-area-inset-bottom, 0px)",
+                  }}
+                >
                   <div className="p-4 sm:p-6 md:p-8">
                     {/* Background decorations */}
                     <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-violet-500/10 rounded-full blur-3xl pointer-events-none z-0" />
@@ -187,6 +201,7 @@ export default function Paslaugos({ openContactModal }) {
                       onClick={() => setActive(null)}
                       className="absolute top-3 right-3 sm:top-5 sm:right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/25 transition-colors border border-white/10 z-20 touch-manipulation"
                       aria-label={t("close", { defaultValue: "Close" })}
+                      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
                     >
                       <X className="w-4 sm:w-5 h-4 sm:h-5 text-white/90" />
                     </button>
@@ -194,7 +209,9 @@ export default function Paslaugos({ openContactModal }) {
                     {/* Content */}
                     <div className="relative z-10">
                       <div className="inline-flex items-center justify-center w-12 sm:w-14 h-12 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-violet-500/30 to-blue-500/30 border border-white/20 mb-4 sm:mb-6">
-                        <span className="text-lg sm:text-2xl font-bold text-white">0{active.index}</span>
+                        <span className="text-lg sm:text-2xl font-bold text-white">
+                          0{active.index}
+                        </span>
                       </div>
 
                       <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight pr-8">
