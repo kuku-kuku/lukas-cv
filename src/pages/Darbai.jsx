@@ -74,9 +74,15 @@ export default function Darbai() {
   }, []);
 
   return (
-    <section className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins overflow-x-clip">
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header badge */}
+    <section
+      className="relative text-white min-h-[100svh] md:min-h-screen font-poppins overflow-x-clip"
+      style={{
+        paddingTop: "calc(var(--navbar-h, 64px) + 16px)",
+        paddingBottom: "max(env(safe-area-inset-bottom), 24px)",
+      }}
+    >
+      <div className="max-w-7xl mx-auto relative z-10 px-4 md:px-8">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -194,7 +200,7 @@ export default function Darbai() {
                         href={p.repoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="min-w-[9rem] inline-flex items-center justify-center gap-2 text-sm px-4 py-3 rounded-xl border border-white/20 bg-white/5 hover:bg:white/10 hover:border-white/30 transition-all backdrop-blur-sm"
+                        className="min-w-[9rem] inline-flex items-center justify-center gap-2 text-sm px-4 py-3 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all backdrop-blur-sm"
                       >
                         <Github className="w-4 h-4" />
                         {t("view_code")}

@@ -24,9 +24,9 @@ export default function Paslaugos({ openContactModal }) {
     e && e.stopPropagation();
     setActive(null);
     if (typeof openContactModal === "function") {
-      openContactModal(); // turi prioritetą
+      openContactModal();             // prioritetas modalui
     } else {
-      navigate("/kontaktai"); // EN ir LT – tas pats kelias
+      navigate("/kontaktai");         // EN ir LT – tas pats kelias
     }
   };
 
@@ -40,7 +40,7 @@ export default function Paslaugos({ openContactModal }) {
     return alreadyHasPrefix ? raw : `${prefix}${raw}`;
   };
 
-  // Globalus horizontalus „clip“, kad mobile neplėstų pločio
+  // globalus horizontalus clip (be šoninio stumdymo)
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -52,19 +52,18 @@ export default function Paslaugos({ openContactModal }) {
     };
   }, []);
 
-  // Body scroll lock modalui
+  // body scroll lock kai modalas atidarytas
   useEffect(() => {
+    if (!active) return;
     const body = document.body;
-    if (active) {
-      const prevOverflow = body.style.overflow;
-      const prevPosition = body.style.position;
-      body.style.overflow = "hidden";
-      body.style.position = "relative";
-      return () => {
-        body.style.overflow = prevOverflow;
-        body.style.position = prevPosition;
-      };
-    }
+    const prevOverflow = body.style.overflow;
+    const prevPosition = body.style.position;
+    body.style.overflow = "hidden";
+    body.style.position = "relative";
+    return () => {
+      body.style.overflow = prevOverflow;
+      body.style.position = prevPosition;
+    };
   }, [active]);
 
   return (
@@ -74,16 +73,21 @@ export default function Paslaugos({ openContactModal }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative pt-28 pb-20 px-4 md:px-8 text-white min-h-screen font-poppins transition-colors duration-500 overflow-x-clip transform-gpu"
+      /* Tikras mobilių įrenginių aukštis + „safe-area“ tarpai */
+      className="relative text-white min-h-[100svh] md:min-h-screen font-poppins transition-colors duration-500 overflow-x-clip"
+      style={{
+        paddingTop: "calc(var(--navbar-h, 64px) + 16px)",
+        paddingBottom: "max(env(safe-area-inset-bottom), 24px)",
+      }}
     >
-      {/* Dekorai – suklipyti, kad neplėstų pločio */}
-      <div className="pointer-events-none absolute inset-0 overflow-x-clip">
+      {/* Dekorai – klipuoti, kad neplėstų pločio */}
+      <div className="pointer-events-none absolute inset-0 overflow-x-clip z-0">
         <div className="absolute top-20 right-10 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       <div className="max-w-screen-xl mx-auto relative z-10">
-        {/* Header mini badge */}
+        {/* Header badge */}
         <motion.div
           className="text-center mb-10"
           initial={isTouch ? false : { opacity: 0, y: -20 }}
@@ -96,7 +100,7 @@ export default function Paslaugos({ openContactModal }) {
           </div>
         </motion.div>
 
-        {/* Service Grid */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-clip">
           {services.map((i) => (
             <motion.div
@@ -174,7 +178,7 @@ export default function Paslaugos({ openContactModal }) {
           ))}
         </div>
 
-        {/* Trust Indicators */}
+        {/* Trust indicators */}
         <motion.div
           initial={isTouch ? false : { opacity: 0, y: 20 }}
           animate={isTouch ? {} : { opacity: 1, y: 0 }}
@@ -196,11 +200,11 @@ export default function Paslaugos({ openContactModal }) {
         </motion.div>
       </div>
 
-      {/* Modal (responsive) */}
+      {/* Modal */}
       <AnimatePresence>
         {active && (
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 overflow-y-auto overscroll-contain"
+            className="fixed inset-0 bg-black/70 backdrop-blur-md z-[120] overflow-y-auto overscroll-contain"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -208,9 +212,16 @@ export default function Paslaugos({ openContactModal }) {
             role="dialog"
             aria-modal="true"
             onKeyDown={(e) => e.key === "Escape" && setActive(null)}
+            style={{ height: "100dvh" }}
           >
-            {/* centering wrapper su paddings */}
-            <div className="min-h-full w-full flex items-center justify-center p-4 sm:p-6">
+            {/* Mobile: items-start (žemiau navbar), Desktop: items-center (centruota) */}
+            <div
+              className="min-h-full w-full flex justify-center p-4 sm:p-6 items-start md:items-center"
+              style={{
+                paddingTop: "max(env(safe-area-inset-top), var(--navbar-h, 64px))",
+                paddingBottom: "max(env(safe-area-inset-bottom), 16px)",
+              }}
+            >
               <motion.div
                 initial={{ scale: 0.96, opacity: 0, y: 10 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -219,8 +230,7 @@ export default function Paslaugos({ openContactModal }) {
                 onClick={(e) => e.stopPropagation()}
                 className="relative w-full max-w-lg sm:max-w-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-white/10 overflow-hidden"
               >
-                {/* vidinis scrollas */}
-                <div className="max-h-[90vh] overflow-y-auto p-5 sm:p-8">
+                <div className="max-h-[calc(100dvh-120px)] sm:max-h-[90vh] overflow-y-auto p-5 sm:p-8">
                   {/* Dekoras modal viduje – klipuotas */}
                   <div className="absolute inset-0 pointer-events-none overflow-x-clip z-0">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl" />
@@ -233,6 +243,7 @@ export default function Paslaugos({ openContactModal }) {
                     onClick={() => setActive(null)}
                     className="absolute top-3 right-3 sm:top-6 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/10 z-20"
                     aria-label={t("close", { defaultValue: "Close" })}
+                    style={{ marginTop: "env(safe-area-inset-top)" }}
                   >
                     <X className="w-5 h-5 text-white/90" />
                   </button>
@@ -265,6 +276,7 @@ export default function Paslaugos({ openContactModal }) {
                         type="button"
                         onClick={handleGetStarted}
                         className="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-white/90 transition-all shadow-lg hover:shadow-xl"
+                        style={{ paddingBottom: "max(env(safe-area-inset-bottom), 0px)" }}
                       >
                         {t("get_started")}
                       </button>
