@@ -3,7 +3,7 @@ import DemoLayout from "../components/DemoLayout";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("demo-cart")) || [];

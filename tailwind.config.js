@@ -1,13 +1,68 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class', // <--- svarbu
+  darkMode: "class",
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      colors: {
+        // Instrument palette — monochrome ink on near-black, one signal colour.
+        ink: {
+          DEFAULT: "#F1EFEA",
+          2: "#A7A5A0",
+          3: "#6E6C68",
+          4: "#403F3C",
+        },
+        base: {
+          DEFAULT: "#0A0A0B",
+          elev: "#101012",
+          sunk: "#060607",
+        },
+        bone: "#F1EFEA",
+        signal: {
+          DEFAULT: "#FF4A1C",
+          dim: "#C23814",
+        },
+      },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        // Poppins kept as an alias so legacy `font-poppins` usages stay valid.
+        poppins: ['Archivo', 'system-ui', 'sans-serif'],
+        sans: ['Archivo', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+      letterSpacing: {
+        tightest: "-0.045em",
+        display: "-0.03em",
+        label: "0.18em",
+      },
+      fontSize: {
+        label: ["0.6875rem", { lineHeight: "1", letterSpacing: "0.18em" }],
+      },
+      maxWidth: {
+        grid: "96rem",
+      },
+      transitionTimingFunction: {
+        expo: "cubic-bezier(0.16, 1, 0.3, 1)",
+        inout: "cubic-bezier(0.76, 0, 0.24, 1)",
+      },
+      keyframes: {
+        "rule-draw": {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
+        },
+        "signal-pulse": {
+          "0%, 100%": { opacity: "0.35" },
+          "50%": { opacity: "1" },
+        },
+        ticker: {
+          from: { transform: "translate3d(0,0,0)" },
+          to: { transform: "translate3d(-50%,0,0)" },
+        },
+      },
+      animation: {
+        "signal-pulse": "signal-pulse 2.4s cubic-bezier(0.76, 0, 0.24, 1) infinite",
+        ticker: "ticker 44s linear infinite",
       },
     },
   },
   plugins: [],
-}
+};

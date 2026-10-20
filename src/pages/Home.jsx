@@ -1,104 +1,76 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import VideoIntro from "../components/VideoIntro";
-import FlashTransition from "../components/FlashTransition";
-import StickyNav from "../components/StickyNav";
-import BackToTop from "../components/BackToTop"; // ← ADD THIS
+import React, { useCallback, useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import BootSequence, { shouldBoot } from "../components/BootSequence";
+import CommandRail from "../components/CommandRail";
+import GridOverlay from "../components/GridOverlay";
+import Masthead from "../components/sections/Masthead";
+import Capabilities from "../components/sections/Capabilities";
+import Method from "../components/sections/Method";
+import Work from "../components/sections/Work";
+import Stack from "../components/sections/Stack";
+import Process from "../components/sections/Process";
+import Contact from "../components/sections/Contact";
+import Footer from "../components/sections/Footer";
+import { useReducedMotion } from "../design/useMotionPrefs";
 
-// All sections
-import HeroSection from "../components/sections/HeroSection";
-import AboutSection from "../components/sections/AboutSection";
-import ServicesSection from "../components/sections/ServicesSection";
-import WorksSection from "../components/sections/WorksSection";
-import ContactSection from "../components/sections/ContactSection";
-
+/**
+ * The single page.
+ *
+ * Two deliberate structural decisions:
+ *
+ * 1. The content is always rendered. The opening sequence is an overlay on
+ *    top of a complete document, so the first paint, the crawler, and anyone
+ *    with JS or motion disabled all get the whole page. (The previous version
+ *    mounted the sections only after a five-second video had finished.)
+ *
+ * 2. The selected project is held here rather than inside the work index, so
+ *    the evidence links in section 01 can open the matching row in section 03
+ *    and scroll to it. One owner, no duplicated state.
+ */
 export default function Home() {
-  const [showVideo, setShowVideo] = useState(true);
-  const [showFlash, setShowFlash] = useState(false);
-  const [mainContentReady, setMainContentReady] = useState(false);
+  const reduced = useReducedMotion();
+  const [booting, setBooting] = useState(() => shouldBoot());
+  const [openProject, setOpenProject] = useState(null);
+  const [pendingScroll, setPendingScroll] = useState(null);
 
-  useEffect(() => {
-    // FORCE SHOW VIDEO - For testing/development
-    // Comment out these lines to use normal once-per-day logic
-    
-    // Uncomment below to enable once-per-day video:
-    /*
-    const lastSeenDate = localStorage.getItem("videoIntroLastSeen");
-    const today = new Date().toDateString();
-    const hasSeenToday = lastSeenDate === today;
-    
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (hasSeenToday || prefersReducedMotion) {
-      setShowVideo(false);
-      setMainContentReady(true);
-    }
-    */
+  const openFromEvidence = useCallback((projectId) => {
+    setOpenProject(projectId);
+    setPendingScroll(projectId);
   }, []);
 
-  const handleVideoEnd = () => {
-    setShowVideo(false);
-    setShowFlash(true);
-    setTimeout(() => {
-      setShowFlash(false);
-      setMainContentReady(true);
-      localStorage.setItem("videoIntroLastSeen", new Date().toDateString());
-    }, 1200);
-  };
-
-  const handleSkipIntro = () => {
-    setShowVideo(false);
-    setMainContentReady(true);
-    localStorage.setItem("videoIntroLastSeen", new Date().toDateString());
-  };
+  // Scroll after the row has actually expanded, so we land on the open panel.
+  useEffect(() => {
+    if (!pendingScroll) return undefined;
+    const id = window.requestAnimationFrame(() => {
+      document.getElementById(`work-${pendingScroll}`)?.scrollIntoView({
+        behavior: reduced ? "auto" : "smooth",
+        block: "center",
+      });
+      setPendingScroll(null);
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [pendingScroll, reduced]);
 
   return (
-    <div className="relative bg-black text-white font-poppins min-h-screen">
-      {/* Video Intro */}
+    <div className="relative min-h-screen">
+      <GridOverlay />
+      <CommandRail />
+
+      <main>
+        <Masthead />
+        <Capabilities onEvidence={openFromEvidence} />
+        <Method />
+        <Work openId={openProject} onOpen={setOpenProject} />
+        <Stack />
+        <Process />
+        <Contact />
+      </main>
+
+      <Footer />
+
       <AnimatePresence>
-        {showVideo && (
-          <VideoIntro onEnd={handleVideoEnd} onSkip={handleSkipIntro} />
-        )}
+        {booting && <BootSequence onDone={() => setBooting(false)} />}
       </AnimatePresence>
-
-      {/* Flash Transition */}
-      <AnimatePresence>
-        {showFlash && <FlashTransition />}
-      </AnimatePresence>
-
-      {/* Main Content - One Page Scroll */}
-      {mainContentReady && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative"
-        >
-          {/* Sticky Navigation */}
-          <StickyNav />
-
-          {/* Back to Top Button - ADD THIS */}
-          <BackToTop />
-
-          {/* All Sections in Order */}
-          <div className="relative">
-            <HeroSection />
-            <AboutSection />
-            <ServicesSection />
-            <WorksSection />
-            <ContactSection />
-          </div>
-
-          {/* Footer (optional) */}
-          <footer className="relative py-8 text-center text-white/40 text-sm border-t border-white/10">
-            <div className="max-w-7xl mx-auto px-4">
-              <p>© {new Date().getFullYear()} Lukas Beneta. All rights reserved.</p>
-            </div>
-          </footer>
-        </motion.div>
-      )}
     </div>
   );
 }

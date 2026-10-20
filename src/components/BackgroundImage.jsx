@@ -1,5 +1,5 @@
 import React from "react";
-import bg from "../assets/background.jpg";
+import bg from "../assets/background.webp";
 
 /**
  * Globalus fonas visiems puslapiams (išskyrus Home).

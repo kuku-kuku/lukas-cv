@@ -1,30 +1,53 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import background from "../assets/background.jpg";
+import { PRACTICE } from "../design/content";
 
+/**
+ * 404, in the same language as the rest of the site: a status readout rather
+ * than a sad illustration. The 2.4 MB photographic background it used to load
+ * is gone — this page now costs nothing but the stylesheet.
+ */
 export default function NotFound() {
   const { t } = useTranslation();
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center text-white font-poppins">
-      <img
-        src={background}
-        alt="background"
-        className="absolute top-0 left-0 w-full h-full object-cover"
-      />
+    <div className="flex min-h-screen flex-col justify-between px-5 py-8 md:px-10">
+      <div className="flex items-baseline justify-between">
+        <Link to="/" className="text-base font-extrabold tracking-tightest">
+          {PRACTICE.mark}
+        </Link>
+        <span className="label" style={{ color: "var(--signal)" }}>
+          HTTP 404
+        </span>
+      </div>
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black/70" />
+      <div>
+        <span className="label">{t("not_found_code", "Resource not found")}</span>
+        <h1 className="display-l mt-5 max-w-[22ch]">{t("not_found_title")}</h1>
+        <p className="lede mt-6 max-w-[48ch]">{t("not_found_subtitle")}</p>
 
-      <div className="relative z-10 text-center px-6">
-        <h1 className="text-5xl font-bold mb-4">{t("not_found_title")}</h1>
-        <p className="text-xl mb-8">{t("not_found_subtitle")}</p>
+        <div className="mt-10 h-px w-full" style={{ background: "var(--line)" }} />
         <Link
           to="/"
-          className="inline-flex items-center px-5 py-3 bg-white text-black rounded-xl hover:bg-gray-300 transition font-medium"
+          className="group mt-8 inline-flex items-center gap-3 border px-6 py-4 text-sm font-semibold"
+          style={{ borderColor: "var(--signal)" }}
         >
-          ← {t("back_home")}
+          <span
+            aria-hidden="true"
+            className="font-mono text-xs transition-transform duration-300 group-hover:-translate-x-1"
+          >
+            ←
+          </span>
+          {t("back_home")}
         </Link>
+      </div>
+
+      <div className="flex items-baseline justify-between">
+        <span className="label">{PRACTICE.domain}</span>
+        <span className="label">
+          {PRACTICE.locality} — {PRACTICE.country}
+        </span>
       </div>
     </div>
   );

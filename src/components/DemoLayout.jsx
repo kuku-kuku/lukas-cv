@@ -4,7 +4,6 @@ import {
   ShoppingCart,
   LogIn,
   Settings,
-  PackageSearch,
   LogOut,
 } from "lucide-react";
 

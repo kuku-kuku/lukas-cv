@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# beneta.lt
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Single-page site for an independent software engineering practice (Klaipėda, LT).
+Create React App + React 18 + Tailwind + Framer Motion + i18next (LT/EN).
 
-## Available Scripts
+## Scripts
 
-In the project directory, you can run:
+| command | what it does |
+| --- | --- |
+| `npm start` | dev server on http://localhost:3000 |
+| `npm run build` | production build into `build/` |
+| `npm test` | CRA test runner |
 
-### `npm start`
+Vercel sets `CI=true`, which makes CRA treat ESLint warnings as errors — keep the
+build warning-free.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Routes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`/` is the whole site (one page, seven sections). `/demo`, `/demo/admin`,
+`/demo/cart` and `/demo/admin-panel` are the e-commerce demo and are code-split;
+anything else renders the 404 page.
 
-### `npm test`
+## Design system
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The art direction is "instrument": near-black ground, bone ink, hairline rules
+and exactly one signal colour (`#FF4A1C`), with Archivo for display and
+JetBrains Mono for technical labels.
 
-### `npm run build`
+- `src/styles.css` — tokens (`:root`), base layer, the `.label` / `.display-*` /
+  `.shell` / `.mask-line` component classes, and the global reduced-motion
+  switch. Colour, spacing and motion values live here first.
+- `tailwind.config.js` — the same palette and type stack exposed as utilities.
+- `src/design/motion.js` — duration, easing, stagger and variant tokens. Any new
+  animation should compose these rather than invent its own timing.
+- `src/design/useMotionPrefs.js` — `useReducedMotion`, `useFinePointer`,
+  `useCompactViewport`, `useMediaFlag`. Effects are scaled down by these rather
+  than switched off wholesale.
+- `src/design/content.js` — page structure: sections, capabilities, the method
+  graph, projects, stack groups, process steps and the rate card. Only
+  identifiers and facts; every string is an i18n key.
+- `src/i18n.js` — all LT/EN copy, and the `<html lang>` sync.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Editing the content
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Adding a capability, project or process step means adding an entry in
+`src/design/content.js` plus its keys in both language blocks of `src/i18n.js`.
+Nothing else needs to change — the rail, the section indices and the
+cross-links between capabilities and work derive from that data.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Project entries deliberately carry no marketing metrics: scope, role, stack and
+status only.
 
-### `npm run eject`
+### Motion rules
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Entrances travel upward on an expo-out curve; nothing bounces or spins.
+2. Anything that loops is reporting live state (the clock, the availability
+   dot, packets in the diagram) — otherwise it runs once.
+3. Every scroll-linked or rAF loop stops when its element leaves the viewport
+   or the tab is hidden (`LatticeField`, `SystemDiagram`, `LiveClock`).
+4. `prefers-reduced-motion` removes choreography, never content or structure.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Images
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Screenshots are WebP with a JPEG fallback and a small `-sm.webp` variant for
+the hover preview, inside fixed-ratio boxes so they cannot shift layout.
+Regenerate with ffmpeg:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+ffmpeg -i source.png -vf "scale='min(1400,iw)':-2:flags=lanczos" -quality 80 public/name.webp
+```
 
-## Learn More
+## Environment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`REACT_APP_EMAILJS_SERVICE_ID`, `REACT_APP_EMAILJS_TEMPLATE_ID` and
+`REACT_APP_EMAILJS_PUBLIC_KEY` drive the contact form. The form posts the
+fields `name`, `email` and `message` — the EmailJS template depends on those
+names, so do not rename them.

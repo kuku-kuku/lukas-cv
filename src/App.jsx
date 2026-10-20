@@ -1,31 +1,58 @@
-import React, { useEffect } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
 } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-
-// Demo routes (keep if needed)
-import Demo from "./pages/Demo";
-import AdminLogin from "./pages/AdminLogin";
-import AdminPanel from "./pages/AdminPanel";
-import Cart from "./pages/Cart";
-
-// Old pages (backup - can remove later)
-// import Apie from "./pages/Apie";
-// import Paslaugos from "./pages/Paslaugos";
-// import Kontaktai from "./pages/Kontaktai";
-// import Darbai from "./pages/Darbai";
-
 import ScrollToTop from "./components/ScrollToTop";
 import BackgroundImage from "./components/BackgroundImage";
 import "./styles.css";
-import { AnimatePresence, motion } from "framer-motion";
 import "./i18n";
 import { initGA, trackPageview } from "./ga";
+import { DUR, EASE } from "./design/motion";
+
+/**
+ * Routing is unchanged from before — /, /demo, /demo/admin, /demo/cart,
+ * /demo/admin-panel and the 404 all still resolve to the same components, so
+ * no indexed URL moved.
+ *
+ * What changed:
+ *  - the demo area and the 404 page are code-split, so the landing page no
+ *    longer ships the demo shop in its main bundle,
+ *  - the app shell no longer sets `overflow: hidden`, which was silently
+ *    breaking `position: sticky` and 100svh sections inside the page.
+ */
+
+const Demo = lazy(() => import("./pages/Demo"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminPanel = lazy(() => import("./pages/AdminPanel"));
+const Cart = lazy(() => import("./pages/Cart"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+function RouteFade({ children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: DUR.s, ease: EASE }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** Minimal, honest placeholder: a hairline, not a fake progress bar. */
+function RouteFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <span className="label">Loading</span>
+    </div>
+  );
+}
 
 function AppContent() {
   const location = useLocation();
@@ -40,102 +67,61 @@ function AppContent() {
   }, [location]);
 
   return (
-    <div className="min-h-screen text-white font-poppins transition relative overflow-hidden">
+    <div className="relative min-h-screen">
       <ScrollToTop />
 
-      {/* Background only for Demo pages */}
+      {/* The photographic background belongs to the demo shop only. */}
       {isDemo && <BackgroundImage />}
 
-      {/* 
-        No global Navbar - Home has StickyNav inside
-        Demo pages can have their own nav if needed
-      */}
+      <Suspense fallback={<RouteFallback />}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
 
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          {/* Main Portfolio - One Page with Video Intro */}
-          <Route path="/" element={<Home />} />
+            <Route
+              path="/demo"
+              element={
+                <RouteFade>
+                  <Demo />
+                </RouteFade>
+              }
+            />
+            <Route
+              path="/demo/admin"
+              element={
+                <RouteFade>
+                  <AdminLogin />
+                </RouteFade>
+              }
+            />
+            <Route
+              path="/demo/cart"
+              element={
+                <RouteFade>
+                  <Cart />
+                </RouteFade>
+              }
+            />
+            <Route
+              path="/demo/admin-panel"
+              element={
+                <RouteFade>
+                  <AdminPanel />
+                </RouteFade>
+              }
+            />
 
-          {/* Demo Routes (keep if needed) */}
-          <Route
-            path="/demo"
-            element={
-              <motion.div 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                exit={{ opacity: 0 }} 
-                transition={{ duration: 0.5 }}
-              >
-                <Demo />
-              </motion.div>
-            }
-          />
-
-          <Route
-            path="/demo/admin"
-            element={
-              <motion.div 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                exit={{ opacity: 0 }} 
-                transition={{ duration: 0.5 }}
-              >
-                <AdminLogin />
-              </motion.div>
-            }
-          />
-
-          <Route
-            path="/demo/cart"
-            element={
-              <motion.div 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                exit={{ opacity: 0 }} 
-                transition={{ duration: 0.5 }}
-              >
-                <Cart />
-              </motion.div>
-            }
-          />
-
-          <Route
-            path="/demo/admin-panel"
-            element={
-              <motion.div 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                exit={{ opacity: 0 }} 
-                transition={{ duration: 0.5 }}
-              >
-                <AdminPanel />
-              </motion.div>
-            }
-          />
-
-          {/* Old routes - commented out (backup)
-          <Route path="/apie" element={<Apie />} />
-          <Route path="/paslaugos" element={<Paslaugos />} />
-          <Route path="/kontaktai" element={<Kontaktai />} />
-          <Route path="/darbai" element={<Darbai />} />
-          */}
-
-          {/* 404 */}
-          <Route
-            path="*"
-            element={
-              <motion.div 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                exit={{ opacity: 0 }} 
-                transition={{ duration: 0.5 }}
-              >
-                <NotFound />
-              </motion.div>
-            }
-          />
-        </Routes>
-      </AnimatePresence>
+            <Route
+              path="*"
+              element={
+                <RouteFade>
+                  <NotFound />
+                </RouteFade>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
     </div>
   );
 }

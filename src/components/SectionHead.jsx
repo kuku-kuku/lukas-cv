@@ -1,0 +1,42 @@
+import React from "react";
+import Reveal from "./motion/Reveal";
+import Rule from "./motion/Rule";
+import SplitText from "./motion/SplitText";
+
+/**
+ * Every section opens the same way: index, name, a rule that draws itself,
+ * then the title and an optional lede. The repetition is the point — it is
+ * what makes the page read as one instrument instead of seven templates.
+ */
+export default function SectionHead({ index, eyebrow, title, lede, id }) {
+  return (
+    <header className="mb-12 md:mb-20">
+      <Reveal className="flex items-baseline justify-between gap-6" y={10}>
+        <span className="label" style={{ color: "var(--signal)" }}>
+          {index}
+        </span>
+        <span className="label flex-1 text-right md:text-left">{eyebrow}</span>
+      </Reveal>
+
+      <Rule className="mt-3" delay={0.05} />
+
+      <div className="mt-6 grid gap-6 md:grid-cols-12 md:gap-10">
+        <h2
+          id={id ? `${id}-title` : undefined}
+          className="display-l md:col-span-7"
+        >
+          <SplitText text={title} stagger={0.045} />
+        </h2>
+        {lede && (
+          <Reveal
+            as="p"
+            delay={0.12}
+            className="lede md:col-span-5 md:pt-2"
+          >
+            {lede}
+          </Reveal>
+        )}
+      </div>
+    </header>
+  );
+}
