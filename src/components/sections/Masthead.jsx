@@ -115,7 +115,7 @@ export default function Masthead() {
             className="lede md:col-span-5 md:col-start-7"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.l, ease: EASE, delay: reduced ? 0 : 0.5 }}
+            transition={{ duration: DUR.m, ease: EASE, delay: reduced ? 0 : 0.18 }}
           >
             {t("masthead_lede")}
           </motion.p>
@@ -124,7 +124,7 @@ export default function Masthead() {
             className="flex flex-wrap items-center gap-3 md:col-span-5 md:col-start-7"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.l, ease: EASE, delay: reduced ? 0 : 0.62 }}
+            transition={{ duration: DUR.m, ease: EASE, delay: reduced ? 0 : 0.3 }}
           >
             <Magnetic>
               <button
@@ -175,7 +175,7 @@ export default function Masthead() {
               transition={{
                 duration: DUR.m,
                 ease: EASE,
-                delay: reduced ? 0 : 0.7 + i * 0.07,
+                delay: reduced ? 0 : 0.42 + i * 0.06,
               }}
             >
               <dt className="label">{t(spec.labelKey)}</dt>
@@ -200,7 +200,7 @@ export default function Masthead() {
             className="label"
             text={`${PRACTICE.name} · ${PRACTICE.domain}`}
             trigger="mount"
-            delay={0.8}
+            delay={0.5}
             stagger={0.02}
           />
           <button

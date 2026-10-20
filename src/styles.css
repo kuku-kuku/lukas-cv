@@ -14,8 +14,10 @@
   --bg-sunk: #060607;
   --ink: #f1efea;
   --ink-2: #a7a5a0;
-  --ink-3: #6e6c68;
-  --ink-4: #403f3c;
+  /* 5.7:1 on --bg: the mono labels are small text and must clear 4.5:1 */
+  --ink-3: #8a8884;
+  /* Non-text only (dots, hairlines) — never used for type */
+  --ink-4: #4a4945;
   --signal: #ff4a1c;
 
   --line: rgba(241, 239, 234, 0.1);
@@ -206,13 +208,22 @@
   }
 
   /* ---- Inverted (bone) section ---- */
+  /* The one inverted spread. It redefines the whole token set rather than
+     only the background, so every utility bound to those tokens flips with
+     it. The literal bone value is used for the background because --ink is
+     redefined in this same rule. */
   .invert-section {
-    background: var(--ink);
+    background: #f1efea;
     color: #0a0a0b;
+    /* The signal colour is tuned for a dark ground; on bone it reaches only
+       2.9:1, so this spread gets a darker tone of the same hue (4.7:1). */
+    --signal: #c23814;
     --line: rgba(10, 10, 11, 0.12);
     --line-strong: rgba(10, 10, 11, 0.28);
+    --ink: #0a0a0b;
     --ink-2: #4a4845;
-    --ink-3: #6b6965;
+    --ink-3: #65635f;
+    --ink-4: #9b9892;
   }
 
   /* ---- Film grain: 1 tiny inline SVG, no image request ---- */

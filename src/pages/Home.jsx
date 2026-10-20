@@ -33,6 +33,30 @@ export default function Home() {
   const [openProject, setOpenProject] = useState(null);
   const [pendingScroll, setPendingScroll] = useState(null);
 
+  /**
+   * Everything below the fold mounts one frame after the masthead.
+   *
+   * The masthead is what the visitor is waiting for, and it was competing for
+   * the main thread with six sections, an interactive diagram and a work
+   * index that nobody can see yet. The delay is a single animation frame, so
+   * the full document still exists milliseconds later — this is not
+   * scroll-gated rendering, and no content is withheld from crawlers.
+   */
+  const [belowFold, setBelowFold] = useState(false);
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setBelowFold(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  // A deep link (/#contact) is resolved by the browser before those sections
+  // exist, so it is re-applied once they do.
+  useEffect(() => {
+    if (!belowFold) return;
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    document.getElementById(id)?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, [belowFold]);
+
   const openFromEvidence = useCallback((projectId) => {
     setOpenProject(projectId);
     setPendingScroll(projectId);
@@ -54,19 +78,23 @@ export default function Home() {
   return (
     <div className="relative min-h-screen">
       <GridOverlay />
-      <CommandRail />
+      {belowFold && <CommandRail />}
 
       <main>
         <Masthead />
-        <Capabilities onEvidence={openFromEvidence} />
-        <Method />
-        <Work openId={openProject} onOpen={setOpenProject} />
-        <Stack />
-        <Process />
-        <Contact />
+        {belowFold && (
+          <>
+            <Capabilities onEvidence={openFromEvidence} />
+            <Method />
+            <Work openId={openProject} onOpen={setOpenProject} />
+            <Stack />
+            <Process />
+            <Contact />
+          </>
+        )}
       </main>
 
-      <Footer />
+      {belowFold && <Footer />}
 
       <AnimatePresence>
         {booting && <BootSequence onDone={() => setBooting(false)} />}

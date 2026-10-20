@@ -6,11 +6,15 @@ module.exports = {
     extend: {
       colors: {
         // Instrument palette — monochrome ink on near-black, one signal colour.
+        // Bound to the CSS tokens rather than fixed hexes, so the inverted
+        // spread (.invert-section) re-tones every `text-ink-*` utility along
+        // with everything else instead of staying light-on-light.
+        // No opacity modifiers are used with these.
         ink: {
-          DEFAULT: "#F1EFEA",
-          2: "#A7A5A0",
-          3: "#6E6C68",
-          4: "#403F3C",
+          DEFAULT: "var(--ink)",
+          2: "var(--ink-2)",
+          3: "var(--ink-3)",
+          4: "var(--ink-4)",
         },
         base: {
           DEFAULT: "#0A0A0B",

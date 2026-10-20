@@ -52,6 +52,9 @@ export default function LatticeField({ className = "" }) {
     let raf = 0;
     let running = false;
     let visible = true;
+    // The field is ambient: it must not compete with the first paint of the
+    // masthead, so the loop only begins once the browser is idle.
+    let ready = false;
     let startedAt = 0;
 
     const pointer = { x: -1, y: -1, active: false };
@@ -253,7 +256,7 @@ export default function LatticeField({ className = "" }) {
     }
 
     function start() {
-      if (running || reduced || !visible) return;
+      if (running || reduced || !visible || !ready) return;
       running = true;
       startedAt = 0;
       raf = requestAnimationFrame(frame);
@@ -313,9 +316,20 @@ export default function LatticeField({ className = "" }) {
     }
 
     onScroll();
-    start();
+    const idle =
+      window.requestIdleCallback || ((fn) => window.setTimeout(fn, 400));
+    const cancelIdle =
+      window.cancelIdleCallback || window.clearTimeout.bind(window);
+    const idleHandle = idle(
+      () => {
+        ready = true;
+        start();
+      },
+      { timeout: 1500 }
+    );
 
     return () => {
+      cancelIdle(idleHandle);
       stop();
       ro.disconnect();
       io.disconnect();

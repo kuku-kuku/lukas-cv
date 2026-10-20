@@ -91,7 +91,7 @@ export default function Contact() {
   }, [success]);
 
   const inputClass =
-    "w-full border-0 border-b bg-transparent px-0 py-3 text-[1.0625rem] text-ink outline-none transition-colors duration-200 placeholder:text-ink-4 focus:border-b-[var(--signal)]";
+    "w-full border-0 border-b bg-transparent px-0 py-3 text-[1.0625rem] text-ink outline-none transition-colors duration-200 placeholder:text-ink-3 focus:border-b-[var(--signal)]";
 
   return (
     <section

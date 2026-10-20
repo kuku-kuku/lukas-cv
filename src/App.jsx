@@ -58,8 +58,28 @@ function AppContent() {
   const location = useLocation();
   const isDemo = location.pathname.startsWith("/demo");
 
+  // Analytics is not first-paint work: starting gtag during hydration costs
+  // main-thread time exactly when the page is trying to render.
   useEffect(() => {
-    initGA();
+    let handle = 0;
+    const idle =
+      window.requestIdleCallback || ((fn) => window.setTimeout(fn, 1500));
+    const cancel =
+      window.cancelIdleCallback || window.clearTimeout.bind(window);
+    const schedule = () => {
+      handle = idle(() => initGA(), { timeout: 6000 });
+    };
+
+    // gtag is ~176 kB of third-party JavaScript — larger than this app. It
+    // waits for load and then for an idle moment, so it can never land in the
+    // middle of the first render. Page views are queued until it is ready.
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+
+    return () => {
+      window.removeEventListener("load", schedule);
+      if (handle) cancel(handle);
+    };
   }, []);
 
   useEffect(() => {

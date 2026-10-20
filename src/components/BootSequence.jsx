@@ -12,7 +12,7 @@ import { DUR, EASE } from "../design/motion";
  *    curtain and never a gate: crawlers, JS-off visitors and anyone who taps
  *    straight away get the content,
  *  - it runs once per browser session, never on prefers-reduced-motion,
- *  - total length is ~1.1s and any click or key press ends it immediately,
+ *  - total length is ~0.9s and any click or key press ends it immediately,
  *  - a hard safety timer calls onDone even if a frame is dropped, so the
  *    overlay cannot get stuck in front of the site.
  *
@@ -20,7 +20,7 @@ import { DUR, EASE } from "../design/motion";
  * first paint of the real content on every single visit.
  */
 
-const LIFETIME = 1100;
+const LIFETIME = 620;
 const SESSION_KEY = "beneta.boot.seen";
 
 export function shouldBoot() {
@@ -50,7 +50,7 @@ export default function BootSequence({ onDone }) {
         /* storage unavailable — nothing to persist, the opening still ran */
       }
       setLeaving(true);
-      window.setTimeout(() => onDone?.(), 420);
+      window.setTimeout(() => onDone?.(), 300);
     };
 
     finishRef.current = finish;
@@ -74,7 +74,7 @@ export default function BootSequence({ onDone }) {
       style={{ background: "var(--bg)" }}
       initial={{ opacity: 1 }}
       animate={leaving ? { y: "-100%" } : { y: 0 }}
-      transition={{ duration: 0.42, ease: EASE }}
+      transition={{ duration: 0.3, ease: EASE }}
       onClick={() => finishRef.current()}
       role="presentation"
     >
@@ -104,7 +104,7 @@ export default function BootSequence({ onDone }) {
             className="display-l block"
             initial={{ y: "110%" }}
             animate={{ y: "0%" }}
-            transition={{ duration: 0.72, ease: EASE }}
+            transition={{ duration: 0.52, ease: EASE }}
           >
             {PRACTICE.mark}
           </motion.span>
@@ -114,7 +114,7 @@ export default function BootSequence({ onDone }) {
           style={{ background: "var(--signal)" }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
+          transition={{ duration: 0.62, ease: EASE, delay: 0.08 }}
         />
       </div>
 

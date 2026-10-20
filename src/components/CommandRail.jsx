@@ -159,7 +159,7 @@ export default function CommandRail() {
             type="button"
             onClick={toggleLanguage}
             className="flex h-[4.5rem] w-full flex-col items-center justify-center gap-1"
-            aria-label={t("switch_language", "Switch language")}
+            aria-label={`${lang} — ${t("switch_language", "Switch language")}`}
           >
             <span className="font-mono text-[0.6875rem] tracking-label text-ink">
               {lang}
@@ -199,7 +199,7 @@ export default function CommandRail() {
               type="button"
               onClick={toggleLanguage}
               className="font-mono text-[0.6875rem] tracking-label text-ink"
-              aria-label={t("switch_language", "Switch language")}
+              aria-label={`${lang} — ${t("switch_language", "Switch language")}`}
             >
               {lang}
             </button>

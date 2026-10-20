@@ -7,7 +7,7 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * Masked type reveal.
  *
  * Accessibility & SEO contract:
- *  - the complete string is exposed once via aria-label on the element,
+ *  - the complete string is exposed once through a visually hidden copy,
  *  - the split fragments are aria-hidden, so assistive tech never spells
  *    the sentence out word by word,
  *  - the text is real DOM text either way, so crawlers and
@@ -48,12 +48,11 @@ export default function SplitText({
   let index = 0;
 
   return (
-    <MotionTag
-      className={className}
-      aria-label={text}
-      initial="hidden"
-      {...animateProps}
-    >
+    <MotionTag className={className} initial="hidden" {...animateProps}>
+      {/* The whole string, once, for assistive tech and for the accessible
+          name of the heading this usually sits in. `aria-label` would be
+          ignored here: it is not allowed on a span without a role. */}
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => {
         if (/^\s+$/.test(word)) {
           return (
