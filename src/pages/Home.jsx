@@ -1,82 +1,104 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import VideoIntro from "../components/VideoIntro";
+import FlashTransition from "../components/FlashTransition";
+import StickyNav from "../components/StickyNav";
+import BackToTop from "../components/BackToTop"; // ← ADD THIS
+
+// All sections
+import HeroSection from "../components/sections/HeroSection";
+import AboutSection from "../components/sections/AboutSection";
+import ServicesSection from "../components/sections/ServicesSection";
+import WorksSection from "../components/sections/WorksSection";
+import ContactSection from "../components/sections/ContactSection";
 
 export default function Home() {
-  const { t, i18n } = useTranslation();
-  const [theme, setTheme] = useState("light");
-  const [langKey, setLangKey] = useState(i18n.language);
+  const [showVideo, setShowVideo] = useState(true);
+  const [showFlash, setShowFlash] = useState(false);
+  const [mainContentReady, setMainContentReady] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    setTheme(saved || "light");
+    // FORCE SHOW VIDEO - For testing/development
+    // Comment out these lines to use normal once-per-day logic
+    
+    // Uncomment below to enable once-per-day video:
+    /*
+    const lastSeenDate = localStorage.getItem("videoIntroLastSeen");
+    const today = new Date().toDateString();
+    const hasSeenToday = lastSeenDate === today;
+    
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (hasSeenToday || prefersReducedMotion) {
+      setShowVideo(false);
+      setMainContentReady(true);
+    }
+    */
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  const handleVideoEnd = () => {
+    setShowVideo(false);
+    setShowFlash(true);
+    setTimeout(() => {
+      setShowFlash(false);
+      setMainContentReady(true);
+      localStorage.setItem("videoIntroLastSeen", new Date().toDateString());
+    }, 1200);
+  };
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === "lt" ? "en" : "lt";
-    i18n.changeLanguage(newLang);
-    setLangKey(newLang);
+  const handleSkipIntro = () => {
+    setShowVideo(false);
+    setMainContentReady(true);
+    localStorage.setItem("videoIntroLastSeen", new Date().toDateString());
   };
 
   return (
-    <div className="relative h-screen w-full font-poppins">
-      {/* Kalbos mygtukas */}
-      <div className="absolute top-6 right-6 z-30">
-        <button
-          onClick={toggleLanguage}
-          className="px-3 py-1 border border-white rounded hover:bg-white hover:text-black text-sm text-white transition"
+    <div className="relative bg-black text-white font-poppins min-h-screen">
+      {/* Video Intro */}
+      <AnimatePresence>
+        {showVideo && (
+          <VideoIntro onEnd={handleVideoEnd} onSkip={handleSkipIntro} />
+        )}
+      </AnimatePresence>
+
+      {/* Flash Transition */}
+      <AnimatePresence>
+        {showFlash && <FlashTransition />}
+      </AnimatePresence>
+
+      {/* Main Content - One Page Scroll */}
+      {mainContentReady && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
         >
-          {i18n.language === "lt" ? "EN" : "LT"}
-        </button>
-      </div>
+          {/* Sticky Navigation */}
+          <StickyNav />
 
-      <motion.div
-        key={langKey}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          {t("heroText")}
-        </h1>
+          {/* Back to Top Button - ADD THIS */}
+          <BackToTop />
 
-        <div className="h-6 md:h-10" />
+          {/* All Sections in Order */}
+          <div className="relative">
+            <HeroSection />
+            <AboutSection />
+            <ServicesSection />
+            <WorksSection />
+            <ContactSection />
+          </div>
 
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
-          <Link
-            to="/apie"
-            className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
-          >
-            {t("about")}
-          </Link>
-          <Link
-            to="/paslaugos"
-            className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
-          >
-            {t("services")}
-          </Link>
-          <Link
-            to="/darbai"
-            className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
-          >
-            {t("works")}
-          </Link>
-          <Link
-            to="/kontaktai"
-            className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-xl shadow hover:scale-105 hover:bg-gray-100 transition min-w-[180px] text-center"
-          >
-            {t("contact")}
-          </Link>
-        </div>
-      </motion.div>
+          {/* Footer (optional) */}
+          <footer className="relative py-8 text-center text-white/40 text-sm border-t border-white/10">
+            <div className="max-w-7xl mx-auto px-4">
+              <p>© {new Date().getFullYear()} Lukas Beneta. All rights reserved.</p>
+            </div>
+          </footer>
+        </motion.div>
+      )}
     </div>
   );
 }
