@@ -1,13 +1,11 @@
 {
-  "build": {
-    "env": {
-      "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
-    }
-  },
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
   "outputDirectory": "build/client",
   "rewrites": [
     {
-      "comment": "Prerendered routes (/ and /en) are real files and are served from the filesystem first. Everything else - the client-side demo sandbox and any unknown URL - falls through to the SPA shell, which renders the right route or the 404 page.",
       "source": "/(.*)",
       "destination": "/__spa-fallback.html"
     }
