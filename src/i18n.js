@@ -212,8 +212,6 @@ const resources = {
       spec_languages_value: 'Lietuvių / English',
       spec_engagement: 'Formatas',
       spec_engagement_value: 'Fiksuota apimtis arba valandinis darbas',
-      boot_skip: 'Paspausk bet kurį klavišą',
-      boot_status: 'Kraunama sąsaja',
 
       // ===== 01 Capabilities =====
       cap_title: 'Ką kuriu',
@@ -596,8 +594,6 @@ const resources = {
       spec_languages_value: "Lietuvių / English",
       spec_engagement: "Engagement",
       spec_engagement_value: "Fixed scope or hourly",
-      boot_skip: "Press any key to skip",
-      boot_status: "Initialising interface",
 
       // ===== 01 Capabilities =====
       cap_title: "What I build",

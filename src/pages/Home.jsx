@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import BootSequence, { shouldBoot } from "../components/BootSequence";
 import CommandRail from "../components/CommandRail";
 import GridOverlay from "../components/GridOverlay";
 import Masthead from "../components/sections/Masthead";
@@ -18,7 +16,14 @@ import { useReducedMotion } from "../design/useMotionPrefs";
  *
  * Two deliberate structural decisions:
  *
- * 1. Every section renders unconditionally. The page is prerendered, so the
+ * 1. There is no opening sequence. A curtain over the page existed to hide
+ *    an empty first paint while a client-rendered app booted; the page is
+ *    prerendered now, so the first frame is already the finished hero. A
+ *    curtain mounted after hydration would cover content that had already
+ *    arrived - content, curtain, content - and delay the one thing a
+ *    visitor came for.
+ *
+ * 2. Every section renders unconditionally. The page is prerendered, so the
  *    whole document must exist at build time - an earlier version mounted
  *    the lower sections a frame late to keep hydration off the critical
  *    path, and the prerendered HTML then contained only the masthead.
@@ -26,25 +31,12 @@ import { useReducedMotion } from "../design/useMotionPrefs";
  *    before any JavaScript runs at all. A deep link needs no help either,
  *    since the target element exists while the HTML is being parsed.
  *
- * 2. The selected project is held here rather than inside the work index, so
+ * 3. The selected project is held here rather than inside the work index, so
  *    the evidence links in section 01 can open the matching row in section 03
  *    and scroll to it. One owner, no duplicated state.
  */
 export default function Home() {
   const reduced = useReducedMotion();
-  /**
-   * The curtain is decided after mount, never during render.
-   *
-   * shouldBoot() reads sessionStorage and matchMedia, which do not exist
-   * while the page is being prerendered. Deciding during render would make
-   * the first client render disagree with the prerendered HTML - a hydration
-   * mismatch - so the first render always matches the server (no curtain)
-   * and the curtain is added a tick later.
-   */
-  const [booting, setBooting] = useState(false);
-  useEffect(() => {
-    if (shouldBoot()) setBooting(true);
-  }, []);
   const [openProject, setOpenProject] = useState(null);
   const [pendingScroll, setPendingScroll] = useState(null);
 
@@ -82,10 +74,6 @@ export default function Home() {
       </main>
 
       <Footer />
-
-      <AnimatePresence>
-        {booting && <BootSequence onDone={() => setBooting(false)} />}
-      </AnimatePresence>
     </div>
   );
 }

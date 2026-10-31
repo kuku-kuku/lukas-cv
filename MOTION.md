@@ -41,9 +41,7 @@ VIEWPORT     { once: true, amount: 0.2 }
 
 | What | Trigger | Motion | Duration / easing | Reduced motion |
 | --- | --- | --- | --- | --- |
-| Boot curtain | first visit per session | mark rises through a mask, rule draws, curtain lifts | 0.62s, exit 0.3s, EASE | not rendered |
-| Masthead headline | mount | three lines rise from a clip mask, staggered 0.09s | 1s, EASE | no travel, final state |
-| Masthead lede / CTAs / specs | mount | fade + 16px rise | DUR.slow, EASE | no travel |
+| Masthead | — | no entrance. The page is prerendered, so the hero is already painted in the first frame; animating it in would mean hiding content that has arrived | — | — |
 | Masthead parallax | scroll | y 0 → −60px, opacity 1 → 0 between 50% and 100% of the fold | scroll-linked | transform not applied |
 | Lattice field | idle callback after first paint | canvas: pointer displacement, scan band, packets | continuous rAF | one static frame, no loop |
 | Section head | in view | index + eyebrow fade-rise, rule draws left→right, title words rise through masks | DUR.base / DUR.reveal, EASE | no travel |
