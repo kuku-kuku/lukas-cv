@@ -38,6 +38,9 @@
   --rail: 0px; /* desktop command rail width, set at md+ */
 
   /* Motion */
+  /* Headroom for the reveal masks - see .mask-line / .mask-word */
+  --mask-pad: 0.26em;
+
   --dur-xs: 180ms;
   --dur-s: 320ms;
   --dur-m: 600ms;
@@ -213,14 +216,25 @@
   }
 
   /* ---- Mask reveal, used by SplitText and Reveal ---- */
-  /* The clip box is padded on both edges and pulled back by the same
-     amount: tight leading (0.88) lets ascenders and descenders sit outside
-     the line box, and without this they get sliced by the mask. */
+  /* Reveal masks.
+     Tight leading (0.88-0.94) lets ink sit outside the line box, so the clip
+     box is padded on both edges and pulled back by the same amount - the
+     layout is unchanged, the glyphs are not sliced. The top edge matters as
+     much as the bottom in Lithuanian: carons on Z/S/C rise above the cap
+     height, ogoneks on a/e/i/u drop below the baseline.
+     One value, used by both the block and inline variants. */
+  .mask-line,
+  .mask-word {
+    overflow: hidden;
+    padding: var(--mask-pad) 0;
+    margin: calc(var(--mask-pad) * -1) 0;
+  }
   .mask-line {
     display: block;
-    overflow: hidden;
-    padding: 0.22em 0;
-    margin: -0.22em 0;
+  }
+  .mask-word {
+    display: inline-block;
+    vertical-align: baseline;
   }
 
   /* ---- The one signal-coloured interactive affordance ---- */

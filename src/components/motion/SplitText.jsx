@@ -67,8 +67,7 @@ export default function SplitText({
           <span
             key={`w-${i}`}
             aria-hidden="true"
-            className={`inline-block overflow-hidden align-baseline ${wordClassName}`}
-            style={{ padding: "0.16em 0", margin: "-0.16em 0" }}
+            className={`mask-word ${wordClassName}`}
           >
             {units.map((unit, u) => {
               const own = index++;
