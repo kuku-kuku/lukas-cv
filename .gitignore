@@ -31,3 +31,6 @@ yarn-error.log*
 
 # lighthouse reports
 lh-*.json
+
+# react-router generated types
+.react-router/
