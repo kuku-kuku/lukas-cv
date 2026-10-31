@@ -68,7 +68,13 @@ export default function Home() {
     if (!belowFold) return;
     const id = window.location.hash.slice(1);
     if (!id) return;
-    document.getElementById(id)?.scrollIntoView({ behavior: "auto", block: "start" });
+    // "instant", not "auto": auto defers to CSS scroll-behavior, which is
+    // smooth here, so a deep link would slow-scroll the whole page instead
+    // of landing on the section.
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "instant",
+      block: "start",
+    });
   }, [belowFold]);
 
   const openFromEvidence = useCallback((projectId) => {

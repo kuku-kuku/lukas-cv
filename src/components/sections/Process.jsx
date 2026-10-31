@@ -38,6 +38,7 @@ export default function Process() {
       id="process"
       ref={ref}
       aria-labelledby="process-title"
+      data-theme="light"
       className="invert-section section relative z-10"
     >
       <div className="shell">

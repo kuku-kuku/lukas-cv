@@ -23,8 +23,20 @@ export default function Footer() {
     <footer className="relative z-10">
       <div className="h-px w-full" style={{ background: "var(--line)" }} />
 
-      {/* status ticker */}
-      <div className="overflow-hidden py-4" aria-hidden="true">
+      {/* Status ticker. It is inset by the rail like every other piece of
+          content - previously it began at x=0 and scrolled underneath the
+          sidebar - and its edges are masked so items enter and leave by
+          fading rather than being chopped by the viewport. */}
+      <div
+        className="overflow-hidden py-4 ml-[var(--gutter)] md:ml-[calc(var(--gutter)+var(--rail))]"
+        aria-hidden="true"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, #000 8%, #000 92%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, #000 8%, #000 92%, transparent)",
+        }}
+      >
         <div
           className={`flex w-max gap-10 ${reduced ? "" : "animate-ticker"}`}
           style={{ willChange: reduced ? undefined : "transform" }}
