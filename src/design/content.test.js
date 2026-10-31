@@ -35,9 +35,13 @@ function collectKeys() {
   RATE_CARD.forEach((r) => keys.push(r.titleKey, r.priceKey));
   PROJECTS.forEach((p) => {
     keys.push(p.roleKey, `status.${p.statusKey}`);
-    ["title", "kind", "scope", "problem", "approach"].forEach((field) =>
-      keys.push(`projects.${p.id}.${field}`)
-    );
+    // Every project needs a name and a type. The engineering notes are
+    // optional - a project can be listed before its write-up is written -
+    // but a project that claims notes must actually have all three.
+    const fields = p.notes
+      ? ["title", "kind", "scope", "problem", "approach"]
+      : ["title", "kind"];
+    fields.forEach((field) => keys.push(`projects.${p.id}.${field}`));
   });
   return keys;
 }

@@ -38,7 +38,7 @@ const PREVIEW_H = 200;
 const PREVIEW_OFFSET = 24;
 
 export default function Work({ openId, onOpen }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const compact = useCompactViewport();
   const fine = useFinePointer();
   const reduced = useReducedMotion();
@@ -273,11 +273,18 @@ export default function Work({ openId, onOpen }) {
                       </PanelItem>
 
                       <div className="md:col-span-7">
+                        {/* Only the notes that have actually been written.
+                            A project can be listed before its write-up
+                            exists without showing empty headings. */}
                         {[
                           { k: "scope", label: t("scope", "Scope") },
                           { k: "problem", label: t("challenge", "Problem") },
                           { k: "approach", label: t("solution", "Approach") },
-                        ].map((block) => (
+                        ]
+                          .filter((b) =>
+                            i18n.exists(`projects.${project.id}.${b.k}`)
+                          )
+                          .map((block) => (
                           <PanelItem reduced={reduced} key={block.k} className="mb-6">
                             <span className="label">{block.label}</span>
                             <p className="mt-2 max-w-[62ch] text-[0.9375rem] leading-relaxed text-ink-2">

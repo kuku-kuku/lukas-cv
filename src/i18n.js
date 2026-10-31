@@ -87,6 +87,30 @@ const resources = {
       view_code: 'Kodas',
 
       projects: {
+        velgtilbud: {
+          title: 'Velgtilbud',
+          kind: 'Pasiūlymų palyginimo platforma (Norvegija)',
+          description:
+            'Norvegiška paslauga, kurioje gyventojai gauna ir palygina kraustymo bei valymo įmonių pasiūlymus. Devynių žingsnių užklausos forma.',
+        },
+        sei: {
+          title: 'Service Experience Index',
+          kind: 'Klientų patirties duomenys',
+          description:
+            'Nepriklausomi, patikrinti klientų patirties duomenys paslaugų verslams.',
+        },
+        smiletrans: {
+          title: 'SMILE Transport',
+          kind: 'Transporto įmonės svetainė',
+          description:
+            'Kelių transporto įmonės svetainė: krovinių pervežimai visoje Europoje, daugiau nei 40 vilkikų autoparkas, kelios kalbos.',
+        },
+        flore: {
+          title: 'Flore studija',
+          kind: 'Gėlių studijos el. parduotuvė',
+          description:
+            'Klaipėdos gėlių studijos svetainė su el. parduotuve: autorinės puokštės, vazoniniai augalai, pristatymas tą pačią dieną.',
+        },
         beneta: {
           title: 'beneta.lt',
           kind: 'Praktikos svetainė',
@@ -284,6 +308,7 @@ const resources = {
       challenge: 'Problema',
       solution: 'Sprendimas',
       role_design_build: 'Dizainas ir programavimas',
+      role_build: 'Programavimas',
       role_build_seo: 'Programavimas ir techninis SEO',
       role_prototype: 'Prototipas ir duomenų sluoksnis',
 
@@ -446,6 +471,30 @@ const resources = {
       view_code: 'Code',
 
       projects: {
+        velgtilbud: {
+          title: "Velgtilbud",
+          kind: "Quote comparison platform (Norway)",
+          description:
+            "A Norwegian service where households receive and compare quotes from moving and cleaning companies, through a nine-step request form.",
+        },
+        sei: {
+          title: "Service Experience Index",
+          kind: "Customer experience data",
+          description:
+            "Independent, verified customer experience data for service businesses.",
+        },
+        smiletrans: {
+          title: "SMILE Transport",
+          kind: "Freight company site",
+          description:
+            "Road haulage company site: freight across Europe, a fleet of more than 40 trucks, multiple languages.",
+        },
+        flore: {
+          title: "Flore studija",
+          kind: "Florist shop",
+          description:
+            "Klaipeda florist studio with an online shop: bespoke bouquets, potted plants, same-day delivery.",
+        },
         beneta: {
           title: "beneta.lt",
           kind: "Practice site",
@@ -643,6 +692,7 @@ const resources = {
       challenge: "Problem",
       solution: "Approach",
       role_design_build: "Design and build",
+      role_build: "Build",
       role_build_seo: "Build and technical SEO",
       role_prototype: "Prototype and data layer",
 

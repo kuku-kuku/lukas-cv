@@ -208,7 +208,8 @@ export default function Masthead() {
             </div>
             <div className="mt-3 h-px w-full" style={{ background: "var(--line)" }} />
             <ul>
-              {PROJECTS.map((p) => (
+              {/* A taste, not the whole index - section 03 has the rest. */}
+              {PROJECTS.slice(0, 4).map((p) => (
                 <li
                   key={p.id}
                   className="border-b"

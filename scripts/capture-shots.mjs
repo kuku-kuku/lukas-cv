@@ -27,6 +27,10 @@ const TARGETS = {
   beneta: "https://www.beneta.lt/",
   fakaunas: "https://fakaunas.lt/",
   bangu: "https://banguklinika.lt/",
+  velgtilbud: "https://www.velgtilbud.no/",
+  sei: "https://serviceexperienceindex.com/",
+  flore: "https://florestudija.lt/",
+  smiletrans: "https://www.smiletrans.lt/lt",
 };
 
 const CHROME =
@@ -36,6 +40,11 @@ const CHROME =
 // Shot at 1440x1250 and cropped to the top 1440x900: cookie banners and chat
 // bubbles are position:fixed to the bottom of the viewport, so a taller
 // window pushes them out of the crop instead of into the portfolio.
+// Sites with entrance animations need longer: the screenshot is taken when
+// the virtual clock runs out, and a short budget catches content mid-fade.
+// Override per run: SHOT_MS=30000 node scripts/capture-shots.mjs smiletrans
+const VIRTUAL_TIME = Number(process.env.SHOT_MS || 15000);
+
 const WIDTH = 1440;
 const SHOT_HEIGHT = 1250;
 const CROP_HEIGHT = 900;
@@ -68,7 +77,7 @@ try {
         "--hide-scrollbars",
         `--user-data-dir=${join(work, "profile")}`,
         `--window-size=${WIDTH},${SHOT_HEIGHT}`,
-        "--virtual-time-budget=15000",
+        `--virtual-time-budget=${VIRTUAL_TIME}`,
         `--screenshot=${raw}`,
         url,
       ],
