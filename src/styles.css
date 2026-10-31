@@ -102,6 +102,21 @@
     outline-offset: 3px;
   }
 
+  /* SVG groups do not take an outline reliably across browsers, so the
+     diagram's nodes show focus by lighting their own rectangle. Without
+     this the diagram told you to use the arrow keys and then gave no sign
+     of where you were. */
+  svg g[role="button"]:focus {
+    outline: none;
+  }
+  svg g[role="button"]:focus-visible rect {
+    stroke: var(--signal);
+    stroke-width: 2;
+  }
+  svg g[role="button"]:focus-visible text {
+    fill: var(--ink);
+  }
+
   h1,
   h2,
   h3,

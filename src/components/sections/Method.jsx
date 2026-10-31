@@ -37,7 +37,7 @@ export default function Method() {
         lede={t("method_lede")}
       />
 
-      <div className="grid gap-x-10 gap-y-10 md:grid-cols-3">
+      <div className="grid items-start gap-x-10 gap-y-10 md:grid-cols-3">
         {PRINCIPLES.map((p, i) => (
           <Reveal key={p.index} delay={i * 0.08}>
             <div className="flex items-baseline justify-between">
@@ -46,7 +46,7 @@ export default function Method() {
               </span>
               <span className="label">{`0${i + 1}/03`}</span>
             </div>
-            <Rule className="mt-3" delay={i * 0.08 + 0.05} />
+            <Rule className="mt-3" delay={0.05} />
             <h3 className="mt-5 text-xl font-semibold tracking-display">
               {t(p.titleKey)}
             </h3>

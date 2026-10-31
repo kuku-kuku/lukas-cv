@@ -5,7 +5,7 @@ import LatticeField from "../LatticeField";
 import LiveClock from "../LiveClock";
 import Magnetic from "../motion/Magnetic";
 import { DUR, EASE } from "../../design/motion";
-import { PRACTICE } from "../../design/content";
+import { PRACTICE, PROJECTS } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -39,8 +39,11 @@ export default function Masthead() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
-  const y = useTransform(scrollY, [0, vh], ["0%", "-14%"]);
-  const fade = useTransform(scrollY, [0, vh * 0.8], [1, 0]);
+  // The hero held full opacity for only ~300px and then sat at half, which
+  // read as disabled rather than as depth. It now stays solid through the
+  // first half of the fold and only clears as the hero leaves.
+  const y = useTransform(scrollY, [0, vh], [0, -60]);
+  const fade = useTransform(scrollY, [vh * 0.5, vh], [1, 0]);
 
   const specs = [
     { labelKey: "spec_status", valueKey: "spec_status_value" },
@@ -83,10 +86,15 @@ export default function Masthead() {
         className="shell relative z-10 py-10"
         style={reduced ? undefined : { y, opacity: fade }}
       >
-        <h1 id="masthead-title" className="display-xl">
-          <span className="sr-only">
-            {PRACTICE.name} - {t("masthead_sr", "software engineering practice")}
-          </span>
+        {/* The accessible name is the visible headline. It used to be a
+            hidden string that said something else, so the page announced a
+            heading nobody could see. The practice name is carried by the
+            byline below and by the JSON-LD, which is where it belongs. */}
+        <h1
+          id="masthead-title"
+          aria-label={LINES.join(" ")}
+          className="display-xl"
+        >
           {LINES.map((line, i) => (
             <span key={line} className="mask-line">
               <motion.span
@@ -111,7 +119,7 @@ export default function Masthead() {
 
         <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-12">
           <motion.p
-            className="lede md:col-span-5 md:col-start-7"
+            className="lede md:col-span-6"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.18 }}
@@ -120,7 +128,7 @@ export default function Masthead() {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap items-center gap-3 md:col-span-5 md:col-start-7"
+            className="flex flex-wrap items-center gap-3 md:col-span-6"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.3 }}
@@ -134,7 +142,7 @@ export default function Masthead() {
               >
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 origin-bottom scale-y-0 transition-transform duration-[320ms] ease-expo group-hover:scale-y-100"
+                  className="absolute inset-0 origin-left scale-x-0 transition-transform duration-[300ms] ease-expo group-hover:scale-x-100"
                   style={{ background: "var(--signal)" }}
                 />
                 <span className="relative transition-colors duration-200 group-hover:text-base">
@@ -152,10 +160,68 @@ export default function Masthead() {
             <button
               type="button"
               onClick={() => goTo("method")}
-              className="signal-link px-2 py-4 text-sm font-medium"
+              className="group inline-flex items-center gap-2 border-b px-1 py-4 text-sm font-medium"
+              style={{ borderColor: "var(--line-strong)" }}
             >
               {t("cta_model", "Read the model")}
+              <span
+                aria-hidden="true"
+                className="font-mono text-xs transition-transform duration-300 group-hover:translate-y-0.5"
+              >
+                ↓
+              </span>
             </button>
+          </motion.div>
+
+          {/* The right column used to be empty below the headline while the
+              copy sat in it. The copy moved left to line up with the
+              headline, and this index of the work takes the space - an
+              entry point rather than a decorative void. */}
+          <motion.div
+            className="hidden md:col-span-4 md:col-start-9 md:block"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.42 }}
+          >
+            <div className="flex items-baseline justify-between">
+              <span className="label">03 / {t("nav_work", "Work")}</span>
+              <button
+                type="button"
+                onClick={() => goTo("work")}
+                className="label transition-colors hover:text-ink"
+              >
+                {t("view_all", "All")} →
+              </button>
+            </div>
+            <div className="mt-3 h-px w-full" style={{ background: "var(--line)" }} />
+            <ul>
+              {PROJECTS.map((p) => (
+                <li
+                  key={p.id}
+                  className="border-b"
+                  style={{ borderColor: "var(--line)" }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => goTo("work")}
+                    className="group flex w-full items-center gap-3 py-2.5 text-left"
+                  >
+                    <span className="font-mono text-label text-ink-3">{p.index}</span>
+                    <span className="flex-1 truncate text-sm text-ink-2 transition-colors group-hover:text-ink">
+                      {t(`projects.${p.id}.title`)}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="h-1 w-1 shrink-0"
+                      style={{
+                        background:
+                          p.statusKey === "live" ? "var(--signal)" : "var(--ink-4)",
+                      }}
+                    />
+                  </button>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         </div>
       </motion.div>

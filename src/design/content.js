@@ -121,22 +121,8 @@ export const METHOD_EDGES = [
 
 export const PROJECTS = [
   {
-    id: "beneta",
-    index: "01",
-    year: "2026",
-    metric: "Lighthouse 95 / LCP 1.1 s",
-    image: "/work-beneta.webp",
-    thumb: "/work-beneta-sm.webp",
-    imageFallback: "/work-beneta.jpg",
-    liveUrl: "https://beneta.lt",
-    repoUrl: null,
-    statusKey: "live",
-    roleKey: "role_design_build",
-    stack: ["React 18", "Tailwind", "Framer Motion", "i18next", "Vercel"],
-  },
-  {
     id: "fakaunas",
-    index: "02",
+    index: "01",
     year: null,
     metric: null,
     image: "/work-fakaunas.webp",
@@ -150,7 +136,7 @@ export const PROJECTS = [
   },
   {
     id: "bangu",
-    index: "03",
+    index: "02",
     year: null,
     metric: null,
     image: "/work-bangu.webp",
@@ -164,7 +150,7 @@ export const PROJECTS = [
   },
   {
     id: "syncara",
-    index: "04",
+    index: "03",
     year: null,
     metric: null,
     image: "/work-syncara.webp",
@@ -175,6 +161,20 @@ export const PROJECTS = [
     statusKey: "demo",
     roleKey: "role_prototype",
     stack: ["React", "Firebase", "Airtable API", "Chart.js", "CSV export"],
+  },
+  {
+    id: "beneta",
+    index: "04",
+    year: "2026",
+    metric: "Lighthouse 95 / LCP 1.1 s",
+    image: "/work-beneta.webp",
+    thumb: "/work-beneta-sm.webp",
+    imageFallback: "/work-beneta.jpg",
+    liveUrl: "https://beneta.lt",
+    repoUrl: null,
+    statusKey: "live",
+    roleKey: "role_design_build",
+    stack: ["React 18", "Tailwind", "Framer Motion", "i18next", "Vercel"],
   },
 ];
 
@@ -223,6 +223,34 @@ export const RATE_CARD = [
   { id: 5, titleKey: "service_5_title", priceKey: "service_5_price", from: false },
   { id: 6, titleKey: "service_6_title", priceKey: "service_6_price", from: false },
 ];
+
+/**
+ * Alternative contact channels, shown beside the form.
+ *
+ * EDIT THESE. Every one is empty on purpose - a portfolio that links to the
+ * wrong profile is worse than one that links to none, so nothing is guessed
+ * here. Fill in what you actually want public; each entry renders only when
+ * it has a value, so leaving one blank simply hides it.
+ *
+ *   email:    the address you are happy to publish (it will be scraped)
+ *   linkedin: full https:// URL
+ *   github:   full https:// URL
+ */
+export const CHANNELS = {
+  email: "",
+  linkedin: "",
+  github: "",
+};
+
+/**
+ * Business details for the footer. Lithuanian individual-activity or MB
+ * registration numbers belong here if the practice is registered; leave
+ * empty otherwise.
+ */
+export const LEGAL = {
+  entity: "",
+  code: "",
+};
 
 export const PRACTICE = {
   name: "Lukas Beneta",

@@ -28,7 +28,9 @@ export default function Process() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "end 0.55"],
+    // Ends while the final step is still on screen, so the meter is full
+    // when you reach the end of the strip rather than after it.
+    offset: ["start 0.85", "end 0.75"],
   });
   const raw = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const progress = useSpring(raw, { stiffness: 120, damping: 30, restDelta: 0.001 });
@@ -39,7 +41,8 @@ export default function Process() {
       ref={ref}
       aria-labelledby="process-title"
       data-theme="light"
-      className="invert-section section relative z-10"
+      className="invert-section section relative z-10 border-y"
+      style={{ borderColor: "rgba(10,10,11,0.35)" }}
     >
       <div className="shell">
         <header className="mb-14 md:mb-20">
@@ -80,11 +83,11 @@ export default function Process() {
           </div>
         )}
 
-        <ol className="grid gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-0">
+        <ol className="grid gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:grid-rows-[auto_auto_1fr_auto] lg:gap-x-0">
           {PROCESS_STEPS.map((step, i) => (
             <motion.li
               key={step.id}
-              className="border-b pb-8 pt-6 lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+              className="border-b pb-8 pt-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               style={{ borderColor: "var(--line)" }}
               initial={reduced ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -112,7 +115,10 @@ export default function Process() {
                 {t(step.bodyKey)}
               </p>
 
-              <div className="mt-5 border-t pt-3" style={{ borderColor: "var(--line)" }}>
+              <div
+                className="mt-5 self-end border-t pt-3"
+                style={{ borderColor: "var(--line)" }}
+              >
                 <span className="label">{t("deliverable", "You get")}</span>
                 <p className="mt-2 max-w-[32ch] text-[0.8125rem] font-medium leading-snug">
                   {t(step.outKey)}
