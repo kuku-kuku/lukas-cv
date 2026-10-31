@@ -29,15 +29,22 @@ export const links = () => [
   { rel: "icon", type: "image/jpeg", href: "/logo.jpg" },
   { rel: "apple-touch-icon", href: "/logo192.png" },
   { rel: "manifest", href: "/manifest.json" },
-  /*
-   * The display faces are deliberately NOT preloaded.
-   *
-   * Preloading them put ~67 kB in front of the render-blocking stylesheet
-   * and pushed first paint out: measured on the live domain, FCP 2.7s with
-   * the preloads. font-display: swap means the text paints immediately in
-   * the fallback either way, so the preloads bought a slightly earlier
-   * swap at the cost of a later first paint. Not a good trade.
-   */
+  // The two display faces, started in parallel with the stylesheet.
+  // Lithuanian needs latin-ext, so both subsets are preloaded.
+  {
+    rel: "preload",
+    as: "font",
+    type: "font/woff2",
+    href: "/fonts/archivo-latin.woff2",
+    crossOrigin: "anonymous",
+  },
+  {
+    rel: "preload",
+    as: "font",
+    type: "font/woff2",
+    href: "/fonts/archivo-latin-ext.woff2",
+    crossOrigin: "anonymous",
+  },
 ];
 
 const STRUCTURED_DATA = {
