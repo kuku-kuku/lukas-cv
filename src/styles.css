@@ -20,9 +20,9 @@
   --ink-4: #4a4945;
   --signal: #ff4a1c;
 
-  /* UI chrome (the rail, its rules and its progress line). Sections can
-     flip these by setting data-theme on <html>, so the navigation stays
-     legible over the inverted spread instead of turning to grey mud. */
+  /* UI chrome (the rail, its rules and its progress line). One colour the
+     whole way down: the rail is opaque so the inverted spread passes behind
+     it without dragging the navigation with it. */
   --chrome-bg: #0a0a0b;
   --chrome-ink: #f1efea;
   --chrome-ink-dim: #8a8884;
@@ -56,15 +56,6 @@
   }
 }
 
-/* Set while an inverted section owns the viewport centre. The transition
-   lives on the chrome elements themselves, so the swap cross-fades. */
-:root[data-theme="light"] {
-  --chrome-bg: #f1efea;
-  --chrome-ink: #0a0a0b;
-  --chrome-ink-dim: #65635f;
-  --chrome-line: rgba(10, 10, 11, 0.14);
-  --chrome-signal: #c23814;
-}
 
 @layer base {
   * {

@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { PRACTICE, SECTIONS } from "../design/content";
 import { DUR, EASE, STAGGER } from "../design/motion";
-import useActiveSection, { useChromeTheme } from "../design/useActiveSection";
+import useActiveSection from "../design/useActiveSection";
 import { useReducedMotion } from "../design/useMotionPrefs";
 
 /**
@@ -14,10 +14,12 @@ import { useReducedMotion } from "../design/useMotionPrefs";
  * drawn along its edge. Each index reveals its name on hover and on keyboard
  * focus; numbers alone tell a first-time visitor nothing.
  *
- * The rail is opaque and themed. It used to be translucent with a backdrop
- * blur, which turned to grey mud with unreadable numbers whenever the light
- * Process spread passed underneath. Now a light section flips data-theme on
- * <html> and the whole chrome cross-fades with it.
+ * The rail is opaque and stays dark the whole way down. It used to be
+ * translucent with a backdrop blur, which turned to grey mud with unreadable
+ * numbers wherever the light Process spread passed underneath. An earlier
+ * attempt had the chrome invert along with that spread; it read as the
+ * sidebar glitching rather than as a deliberate band, so the rail now holds
+ * one colour and the light section simply passes behind it.
  *
  * Small screens: a slim top meter reporting the current section, plus a
  * full-height sheet. Nothing hover-dependent, everything in thumb reach.
@@ -31,8 +33,6 @@ export default function CommandRail() {
   const ids = useMemo(() => SECTIONS.map((s) => s.id), []);
   const activeId = useActiveSection(ids, "index");
   const activeSection = SECTIONS.find((s) => s.id === activeId) || SECTIONS[0];
-
-  useChromeTheme();
 
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
