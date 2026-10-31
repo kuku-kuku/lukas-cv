@@ -16,10 +16,14 @@ module.exports = {
           3: "var(--ink-3)",
           4: "var(--ink-4)",
         },
-        base: {
-          DEFAULT: "#0A0A0B",
-          elev: "#101012",
-          sunk: "#060607",
+        /* Named "ground", not "base": Tailwind already owns `text-base`
+           for the font-size scale, so a colour called base makes
+           `text-base` ambiguous - and the colour wins, painting text
+           near-black on a dark page. */
+        ground: {
+          DEFAULT: "#111113",
+          elev: "#191A1C",
+          sunk: "#0C0C0E",
         },
         bone: "#F1EFEA",
         signal: {

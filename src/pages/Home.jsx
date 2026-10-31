@@ -7,6 +7,7 @@ import Work from "../components/sections/Work";
 import Why from "../components/sections/Why";
 import Pricing from "../components/sections/Pricing";
 import Faq from "../components/sections/Faq";
+import QuoteDrawer from "../components/QuoteDrawer";
 import Process from "../components/sections/Process";
 import Contact from "../components/sections/Contact";
 import Footer from "../components/sections/Footer";
@@ -41,9 +42,8 @@ export default function Home() {
   const reduced = useReducedMotion();
   const [openProject, setOpenProject] = useState(null);
 
-  // Choosing a package on the pricing cards pre-fills the contact form, so
-  // "this one" and "here is my project" are a single movement.
-  const [packageChoice, setPackageChoice] = useState(null);
+  // Choosing a package opens the quote drawer with that package selected.
+  const [quotePackage, setQuotePackage] = useState(null);
   const [pendingScroll, setPendingScroll] = useState(null);
 
   const openFromEvidence = useCallback((projectId) => {
@@ -74,13 +74,18 @@ export default function Home() {
         <Why />
         <Capabilities onEvidence={openFromEvidence} />
         <Work openId={openProject} onOpen={setOpenProject} />
-        <Pricing onChoose={setPackageChoice} />
+        <Pricing onChoose={setQuotePackage} />
         <Process />
         <Faq />
-        <Contact packageChoice={packageChoice} />
+        <Contact />
       </main>
 
       <Footer />
+
+      <QuoteDrawer
+        packageId={quotePackage}
+        onClose={() => setQuotePackage(null)}
+      />
     </div>
   );
 }

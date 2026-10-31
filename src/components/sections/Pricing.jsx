@@ -20,21 +20,18 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * On a light ground: this is the densest block of text on the page, and long
  * copy reads easier dark-on-light.
  *
- * Each card's button pre-fills the contact form, so choosing a package and
- * writing the brief is one movement instead of two.
+ * Each card's button opens the quote drawer with that package already
+ * chosen, so deciding and enquiring is one movement instead of two.
  */
 export default function Pricing({ onChoose }) {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
   const [revealRef, armed] = useReveal();
 
-  const choose = (id) => {
-    onChoose?.(id);
-    document.getElementById("contact")?.scrollIntoView({
-      behavior: reduced ? "instant" : "smooth",
-      block: "start",
-    });
-  };
+  // Opens the quote drawer. Scrolling to the contact section instead would
+  // take the visitor away from the prices they are comparing and leave the
+  // decision they just made behind.
+  const choose = (id) => onChoose?.(id);
 
   return (
     <section

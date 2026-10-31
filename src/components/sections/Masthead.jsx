@@ -153,12 +153,12 @@ export default function Masthead() {
                   className="absolute inset-0 origin-left scale-x-0 transition-transform duration-[300ms] ease-expo group-hover:scale-x-100"
                   style={{ background: "var(--signal)" }}
                 />
-                <span className="relative transition-colors duration-200 group-hover:text-base">
+                <span className="relative transition-colors duration-200 group-hover:text-ground">
                   {t("cta_brief", "Start a brief")}
                 </span>
                 <span
                   aria-hidden="true"
-                  className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-base"
+                  className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-ground"
                 >
                   →
                 </span>

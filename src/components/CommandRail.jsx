@@ -89,7 +89,7 @@ export default function CommandRail() {
     <>
       <a
         href="#capabilities"
-        className="sr-only-focusable fixed left-4 top-4 z-[90] bg-base px-4 py-2 text-sm"
+        className="sr-only-focusable fixed left-4 top-4 z-[90] bg-ground px-4 py-2 text-sm"
       >
         {t("skip_to_content", "Skip to content")}
       </a>
@@ -112,10 +112,21 @@ export default function CommandRail() {
         <button
           type="button"
           onClick={() => goTo("index")}
-          className="chrome-line flex h-[4.5rem] w-full items-center justify-center border-b text-lg font-extrabold tracking-tightest"
+          className="chrome-line flex h-[4.5rem] w-full items-center justify-center border-b"
           aria-label={`${PRACTICE.mark} - ${t("nav_index", "Index")}`}
         >
-          B
+          {/* The mark is a black disc on a near-bone field with no alpha.
+              Inverting it lands the background on #121315 - within two
+              values of the rail's own #111113 - so it sits on the dark
+              chrome without needing a cut-out. */}
+          <img
+            src="/logo-mark.webp"
+            alt=""
+            width="32"
+            height="32"
+            className="h-8 w-8"
+            style={{ filter: "invert(1)" }}
+          />
         </button>
 
         <ul className="flex flex-1 flex-col justify-center gap-1 py-6">
@@ -207,12 +218,12 @@ export default function CommandRail() {
                 className="absolute inset-0 origin-left scale-x-0 transition-transform duration-[300ms] ease-expo group-hover:scale-x-100"
                 style={{ background: "var(--chrome-signal)" }}
               />
-              <span className="relative transition-colors duration-200 group-hover:text-base">
+              <span className="relative transition-colors duration-200 group-hover:text-ground">
                 {t("cta_brief", "Start a brief")}
               </span>
               <span
                 aria-hidden="true"
-                className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-base"
+                className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-ground"
               >
                 →
               </span>

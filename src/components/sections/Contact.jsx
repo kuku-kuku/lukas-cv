@@ -5,7 +5,7 @@ import emailjs from "@emailjs/browser";
 import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
-import { CHANNELS, PACKAGES } from "../../design/content";
+import { CHANNELS } from "../../design/content";
 import { DUR, EASE } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
@@ -59,7 +59,7 @@ const TOPICS = [
   { id: "other", key: "topic_other" },
 ];
 
-export default function Contact({ packageChoice }) {
+export default function Contact() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
   const formRef = useRef(null);
@@ -140,16 +140,6 @@ export default function Contact({ packageChoice }) {
     el.value = line ? PREFIX_MARK + line + BREAK + body : body;
     grow(el);
   };
-
-  useEffect(() => {
-    if (!packageChoice) return;
-    const pkg = PACKAGES.find((p) => p.id === packageChoice);
-    if (!pkg) return;
-    setTopic(null);
-    applyPrefix(`${t(pkg.titleKey)} (nuo ${pkg.price} EUR)`);
-    autosize.current?.focus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [packageChoice]);
 
   const clearError = (name) =>
     setFieldErrors((prev) => {
@@ -473,7 +463,7 @@ export default function Contact({ packageChoice }) {
                         className="absolute inset-0 origin-left scale-x-0 transition-transform duration-[300ms] ease-expo group-hover:scale-x-100 group-disabled:scale-x-0"
                         style={{ background: "var(--signal)" }}
                       />
-                      <span className="relative transition-colors duration-200 group-hover:text-base">
+                      <span className="relative transition-colors duration-200 group-hover:text-ground">
                         {sending
                           ? t("form_sending", "Sending...")
                           : t("form_send", "Send brief")}
@@ -489,7 +479,7 @@ export default function Contact({ packageChoice }) {
                       ) : (
                         <span
                           aria-hidden="true"
-                          className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-base"
+                          className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-ground"
                         >
                           →
                         </span>

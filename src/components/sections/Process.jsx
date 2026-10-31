@@ -118,7 +118,12 @@ export default function Process() {
               </p>
 
               <div
-                className="mt-5 self-end border-t pt-3"
+                /* self-start, not self-end: the row is shared by all six
+                   steps, so aligning to the bottom lines up the blocks'
+                   baselines only if they are the same height - and they are
+                   not. Starting them together is what makes the "Ka gaunate"
+                   rule read as one line across the strip. */
+                className="mt-5 self-start border-t pt-3"
                 style={{ borderColor: "var(--line)" }}
               >
                 <span className="label">{t("deliverable", "You get")}</span>

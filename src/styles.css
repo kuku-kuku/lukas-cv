@@ -28,7 +28,7 @@
      whole way down: the rail is opaque so the inverted spread passes behind
      it without dragging the navigation with it. */
   --chrome-bg: #111113;
-  --chrome-ink: #f1efea;
+  --chrome-ink: #edebe6;
   --chrome-ink-dim: #8a8884;
   --chrome-line: rgba(241, 239, 234, 0.1);
   --chrome-signal: #ff4a1c;
