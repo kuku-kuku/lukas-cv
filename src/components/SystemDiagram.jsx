@@ -210,7 +210,7 @@ export default function SystemDiagram() {
         <h3 className="text-xl font-semibold tracking-display md:text-2xl">
           {t(active.titleKey)}
         </h3>
-        <p className="max-w-[62ch] text-[0.95rem] leading-relaxed text-ink-2">
+        <p className="copy">
           {t(active.bodyKey)}
         </p>
       </motion.div>

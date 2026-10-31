@@ -93,6 +93,22 @@ export default function Contact() {
     return next;
   }
 
+  /**
+   * The brief box grows with what you type instead of offering a drag
+   * handle. `field-sizing: content` does this natively in Chromium; this is
+   * the fallback for Safari and Firefox, and it is also what keeps the box
+   * correct after a reset or an autofill.
+   */
+  const autosize = useRef(null);
+  const grow = (el) => {
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${Math.min(el.scrollHeight, 360)}px`;
+  };
+  useEffect(() => {
+    grow(autosize.current);
+  }, []);
+
   const clearError = (name) =>
     setFieldErrors((prev) => {
       if (!prev[name]) return prev;
@@ -122,6 +138,7 @@ export default function Contact() {
       }
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, { publicKey: PUBLIC_KEY });
       form.reset();
+      grow(autosize.current);
       setSent(true);
     } catch (err) {
       console.error("Email send error:", err);
@@ -196,23 +213,23 @@ export default function Contact() {
           <dl className="space-y-6">
             <div>
               <dt className="label">{t("spec_base", "Based")}</dt>
-              <dd className="mt-2 text-[0.9375rem]">
+              <dd className="mt-2 text-base">
                 {PRACTICE.locality}, {t("country_lt", "Lithuania")}
               </dd>
             </div>
             <div>
               <dt className="label">{t("local_time", "Local time")}</dt>
-              <dd className="mt-2 text-[0.9375rem]">
+              <dd className="mt-2 text-base">
                 <LiveClock />
               </dd>
             </div>
             <div>
               <dt className="label">{t("response", "Response")}</dt>
-              <dd className="mt-2 text-[0.9375rem]">{t("response_value")}</dd>
+              <dd className="mt-2 text-base">{t("response_value")}</dd>
             </div>
             <div>
               <dt className="label">{t("spec_languages", "Languages")}</dt>
-              <dd className="mt-2 text-[0.9375rem]">{t("spec_languages_value")}</dd>
+              <dd className="mt-2 text-base">{t("spec_languages_value")}</dd>
             </div>
           </dl>
 
@@ -226,7 +243,7 @@ export default function Contact() {
                     <dd className="mt-2">
                       <a
                         href={c.href}
-                        className="signal-link text-[0.9375rem]"
+                        className="signal-link text-base"
                         {...(c.external
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
@@ -243,7 +260,7 @@ export default function Contact() {
           <Rule className="my-8" />
 
           <Reveal>
-            <p className="max-w-[36ch] text-[0.9375rem] leading-relaxed text-ink-2">
+            <p className="copy-sm max-w-[36ch]">
               {t("contact_note")}
             </p>
           </Reveal>
@@ -269,7 +286,7 @@ export default function Contact() {
                 <p className="mt-4 text-xl font-semibold tracking-display">
                   {t("form_sent_success")}
                 </p>
-                <p className="mt-3 max-w-[46ch] text-[0.9375rem] leading-relaxed text-ink-2">
+                <p className="copy-sm mt-3 max-w-[46ch]">
                   {t("form_sent_note")}
                 </p>
                 <button
@@ -320,7 +337,7 @@ export default function Contact() {
                         </div>
 
                         {invalid && (
-                          <p id={`err-${f.name}`} className="mt-2 text-[0.8125rem] text-ink">
+                          <p id={`err-${f.name}`} className="copy-sm mt-2 text-ink">
                             {fieldErrors[f.name]}
                           </p>
                         )}
@@ -348,17 +365,21 @@ export default function Contact() {
                         aria-describedby={
                           fieldErrors.message ? "err-message" : "hint-message"
                         }
-                        onInput={() => clearError("message")}
-                        className="peer w-full resize-y border-0 bg-transparent px-0 py-3 text-[1.0625rem] text-ink outline-none placeholder:text-ink-3"
+                        ref={autosize}
+                        onInput={(e) => {
+                          clearError("message");
+                          grow(e.currentTarget);
+                        }}
+                        className="autogrow peer w-full border-0 bg-transparent px-0 py-3 text-[1.0625rem] text-ink outline-none placeholder:text-ink-3"
                       />
                       {underline(!!fieldErrors.message)}
                     </div>
                     {fieldErrors.message ? (
-                      <p id="err-message" className="mt-2 text-[0.8125rem] text-ink">
+                      <p id="err-message" className="copy-sm mt-2 text-ink">
                         {fieldErrors.message}
                       </p>
                     ) : (
-                      <p id="hint-message" className="mt-3 text-[0.8125rem] text-ink-3">
+                      <p id="hint-message" className="copy-sm mt-3">
                         {t("form_brief_hint")}
                       </p>
                     )}
@@ -417,7 +438,7 @@ export default function Contact() {
                       )}
                     </button>
 
-                    <p className="max-w-[28ch] text-[0.75rem] leading-relaxed text-ink-3">
+                    <p className="copy-sm max-w-[34ch] text-sm">
                       {t("privacy_note")}
                     </p>
                   </div>

@@ -175,13 +175,13 @@ export default function Work({ openId, onOpen }) {
                         {name}
                       </button>
                     </h3>
-                    <span className="mt-0.5 block truncate text-[0.8125rem] text-ink-3 md:hidden">
+                    <span className="mt-0.5 block truncate text-base text-ink-2 md:hidden">
                       {kind}
                     </span>
                   </div>
                 </div>
 
-                <span className="hidden truncate text-sm text-ink-2 md:block">
+                <span className="hidden truncate text-base text-ink-2 md:block">
                   {kind}
                 </span>
 
@@ -246,7 +246,7 @@ export default function Work({ openId, onOpen }) {
                         <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-4">
                           <div>
                             <dt className="label">{t("role", "Role")}</dt>
-                            <dd className="mt-2 text-sm">{t(project.roleKey)}</dd>
+                            <dd className="mt-2 text-base">{t(project.roleKey)}</dd>
                           </div>
                           {project.year && (
                             <div>
@@ -287,7 +287,7 @@ export default function Work({ openId, onOpen }) {
                           .map((block) => (
                           <PanelItem reduced={reduced} key={block.k} className="mb-6">
                             <span className="label">{block.label}</span>
-                            <p className="mt-2 max-w-[62ch] text-[0.9375rem] leading-relaxed text-ink-2">
+                            <p className="copy mt-2">
                               {t(`projects.${project.id}.${block.k}`)}
                             </p>
                           </PanelItem>

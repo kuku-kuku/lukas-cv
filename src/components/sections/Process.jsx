@@ -113,7 +113,7 @@ export default function Process() {
               <h3 className="mt-4 text-lg font-semibold tracking-display">
                 {t(step.titleKey)}
               </h3>
-              <p className="mt-3 max-w-[34ch] text-[0.875rem] leading-relaxed text-ink-2">
+              <p className="copy-sm mt-3 max-w-[34ch]">
                 {t(step.bodyKey)}
               </p>
 
@@ -122,7 +122,7 @@ export default function Process() {
                 style={{ borderColor: "var(--line)" }}
               >
                 <span className="label">{t("deliverable", "You get")}</span>
-                <p className="mt-2 max-w-[32ch] text-[0.8125rem] font-medium leading-snug">
+                <p className="mt-2 max-w-[32ch] text-base font-medium leading-snug">
                   {t(step.outKey)}
                 </p>
               </div>

@@ -108,7 +108,7 @@ export function Layout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#0A0A0B" />
+        <meta name="theme-color" content="#111113" />
         <meta name="color-scheme" content="dark" />
         <meta name="author" content="Lukas Beneta" />
         <Meta />

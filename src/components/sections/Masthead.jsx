@@ -221,7 +221,7 @@ export default function Masthead() {
                     className="group flex w-full items-center gap-3 py-2.5 text-left"
                   >
                     <span className="font-mono text-label text-ink-3">{p.index}</span>
-                    <span className="flex-1 truncate text-sm text-ink-2 transition-colors group-hover:text-ink">
+                    <span className="flex-1 truncate text-base text-ink-2 transition-colors group-hover:text-ink">
                       {t(`projects.${p.id}.title`)}
                     </span>
                     <span

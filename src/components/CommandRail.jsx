@@ -151,7 +151,7 @@ export default function CommandRail() {
                     />
                   )}
                   {/* The name, on hover and on keyboard focus. */}
-                  <span className="chrome chrome-line pointer-events-none absolute left-[4.5rem] -translate-x-2 whitespace-nowrap border px-3 py-2 text-[0.8125rem] font-medium opacity-0 transition-[opacity,transform] duration-150 ease-expo group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100">
+                  <span className="chrome chrome-line pointer-events-none absolute left-[4.5rem] -translate-x-2 whitespace-nowrap border px-3 py-2 text-base font-medium opacity-0 transition-[opacity,transform] duration-150 ease-expo group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100">
                     {t(s.labelKey)}
                   </span>
                 </button>
@@ -195,7 +195,7 @@ export default function CommandRail() {
             <button
               type="button"
               onClick={() => goTo("contact")}
-              className="group relative inline-flex items-center gap-3 overflow-hidden border px-5 py-3 text-[0.8125rem] font-semibold"
+              className="group relative inline-flex items-center gap-3 overflow-hidden border px-5 py-3 text-base font-semibold"
               style={{
                 borderColor: "var(--chrome-signal)",
                 background: "var(--chrome-bg)",

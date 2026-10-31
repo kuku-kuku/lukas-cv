@@ -50,7 +50,7 @@ export default function Method() {
             <h3 className="mt-5 text-xl font-semibold tracking-display">
               {t(p.titleKey)}
             </h3>
-            <p className="mt-3 max-w-[42ch] text-[0.9375rem] leading-relaxed text-ink-2">
+            <p className="copy-sm mt-3 max-w-[42ch]">
               {t(p.bodyKey)}
             </p>
           </Reveal>

@@ -48,7 +48,7 @@ export default function Capabilities({ onEvidence }) {
 
   const detail = (cap) => (
     <div className="pb-2">
-      <p className="max-w-[58ch] text-[0.975rem] leading-relaxed text-ink-2">
+      <p className="copy">
         {t(cap.bodyKey)}
       </p>
 
