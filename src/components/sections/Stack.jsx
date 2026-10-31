@@ -7,12 +7,12 @@ import { DUR, EASE, STAGGER } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
- * 04 — STACK
+ * 04 - STACK
  *
  * A specification table, not a logo wall: four groups, set as a dense
  * hairline matrix in the same mono voice as the rest of the instrumentation.
  * Everything listed is in use in the work indexed in section 03 or in the
- * services on offer — nothing is here to pad the list.
+ * services on offer - nothing is here to pad the list.
  */
 export default function Stack() {
   const { t } = useTranslation();

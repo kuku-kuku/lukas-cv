@@ -8,7 +8,7 @@ import { useFinePointer, useReducedMotion } from "../../design/useMotionPrefs";
  * which reads as depth rather than as a gimmick.
  *
  * Only active for fine pointers that can hover, and never for visitors who
- * asked for reduced motion — on touch it renders as a plain element, so the
+ * asked for reduced motion - on touch it renders as a plain element, so the
  * native tap target and hit area are untouched.
  */
 export default function Magnetic({ children, strength = 0.28, className = "" }) {

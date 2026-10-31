@@ -4,7 +4,7 @@ import React from "react";
  * The column grid, left visible.
  *
  * Every measurement on the page is taken from these hairlines, so showing
- * them is honest rather than decorative — and it costs nothing: one fixed
+ * them is honest rather than decorative - and it costs nothing: one fixed
  * element, no JS, a repeating gradient only. Four columns up to md, twelve
  * above it, aligned to the same gutter and rail as .shell.
  */

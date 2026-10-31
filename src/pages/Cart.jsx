@@ -39,7 +39,7 @@ export default function Cart() {
   };
 
   const handleCheckout = () => {
-    // kol mokėjimai neveikia – nieko nedarom
+    // kol mokėjimai neveikia - nieko nedarom
   };
 
   const totalPrice = cart.reduce((sum, item) => sum + parseFloat(item.price), 0).toFixed(2);

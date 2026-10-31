@@ -5,7 +5,7 @@ import { PRACTICE } from "../design/content";
 import { DUR, EASE } from "../design/motion";
 
 /**
- * BOOT SEQUENCE — the opening, deliberately short.
+ * BOOT SEQUENCE - the opening, deliberately short.
  *
  * Rules it obeys:
  *  - the page is fully rendered underneath from the first paint, so this is a
@@ -47,7 +47,7 @@ export default function BootSequence({ onDone }) {
       try {
         window.sessionStorage.setItem(SESSION_KEY, "1");
       } catch (err) {
-        /* storage unavailable — nothing to persist, the opening still ran */
+        /* storage unavailable - nothing to persist, the opening still ran */
       }
       setLeaving(true);
       window.setTimeout(() => onDone?.(), 300);
@@ -85,7 +85,7 @@ export default function BootSequence({ onDone }) {
           animate={{ opacity: 1 }}
           transition={{ duration: DUR.s }}
         >
-          {PRACTICE.locality} — {PRACTICE.country}
+          {PRACTICE.locality} - {PRACTICE.country}
         </motion.span>
         <motion.span
           className="label"

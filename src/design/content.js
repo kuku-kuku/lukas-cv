@@ -1,5 +1,5 @@
 /**
- * SITE STRUCTURE — single source of truth for the page.
+ * SITE STRUCTURE - single source of truth for the page.
  *
  * Only structure, identifiers and verifiable facts live here. Every piece of
  * human-readable copy is an i18n key (see src/i18n.js) so LT/EN stay in sync

@@ -136,7 +136,7 @@ export default function Demo() {
                 onClick={() => setShowMiniCart(true)}
                 className="bg-black text-white px-5 py-3 rounded-full shadow-lg hover:bg-gray-800 transition min-w-[170px] text-center"
               >
-                🛒 {cart.length} preki{cart.length === 1 ? "ė" : "ės"} – {totalPrice} €
+                🛒 {cart.length} preki{cart.length === 1 ? "ė" : "ės"} - {totalPrice} €
               </button>
             )}
 

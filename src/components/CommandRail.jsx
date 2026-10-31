@@ -7,7 +7,7 @@ import useActiveSection from "../design/useActiveSection";
 import { useReducedMotion } from "../design/useMotionPrefs";
 
 /**
- * COMMAND RAIL — navigation as instrumentation.
+ * COMMAND RAIL - navigation as instrumentation.
  *
  * Desktop: a permanent hairline rail on the left. It carries the section
  * indices, a travelling marker that tracks the section you are reading, and a
@@ -102,7 +102,7 @@ export default function CommandRail() {
           onClick={() => goTo("index")}
           className="flex h-[4.5rem] w-full items-center justify-center border-b text-lg font-extrabold tracking-tightest hairline"
           style={{ borderColor: "var(--line)" }}
-          aria-label={`${PRACTICE.mark} — ${t("nav_index", "Index")}`}
+          aria-label={`${PRACTICE.mark} - ${t("nav_index", "Index")}`}
         >
           B
         </button>
@@ -159,7 +159,7 @@ export default function CommandRail() {
             type="button"
             onClick={toggleLanguage}
             className="flex h-[4.5rem] w-full flex-col items-center justify-center gap-1"
-            aria-label={`${lang} — ${t("switch_language", "Switch language")}`}
+            aria-label={`${lang} - ${t("switch_language", "Switch language")}`}
           >
             <span className="font-mono text-[0.6875rem] tracking-label text-ink">
               {lang}
@@ -199,7 +199,7 @@ export default function CommandRail() {
               type="button"
               onClick={toggleLanguage}
               className="font-mono text-[0.6875rem] tracking-label text-ink"
-              aria-label={`${lang} — ${t("switch_language", "Switch language")}`}
+              aria-label={`${lang} - ${t("switch_language", "Switch language")}`}
             >
               {lang}
             </button>

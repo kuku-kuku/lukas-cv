@@ -6,7 +6,7 @@ import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
 
 /**
- * 02 — METHOD
+ * 02 - METHOD
  *
  * The section that has to carry the actual argument: how a vague request
  * becomes a system that can be operated. Three principles in text, then the

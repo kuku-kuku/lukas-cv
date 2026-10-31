@@ -11,7 +11,7 @@ import { DUR, EASE } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
- * 06 — CONTACT
+ * 06 - CONTACT
  *
  * The delivery mechanism is unchanged from the previous site on purpose: the
  * same EmailJS template, the same three field names (name / email / message),

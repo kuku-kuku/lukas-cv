@@ -8,7 +8,7 @@ import { DUR, EASE, STAGGER } from "../../design/motion";
 import { useCompactViewport, useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
- * 05 — PROCESS
+ * 05 - PROCESS
  *
  * The one inverted spread on the site. Flipping to bone-on-black here does
  * two things: it breaks the vertical monotony of a long dark page at exactly

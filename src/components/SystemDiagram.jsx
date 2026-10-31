@@ -6,7 +6,7 @@ import { DUR, EASE } from "../design/motion";
 import { useMediaFlag, useReducedMotion } from "../design/useMotionPrefs";
 
 /**
- * SYSTEM DIAGRAM — an explorable model of how work moves through the practice.
+ * SYSTEM DIAGRAM - an explorable model of how work moves through the practice.
  *
  * It is the argument of the Method section, not an illustration of it:
  * inputs on the left, the engineering spine in the middle, delivery on the
@@ -354,7 +354,7 @@ export default function SystemDiagram() {
                 role="button"
                 tabIndex={0}
                 aria-pressed={on}
-                aria-label={`${t(n.titleKey)} — ${KIND_LABEL[n.kind]}`}
+                aria-label={`${t(n.titleKey)} - ${KIND_LABEL[n.kind]}`}
                 onClick={() => setActiveId(n.id)}
                 onFocus={() => setActiveId(n.id)}
                 onKeyDown={(e) => onKeyDown(e, n.id)}

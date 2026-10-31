@@ -15,7 +15,7 @@ import { initGA, trackPageview } from "./ga";
 import { DUR, EASE } from "./design/motion";
 
 /**
- * Routing is unchanged from before — /, /demo, /demo/admin, /demo/cart,
+ * Routing is unchanged from before - /, /demo, /demo/admin, /demo/cart,
  * /demo/admin-panel and the 404 all still resolve to the same components, so
  * no indexed URL moved.
  *
@@ -70,7 +70,7 @@ function AppContent() {
       handle = idle(() => initGA(), { timeout: 6000 });
     };
 
-    // gtag is ~176 kB of third-party JavaScript — larger than this app. It
+    // gtag is ~176 kB of third-party JavaScript - larger than this app. It
     // waits for load and then for an idle moment, so it can never land in the
     // middle of the first render. Page views are queued until it is ready.
     if (document.readyState === "complete") schedule();

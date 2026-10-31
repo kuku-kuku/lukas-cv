@@ -5,7 +5,7 @@ import SplitText from "./motion/SplitText";
 
 /**
  * Every section opens the same way: index, name, a rule that draws itself,
- * then the title and an optional lede. The repetition is the point — it is
+ * then the title and an optional lede. The repetition is the point - it is
  * what makes the page read as one instrument instead of seven templates.
  */
 export default function SectionHead({ index, eyebrow, title, lede, id }) {

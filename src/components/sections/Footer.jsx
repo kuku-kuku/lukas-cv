@@ -15,7 +15,7 @@ export default function Footer() {
   const items = [
     t("footer_available"),
     ...CAPABILITIES.map((c) => t(c.titleKey)),
-    `${PRACTICE.locality} — ${PRACTICE.country}`,
+    `${PRACTICE.locality} - ${PRACTICE.country}`,
   ];
   const strip = [...items, ...items];
 

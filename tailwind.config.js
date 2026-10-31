@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Instrument palette — monochrome ink on near-black, one signal colour.
+        // Instrument palette - monochrome ink on near-black, one signal colour.
         // Bound to the CSS tokens rather than fixed hexes, so the inverted
         // spread (.invert-section) re-tones every `text-ink-*` utility along
         // with everything else instead of staying light-on-light.

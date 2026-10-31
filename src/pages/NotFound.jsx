@@ -6,7 +6,7 @@ import { PRACTICE } from "../design/content";
 /**
  * 404, in the same language as the rest of the site: a status readout rather
  * than a sad illustration. The 2.4 MB photographic background it used to load
- * is gone — this page now costs nothing but the stylesheet.
+ * is gone - this page now costs nothing but the stylesheet.
  */
 export default function NotFound() {
   const { t } = useTranslation();
@@ -46,7 +46,7 @@ export default function NotFound() {
       <div className="flex items-baseline justify-between">
         <span className="label">{PRACTICE.domain}</span>
         <span className="label">
-          {PRACTICE.locality} — {PRACTICE.country}
+          {PRACTICE.locality} - {PRACTICE.country}
         </span>
       </div>
     </div>

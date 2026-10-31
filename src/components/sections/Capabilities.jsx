@@ -9,10 +9,10 @@ import { DUR, EASE, STAGGER } from "../../design/motion";
 import { useCompactViewport, useFinePointer, useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
- * 01 — CAPABILITIES
+ * 01 - CAPABILITIES
  *
  * Presented as a matrix, not as feature cards: six capabilities on the left,
- * one detail panel on the right. The connective tissue is evidence — each
+ * one detail panel on the right. The connective tissue is evidence - each
  * capability names the shipped work it draws on, and selecting one marks the
  * other capabilities that share that evidence. That is what makes it a system
  * view: you can see which abilities travel together on a real project.
@@ -30,7 +30,7 @@ export default function Capabilities({ onEvidence }) {
   const reduced = useReducedMotion();
   const [activeId, setActiveId] = useState(CAPABILITIES[0].id);
 
-  const projectTitle = (id) => t(`projects.${id}.title`).split("—")[0].trim();
+  const projectTitle = (id) => t(`projects.${id}.title`);
 
   const active = CAPABILITIES.find((c) => c.id === activeId) || CAPABILITIES[0];
 

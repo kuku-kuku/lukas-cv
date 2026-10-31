@@ -10,7 +10,7 @@ import { PRACTICE } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
- * 00 — MASTHEAD
+ * 00 - MASTHEAD
  *
  * An editorial cover, not a centred hero: the wordmark is set as three
  * oversized lines on the left edge of the grid, the positioning statement sits
@@ -18,7 +18,7 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * facts rather than slogans.
  *
  * Scroll choreography is one transform on one element (the type block lifts
- * and fades as you leave) — the lattice behind it handles its own departure.
+ * and fades as you leave) - the lattice behind it handles its own departure.
  */
 
 const LINES = ["SOFTWARE", "ENGINEERING", "PRACTICE"];
@@ -86,7 +86,7 @@ export default function Masthead() {
       >
         <h1 id="masthead-title" className="display-xl">
           <span className="sr-only">
-            {PRACTICE.name} — {t("masthead_sr", "software engineering practice")}
+            {PRACTICE.name} - {t("masthead_sr", "software engineering practice")}
           </span>
           {LINES.map((line, i) => (
             <span key={line} className="mask-line">

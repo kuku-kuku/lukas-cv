@@ -39,13 +39,27 @@ export default function Home() {
    * The masthead is what the visitor is waiting for, and it was competing for
    * the main thread with six sections, an interactive diagram and a work
    * index that nobody can see yet. The delay is a single animation frame, so
-   * the full document still exists milliseconds later — this is not
+   * the full document still exists milliseconds later - this is not
    * scroll-gated rendering, and no content is withheld from crawlers.
    */
   const [belowFold, setBelowFold] = useState(false);
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => setBelowFold(true));
-    return () => window.cancelAnimationFrame(frame);
+    let done = false;
+    const show = () => {
+      if (done) return;
+      done = true;
+      setBelowFold(true);
+    };
+    // A frame callback is the right trigger when the page is actually being
+    // painted, but it never fires in a background tab or a non-painting
+    // renderer - which would leave the document as a masthead and nothing
+    // else. The timer is the floor that guarantees the rest mounts anyway.
+    const frame = window.requestAnimationFrame(show);
+    const timer = window.setTimeout(show, 300);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   // A deep link (/#contact) is resolved by the browser before those sections

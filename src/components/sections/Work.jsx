@@ -16,14 +16,14 @@ import {
 } from "../../design/useMotionPrefs";
 
 /**
- * 03 — WORK
+ * 03 - WORK
  *
  * An index, not a card grid. Each project is a row: number, name, role,
- * status. The row expands in place into the engineering notes — scope, what
+ * status. The row expands in place into the engineering notes - scope, what
  * was actually hard, how it was solved, the stack, and a link to go and check.
  *
  * Desktop adds the one hover-only flourish on the page: a plate that tracks
- * the pointer and previews the row under it. It is purely additive — the same
+ * the pointer and previews the row under it. It is purely additive - the same
  * image appears inline when the row is expanded, so nothing is reachable only
  * by hovering. It is disabled for coarse pointers and reduced motion.
  *
@@ -81,9 +81,8 @@ export default function Work({ openId, onOpen }) {
 
         {PROJECTS.map((project, i) => {
           const open = openId === project.id;
-          const title = t(`projects.${project.id}.title`);
-          const name = title.split("—")[0].trim();
-          const kind = title.includes("—") ? title.split("—").slice(1).join("—").trim() : "";
+          const name = t(`projects.${project.id}.title`);
+          const kind = t(`projects.${project.id}.kind`);
 
           return (
             <motion.article
@@ -233,7 +232,7 @@ export default function Work({ openId, onOpen }) {
           );
         })}
 
-        {/* pointer-tracking preview — desktop enhancement only */}
+        {/* pointer-tracking preview - desktop enhancement only */}
         {previewEnabled && (
           <AnimatePresence>
             {hoveredProject && openId !== hoveredProject.id && (
@@ -278,7 +277,7 @@ function ProjectPlate({ project, thumb = false }) {
           {project.stack.slice(0, 4).join(" / ")}
         </span>
         <span className="text-2xl font-semibold tracking-display">
-          {t(`projects.${project.id}.title`).split("—")[0].trim()}
+          {t(`projects.${project.id}.title`)}
         </span>
       </div>
     );
@@ -293,7 +292,9 @@ function ProjectPlate({ project, thumb = false }) {
         <source srcSet={src} type="image/webp" />
         <img
           src={project.imageFallback || src}
-          alt={t(`projects.${project.id}.title`)}
+          alt={`${t(`projects.${project.id}.title`)} - ${t(
+            `projects.${project.id}.kind`
+          )}`}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover object-top"

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 /**
  * Environment probes used to scale the experience down rather than off.
  *
- * reduced  — the visitor asked for less motion (OS level), live-updating.
- * fine     — a precision pointer that can hover: gates magnetic/cursor work.
- * compact  — small viewport: gates pinned/horizontal choreography and
+ * reduced  - the visitor asked for less motion (OS level), live-updating.
+ * fine     - a precision pointer that can hover: gates magnetic/cursor work.
+ * compact  - small viewport: gates pinned/horizontal choreography and
  *            lowers canvas density.
  */
 function read(query) {

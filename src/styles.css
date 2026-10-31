@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================================================
-   INSTRUMENT — design tokens
+   INSTRUMENT - design tokens
    One source of truth for colour, rhythm, rules and motion.
    Motion durations/easings are mirrored in src/design/motion.js
    so JS timelines and CSS transitions stay in sync.
@@ -16,7 +16,7 @@
   --ink-2: #a7a5a0;
   /* 5.7:1 on --bg: the mono labels are small text and must clear 4.5:1 */
   --ink-3: #8a8884;
-  /* Non-text only (dots, hairlines) — never used for type */
+  /* Non-text only (dots, hairlines) - never used for type */
   --ink-4: #4a4945;
   --signal: #ff4a1c;
 
@@ -74,7 +74,7 @@
     color: #0a0a0b;
   }
 
-  /* Visible, deliberate focus — never removed */
+  /* Visible, deliberate focus - never removed */
   :focus-visible {
     outline: 1px solid var(--signal);
     outline-offset: 3px;

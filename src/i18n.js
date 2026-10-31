@@ -5,13 +5,13 @@ const resources = {
   lt: {
     translation: {
       // Bendra
-      title: 'Lukas Beneta – Paslaugos',
+      title: 'Lukas Beneta - Paslaugos',
       heroText: 'Labas! Aš tavo puslapio kūrėjas Lukas.',
       about: 'Apie mane',
       services: 'Paslaugos',
       works: 'Mano darbai',
       contact: 'Susisiekime',
-      contact_intro: 'Jei turi klausimų ar pasiūlymų – drąsiai rašyk!',
+      contact_intro: 'Jei turi klausimų ar pasiūlymų - drąsiai rašyk!',
       contact_button: 'Parašyk man',
       close: 'Uždaryti',
 
@@ -32,39 +32,39 @@ const resources = {
       service_1_title: 'Vieno puslapio svetainė',
       service_1_short: 'Tinka portfolio, verslo pristatymui, renginiams.',
       service_1_long:
-        'Tai vieno puslapio svetainė, idealiai tinkanti pristatyti savo veiklą, projektą ar renginį. Sukursiu unikalų dizainą, pasirūpinsiu programavimu, SEO pagrindais ir įkelsiu svetainę į serverį. Tai greitas ir efektyvus būdas būti internete – aiškiai, patraukliai ir profesionaliai.',
-      // be „nuo“ – logika prideda „Nuo “ kortelėje
+        'Tai vieno puslapio svetainė, idealiai tinkanti pristatyti savo veiklą, projektą ar renginį. Sukursiu unikalų dizainą, pasirūpinsiu programavimu, SEO pagrindais ir įkelsiu svetainę į serverį. Tai greitas ir efektyvus būdas būti internete - aiškiai, patraukliai ir profesionaliai.',
+      // be „nuo“ - logika prideda „Nuo “ kortelėje
       service_1_price: '200 €',
 
       service_2_title: 'Pilna interneto svetainė',
       service_2_short: 'Keletas puslapių, SEO optimizacija, kontaktų forma, pritaikyta mobiliesiems.',
       service_2_long:
-        'Pilna svetainė – tai daugiau nei vienas puslapis. Įprastai ji apima pagrindinį puslapį, apie puslapį, paslaugas, kontaktų formą ir kitus skyrius. Svetainė bus patogi naudoti tiek kompiuteryje, tiek telefone, o turinys bus optimizuotas Google paieškai. Tai rimtas sprendimas tiems, kas nori būti matomi internete iš visų pusių.',
+        'Pilna svetainė - tai daugiau nei vienas puslapis. Įprastai ji apima pagrindinį puslapį, apie puslapį, paslaugas, kontaktų formą ir kitus skyrius. Svetainė bus patogi naudoti tiek kompiuteryje, tiek telefone, o turinys bus optimizuotas Google paieškai. Tai rimtas sprendimas tiems, kas nori būti matomi internete iš visų pusių.',
       service_2_price: '300 €',
 
       service_3_title: 'Serverio sukūrimas',
       service_3_short: 'Sukursiu backend serverį (Node.js, Express, MongoDB ar MySQL).',
       service_3_long:
-        'Jei tau reikia „vidinės“ sistemos, kuri saugo, valdo ar apdoroja duomenis – tuomet reikia serverio. Galiu sukurti REST API, vartotojų registraciją, prisijungimą, duomenų bazės ryšį ir paruošti viską talpinimui. Tinka tiek paprastoms, tiek sudėtingesnėms sistemoms.',
+        'Jei tau reikia „vidinės“ sistemos, kuri saugo, valdo ar apdoroja duomenis - tuomet reikia serverio. Galiu sukurti REST API, vartotojų registraciją, prisijungimą, duomenų bazės ryšį ir paruošti viską talpinimui. Tinka tiek paprastoms, tiek sudėtingesnėms sistemoms.',
       service_3_price: '300 €',
 
       service_4_title: 'Serverio priežiūra (mėnesinis planas)',
       service_4_short: 'Reguliari priežiūra, atnaujinimai, mažų problemų sprendimas.',
       service_4_long:
-        'Kad tavo serveris veiktų sklandžiai – jį reikia prižiūrėti. Siūlau mėnesinę priežiūrą, kuri apima atnaujinimus, klaidų sprendimą, log failų analizę ir duomenų bazės priežiūrą. Tai idealu tiems, kurie nori stabilumo be rūpesčių.',
+        'Kad tavo serveris veiktų sklandžiai - jį reikia prižiūrėti. Siūlau mėnesinę priežiūrą, kuri apima atnaujinimus, klaidų sprendimą, log failų analizę ir duomenų bazės priežiūrą. Tai idealu tiems, kurie nori stabilumo be rūpesčių.',
       service_4_price: '60 €/mėn',
 
       service_5_title: 'Svetainės atnaujinimai / priežiūra',
-      service_5_short: 'Jei turi puslapį, kurį reikia „pagyvinti“ ar atnaujinti – galiu padėti!',
+      service_5_short: 'Jei turi puslapį, kurį reikia „pagyvinti“ ar atnaujinti - galiu padėti!',
       service_5_long:
         'Tavo svetainė veikia, bet atrodo pasenusi, lėta ar netinkama šių dienų vartotojams? Galiu ją atnaujinti vizualiai, patobulinti veikimą, pridėti naujas funkcijas ir pasirūpinti, kad viskas būtų modernu ir patogu.',
       service_5_price: '20 €/val',
 
       service_6_title: 'Konsultacija ar pagalba',
-      service_6_short: 'Jei kažkas neveikia arba nori pasitarti dėl projekto – rašyk drąsiai.',
+      service_6_short: 'Jei kažkas neveikia arba nori pasitarti dėl projekto - rašyk drąsiai.',
       service_6_long:
         'Kartais užtenka tik vieno pokalbio, kad rasti tinkamą kryptį. Galiu patarti dėl technologijos pasirinkimo, dizaino, funkcionalumo ar padėti išspręsti konkrečią problemą.',
-      // Nemokama – be „Nuo“
+      // Nemokama - be „Nuo“
       service_6_price: 'Pirma konsultacija nemokama',
 
       // Darbai
@@ -88,7 +88,8 @@ const resources = {
 
       projects: {
         beneta: {
-          title: 'beneta.lt — Praktikos svetainė',
+          title: 'beneta.lt',
+          kind: 'Praktikos svetainė',
           description: 'Ši svetainė: vieno puslapio sąsaja su judesio sistema, dviem kalbomis ir kontaktų forma.',
           scope:
             'Dizaino kryptis, dizaino sistema, judesio sistema, dvi kalbos (LT/EN), kontaktų forma, matavimai ir talpinimas Vercel.',
@@ -98,7 +99,8 @@ const resources = {
             'Viena React programa be papildomų animacijų bibliotekų: Canvas fonas ir SVG diagrama parašyti ranka, judesys aprašytas bendrais trukmių ir easing tokenais, visa choreografija išjungiama su prefers-reduced-motion.',
         },
         fakaunas: {
-          title: 'FA Kaunas — Jaunimo futbolo akademija',
+          title: 'FA Kaunas',
+          kind: 'Jaunimo futbolo akademija',
           description: 'Jaunimo futbolo akademijos svetainė su registracija ir dinamišku turiniu.',
           scope:
             'Svetainės struktūra, turinio skyriai, registracijos forma su el. pašto siuntimu per Resend API, pritaikymas telefonams, talpinimas.',
@@ -108,7 +110,8 @@ const resources = {
             'Forma siunčiama per Express endpointą, kuris naudoja Resend API, todėl siuntimo klaidos matomos serveryje, o ne tyliai prarandamos naršyklėje. Turinys suskirstytas į aiškius blokus, kad akademija galėtų keisti tekstus be dizaino perdarymo.',
         },
         syncara: {
-          title: 'Syncara — Analitikos skydas',
+          title: 'Syncara',
+          kind: 'Analitikos skydas',
           description: 'Analitikos skydas klientų duomenų vizualizacijai ir eksportui.',
           scope:
             'Prototipas: duomenų traukimas iš Airtable, autentifikacija su Firebase, grafikai su Chart.js, eksportas į CSV.',
@@ -118,7 +121,8 @@ const resources = {
             'Duomenų sluoksnis atskirtas nuo vaizdo: Airtable lieka kaip šaltinis, kurį klientas jau moka naudoti, o skydas tik skaito, sujungia ir eksportuoja. Prototipas nepaleistas į produkciją, todėl pažymėtas kaip demonstracija.',
         },
         bangu: {
-          title: 'Bangų klinika — Odontologijos klinika',
+          title: 'Bangų klinika',
+          kind: 'Odontologijos klinika',
           description: 'Šiuolaikiška klinikos svetainė su keliomis kalbomis ir paruošta SEO.',
           scope:
             'Kelių puslapių klinikos svetainė, kelios kalbos su i18next, paslaugų ir kontaktų skyriai, techninis SEO ir metaduomenys.',
@@ -150,11 +154,11 @@ const resources = {
       back_home: 'Grįžti į pradžą',
 
       // Apie
-    about_p1: 'Aš esu Lukas Beneta – buvęs barmenas, kuris iškeitė kokteilių plaktuvą į klaviatūrą. Taip, skamba drąsiai, bet ar žinojai, kad programavimas ir barmenavimas turi kažką bendro? Abu reikalauja ritmo, kruopštumo ir... kartais – kantrybės.',
-    about_p2: 'Mokiausi CodeAcademy, kur išmokau nuo nulio kurti funkcionalius, estetiškus ir svarbiausia – veikiančius puslapius. Nuo to laiko – kuriu, eksperimentuoju ir padedu kitiems būti matomiems internete.',
-    about_p3: 'Nuo mažens žaidžiu futbolą ir tą aistrą nešuosi iki dabar – tai mane išmokė komandinio darbo, užsispyrimo ir siekio laimėti kiekviename etape.',
+    about_p1: 'Aš esu Lukas Beneta - buvęs barmenas, kuris iškeitė kokteilių plaktuvą į klaviatūrą. Taip, skamba drąsiai, bet ar žinojai, kad programavimas ir barmenavimas turi kažką bendro? Abu reikalauja ritmo, kruopštumo ir... kartais - kantrybės.',
+    about_p2: 'Mokiausi CodeAcademy, kur išmokau nuo nulio kurti funkcionalius, estetiškus ir svarbiausia - veikiančius puslapius. Nuo to laiko - kuriu, eksperimentuoju ir padedu kitiems būti matomiems internete.',
+    about_p3: 'Nuo mažens žaidžiu futbolą ir tą aistrą nešuosi iki dabar - tai mane išmokė komandinio darbo, užsispyrimo ir siekio laimėti kiekviename etape.',
     about_p4: 'Dirbdamas labiausiai vertinu paprastumą, logišką struktūrą ir tvirtą ryšį su žmogumi, kuriam kuriu. Esu stipriausias tada, kai turiu aiškų tikslą, galiu jį suprasti, suskaidyti į etapus ir nuosekliai įgyvendinti. Man svarbu ne tik techninis rezultatas, bet ir tai, kad jis kurtų vertę žmogui, kuriam jis skirtas.',
-    about_p5: 'Jei nori žmogaus, kuris ne tik suprogramuos, bet ir supras, ko tau reikia – mes tikrai sutarsime.',
+    about_p5: 'Jei nori žmogaus, kuris ne tik suprogramuos, bet ir supras, ko tau reikia - mes tikrai sutarsime.',
 
       // ===== Redesign: navigation =====
       nav_index: 'Pradžia',
@@ -172,7 +176,7 @@ const resources = {
       // ===== 00 Masthead =====
       masthead_sr: 'programinės įrangos inžinerijos praktika',
       masthead_lede:
-        'Nepriklausoma inžinerijos praktika Klaipėdoje. Imu neaiškiai apibrėžtas technines problemas — interneto produktus, serverio sistemas, API integracijas, rankinius procesus — ir grąžinu veikiančias, išmatuojamas sistemas.',
+        'Nepriklausoma inžinerijos praktika Klaipėdoje. Imu neaiškiai apibrėžtas technines problemas - interneto produktus, serverio sistemas, API integracijas, rankinius procesus - ir grąžinu veikiančias, išmatuojamas sistemas.',
       cta_brief: 'Aprašyti užduotį',
       cta_model: 'Kaip dirbu',
       scroll_cue: 'Žemiau',
@@ -190,7 +194,7 @@ const resources = {
       // ===== 01 Capabilities =====
       cap_title: 'Ką kuriu',
       cap_lede:
-        'Šešios sritys, kurios realiuose projektuose beveik visada eina kartu. Pasirink vieną — pamatysi, kur ji panaudota ir kurios kitos sritys su ja susijusios.',
+        'Šešios sritys, kurios realiuose projektuose beveik visada eina kartu. Pasirink vieną - pamatysi, kur ji panaudota ir kurios kitos sritys su ja susijusios.',
       cap_apps_title: 'Interneto programos',
       cap_apps_body:
         'Vieno arba kelių puslapių produktai su React: komponentų sistema, maršrutai, kelios kalbos, administravimo sąsajos. Dizainas ir kodas tame pačiame procese, todėl sąsaja nelieka perduota kitam etapui.',
@@ -202,13 +206,13 @@ const resources = {
         'Susiejimas su paslaugomis, kurias verslas jau naudoja: el. pašto siuntimas, formų apsauga, Firebase, Airtable, trečiųjų šalių API. Integracija laikoma baigta tada, kai turi klaidų apdorojimą, o ne tik veikiantį geriausią atvejį.',
       cap_automation_title: 'Automatizavimas',
       cap_automation_body:
-        'Rankiniai, pasikartojantys procesai perkeliami į kodą: duomenų surinkimas, suvestinės, eksportas, vidiniai įrankiai. Tikslas — kad kasdienis darbas nebereikalautų atskiro žmogaus laiko.',
+        'Rankiniai, pasikartojantys procesai perkeliami į kodą: duomenų surinkimas, suvestinės, eksportas, vidiniai įrankiai. Tikslas - kad kasdienis darbas nebereikalautų atskiro žmogaus laiko.',
       cap_performance_title: 'Greitis ir SEO',
       cap_performance_body:
         'Core Web Vitals, paketų svoris, vaizdų formatai, techninis SEO ir prieinamumas. Matuojama prieš ir po, o ne vertinama iš akies.',
       cap_operations_title: 'Priežiūra',
       cap_operations_body:
-        'Paleidimas, aplinkos kintamieji, atnaujinimai, stebėjimas ir perdavimas. Jei norite — projektas lieka mano priežiūroje; jei ne — gaunate dokumentaciją ir prieigas, kad galėtumėte tęsti be manęs.',
+        'Paleidimas, aplinkos kintamieji, atnaujinimai, stebėjimas ir perdavimas. Jei norite - projektas lieka mano priežiūroje; jei ne - gaunate dokumentaciją ir prieigas, kad galėtumėte tęsti be manęs.',
       evidence: 'Kur panaudota',
       shared: 'susiję',
       detail: 'Detaliau',
@@ -230,7 +234,7 @@ const resources = {
         'Projektas baigtas ne tada, kai kodas parašytas, o kai jis veikia produkcijoje, turi matavimus ir žmogų, kuris žino, kaip jį atnaujinti.',
       node_brief_title: 'Užduotis',
       node_brief_body:
-        'Ką reikia pasiekti, kam ir kada. Dažniausiai pirminis aprašymas yra rezultatas, o ne sprendimas — ir taip turi būti.',
+        'Ką reikia pasiekti, kam ir kada. Dažniausiai pirminis aprašymas yra rezultatas, o ne sprendimas - ir taip turi būti.',
       node_constraints_title: 'Ribos',
       node_constraints_body:
         'Biudžetas, terminai, esama infrastruktūra, komandos įgūdžiai. Visa tai įeina į architektūrą kaip įvestis, o ne kaip staigmena pabaigoje.',
@@ -239,7 +243,7 @@ const resources = {
         'Kas jau egzistuoja: lentelės, failai, API, skaičiuoklės. Duomenų perkėlimas beveik visada sudėtingesnis, nei atrodo iš pradžių.',
       node_model_title: 'Modelis',
       node_model_body:
-        'Objektai, jų ryšiai ir būsenos. Vienas paveikslas, dėl kurio sutariame prieš darbus — čia pakeitimai kainuoja minutes, ne savaites.',
+        'Objektai, jų ryšiai ir būsenos. Vienas paveikslas, dėl kurio sutariame prieš darbus - čia pakeitimai kainuoja minutes, ne savaites.',
       node_contract_title: 'Kontraktai',
       node_contract_body:
         'API formos, duomenų tipai, klaidų atvejai. Kai jie sutarti, sąsają ir serverį galima kurti nepriklausomai vieną nuo kito.',
@@ -251,13 +255,13 @@ const resources = {
         'Node.js endpointai, autentifikacija, duomenų bazė, integracijos. Veikia be sąsajos ir yra tikrinami atskirai.',
       node_automation_title: 'Automatizacijos',
       node_automation_body:
-        'Suvestinės, eksportas, periodinės užduotys, vidiniai įrankiai — darbas, kurio nebereikia atlikti ranka.',
+        'Suvestinės, eksportas, periodinės užduotys, vidiniai įrankiai - darbas, kurio nebereikia atlikti ranka.',
       node_ship_title: 'Paleidimas',
       node_ship_body:
         'Produkcinis build, aplinkos kintamieji, domenas, matavimai. Paleidimo diena turi būti nuobodi.',
       node_operate_title: 'Priežiūra',
       node_operate_body:
-        'Stebėjimas, atnaujinimai, pataisymai. Tai, kas čia pamatuojama, grįžta atgal į modelį — todėl diagramoje yra grįžtamasis ryšys.',
+        'Stebėjimas, atnaujinimai, pataisymai. Tai, kas čia pamatuojama, grįžta atgal į modelį - todėl diagramoje yra grįžtamasis ryšys.',
       diagram_title: 'Sistemos modelis',
       diagram_hint: 'Spustelk arba naudok rodyklių klavišus',
       diagram_aria: 'Interaktyvi inžinerinio modelio diagrama',
@@ -270,7 +274,7 @@ const resources = {
       // ===== 03 Work =====
       work_title_new: 'Atrinkti darbai',
       work_lede:
-        'Keturi projektai. Be išgalvotų procentų — tik apimtis, vaidmuo, technologijos ir nuoroda, kurią gali atidaryti ir pasitikrinti pats.',
+        'Keturi projektai. Be išgalvotų procentų - tik apimtis, vaidmuo, technologijos ir nuoroda, kurią gali atidaryti ir pasitikrinti pats.',
       role: 'Vaidmuo',
       status_label: 'Būklė',
       scope: 'Apimtis',
@@ -292,7 +296,7 @@ const resources = {
       // ===== 05 Process =====
       process_title: 'Kaip atrodo darbas su manimi',
       process_lede:
-        'Šeši etapai. Po kiekvieno turi kažką konkretaus rankose — ne tik pažadą, kad darbas vyksta.',
+        'Šeši etapai. Po kiekvieno turi kažką konkretaus rankose - ne tik pažadą, kad darbas vyksta.',
       deliverable: 'Ką gauni',
       step_intake_title: 'Susipažinimas',
       step_intake_body:
@@ -317,12 +321,12 @@ const resources = {
       step_operate_title: 'Priežiūra',
       step_operate_body:
         'Pasirinktinai: atnaujinimai, pataisymai, nauji skyriai ir stebėjimas. Be šio etapo projektas vis tiek lieka tavo.',
-      step_operate_out: 'Mėnesinė priežiūra arba valandinė pagalba — tiek, kiek reikia.',
+      step_operate_out: 'Mėnesinė priežiūra arba valandinė pagalba - tiek, kiek reikia.',
 
       // ===== 06 Contact =====
       contact_title_new: 'Papasakok, ką reikia išspręsti',
       contact_lede:
-        'Geriausia pradėti nuo problemos, ne nuo sprendimo. Jei dar nežinai, ko tiksliai reikia, parašyk kaip yra — pirmas atsakymas bus klausimai.',
+        'Geriausia pradėti nuo problemos, ne nuo sprendimo. Jei dar nežinai, ko tiksliai reikia, parašyk kaip yra - pirmas atsakymas bus klausimai.',
       contact_note:
         'Jei projektas man netinka arba jam nereikia atskiro kūrėjo, pasakysiu iš karto ir, jei galėsiu, pasiūlysiu kitą kelią.',
       local_time: 'Vietos laikas',
@@ -351,13 +355,13 @@ const resources = {
   en: {
     translation: {
       // General
-      title: 'Lukas Beneta – Services',
+      title: 'Lukas Beneta - Services',
       heroText: 'Hi! I’m Lukas, the creator of your website.',
       about: 'About me',
       services: 'Services',
       works: 'My Portfolio',
       contact: 'Contact Me',
-      contact_intro: 'If you have any questions or proposals – feel free to reach out!',
+      contact_intro: 'If you have any questions or proposals - feel free to reach out!',
       contact_button: 'Contact me',
       close: 'Close',
 
@@ -378,7 +382,7 @@ const resources = {
       service_1_title: 'One-page website',
       service_1_short: 'Perfect for portfolios, business presentations, or events.',
       service_1_long:
-        'A one-page website is a great way to present your activity, brand, or event online. I’ll design and code it, take care of SEO basics, and publish it online. It’s a fast and professional way to build online presence – clear, modern, and efficient.',
+        'A one-page website is a great way to present your activity, brand, or event online. I’ll design and code it, take care of SEO basics, and publish it online. It’s a fast and professional way to build online presence - clear, modern, and efficient.',
       service_1_price: '200 €',
 
       service_2_title: 'Full website',
@@ -390,7 +394,7 @@ const resources = {
       service_3_title: 'Server development',
       service_3_short: 'I’ll build a backend server (Node.js, Express, MongoDB or MySQL).',
       service_3_long:
-        'If you need a backend system to store, manage or process data – I can build it. This includes REST APIs, authentication, user registration, and database integration.',
+        'If you need a backend system to store, manage or process data - I can build it. This includes REST APIs, authentication, user registration, and database integration.',
       service_3_price: '300 €',
 
       service_4_title: 'Server maintenance (monthly plan)',
@@ -400,13 +404,13 @@ const resources = {
       service_4_price: '60 €/month',
 
       service_5_title: 'Website updates / maintenance',
-      service_5_short: 'If you have a site that needs a refresh – I can help!',
+      service_5_short: 'If you have a site that needs a refresh - I can help!',
       service_5_long:
-        'If your site looks outdated or is running slow – I can modernize the design, improve performance, and add new features.',
+        'If your site looks outdated or is running slow - I can modernize the design, improve performance, and add new features.',
       service_5_price: '20 €/hour',
 
       service_6_title: 'Consultation or help',
-      service_6_short: 'If something isn’t working or you want advice – feel free to reach out.',
+      service_6_short: 'If something isn’t working or you want advice - feel free to reach out.',
       service_6_long:
         'Sometimes a short conversation is all it takes to find the right path. I can help you choose the right tech, design, or fix a specific issue.',
       service_6_price: 'First consultation is free',
@@ -431,7 +435,8 @@ const resources = {
 
       projects: {
         beneta: {
-          title: "beneta.lt — Practice site",
+          title: "beneta.lt",
+          kind: "Practice site",
           description: "This site: a single-page interface with a motion system, two languages and a contact form.",
           scope:
             "Art direction, design system, motion system, two languages (LT/EN), contact form, measurement and deployment on Vercel.",
@@ -441,7 +446,8 @@ const resources = {
             "One React app and no extra animation libraries: the canvas field and the SVG diagram are written by hand, motion is defined by shared duration and easing tokens, and the whole choreography switches off under prefers-reduced-motion.",
         },
         fakaunas: {
-          title: "FA Kaunas — Youth Football Academy",
+          title: "FA Kaunas",
+          kind: "Youth Football Academy",
           description: "Academy website with registration system and dynamic content.",
           scope:
             "Site structure, content sections, a registration form delivering mail through the Resend API, phone layouts, deployment.",
@@ -451,7 +457,8 @@ const resources = {
             "The form posts to an Express endpoint that calls the Resend API, so delivery failures surface on the server instead of being lost quietly in the browser. Content sits in clear blocks so the academy can rewrite copy without touching the design.",
         },
         syncara: {
-          title: "Syncara — Analytics dashboard",
+          title: "Syncara",
+          kind: "Analytics dashboard",
           description: "Analytics dashboard for visualizing client data and exporting results.",
           scope:
             "Prototype: data pulled from Airtable, authentication through Firebase, charts with Chart.js, CSV export.",
@@ -461,7 +468,8 @@ const resources = {
             "The data layer is separated from the view: Airtable stays as the source the client already knows how to use, and the dashboard only reads, joins and exports. It was never taken to production, so it is labelled as a demo.",
         },
         bangu: {
-          title: "Bangu Klinika — Dental clinic",
+          title: "Bangu Klinika",
+          kind: "Dental clinic",
           description: "Modern multilingual clinic website, optimized for search engines.",
           scope:
             "Multi-page clinic site, multiple languages with i18next, service and contact sections, technical SEO and metadata.",
@@ -493,11 +501,11 @@ const resources = {
       back_home: 'Back to homepage',
 
       // About
-    about_p1: "I'm Lukas Beneta – a former bartender who swapped a cocktail shaker for a keyboard. Sounds bold, right? But did you know bartending and programming share a lot? Both require rhythm, precision, and… sometimes, patience.",
-    about_p2: "I studied at CodeAcademy, where I learned to build functional, aesthetic, and – most importantly – working websites from scratch. Since then, I've been creating, experimenting, and helping others be seen online.",
-    about_p3: "I’ve been playing football since I was a kid – and that passion taught me teamwork, persistence, and the will to win at every stage.",
-    about_p4: "In my work, I value simplicity, logical structure, and a strong connection with the person I’m building for. I’m at my best when there’s a clear goal – I break it down, structure it, and bring it to life step by step. What matters to me is not just the technical outcome, but the real value it creates for the person using it.",
-    about_p5: "If you’re looking for someone who can code and truly understand what you need – chances are we’ll get along great.",
+    about_p1: "I'm Lukas Beneta - a former bartender who swapped a cocktail shaker for a keyboard. Sounds bold, right? But did you know bartending and programming share a lot? Both require rhythm, precision, and… sometimes, patience.",
+    about_p2: "I studied at CodeAcademy, where I learned to build functional, aesthetic, and - most importantly - working websites from scratch. Since then, I've been creating, experimenting, and helping others be seen online.",
+    about_p3: "I’ve been playing football since I was a kid - and that passion taught me teamwork, persistence, and the will to win at every stage.",
+    about_p4: "In my work, I value simplicity, logical structure, and a strong connection with the person I’m building for. I’m at my best when there’s a clear goal - I break it down, structure it, and bring it to life step by step. What matters to me is not just the technical outcome, but the real value it creates for the person using it.",
+    about_p5: "If you’re looking for someone who can code and truly understand what you need - chances are we’ll get along great.",
 
       // ===== Redesign: navigation =====
       nav_index: "Index",
@@ -515,7 +523,7 @@ const resources = {
       // ===== 00 Masthead =====
       masthead_sr: "software engineering practice",
       masthead_lede:
-        "An independent engineering practice in Klaipeda, Lithuania. I take loosely defined technical problems — web products, backend systems, API integrations, manual workflows — and hand back systems that work and can be measured.",
+        "An independent engineering practice in Klaipeda, Lithuania. I take loosely defined technical problems - web products, backend systems, API integrations, manual workflows - and hand back systems that work and can be measured.",
       cta_brief: "Start a brief",
       cta_model: "Read the model",
       scroll_cue: "Scroll",
@@ -573,7 +581,7 @@ const resources = {
         "A project is not finished when the code is written. It is finished when it runs in production, reports on itself, and somebody knows how to update it.",
       node_brief_title: "Request",
       node_brief_body:
-        "What has to be achieved, for whom, and by when. The first description is usually an outcome rather than a solution — which is exactly as it should be.",
+        "What has to be achieved, for whom, and by when. The first description is usually an outcome rather than a solution - which is exactly as it should be.",
       node_constraints_title: "Constraints",
       node_constraints_body:
         "Budget, deadlines, existing infrastructure, the skills on hand. All of it enters the architecture as input instead of arriving as a surprise at the end.",
@@ -582,7 +590,7 @@ const resources = {
         "Whatever already exists: tables, files, APIs, spreadsheets. Moving data is almost always harder than it looks from the outside.",
       node_model_title: "Model",
       node_model_body:
-        "Objects, relations and states. One picture we agree on before the build — changes here cost minutes rather than weeks.",
+        "Objects, relations and states. One picture we agree on before the build - changes here cost minutes rather than weeks.",
       node_contract_title: "Contracts",
       node_contract_body:
         "API shapes, data types, failure cases. Once they are agreed, the interface and the services can be built independently of each other.",
@@ -594,7 +602,7 @@ const resources = {
         "Node.js endpoints, authentication, the database, integrations. They run without the interface and are checked on their own.",
       node_automation_title: "Automation",
       node_automation_body:
-        "Summaries, exports, scheduled jobs, internal tools — the work nobody should be doing by hand any more.",
+        "Summaries, exports, scheduled jobs, internal tools - the work nobody should be doing by hand any more.",
       node_ship_title: "Ship",
       node_ship_body:
         "Production build, environment variables, domain, measurement. Launch day is supposed to be boring.",
@@ -613,7 +621,7 @@ const resources = {
       // ===== 03 Work =====
       work_title_new: "Selected work",
       work_lede:
-        "Four projects. No invented percentages — scope, role, stack, and a link you can open and check for yourself.",
+        "Four projects. No invented percentages - scope, role, stack, and a link you can open and check for yourself.",
       role: "Role",
       status_label: "Status",
       scope: "Scope",
@@ -660,12 +668,12 @@ const resources = {
       step_operate_title: "Operate",
       step_operate_body:
         "Optional: updates, fixes, new sections and monitoring. Skip it and the project is still yours.",
-      step_operate_out: "Monthly maintenance or hourly support — as much as you actually need.",
+      step_operate_out: "Monthly maintenance or hourly support - as much as you actually need.",
 
       // ===== 06 Contact =====
       contact_title_new: "Tell me what needs solving",
       contact_lede:
-        "Start with the problem rather than the solution. If you are not sure what you need yet, say so — the first reply will be questions.",
+        "Start with the problem rather than the solution. If you are not sure what you need yet, say so - the first reply will be questions.",
       contact_note:
         "If the project is not a fit, or does not need a developer at all, I will say so straight away and point you elsewhere where I can.",
       local_time: "Local time",

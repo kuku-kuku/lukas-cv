@@ -6,14 +6,14 @@ import {
 } from "../design/useMotionPrefs";
 
 /**
- * LATTICE FIELD — the ambient system behind the masthead.
+ * LATTICE FIELD - the ambient system behind the masthead.
  *
  * Not a particle field: it is a regular lattice of nodes and links, i.e. the
  * subject matter of the practice (connected systems) rendered as the
  * background. Three things act on it:
- *   1. a slow diagonal scan wave — the resting heartbeat,
- *   2. the pointer — nodes within reach brighten and lean away,
- *   3. scroll — the whole lattice drifts and dims as you leave the masthead.
+ *   1. a slow diagonal scan wave - the resting heartbeat,
+ *   2. the pointer - nodes within reach brighten and lean away,
+ *   3. scroll - the whole lattice drifts and dims as you leave the masthead.
  * Packets travel along links in the signal colour: visible evidence of flow.
  *
  * Budget discipline:

@@ -35,7 +35,7 @@ function collectKeys() {
   RATE_CARD.forEach((r) => keys.push(r.titleKey, r.priceKey));
   PROJECTS.forEach((p) => {
     keys.push(p.roleKey, `status.${p.statusKey}`);
-    ["title", "scope", "problem", "approach"].forEach((field) =>
+    ["title", "kind", "scope", "problem", "approach"].forEach((field) =>
       keys.push(`projects.${p.id}.${field}`)
     );
   });

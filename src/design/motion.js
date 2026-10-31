@@ -1,5 +1,5 @@
 /**
- * Motion tokens — the single vocabulary every animation in the site speaks.
+ * Motion tokens - the single vocabulary every animation in the site speaks.
  * Mirrors the CSS custom properties in src/styles.css.
  *
  * Rule of the system: things enter from below, along the reading direction,
