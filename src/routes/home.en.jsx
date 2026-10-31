@@ -9,7 +9,7 @@ export const meta = () => [
     locale: "en",
     title: "Websites for small business | Beneta",
     description:
-      "Websites for small businesses, from EUR 490 and ready in 1-2 weeks. Fast, clear, and findable on Google. Working remotely across Lithuania and the EU.",
+      "Websites for small businesses, from EUR 490 and ready in 1-2 weeks. Fast, clear, and findable on Google. Everything handled remotely.",
   }),
   faqJsonLd("en"),
 ];

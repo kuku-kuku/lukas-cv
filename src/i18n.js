@@ -154,7 +154,7 @@ const resources = {
 
       // ===== 00 Masthead =====
       masthead_lede:
-        "Kuriu svetaines ir paprastas internetines sistemas smulkiam verslui - nuo idėjos iki veikiančio rezultato. Dirbu nuotoliniu būdu su klientais visoje Lietuvoje.",
+        "Kuriu svetaines ir paprastas internetines sistemas smulkiam verslui - nuo idėjos iki veikiančio rezultato. Visą darbą atlieku nuotoliniu būdu.",
       cta_brief: "Gauti pasiūlymą",
       cta_model: "Kainos",
       scroll_cue: 'Žemiau',
@@ -330,7 +330,7 @@ const resources = {
       trust_response: "Atsakau per 24 val. darbo dienomis",
       trust_price: "Fiksuota kaina iš anksto",
       trust_free: "Pirma konsultacija nemokama",
-      remote_line: "Nuotoliniu būdu · Visa Lietuva ir ES",
+      remote_line: "Dirbu nuotoliniu būdu",
       tech_details: "Techninės detalės",
       cap_seo_title: "Mūsų neranda Google",
       cap_seo_body: "Sutvarkau tai, kas lemia matomumą Google: tekstus, struktūrą ir greitį. Parodau, kas pasikeitė.",
@@ -389,7 +389,7 @@ const resources = {
       faq_google_q: "Ar svetainė bus rodoma Google?",
       faq_google_a: "Svetainė paruošiama taip, kad Google ją rastų ir suprastų. Kaip aukštai pakilsite, priklauso nuo konkurencijos ir turinio - to niekas negali garantuoti.",
       faq_meet_q: "Ar reikia susitikti gyvai?",
-      faq_meet_a: "Ne. Viską darau nuotoliniu būdu - telefonu, el. paštu arba vaizdo skambučiu. Dirbu su klientais visoje Lietuvoje.",
+      faq_meet_a: "Ne. Viską darau nuotoliniu būdu - telefonu, el. paštu arba vaizdo skambučiu.",
       faq_owns_q: "Kas priklauso man - domenas, svetainė, failai?",
       faq_owns_a: "Viskas jūsų: domenas, svetainė ir visi failai. Jei kada norėsite dirbti su kitu žmogumi - viską perduodu be jokių kliūčių.",
       about_title: "Kas aš",
@@ -560,7 +560,7 @@ const resources = {
 
       // ===== 00 Masthead =====
       masthead_lede:
-        "I build websites and simple online tools for small businesses - from the idea to a working result. I work remotely with clients across Lithuania and the EU.",
+        "I build websites and simple online tools for small businesses - from the idea to a working result. Everything is done remotely.",
       cta_brief: "Get a quote",
       cta_model: "Pricing",
       scroll_cue: "Scroll",
@@ -736,7 +736,7 @@ const resources = {
       trust_response: "I reply within 24 hours",
       trust_price: "A fixed price, agreed up front",
       trust_free: "First conversation is free",
-      remote_line: "Remote · Lithuania and the EU",
+      remote_line: "Working remotely",
       tech_details: "Technical details",
       cap_seo_title: "Google cannot find you",
       cap_seo_body: "I fix what decides whether Google finds you: copy, structure and speed - and show you what changed.",

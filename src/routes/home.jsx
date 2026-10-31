@@ -9,7 +9,7 @@ export const meta = () => [
     locale: "lt",
     title: "Svetainių kūrimas verslui | Beneta",
     description:
-      "Kuriu svetaines smulkiam verslui: nuo 490 EUR, per 1-2 savaites. Greita, aiški svetainė, kurią randa Google. Dirbu nuotoliniu būdu visoje Lietuvoje.",
+      "Kuriu svetaines smulkiam verslui: nuo 490 EUR, per 1-2 savaites. Greita, aiški svetainė, kurią randa Google. Visą darbą atlieku nuotoliniu būdu.",
   }),
   faqJsonLd("lt"),
 ];

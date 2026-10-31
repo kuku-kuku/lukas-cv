@@ -270,7 +270,7 @@ export default function QuoteDrawer({ packageId, onClose }) {
                     id="q-budget"
                     value={budget}
                     onChange={(e) => setBudget(e.target.value)}
-                    className="mt-2 w-full border-0 border-b bg-transparent px-0 py-3 text-base text-ink outline-none"
+                    className="select-dark mt-2 w-full border-0 border-b bg-transparent px-0 py-3 text-base text-ink outline-none"
                     style={{ borderColor: "var(--line-strong)" }}
                   >
                     <option value="">{t("budget_none")}</option>

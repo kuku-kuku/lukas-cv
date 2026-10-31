@@ -237,6 +237,19 @@
     field-sizing: content;
   }
 
+  /* Native select popups are drawn by the OS, not by the page: the list
+     inherits the control's light text but keeps the system's white
+     background, so the options were white on white. color-scheme tells the
+     platform to draw the whole control dark, and the explicit option
+     colours cover browsers that ignore it. */
+  .select-dark {
+    color-scheme: dark;
+  }
+  .select-dark option {
+    background-color: var(--bg-elev);
+    color: var(--ink);
+  }
+
   /* ---- Hairlines: structure instead of boxes ---- */
   .hairline {
     border-color: var(--line);
