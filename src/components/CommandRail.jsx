@@ -115,17 +115,15 @@ export default function CommandRail() {
           className="chrome-line flex h-[4.5rem] w-full items-center justify-center border-b"
           aria-label={`${PRACTICE.mark} - ${t("nav_index", "Index")}`}
         >
-          {/* The mark is a black disc on a near-bone field with no alpha.
-              Inverting it lands the background on #121315 - within two
-              values of the rail's own #111113 - so it sits on the dark
-              chrome without needing a cut-out. */}
+          {/* The brand mark, the same image as the browser tab icon. It is
+              a dark monogram on a light field, so on the dark rail it reads
+              as a badge rather than needing a cut-out or an inversion. */}
           <img
             src="/logo-mark.webp"
             alt=""
-            width="32"
-            height="32"
-            className="h-8 w-8"
-            style={{ filter: "invert(1)" }}
+            width="34"
+            height="34"
+            className="h-[34px] w-[34px] rounded-[3px]"
           />
         </button>
 

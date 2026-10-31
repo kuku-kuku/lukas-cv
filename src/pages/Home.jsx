@@ -44,6 +44,10 @@ export default function Home() {
 
   // Choosing a package opens the quote drawer with that package selected.
   const [quotePackage, setQuotePackage] = useState(null);
+  // Stable identity: an inline arrow here gives the drawer a new prop on
+  // every render of this page, which re-runs its effects continuously and
+  // interrupts its exit animation so it never unmounts.
+  const closeQuote = useCallback(() => setQuotePackage(null), []);
   const [pendingScroll, setPendingScroll] = useState(null);
 
   const openFromEvidence = useCallback((projectId) => {
@@ -82,10 +86,7 @@ export default function Home() {
 
       <Footer />
 
-      <QuoteDrawer
-        packageId={quotePackage}
-        onClose={() => setQuotePackage(null)}
-      />
+      <QuoteDrawer packageId={quotePackage} onClose={closeQuote} />
     </div>
   );
 }

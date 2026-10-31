@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { BUDGETS, describeError, sendBrief, validateBrief } from "../design/brief";
 import { PACKAGES } from "../design/content";
@@ -32,6 +32,8 @@ export default function QuoteDrawer({ packageId, onClose }) {
   const firstFieldRef = useRef(null);
   const formRef = useRef(null);
   const returnFocusRef = useRef(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -53,7 +55,7 @@ export default function QuoteDrawer({ packageId, onClose }) {
 
     const onKey = (e) => {
       if (e.key === "Escape") {
-        onClose();
+        onCloseRef.current();
         return;
       }
       if (e.key !== "Tab") return;
@@ -80,7 +82,9 @@ export default function QuoteDrawer({ packageId, onClose }) {
       document.body.style.overflow = prevOverflow;
       returnFocusRef.current?.focus?.();
     };
-  }, [open, onClose]);
+    // `open` only: the handler reaches onClose through a ref, so this does
+    // not tear down and re-arm on every parent render.
+  }, [open]);
 
   // A fresh panel each time it opens.
   useEffect(() => {
@@ -174,15 +178,27 @@ export default function QuoteDrawer({ packageId, onClose }) {
   const rest = compact ? { y: 0 } : { x: 0 };
 
   return (
-    <AnimatePresence>
+    /* Deliberately NOT wrapped in AnimatePresence.
+
+       With it, the exit animation ran but the subtree was never unmounted,
+       leaving a fixed inset-0 container at opacity 0 with pointer-events
+       auto - an invisible sheet over the whole page that swallowed every
+       click. Several shapes were tried (fragment, keyed array, single
+       child, nested exits removed) and the node always survived.
+
+       An exit animation is cosmetic; a page that stops responding is not.
+       The drawer now mounts and unmounts plainly, animating only on the way
+       in, so closing it cannot leave anything behind. */
+    <>
       {open && (
-        <>
-          <motion.div
-            className="fixed inset-0 z-[70] bg-black/60"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduced ? 0 : DUR.base }}
+        <motion.div
+          className="fixed inset-0 z-[70]"
+          initial={reduced ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduced ? 0 : DUR.base }}
+        >
+          <div
+            className="absolute inset-0 bg-black/60"
             onClick={onClose}
             aria-hidden="true"
           />
@@ -196,7 +212,12 @@ export default function QuoteDrawer({ packageId, onClose }) {
             style={{ background: "var(--bg-elev)", borderColor: "var(--line-strong)" }}
             initial={reduced ? false : slide}
             animate={rest}
-            exit={reduced ? undefined : slide}
+            /* No exit here on purpose. AnimatePresence waits for every
+               nested exit to report completion before it unmounts the
+               subtree, and a second one on this panel left the dialog
+               mounted after it had animated away - an invisible overlay
+               over the whole page. The container's fade is the single
+               exit, so removal is guaranteed. */
             transition={{ duration: reduced ? 0 : DUR.slow, ease: EASE }}
           >
             <div className="flex items-start justify-between gap-6">
@@ -325,8 +346,8 @@ export default function QuoteDrawer({ packageId, onClose }) {
               </form>
             )}
           </motion.div>
-        </>
+        </motion.div>
       )}
-    </AnimatePresence>
+    </>
   );
 }
