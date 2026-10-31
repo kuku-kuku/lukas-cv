@@ -61,24 +61,32 @@ function AppContent() {
   // Analytics is not first-paint work: starting gtag during hydration costs
   // main-thread time exactly when the page is trying to render.
   useEffect(() => {
-    let handle = 0;
-    const idle =
-      window.requestIdleCallback || ((fn) => window.setTimeout(fn, 1500));
-    const cancel =
-      window.cancelIdleCallback || window.clearTimeout.bind(window);
-    const schedule = () => {
-      handle = idle(() => initGA(), { timeout: 6000 });
+    let timer = 0;
+    let done = false;
+
+    // gtag is ~176 kB of third-party JavaScript - larger than this entire
+    // app - and ~570ms of main-thread work. Loading it during page load
+    // pushed LCP out by seconds on a slow connection for no benefit to the
+    // visitor, so it waits for the first real interaction (or 8s, whichever
+    // comes first). Page views are queued in src/ga until it is ready, and
+    // counter.dev already counts visits that never interact.
+    const EVENTS = ["pointerdown", "keydown", "scroll", "touchstart"];
+    const start = () => {
+      if (done) return;
+      done = true;
+      EVENTS.forEach((e) => window.removeEventListener(e, start));
+      window.clearTimeout(timer);
+      initGA();
     };
 
-    // gtag is ~176 kB of third-party JavaScript - larger than this app. It
-    // waits for load and then for an idle moment, so it can never land in the
-    // middle of the first render. Page views are queued until it is ready.
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
+    EVENTS.forEach((e) =>
+      window.addEventListener(e, start, { once: true, passive: true })
+    );
+    timer = window.setTimeout(start, 8000);
 
     return () => {
-      window.removeEventListener("load", schedule);
-      if (handle) cancel(handle);
+      EVENTS.forEach((e) => window.removeEventListener(e, start));
+      window.clearTimeout(timer);
     };
   }, []);
 
