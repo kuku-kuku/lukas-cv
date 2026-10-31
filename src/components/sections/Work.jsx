@@ -253,6 +253,19 @@ export default function Work({ openId, onOpen }) {
                               </dd>
                             </div>
                           )}
+                          {project.metricNote && (
+                            <div className="col-span-2">
+                              <dt className="label">{t("measured", "Measured")}</dt>
+                              <dd className="nums mt-2 font-mono text-sm text-ink-2">
+                                {project.metricNote}
+                                {project.metricDate && (
+                                  <span className="ml-2 text-ink-3">
+                                    · {project.metricDate}
+                                  </span>
+                                )}
+                              </dd>
+                            </div>
+                          )}
                         </dl>
                       </PanelItem>
 
