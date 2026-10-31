@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
-import { useReducedMotion } from "../../design/useMotionPrefs";
+import useReveal from "../../design/useReveal";
 
 /**
  * Masked type reveal.
@@ -14,7 +14,9 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  *    an earlier version shipped a visually hidden duplicate, so every
  *    heading's text appeared twice ("Ka kuriuKa kuriu"),
  *  - the text is still real DOM text, so crawlers and JS-disabled visitors
- *    see it.
+ *    see it,
+ *  - it only splits at all when useReveal arms it. Prerendered output and
+ *    anything already on screen at hydration render as one plain string.
  *
  * Words are the atomic unit so native line breaking still decides where
  * lines fall: each word carries its own clipping mask, which means the
@@ -31,15 +33,21 @@ export default function SplitText({
   duration = DUR.reveal,
   trigger = "inView",
 }) {
-  const reduced = useReducedMotion();
+  const [ref, armed] = useReveal();
 
   const words = useMemo(
     () => String(text ?? "").split(/(\s+)/).filter((w) => w.length > 0),
     [text]
   );
 
-  if (reduced) {
-    return <Tag className={className}>{text}</Tag>;
+  // Prerendered, already on screen, or reduced motion: plain finished text.
+  // This is also what a crawler and a JS-disabled visitor get.
+  if (!armed) {
+    return (
+      <Tag ref={ref} className={className}>
+        {text}
+      </Tag>
+    );
   }
 
   const MotionTag = motion[Tag] || motion.span;
@@ -51,7 +59,7 @@ export default function SplitText({
   let index = 0;
 
   return (
-    <MotionTag className={className} initial="hidden" {...animateProps}>
+    <MotionTag ref={ref} className={className} initial="hidden" {...animateProps}>
       {words.map((word, i) => {
         if (/^\s+$/.test(word)) {
           return (

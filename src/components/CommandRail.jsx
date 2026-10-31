@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
 import { PRACTICE, SECTIONS } from "../design/content";
 import { DUR, EASE, STAGGER } from "../design/motion";
 import useActiveSection from "../design/useActiveSection";
+import { swapLocale } from "../design/locale";
 import { useReducedMotion } from "../design/useMotionPrefs";
 
 /**
@@ -60,9 +62,11 @@ export default function CommandRail() {
     [reduced]
   );
 
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language?.startsWith("lt") ? "en" : "lt");
-  };
+  // Language is a URL now, not component state: switching navigates to the
+  // other locale so the page can be linked, shared and indexed.
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const toggleLanguage = () => navigate(swapLocale(pathname));
 
   const lang = i18n.language?.startsWith("lt") ? "LT" : "EN";
 

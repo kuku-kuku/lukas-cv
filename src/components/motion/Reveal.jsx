@@ -1,12 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { DUR, EASE, VIEWPORT, still } from "../../design/motion";
-import { useReducedMotion } from "../../design/useMotionPrefs";
+import { DUR, EASE, VIEWPORT } from "../../design/motion";
+import useReveal from "../../design/useReveal";
 
 /**
  * The default entrance for any block of content.
- * Swaps to a no-travel variant under prefers-reduced-motion so the
- * composition is identical, only the choreography is gone.
+ *
+ * Renders as finished content until useReveal says otherwise: during
+ * prerender, on the first client render, under prefers-reduced-motion, and
+ * for anything already on screen when the page hydrates. Only elements that
+ * are still below the fold get motion props, so nothing the visitor is
+ * already reading is snapped away and replayed.
  */
 export default function Reveal({
   children,
@@ -17,29 +21,23 @@ export default function Reveal({
   duration = DUR.slow,
   ...rest
 }) {
-  const reduced = useReducedMotion();
+  const [ref, armed] = useReveal();
   const MotionTag = motion[Tag] || motion.div;
 
-  const variants = reduced
-    ? still
-    : {
-        hidden: { opacity: 0, y },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration, ease: EASE, delay },
+  const motionProps = armed
+    ? {
+        initial: "hidden",
+        whileInView: "show",
+        viewport: VIEWPORT,
+        variants: {
+          hidden: { opacity: 0, y },
+          show: { opacity: 1, y: 0, transition: { duration, ease: EASE, delay } },
         },
-      };
+      }
+    : {};
 
   return (
-    <MotionTag
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={VIEWPORT}
-      variants={variants}
-      {...rest}
-    >
+    <MotionTag ref={ref} className={className} {...motionProps} {...rest}>
       {children}
     </MotionTag>
   );

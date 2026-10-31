@@ -58,9 +58,12 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
 
-  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-  const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+  // Vite exposes these through import.meta.env; the REACT_APP_ prefix is
+  // kept (see vite.config.js envPrefix) so the Vercel variables and the
+  // local .env file carry on working unchanged.
+  const SERVICE_ID = import.meta.env.REACT_APP_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY = import.meta.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
   function describe(err) {
     if (!err) return t("form_error_unknown", "Unknown error");

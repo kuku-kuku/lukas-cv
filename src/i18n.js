@@ -734,18 +734,17 @@ i18n.use(initReactI18next).init({
   },
 });
 
-/**
- * Keep the document language in sync with i18next. Screen readers pick
- * pronunciation from this attribute and search engines read it as the page
- * language, so leaving it hard-coded to `lt` while the UI is in English is a
- * real (if invisible) defect.
+/*
+ * <html lang> is deliberately NOT managed here any more.
+ *
+ * This module used to set it on import and on every languageChanged event.
+ * That is a DOM mutation performed while the module graph is still being
+ * evaluated - before React hydrates - so on /en it overwrote the
+ * prerendered lang="en" with lang="lt" and hydration then disagreed with
+ * the document it was handed.
+ *
+ * The attribute now belongs to the route: src/root.jsx renders it from the
+ * URL, and useLocale() keeps it correct across client-side navigation.
  */
-const syncDocumentLang = (lng) => {
-  if (typeof document === "undefined" || !lng) return;
-  document.documentElement.lang = lng.startsWith("lt") ? "lt" : "en";
-};
-
-syncDocumentLang(i18n.language);
-i18n.on("languageChanged", syncDocumentLang);
 
 export default i18n;

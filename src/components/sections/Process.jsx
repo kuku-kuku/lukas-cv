@@ -6,6 +6,7 @@ import Reveal from "../motion/Reveal";
 import { PROCESS_STEPS } from "../../design/content";
 import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useCompactViewport, useReducedMotion } from "../../design/useMotionPrefs";
+import useReveal from "../../design/useReveal";
 
 /**
  * 05 - PROCESS
@@ -23,6 +24,7 @@ import { useCompactViewport, useReducedMotion } from "../../design/useMotionPref
 export default function Process() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
+  const [revealRef, armed] = useReveal();
   const compact = useCompactViewport();
   const ref = useRef(null);
 
@@ -38,6 +40,7 @@ export default function Process() {
   return (
     <section
       id="process"
+      ref={revealRef}
       ref={ref}
       aria-labelledby="process-title"
       className="invert-section section relative z-10 border-y"
@@ -88,7 +91,7 @@ export default function Process() {
               key={step.id}
               className="border-b pb-8 pt-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               style={{ borderColor: "var(--line)" }}
-              initial={reduced ? false : { opacity: 0, y: 18 }}
+              initial={armed ? { opacity: 0, y: 18 } : false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{

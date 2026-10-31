@@ -19,13 +19,13 @@ const formatter = () =>
   });
 
 export default function LiveClock({ className = "" }) {
-  const [time, setTime] = useState(() => {
-    try {
-      return formatter().format(new Date());
-    } catch (err) {
-      return "--:--:--";
-    }
-  });
+  /*
+   * Starts as a placeholder rather than the current time: this page is
+   * prerendered, so "now" at build time is not "now" in the browser and
+   * hydration would report a text mismatch. The real time arrives on the
+   * first tick, which is immediate.
+   */
+  const [time, setTime] = useState("--:--:--");
 
   useEffect(() => {
     let id = 0;

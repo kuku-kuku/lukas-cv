@@ -22,6 +22,18 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
 
 const LINES = ["SOFTWARE", "ENGINEERING", "PRACTICE"];
 
+/*
+ * A note on the opening.
+ *
+ * The masthead used to animate itself in on mount. Now that the page is
+ * prerendered it arrives as finished HTML, and replaying that entrance would
+ * mean the visitor sees the headline, watches it vanish at hydration, and
+ * then watches it return - the exact flash prerendering is meant to remove.
+ * So the masthead renders in its final state and the boot curtain carries
+ * the opening beat instead. The scroll parallax below is unaffected: it is
+ * driven by scroll position, not by mount.
+ */
+
 export default function Masthead() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
@@ -31,11 +43,12 @@ export default function Masthead() {
   // correct a stale measurement, so a measured progress value that resolves
   // late would leave the headline invisible on first paint.
   const { scrollY } = useScroll();
-  const [vh, setVh] = useState(() =>
-    typeof window === "undefined" ? 800 : window.innerHeight
-  );
+  // A fixed value for the prerender and the first render; the real height
+  // is measured right after mount and on every resize after that.
+  const [vh, setVh] = useState(800);
   useEffect(() => {
     const onResize = () => setVh(window.innerHeight);
+    onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -100,7 +113,7 @@ export default function Masthead() {
               <motion.span
                 className="block"
                 aria-hidden="true"
-                initial={reduced ? false : { y: "108%" }}
+                initial={false}
                 animate={{ y: "0%" }}
                 transition={{
                   duration: 1,
@@ -120,7 +133,7 @@ export default function Masthead() {
         <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-12">
           <motion.p
             className="lede md:col-span-6"
-            initial={reduced ? false : { opacity: 0, y: 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.18 }}
           >
@@ -129,7 +142,7 @@ export default function Masthead() {
 
           <motion.div
             className="flex flex-wrap items-center gap-3 md:col-span-6"
-            initial={reduced ? false : { opacity: 0, y: 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.3 }}
           >
@@ -179,7 +192,7 @@ export default function Masthead() {
               entry point rather than a decorative void. */}
           <motion.div
             className="hidden md:col-span-4 md:col-start-9 md:block"
-            initial={reduced ? false : { opacity: 0, y: 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.42 }}
           >
@@ -235,7 +248,7 @@ export default function Masthead() {
               key={spec.labelKey}
               className="border-b border-r px-0 py-4 last:border-r-0 md:border-b-0 md:px-0 md:py-5"
               style={{ borderColor: "var(--line)" }}
-              initial={reduced ? false : { opacity: 0, y: 12 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: DUR.slow,

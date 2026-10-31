@@ -5,6 +5,7 @@ import SectionHead from "../SectionHead";
 import { STACK_GROUPS } from "../../design/content";
 import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
+import useReveal from "../../design/useReveal";
 
 /**
  * 04 - STACK
@@ -17,10 +18,12 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
 export default function Stack() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
+  const [revealRef, armed] = useReveal();
 
   return (
     <section
       id="stack"
+      ref={revealRef}
       aria-labelledby="stack-title"
       className="shell section relative z-10"
     >
@@ -39,7 +42,7 @@ export default function Stack() {
             key={group.id}
             className="border-b md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
             style={{ borderColor: "var(--line)" }}
-            initial={reduced ? false : { opacity: 0, y: 16 }}
+            initial={armed ? { opacity: 0, y: 16 } : false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT}
             transition={{
@@ -65,7 +68,7 @@ export default function Stack() {
                   <motion.li
                     key={item}
                     className="font-mono text-[0.8125rem] text-ink-2"
-                    initial={reduced ? false : { opacity: 0, x: -6 }}
+                    initial={armed ? { opacity: 0, x: -6 } : false}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={VIEWPORT}
                     transition={{

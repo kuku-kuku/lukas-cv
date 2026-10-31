@@ -18,10 +18,13 @@ import { useReducedMotion } from "../design/useMotionPrefs";
  *
  * Two deliberate structural decisions:
  *
- * 1. The content is always rendered. The opening sequence is an overlay on
- *    top of a complete document, so the first paint, the crawler, and anyone
- *    with JS or motion disabled all get the whole page. (The previous version
- *    mounted the sections only after a five-second video had finished.)
+ * 1. Every section renders unconditionally. The page is prerendered, so the
+ *    whole document must exist at build time - an earlier version mounted
+ *    the lower sections a frame late to keep hydration off the critical
+ *    path, and the prerendered HTML then contained only the masthead.
+ *    Prerendering solves that problem far better: the content is painted
+ *    before any JavaScript runs at all. A deep link needs no help either,
+ *    since the target element exists while the HTML is being parsed.
  *
  * 2. The selected project is held here rather than inside the work index, so
  *    the evidence links in section 01 can open the matching row in section 03
@@ -29,53 +32,21 @@ import { useReducedMotion } from "../design/useMotionPrefs";
  */
 export default function Home() {
   const reduced = useReducedMotion();
-  const [booting, setBooting] = useState(() => shouldBoot());
+  /**
+   * The curtain is decided after mount, never during render.
+   *
+   * shouldBoot() reads sessionStorage and matchMedia, which do not exist
+   * while the page is being prerendered. Deciding during render would make
+   * the first client render disagree with the prerendered HTML - a hydration
+   * mismatch - so the first render always matches the server (no curtain)
+   * and the curtain is added a tick later.
+   */
+  const [booting, setBooting] = useState(false);
+  useEffect(() => {
+    if (shouldBoot()) setBooting(true);
+  }, []);
   const [openProject, setOpenProject] = useState(null);
   const [pendingScroll, setPendingScroll] = useState(null);
-
-  /**
-   * Everything below the fold mounts one frame after the masthead.
-   *
-   * The masthead is what the visitor is waiting for, and it was competing for
-   * the main thread with six sections, an interactive diagram and a work
-   * index that nobody can see yet. The delay is a single animation frame, so
-   * the full document still exists milliseconds later - this is not
-   * scroll-gated rendering, and no content is withheld from crawlers.
-   */
-  const [belowFold, setBelowFold] = useState(false);
-  useEffect(() => {
-    let done = false;
-    const show = () => {
-      if (done) return;
-      done = true;
-      setBelowFold(true);
-    };
-    // A frame callback is the right trigger when the page is actually being
-    // painted, but it never fires in a background tab or a non-painting
-    // renderer - which would leave the document as a masthead and nothing
-    // else. The timer is the floor that guarantees the rest mounts anyway.
-    const frame = window.requestAnimationFrame(show);
-    const timer = window.setTimeout(show, 300);
-    return () => {
-      window.cancelAnimationFrame(frame);
-      window.clearTimeout(timer);
-    };
-  }, []);
-
-  // A deep link (/#contact) is resolved by the browser before those sections
-  // exist, so it is re-applied once they do.
-  useEffect(() => {
-    if (!belowFold) return;
-    const id = window.location.hash.slice(1);
-    if (!id) return;
-    // "instant", not "auto": auto defers to CSS scroll-behavior, which is
-    // smooth here, so a deep link would slow-scroll the whole page instead
-    // of landing on the section.
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "instant",
-      block: "start",
-    });
-  }, [belowFold]);
 
   const openFromEvidence = useCallback((projectId) => {
     setOpenProject(projectId);
@@ -98,23 +69,19 @@ export default function Home() {
   return (
     <div className="relative min-h-screen">
       <GridOverlay />
-      {belowFold && <CommandRail />}
+      <CommandRail />
 
       <main>
         <Masthead />
-        {belowFold && (
-          <>
-            <Capabilities onEvidence={openFromEvidence} />
-            <Method />
-            <Work openId={openProject} onOpen={setOpenProject} />
-            <Stack />
-            <Process />
-            <Contact />
-          </>
-        )}
+        <Capabilities onEvidence={openFromEvidence} />
+        <Method />
+        <Work openId={openProject} onOpen={setOpenProject} />
+        <Stack />
+        <Process />
+        <Contact />
       </main>
 
-      {belowFold && <Footer />}
+      <Footer />
 
       <AnimatePresence>
         {booting && <BootSequence onDone={() => setBooting(false)} />}

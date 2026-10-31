@@ -7,6 +7,7 @@ import Rule from "../motion/Rule";
 import { CAPABILITIES, PROJECTS, RATE_CARD } from "../../design/content";
 import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useCompactViewport, useFinePointer, useReducedMotion } from "../../design/useMotionPrefs";
+import useReveal from "../../design/useReveal";
 
 /**
  * 01 - CAPABILITIES
@@ -28,6 +29,7 @@ export default function Capabilities({ onEvidence }) {
   const compact = useCompactViewport();
   const fine = useFinePointer();
   const reduced = useReducedMotion();
+  const [revealRef, armed] = useReveal();
   const [activeId, setActiveId] = useState(CAPABILITIES[0].id);
 
   const projectTitle = (id) => t(`projects.${id}.title`);
@@ -92,6 +94,7 @@ export default function Capabilities({ onEvidence }) {
   return (
     <section
       id="capabilities"
+      ref={revealRef}
       aria-labelledby="capabilities-title"
       className="shell section relative z-10"
     >
@@ -116,7 +119,7 @@ export default function Capabilities({ onEvidence }) {
                   key={cap.id}
                   className="border-b"
                   style={{ borderColor: "var(--line)" }}
-                  initial={reduced ? false : { opacity: 0, y: 14 }}
+                  initial={armed ? { opacity: 0, y: 14 } : false}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={VIEWPORT}
                   transition={{
@@ -218,7 +221,7 @@ export default function Capabilities({ onEvidence }) {
               <Rule className="mt-3" />
               <motion.div
                 key={active.id}
-                initial={reduced ? false : { opacity: 0, y: 12 }}
+                initial={armed ? { opacity: 0, y: 12 } : false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: DUR.base, ease: EASE }}
                 className="mt-6"
@@ -245,7 +248,7 @@ export default function Capabilities({ onEvidence }) {
               key={row.id}
               className="border-b"
               style={{ borderColor: "var(--line)" }}
-              initial={reduced ? false : { opacity: 0, y: 12 }}
+              initial={armed ? { opacity: 0, y: 12 } : false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{

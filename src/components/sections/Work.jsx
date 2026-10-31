@@ -14,6 +14,7 @@ import {
   useFinePointer,
   useReducedMotion,
 } from "../../design/useMotionPrefs";
+import useReveal from "../../design/useReveal";
 
 /**
  * 03 - WORK
@@ -41,6 +42,7 @@ export default function Work({ openId, onOpen }) {
   const compact = useCompactViewport();
   const fine = useFinePointer();
   const reduced = useReducedMotion();
+  const [revealRef, armed] = useReveal();
 
   const [hovered, setHovered] = useState(null);
   const listRef = useRef(null);
@@ -99,6 +101,7 @@ export default function Work({ openId, onOpen }) {
   return (
     <section
       id="work"
+      ref={revealRef}
       aria-labelledby="work-title"
       className="shell section relative z-10"
     >
@@ -125,7 +128,7 @@ export default function Work({ openId, onOpen }) {
               id={`work-${project.id}`}
               className="group border-b"
               style={{ borderColor: "var(--line)" }}
-              initial={reduced ? false : { opacity: 0, y: 16 }}
+              initial={armed ? { opacity: 0, y: 16 } : false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{
