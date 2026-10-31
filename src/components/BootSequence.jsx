@@ -83,7 +83,7 @@ export default function BootSequence({ onDone }) {
           className="label"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: DUR.s }}
+          transition={{ duration: DUR.base }}
         >
           {PRACTICE.locality} - {PRACTICE.country}
         </motion.span>
@@ -91,7 +91,7 @@ export default function BootSequence({ onDone }) {
           className="label"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: DUR.s, delay: 0.1 }}
+          transition={{ duration: DUR.base, delay: 0.1 }}
         >
           {t("boot_skip", "Press any key to skip")}
         </motion.span>
@@ -123,7 +123,7 @@ export default function BootSequence({ onDone }) {
           className="label"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: DUR.s, delay: 0.2 }}
+          transition={{ duration: DUR.base, delay: 0.2 }}
         >
           {t("boot_status", "Initialising interface")}
         </motion.span>
@@ -132,7 +132,7 @@ export default function BootSequence({ onDone }) {
           style={{ color: "var(--signal)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: DUR.s, delay: 0.3 }}
+          transition={{ duration: DUR.base, delay: 0.3 }}
         >
           {PRACTICE.domain}
         </motion.span>

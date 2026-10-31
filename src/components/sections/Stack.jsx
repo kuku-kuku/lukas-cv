@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import SectionHead from "../SectionHead";
 import { STACK_GROUPS } from "../../design/content";
-import { DUR, EASE, STAGGER } from "../../design/motion";
+import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -22,7 +22,7 @@ export default function Stack() {
     <section
       id="stack"
       aria-labelledby="stack-title"
-      className="shell relative z-10 py-24 md:py-32"
+      className="shell section relative z-10"
     >
       <SectionHead
         id="stack"
@@ -41,11 +41,11 @@ export default function Stack() {
             style={{ borderColor: "var(--line)" }}
             initial={reduced ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+            viewport={VIEWPORT}
             transition={{
-              duration: DUR.m,
+              duration: DUR.slow,
               ease: EASE,
-              delay: reduced ? 0 : gi * STAGGER.base,
+              delay: reduced ? 0 : gi * STAGGER,
             }}
           >
             <div className="py-6">
@@ -67,11 +67,11 @@ export default function Stack() {
                     className="font-mono text-[0.8125rem] text-ink-2"
                     initial={reduced ? false : { opacity: 0, x: -6 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={VIEWPORT}
                     transition={{
-                      duration: DUR.s,
+                      duration: DUR.base,
                       ease: EASE,
-                      delay: reduced ? 0 : gi * STAGGER.base + ii * 0.03,
+                      delay: reduced ? 0 : gi * STAGGER + ii * 0.03,
                     }}
                   >
                     {item}

@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import LatticeField from "../LatticeField";
 import LiveClock from "../LiveClock";
 import Magnetic from "../motion/Magnetic";
-import SplitText from "../motion/SplitText";
 import { DUR, EASE } from "../../design/motion";
 import { PRACTICE } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
@@ -77,7 +76,7 @@ export default function Masthead() {
 
       <div className="shell relative z-10 flex items-baseline justify-between">
         <span className="label">00 / {t("nav_index", "Index")}</span>
-        <LiveClock className="text-[0.6875rem] tracking-label uppercase text-ink-2" />
+        <LiveClock className="text-label uppercase text-ink-2" />
       </div>
 
       <motion.div
@@ -115,7 +114,7 @@ export default function Masthead() {
             className="lede md:col-span-5 md:col-start-7"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.m, ease: EASE, delay: reduced ? 0 : 0.18 }}
+            transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.18 }}
           >
             {t("masthead_lede")}
           </motion.p>
@@ -124,7 +123,7 @@ export default function Masthead() {
             className="flex flex-wrap items-center gap-3 md:col-span-5 md:col-start-7"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.m, ease: EASE, delay: reduced ? 0 : 0.3 }}
+            transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.3 }}
           >
             <Magnetic>
               <button
@@ -173,7 +172,7 @@ export default function Masthead() {
               initial={reduced ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: DUR.m,
+                duration: DUR.slow,
                 ease: EASE,
                 delay: reduced ? 0 : 0.42 + i * 0.06,
               }}
@@ -195,14 +194,11 @@ export default function Masthead() {
         <div className="h-px w-full" style={{ background: "var(--line)" }} />
 
         <div className="mt-5 flex items-center justify-between">
-          <SplitText
-            as="span"
-            className="label"
-            text={`${PRACTICE.name} · ${PRACTICE.domain}`}
-            trigger="mount"
-            delay={0.5}
-            stagger={0.02}
-          />
+          {/* A byline, not a performance: animating it per character would
+              leave a span with no accessible name. */}
+          <span className="label">
+            {PRACTICE.name} · {PRACTICE.domain}
+          </span>
           <button
             type="button"
             onClick={() => goTo("capabilities")}

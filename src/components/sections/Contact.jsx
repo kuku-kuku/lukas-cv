@@ -97,7 +97,7 @@ export default function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="shell relative z-10 py-24 md:py-32"
+      className="shell section relative z-10"
     >
       <SectionHead
         id="contact"
@@ -194,7 +194,7 @@ export default function Contact() {
                       initial={reduced ? false : { opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: DUR.s, ease: EASE }}
+                      transition={{ duration: DUR.base, ease: EASE }}
                       className="border-l-2 py-2 pl-4 text-sm"
                       style={{
                         borderColor: error ? "var(--signal)" : "var(--ink)",

@@ -276,6 +276,7 @@ const resources = {
       work_lede:
         'Keturi projektai. Be išgalvotų procentų - tik apimtis, vaidmuo, technologijos ir nuoroda, kurią gali atidaryti ir pasitikrinti pats.',
       role: 'Vaidmuo',
+      year: 'Metai',
       status_label: 'Būklė',
       scope: 'Apimtis',
       challenge: 'Problema',
@@ -623,6 +624,7 @@ const resources = {
       work_lede:
         "Four projects. No invented percentages - scope, role, stack, and a link you can open and check for yourself.",
       role: "Role",
+      year: "Year",
       status_label: "Status",
       scope: "Scope",
       challenge: "Problem",

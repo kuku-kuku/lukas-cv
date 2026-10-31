@@ -21,7 +21,7 @@ export default function Rule({ className = "", delay = 0, tone = "line" }) {
       initial={reduced ? { scaleX: 1 } : { scaleX: 0 }}
       whileInView={{ scaleX: 1 }}
       viewport={VIEWPORT}
-      transition={{ duration: reduced ? 0 : DUR.l, ease: EASE, delay }}
+      transition={{ duration: reduced ? 0 : DUR.reveal, ease: EASE, delay }}
     />
   );
 }

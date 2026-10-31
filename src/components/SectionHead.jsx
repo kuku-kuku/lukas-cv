@@ -21,8 +21,11 @@ export default function SectionHead({ index, eyebrow, title, lede, id }) {
       <Rule className="mt-3" delay={0.05} />
 
       <div className="mt-6 grid gap-6 md:grid-cols-12 md:gap-10">
+        {/* The heading owns the accessible name; SplitText below renders
+            only aria-hidden fragments, so the string exists once. */}
         <h2
           id={id ? `${id}-title` : undefined}
+          aria-label={title}
           className="display-l md:col-span-7"
         >
           <SplitText text={title} stagger={0.045} />

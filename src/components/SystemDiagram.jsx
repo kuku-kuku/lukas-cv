@@ -204,7 +204,7 @@ export default function SystemDiagram() {
         key={active.id}
         initial={reduced ? false : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: DUR.s, ease: EASE }}
+        transition={{ duration: DUR.base, ease: EASE }}
         className="mt-3 grid gap-3 md:grid-cols-[minmax(0,22ch)_minmax(0,1fr)] md:gap-10"
       >
         <h3 className="text-xl font-semibold tracking-display md:text-2xl">

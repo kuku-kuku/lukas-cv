@@ -119,7 +119,7 @@ export default function CommandRail() {
                   className="relative flex h-11 w-full items-center justify-center"
                 >
                   <span
-                    className="font-mono text-[0.6875rem] tracking-label transition-colors duration-200"
+                    className="font-mono text-label transition-colors duration-200"
                     style={{ color: on ? "var(--signal)" : "var(--ink-3)" }}
                   >
                     {s.index}
@@ -161,7 +161,7 @@ export default function CommandRail() {
             className="flex h-[4.5rem] w-full flex-col items-center justify-center gap-1"
             aria-label={`${lang} - ${t("switch_language", "Switch language")}`}
           >
-            <span className="font-mono text-[0.6875rem] tracking-label text-ink">
+            <span className="font-mono text-label text-ink">
               {lang}
             </span>
             <span
@@ -198,7 +198,7 @@ export default function CommandRail() {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="font-mono text-[0.6875rem] tracking-label text-ink"
+              className="font-mono text-label text-ink"
               aria-label={`${lang} - ${t("switch_language", "Switch language")}`}
             >
               {lang}
@@ -232,7 +232,7 @@ export default function CommandRail() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: reduced ? 0 : DUR.s, ease: EASE }}
+            transition={{ duration: reduced ? 0 : DUR.base, ease: EASE }}
             style={{ background: "var(--bg)" }}
           >
             <div
@@ -257,9 +257,9 @@ export default function CommandRail() {
                   initial={reduced ? false : { opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    duration: DUR.m,
+                    duration: DUR.slow,
                     ease: EASE,
-                    delay: reduced ? 0 : i * STAGGER.tight,
+                    delay: reduced ? 0 : i * STAGGER,
                   }}
                   className="border-b hairline"
                   style={{ borderColor: "var(--line)" }}
@@ -270,7 +270,7 @@ export default function CommandRail() {
                     className="flex w-full items-baseline gap-5 py-5 text-left"
                   >
                     <span
-                      className="font-mono text-[0.6875rem] tracking-label"
+                      className="font-mono text-label"
                       style={{
                         color: s.id === activeId ? "var(--signal)" : "var(--ink-3)",
                       }}

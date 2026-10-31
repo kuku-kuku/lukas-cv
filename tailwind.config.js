@@ -36,10 +36,10 @@ module.exports = {
       letterSpacing: {
         tightest: "-0.045em",
         display: "-0.03em",
-        label: "0.18em",
+        label: "0.12em",
       },
       fontSize: {
-        label: ["0.6875rem", { lineHeight: "1", letterSpacing: "0.18em" }],
+        label: ["0.75rem", { lineHeight: "1", letterSpacing: "0.12em" }],
       },
       maxWidth: {
         grid: "96rem",

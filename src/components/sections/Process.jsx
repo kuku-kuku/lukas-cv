@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import SplitText from "../motion/SplitText";
 import Reveal from "../motion/Reveal";
 import { PROCESS_STEPS } from "../../design/content";
-import { DUR, EASE, STAGGER } from "../../design/motion";
+import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useCompactViewport, useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -38,7 +38,7 @@ export default function Process() {
       id="process"
       ref={ref}
       aria-labelledby="process-title"
-      className="invert-section relative z-10 py-24 md:py-32"
+      className="invert-section section relative z-10"
     >
       <div className="shell">
         <header className="mb-14 md:mb-20">
@@ -52,7 +52,11 @@ export default function Process() {
           </div>
           <div className="mt-3 h-px w-full" style={{ background: "var(--line-strong)" }} />
           <div className="mt-6 grid gap-6 md:grid-cols-12 md:gap-10">
-            <h2 id="process-title" className="display-l md:col-span-7">
+            <h2
+              id="process-title"
+              aria-label={t("process_title")}
+              className="display-l md:col-span-7"
+            >
               <SplitText text={t("process_title")} stagger={0.045} />
             </h2>
             <Reveal as="p" delay={0.12} className="lede md:col-span-5 md:pt-2">
@@ -83,16 +87,16 @@ export default function Process() {
               style={{ borderColor: "var(--line)" }}
               initial={reduced ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "0px 0px -12% 0px" }}
+              viewport={VIEWPORT}
               transition={{
-                duration: DUR.m,
+                duration: DUR.slow,
                 ease: EASE,
-                delay: reduced ? 0 : (i % 3) * STAGGER.base,
+                delay: reduced ? 0 : (i % 3) * STAGGER,
               }}
             >
               <div className="flex items-baseline gap-3">
                 <span
-                  className="font-mono text-[0.6875rem] tracking-label"
+                  className="font-mono text-label"
                   style={{ color: "var(--signal)" }}
                 >
                   {step.index}

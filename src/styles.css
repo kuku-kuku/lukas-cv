@@ -92,6 +92,13 @@
     text-wrap: pretty;
   }
 
+  /* Lithuanian compounds are long; let the browser break them rather than
+     push a line into an overflow. */
+  [lang="lt"] p,
+  [lang="lt"] dd {
+    hyphens: auto;
+  }
+
   /* Firefox / WebKit scrollbar, tuned to the palette */
   * {
     scrollbar-color: var(--ink-4) transparent;
@@ -113,13 +120,26 @@
 
 @layer components {
   /* ---- Technical label: the voice of the instrument ---- */
+  /* The technical voice of the interface. 12px is the floor for tracked-out
+     uppercase mono; below that the letterforms stop resolving. One muted
+     tone (--ink-3, 5.7:1) is used for every label on the site. */
   .label {
     font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     line-height: 1;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-3);
+  }
+
+  /* P1-12: one vertical rhythm for every section on the page. */
+  .section {
+    padding-block: clamp(6rem, 12vw, 10rem);
+  }
+
+  /* Numbers that sit in columns must not jitter between weights. */
+  .nums {
+    font-variant-numeric: tabular-nums;
   }
 
   /* ---- Fluid display type scale ---- */
@@ -180,8 +200,8 @@
   .mask-line {
     display: block;
     overflow: hidden;
-    padding: 0.16em 0;
-    margin: -0.16em 0;
+    padding: 0.22em 0;
+    margin: -0.22em 0;
   }
 
   /* ---- The one signal-coloured interactive affordance ---- */

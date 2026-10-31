@@ -5,7 +5,7 @@ import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
 import { CAPABILITIES, PROJECTS, RATE_CARD } from "../../design/content";
-import { DUR, EASE, STAGGER } from "../../design/motion";
+import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useCompactViewport, useFinePointer, useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -54,7 +54,7 @@ export default function Capabilities({ onEvidence }) {
         {cap.items.map((item) => (
           <li
             key={item}
-            className="border-b border-r py-3 pr-3 font-mono text-[0.75rem] uppercase tracking-[0.1em] text-ink-2 last:border-r-0 even:border-r-0"
+            className="border-b border-r py-3 pr-3 font-mono text-label uppercase text-ink-2 last:border-r-0 even:border-r-0"
             style={{ borderColor: "var(--line)" }}
           >
             {item}
@@ -76,7 +76,7 @@ export default function Capabilities({ onEvidence }) {
                   onClick={() => onEvidence?.(pid)}
                   className="signal-link text-sm font-medium"
                 >
-                  <span className="mr-2 font-mono text-[0.6875rem] text-ink-3">
+                  <span className="mr-2 font-mono text-label normal-case text-ink-3">
                     {project.index}
                   </span>
                   {projectTitle(pid)}
@@ -93,7 +93,7 @@ export default function Capabilities({ onEvidence }) {
     <section
       id="capabilities"
       aria-labelledby="capabilities-title"
-      className="shell relative z-10 py-24 md:py-32"
+      className="shell section relative z-10"
     >
       <SectionHead
         id="capabilities"
@@ -118,11 +118,11 @@ export default function Capabilities({ onEvidence }) {
                   style={{ borderColor: "var(--line)" }}
                   initial={reduced ? false : { opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+                  viewport={VIEWPORT}
                   transition={{
-                    duration: DUR.m,
+                    duration: DUR.slow,
                     ease: EASE,
-                    delay: reduced ? 0 : i * STAGGER.tight,
+                    delay: reduced ? 0 : i * STAGGER,
                   }}
                 >
                   <button
@@ -135,7 +135,7 @@ export default function Capabilities({ onEvidence }) {
                     className="group relative flex w-full items-center gap-4 py-5 text-left md:gap-6"
                   >
                     <span
-                      className="font-mono text-[0.6875rem] tracking-label transition-colors duration-200"
+                      className="font-mono text-label transition-colors duration-200"
                       style={{ color: on ? "var(--signal)" : "var(--ink-3)" }}
                     >
                       {cap.index}
@@ -191,7 +191,7 @@ export default function Capabilities({ onEvidence }) {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: reduced ? 0 : DUR.s, ease: EASE }}
+                          transition={{ duration: reduced ? 0 : DUR.base, ease: EASE }}
                           className="overflow-hidden"
                         >
                           <div className="pb-6">{detail(cap)}</div>
@@ -220,7 +220,7 @@ export default function Capabilities({ onEvidence }) {
                 key={active.id}
                 initial={reduced ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: DUR.s, ease: EASE }}
+                transition={{ duration: DUR.base, ease: EASE }}
                 className="mt-6"
               >
                 <h3 className="display-m mb-5">{t(active.titleKey)}</h3>
@@ -247,15 +247,15 @@ export default function Capabilities({ onEvidence }) {
               style={{ borderColor: "var(--line)" }}
               initial={reduced ? false : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+              viewport={VIEWPORT}
               transition={{
-                duration: DUR.m,
+                duration: DUR.slow,
                 ease: EASE,
-                delay: reduced ? 0 : i * STAGGER.tight,
+                delay: reduced ? 0 : i * STAGGER,
               }}
             >
               <div className="group flex items-baseline gap-4 py-4 md:gap-8">
-                <span className="font-mono text-[0.6875rem] tracking-label text-ink-3">
+                <span className="font-mono text-label text-ink-3">
                   {String(row.id).padStart(2, "0")}
                 </span>
                 <span className="flex-1 text-[0.975rem] font-medium transition-colors duration-200 group-hover:text-ink md:text-lg">
@@ -263,7 +263,7 @@ export default function Capabilities({ onEvidence }) {
                 </span>
                 <span className="font-mono text-sm tabular-nums text-ink">
                   {row.from && (
-                    <span className="mr-2 text-[0.6875rem] uppercase tracking-label text-ink-3">
+                    <span className="mr-2 text-label text-ink-3">
                       {t("starting_from", "From")}
                     </span>
                   )}

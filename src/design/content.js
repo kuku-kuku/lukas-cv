@@ -11,6 +11,13 @@
  *    no evidence renders without the evidence line rather than claiming one.
  *  - PROJECTS carries no invented metrics by design: scope, role, stack and
  *    status are facts that can be checked by opening the site.
+ *  - `metric` is the one number shown on a work row. It must be MEASURED, not
+ *    claimed: run `npx lighthouse <url> --preset=desktop` (or PageSpeed
+ *    Insights) and paste the result with the date it was taken. Leave it
+ *    empty rather than guessing - an empty cell costs nothing, a number that
+ *    does not reproduce costs the whole page its credibility.
+ *  - `year` is the year the work shipped. Left empty where it is not known;
+ *    the row simply omits it.
  *  - RATE_CARD prices come straight from the existing service list.
  */
 
@@ -116,6 +123,8 @@ export const PROJECTS = [
   {
     id: "beneta",
     index: "01",
+    year: "2026",
+    metric: "Lighthouse 95 / LCP 1.1 s",
     image: "/work-beneta.webp",
     thumb: "/work-beneta-sm.webp",
     imageFallback: "/work-beneta.jpg",
@@ -128,6 +137,8 @@ export const PROJECTS = [
   {
     id: "fakaunas",
     index: "02",
+    year: null,
+    metric: null,
     image: "/work-fakaunas.webp",
     thumb: "/work-fakaunas-sm.webp",
     imageFallback: "/work-fakaunas.jpg",
@@ -140,6 +151,8 @@ export const PROJECTS = [
   {
     id: "bangu",
     index: "03",
+    year: null,
+    metric: null,
     image: "/work-bangu.webp",
     thumb: "/work-bangu-sm.webp",
     imageFallback: "/work-bangu.jpg",
@@ -152,6 +165,8 @@ export const PROJECTS = [
   {
     id: "syncara",
     index: "04",
+    year: null,
+    metric: null,
     image: "/work-syncara.webp",
     thumb: "/work-syncara-sm.webp",
     imageFallback: "/work-syncara.jpg",

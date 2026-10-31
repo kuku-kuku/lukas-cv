@@ -27,7 +27,7 @@ export default function Method() {
     <section
       id="method"
       aria-labelledby="method-title"
-      className="shell relative z-10 py-24 md:py-32"
+      className="shell section relative z-10"
     >
       <SectionHead
         id="method"

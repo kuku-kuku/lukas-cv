@@ -14,7 +14,7 @@ export default function Reveal({
   className = "",
   delay = 0,
   y = 18,
-  duration = DUR.m,
+  duration = DUR.slow,
   ...rest
 }) {
   const reduced = useReducedMotion();

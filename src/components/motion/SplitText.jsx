@@ -7,11 +7,14 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * Masked type reveal.
  *
  * Accessibility & SEO contract:
- *  - the complete string is exposed once through a visually hidden copy,
- *  - the split fragments are aria-hidden, so assistive tech never spells
- *    the sentence out word by word,
- *  - the text is real DOM text either way, so crawlers and
- *    JS-disabled visitors see it.
+ *  - the fragments are aria-hidden, so assistive tech never spells the
+ *    sentence out word by word,
+ *  - the CALLER owns the accessible name: it puts aria-label on the heading
+ *    that wraps this. That keeps exactly one copy of the string in the DOM -
+ *    an earlier version shipped a visually hidden duplicate, so every
+ *    heading's text appeared twice ("Ka kuriuKa kuriu"),
+ *  - the text is still real DOM text, so crawlers and JS-disabled visitors
+ *    see it.
  *
  * Words are the atomic unit so native line breaking still decides where
  * lines fall: each word carries its own clipping mask, which means the
@@ -24,8 +27,8 @@ export default function SplitText({
   className = "",
   wordClassName = "",
   delay = 0,
-  stagger = STAGGER.base,
-  duration = DUR.l,
+  stagger = STAGGER,
+  duration = DUR.reveal,
   trigger = "inView",
 }) {
   const reduced = useReducedMotion();
@@ -49,10 +52,6 @@ export default function SplitText({
 
   return (
     <MotionTag className={className} initial="hidden" {...animateProps}>
-      {/* The whole string, once, for assistive tech and for the accessible
-          name of the heading this usually sits in. `aria-label` would be
-          ignored here: it is not allowed on a span without a role. */}
-      <span className="sr-only">{text}</span>
       {words.map((word, i) => {
         if (/^\s+$/.test(word)) {
           return (

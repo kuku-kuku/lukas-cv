@@ -38,7 +38,7 @@ function RouteFade({ children }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: DUR.s, ease: EASE }}
+      transition={{ duration: DUR.base, ease: EASE }}
     >
       {children}
     </motion.div>
