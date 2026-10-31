@@ -58,10 +58,7 @@ export default function Footer() {
             "linear-gradient(to right, transparent, #000 8%, #000 92%, transparent)",
         }}
       >
-        <div
-          className={`flex w-max gap-10 ${reduced ? "" : "animate-ticker"}`}
-          style={{ willChange: reduced ? undefined : "transform" }}
-        >
+        <div className={`flex w-max gap-10 ${reduced ? "" : "animate-ticker"}`}>
           {strip.map((item, i) => (
             <span key={`${item}-${i}`} className="label whitespace-nowrap">
               {item}
