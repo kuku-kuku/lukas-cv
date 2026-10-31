@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import LatticeField from "../LatticeField";
 import Magnetic from "../motion/Magnetic";
 import { DUR, EASE } from "../../design/motion";
-import { PRACTICE, PROJECTS } from "../../design/content";
+import { PRACTICE, PROJECTS, SECTIONS } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -61,6 +61,7 @@ export default function Masthead() {
   // led with BUSINESS / LOCATION / LANGUAGES, none of which answers the
   // question a visitor actually has in the first ten seconds.
   const trust = ["trust_response", "trust_price", "trust_free"];
+  const workSection = SECTIONS.find((x) => x.id === "work");
 
   const goTo = (id) => {
     document.getElementById(id)?.scrollIntoView({
@@ -191,7 +192,10 @@ export default function Masthead() {
             transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.42 }}
           >
             <div className="flex items-baseline justify-between">
-              <span className="label">03 / {t("nav_work", "Work")}</span>
+              {/* Derived, so renumbering a section cannot leave this stale. */}
+              <span className="label">
+                {workSection.index} / {t(workSection.labelKey)}
+              </span>
               <button
                 type="button"
                 onClick={() => goTo("work")}
