@@ -15,7 +15,7 @@ export default function Footer() {
   const items = [
     t("footer_available"),
     ...CAPABILITIES.map((c) => t(c.titleKey)),
-    `${PRACTICE.locality} - ${PRACTICE.country}`,
+    t("remote_line"),
   ];
   const strip = [...items, ...items];
 
@@ -77,8 +77,8 @@ export default function Footer() {
           <span className="block text-3xl font-extrabold tracking-tightest md:text-4xl">
             {PRACTICE.mark}
           </span>
-          <p className="mt-2 text-sm text-ink-3">
-            {PRACTICE.name} · {PRACTICE.locality}, {PRACTICE.country}
+          <p className="mt-2 text-base text-ink-2">
+            {PRACTICE.name} · {t("remote_line")}
           </p>
         </div>
 

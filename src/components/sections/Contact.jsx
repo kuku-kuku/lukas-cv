@@ -3,10 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import SectionHead from "../SectionHead";
-import LiveClock from "../LiveClock";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
-import { CHANNELS, PRACTICE } from "../../design/content";
+import { CHANNELS, PACKAGES } from "../../design/content";
 import { DUR, EASE } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
@@ -49,7 +48,18 @@ const FIELDS = [
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export default function Contact() {
+/** Marks the line the quick-select writes, so it can be replaced cleanly. */
+const PREFIX_MARK = "> ";
+const BREAK = String.fromCharCode(10, 10);
+
+const TOPICS = [
+  { id: "new", key: "topic_new" },
+  { id: "refresh", key: "topic_refresh" },
+  { id: "shop", key: "topic_shop" },
+  { id: "other", key: "topic_other" },
+];
+
+export default function Contact({ packageChoice }) {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
   const formRef = useRef(null);
@@ -108,6 +118,38 @@ export default function Contact() {
   useEffect(() => {
     grow(autosize.current);
   }, []);
+
+  /**
+   * The quick-select writes a line into the brief rather than into a hidden
+   * field. A hidden field would need a matching placeholder in the EmailJS
+   * template, and if it were ever missing the answer would vanish silently.
+   * Putting it in the message means it always arrives - and the visitor can
+   * see and edit exactly what is being sent.
+   */
+  const [topic, setTopic] = useState(null);
+
+  const applyPrefix = (line) => {
+    const el = autosize.current;
+    if (!el) return;
+    // Strip a prefix we wrote earlier, keep whatever the visitor typed.
+    let body = el.value;
+    if (body.startsWith(PREFIX_MARK)) {
+      const brk = body.indexOf(BREAK);
+      body = brk === -1 ? "" : body.slice(brk + 2);
+    }
+    el.value = line ? PREFIX_MARK + line + BREAK + body : body;
+    grow(el);
+  };
+
+  useEffect(() => {
+    if (!packageChoice) return;
+    const pkg = PACKAGES.find((p) => p.id === packageChoice);
+    if (!pkg) return;
+    setTopic(null);
+    applyPrefix(`${t(pkg.titleKey)} (nuo ${pkg.price} EUR)`);
+    autosize.current?.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [packageChoice]);
 
   const clearError = (name) =>
     setFieldErrors((prev) => {
@@ -212,24 +254,12 @@ export default function Contact() {
         <div className="md:col-span-4">
           <dl className="space-y-6">
             <div>
-              <dt className="label">{t("spec_base", "Based")}</dt>
-              <dd className="mt-2 text-base">
-                {PRACTICE.locality}, {t("country_lt", "Lithuania")}
-              </dd>
-            </div>
-            <div>
-              <dt className="label">{t("local_time", "Local time")}</dt>
-              <dd className="mt-2 text-base">
-                <LiveClock />
-              </dd>
-            </div>
-            <div>
               <dt className="label">{t("response", "Response")}</dt>
               <dd className="mt-2 text-base">{t("response_value")}</dd>
             </div>
             <div>
-              <dt className="label">{t("spec_languages", "Languages")}</dt>
-              <dd className="mt-2 text-base">{t("spec_languages_value")}</dd>
+              <dt className="label">{t("remote_label", "Darbo būdas")}</dt>
+              <dd className="mt-2 text-base">{t("remote_line")}</dd>
             </div>
           </dl>
 
@@ -344,6 +374,34 @@ export default function Contact() {
                       </div>
                     );
                   })}
+
+                  <div>
+                    <span className="label">{t("topic_label")}</span>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {TOPICS.map((o) => {
+                        const on = topic === o.id;
+                        return (
+                          <button
+                            key={o.id}
+                            type="button"
+                            aria-pressed={on}
+                            onClick={() => {
+                              const next = on ? null : o.id;
+                              setTopic(next);
+                              applyPrefix(next ? t(o.key) : null);
+                            }}
+                            className="border px-4 py-2 text-base transition-colors"
+                            style={{
+                              borderColor: on ? "var(--signal)" : "var(--line-strong)",
+                              color: on ? "var(--signal)" : "var(--ink-2)",
+                            }}
+                          >
+                            {t(o.key)}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
 
                   <div className="group">
                     <label

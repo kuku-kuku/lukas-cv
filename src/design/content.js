@@ -21,16 +21,17 @@
  *  - `notes: false` means no scope/problem/approach copy has been written
  *    yet. The panel renders what exists and omits the rest, so a project can
  *    be listed truthfully before its write-up is done.
- *  - RATE_CARD prices come straight from the existing service list.
+ *  - PACKAGES / CARE / HOURLY are the only place prices live; the cards,
+ *    the contact form's budget select and the JSON-LD all read from them.
  */
 
 export const SECTIONS = [
   { id: "index", index: "00", labelKey: "nav_index" },
   { id: "capabilities", index: "01", labelKey: "nav_capabilities" },
-  { id: "method", index: "02", labelKey: "nav_method" },
-  { id: "work", index: "03", labelKey: "nav_work" },
-  { id: "stack", index: "04", labelKey: "nav_stack" },
-  { id: "process", index: "05", labelKey: "nav_process" },
+  { id: "work", index: "02", labelKey: "nav_work" },
+  { id: "pricing", index: "03", labelKey: "nav_pricing" },
+  { id: "process", index: "04", labelKey: "nav_process" },
+  { id: "faq", index: "05", labelKey: "nav_faq" },
   { id: "contact", index: "06", labelKey: "nav_contact" },
 ];
 
@@ -40,47 +41,47 @@ export const CAPABILITIES = [
     index: "01",
     titleKey: "cap_apps_title",
     bodyKey: "cap_apps_body",
-    items: ["React 18", "SPA / routing", "i18n (LT/EN)", "Design systems"],
-    evidence: ["fakaunas", "bangu"],
-  },
-  {
-    id: "backend",
-    index: "02",
-    titleKey: "cap_backend_title",
-    bodyKey: "cap_backend_body",
-    items: ["Node.js / Express", "REST APIs", "MongoDB / MySQL", "Auth flows"],
-    evidence: ["fakaunas"],
-  },
-  {
-    id: "integrations",
-    index: "03",
-    titleKey: "cap_integrations_title",
-    bodyKey: "cap_integrations_body",
-    items: ["Transactional email", "Firebase", "Airtable", "Third-party APIs"],
-    evidence: ["syncara", "fakaunas"],
-  },
-  {
-    id: "automation",
-    index: "04",
-    titleKey: "cap_automation_title",
-    bodyKey: "cap_automation_body",
-    items: ["Dashboards", "Data export", "Scheduled jobs", "Internal tools"],
-    evidence: ["syncara"],
+    tech: ["React", "Vite", "Tailwind", "Prerendering"],
+    evidence: ["fakaunas", "smiletrans"],
   },
   {
     id: "performance",
-    index: "05",
+    index: "02",
     titleKey: "cap_performance_title",
     bodyKey: "cap_performance_body",
-    items: ["Core Web Vitals", "Bundle budgets", "Technical SEO", "Accessibility"],
+    tech: ["Core Web Vitals", "Lighthouse", "WebP / AVIF"],
     evidence: ["beneta", "bangu"],
+  },
+  {
+    id: "seo",
+    index: "03",
+    titleKey: "cap_seo_title",
+    bodyKey: "cap_seo_body",
+    tech: ["Techninis SEO", "Struktūriniai duomenys", "Sitemap"],
+    evidence: ["bangu"],
+  },
+  {
+    id: "shop",
+    index: "04",
+    titleKey: "cap_shop_title",
+    bodyKey: "cap_shop_body",
+    tech: ["WordPress", "WooCommerce", "Shopify"],
+    evidence: ["flore"],
+  },
+  {
+    id: "automation",
+    index: "05",
+    titleKey: "cap_automation_title",
+    bodyKey: "cap_automation_body",
+    tech: ["Node.js", "REST API", "Airtable", "Resend"],
+    evidence: ["syncara", "velgtilbud"],
   },
   {
     id: "operations",
     index: "06",
     titleKey: "cap_operations_title",
     bodyKey: "cap_operations_body",
-    items: ["Deployment", "Monitoring", "Updates", "Handover"],
+    tech: ["Vercel", "Atsarginės kopijos", "Stebėjimas"],
     evidence: [],
   },
 ];
@@ -297,15 +298,98 @@ export const PROCESS_STEPS = [
   { id: "operate", index: "06", titleKey: "step_operate_title", bodyKey: "step_operate_body", outKey: "step_operate_out" },
 ];
 
-/** Prices carried over verbatim from the existing service list. */
-export const RATE_CARD = [
-  { id: 1, titleKey: "service_1_title", priceKey: "service_1_price", from: true },
-  { id: 2, titleKey: "service_2_title", priceKey: "service_2_price", from: true },
-  { id: 3, titleKey: "service_3_title", priceKey: "service_3_price", from: true },
-  { id: 4, titleKey: "service_4_title", priceKey: "service_4_price", from: false },
-  { id: 5, titleKey: "service_5_title", priceKey: "service_5_price", from: false },
-  { id: 6, titleKey: "service_6_title", priceKey: "service_6_price", from: false },
+/**
+ * PRICING - the single place prices live.
+ *
+ * These values render in three places: the pricing cards, the budget select
+ * on the contact form, and the Offer entries in the JSON-LD. Change a number
+ * here and all three follow.
+ *
+ * PLACEHOLDERS pending confirmation. Reference points used to set them:
+ * Lithuanian marketplace freelancers average 230-300 EUR a site, small
+ * studios charge 450-590 for a one-pager and 890+ for a business site. The
+ * old list (200 / 300 EUR) sat below the freelance floor while the site
+ * argues for custom, fast, measured work - which reads as a warning, not a
+ * bargain.
+ */
+export const PACKAGES = [
+  {
+    id: "onepage",
+    price: 490,
+    duration: "1-2 sav.",
+    featured: false,
+    titleKey: "pkg_onepage_title",
+    forKey: "pkg_onepage_for",
+    includes: [
+      "inc_mobile",
+      "inc_form",
+      "inc_google",
+      "inc_speed",
+      "inc_analytics",
+      "inc_fixes",
+      "inc_ownership",
+    ],
+  },
+  {
+    id: "business",
+    price: 990,
+    duration: "2-4 sav.",
+    featured: true,
+    titleKey: "pkg_business_title",
+    forKey: "pkg_business_for",
+    includes: [
+      "inc_pages",
+      "inc_mobile",
+      "inc_form",
+      "inc_google",
+      "inc_speed",
+      "inc_analytics",
+      "inc_editing",
+      "inc_fixes",
+      "inc_ownership",
+    ],
+  },
+  {
+    id: "custom",
+    price: 1900,
+    duration: "pagal sąmatą",
+    featured: false,
+    titleKey: "pkg_custom_title",
+    forKey: "pkg_custom_for",
+    includes: [
+      "inc_shop",
+      "inc_booking",
+      "inc_accounts",
+      "inc_integrations",
+      "inc_speed",
+      "inc_fixes",
+      "inc_ownership",
+    ],
+  },
 ];
+
+/** Monthly care plans. Replaces the old "server maintenance" line. */
+export const CARE = [
+  { id: "calm", price: 39, titleKey: "care_calm_title", bodyKey: "care_calm_body" },
+  { id: "growth", price: 99, titleKey: "care_growth_title", bodyKey: "care_growth_body" },
+];
+
+/** One-off work. */
+export const HOURLY = 35;
+
+/**
+ * FAQ. Rendered as an accordion and as FAQPage structured data, so the
+ * answers Google shows are the answers on the page.
+ */
+export const FAQ = [
+  "price",
+  "time",
+  "edit",
+  "broken",
+  "google",
+  "meet",
+  "owns",
+].map((id) => ({ id, qKey: `faq_${id}_q`, aKey: `faq_${id}_a` }));
 
 /**
  * Alternative contact channels, shown beside the form.
@@ -338,7 +422,8 @@ export const LEGAL = {
 export const PRACTICE = {
   name: "Lukas Beneta",
   mark: "BENETA",
-  locality: "Klaipėda",
+  // Remote practice: no city is surfaced anywhere in the interface.
+  // Kept only for legal registration details in the footer, if ever needed.
   country: "LT",
   timeZone: "Europe/Vilnius",
   domain: "beneta.lt",

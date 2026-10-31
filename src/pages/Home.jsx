@@ -3,9 +3,10 @@ import CommandRail from "../components/CommandRail";
 import GridOverlay from "../components/GridOverlay";
 import Masthead from "../components/sections/Masthead";
 import Capabilities from "../components/sections/Capabilities";
-import Method from "../components/sections/Method";
 import Work from "../components/sections/Work";
-import Stack from "../components/sections/Stack";
+import Why from "../components/sections/Why";
+import Pricing from "../components/sections/Pricing";
+import Faq from "../components/sections/Faq";
 import Process from "../components/sections/Process";
 import Contact from "../components/sections/Contact";
 import Footer from "../components/sections/Footer";
@@ -31,13 +32,18 @@ import { useReducedMotion } from "../design/useMotionPrefs";
  *    before any JavaScript runs at all. A deep link needs no help either,
  *    since the target element exists while the HTML is being parsed.
  *
- * 3. The selected project is held here rather than inside the work index, so
- *    the evidence links in section 01 can open the matching row in section 03
- *    and scroll to it. One owner, no duplicated state.
+ * 3. The selected project and the chosen pricing package are held here
+ *    rather than inside their sections, so the evidence links in section 01
+ *    can open a row in section 02, and a package in section 03 can pre-fill
+ *    the form in section 06. One owner each, no duplicated state.
  */
 export default function Home() {
   const reduced = useReducedMotion();
   const [openProject, setOpenProject] = useState(null);
+
+  // Choosing a package on the pricing cards pre-fills the contact form, so
+  // "this one" and "here is my project" are a single movement.
+  const [packageChoice, setPackageChoice] = useState(null);
   const [pendingScroll, setPendingScroll] = useState(null);
 
   const openFromEvidence = useCallback((projectId) => {
@@ -65,12 +71,13 @@ export default function Home() {
 
       <main>
         <Masthead />
+        <Why />
         <Capabilities onEvidence={openFromEvidence} />
-        <Method />
         <Work openId={openProject} onOpen={setOpenProject} />
-        <Stack />
+        <Pricing onChoose={setPackageChoice} />
         <Process />
-        <Contact />
+        <Faq />
+        <Contact packageChoice={packageChoice} />
       </main>
 
       <Footer />

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
-import { CAPABILITIES, PROJECTS, RATE_CARD } from "../../design/content";
+import { CAPABILITIES, PROJECTS } from "../../design/content";
 import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useCompactViewport, useFinePointer, useReducedMotion } from "../../design/useMotionPrefs";
 import useReveal from "../../design/useReveal";
@@ -52,17 +52,23 @@ export default function Capabilities({ onEvidence }) {
         {t(cap.bodyKey)}
       </p>
 
-      <ul className="mt-6 grid grid-cols-2 border-t" style={{ borderColor: "var(--line)" }}>
-        {cap.items.map((item) => (
-          <li
-            key={item}
-            className="border-b border-r py-3 pr-3 font-mono text-label uppercase text-ink-2 last:border-r-0 even:border-r-0"
-            style={{ borderColor: "var(--line)" }}
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
+      {/* The technology lives behind a disclosure. A client who wants it can
+          open it; nobody has to read "Core Web Vitals" to understand that
+          their site will be fast. */}
+      {cap.tech?.length > 0 && (
+        <details className="mt-6 border-t pt-4" style={{ borderColor: "var(--line)" }}>
+          <summary className="label cursor-pointer select-none">
+            {t("tech_details")}
+          </summary>
+          <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+            {cap.tech.map((item) => (
+              <li key={item} className="font-mono text-label text-ink-2">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
 
       {cap.evidence.length > 0 && (
         <div className="mt-6">
@@ -234,49 +240,6 @@ export default function Capabilities({ onEvidence }) {
         )}
       </div>
 
-      {/* ---- rate card ---- */}
-      <div className="mt-24 md:mt-32">
-        <Reveal className="flex items-baseline justify-between gap-6" y={10}>
-          <span className="label">{t("rate_card", "Engagements")}</span>
-          <span className="label">{t("rate_note", "VAT not included · fixed scope or hourly")}</span>
-        </Reveal>
-        <Rule className="mt-3" tone="strong" />
-
-        <ul>
-          {RATE_CARD.map((row, i) => (
-            <motion.li
-              key={row.id}
-              className="border-b"
-              style={{ borderColor: "var(--line)" }}
-              initial={armed ? { opacity: 0, y: 12 } : false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT}
-              transition={{
-                duration: DUR.slow,
-                ease: EASE,
-                delay: reduced ? 0 : i * STAGGER,
-              }}
-            >
-              <div className="group flex items-baseline gap-4 py-4 md:gap-8">
-                <span className="font-mono text-label text-ink-3">
-                  {String(row.id).padStart(2, "0")}
-                </span>
-                <span className="flex-1 text-[0.975rem] font-medium transition-colors duration-200 group-hover:text-ink md:text-lg">
-                  {t(row.titleKey)}
-                </span>
-                <span className="font-mono text-sm tabular-nums text-ink">
-                  {row.from && (
-                    <span className="mr-2 text-label text-ink-3">
-                      {t("starting_from", "From")}
-                    </span>
-                  )}
-                  {t(row.priceKey)}
-                </span>
-              </div>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
     </section>
   );
 }

@@ -1,3 +1,6 @@
+import i18n from "../i18n";
+import { FAQ } from "./content";
+
 /**
  * Per-route document metadata.
  *
@@ -108,4 +111,27 @@ export function buildMeta({
   }
 
   return tags;
+}
+
+/**
+ * FAQPage structured data, built from the same strings the page renders.
+ *
+ * Google can show these answers directly in search results, so they must be
+ * the answers on the page - not a separate, friendlier set written for the
+ * crawler. Taking them from i18n guarantees that.
+ */
+export function faqJsonLd(locale) {
+  const t = i18n.getFixedT(locale);
+
+  return {
+    "script:ld+json": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQ.map((item) => ({
+        "@type": "Question",
+        name: t(item.qKey),
+        acceptedAnswer: { "@type": "Answer", text: t(item.aKey) },
+      })),
+    },
+  };
 }

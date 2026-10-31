@@ -2,14 +2,17 @@ import React from "react";
 import Home from "../pages/Home";
 import { useLocale } from "../design/locale";
 import { buildMeta } from "../design/seo";
+import { faqJsonLd } from "../design/seo";
 
-export const meta = () =>
-  buildMeta({
+export const meta = () => [
+  ...buildMeta({
     locale: "lt",
-    title: "Beneta - programinės įrangos inžinerijos praktika",
+    title: "Svetainių kūrimas verslui | Beneta",
     description:
-      "Nepriklausoma inžinerijos praktika Klaipėdoje. Interneto programos, serverių sistemos, API integracijos, automatizavimas ir greičio optimizavimas.",
-  });
+      "Kuriu svetaines smulkiam verslui: nuo 490 EUR, per 1-2 savaites. Greita, aiški svetainė, kurią randa Google. Dirbu nuotoliniu būdu visoje Lietuvoje.",
+  }),
+  faqJsonLd("lt"),
+];
 
 export default function LtHome() {
   useLocale("lt");

@@ -55,13 +55,14 @@ const STRUCTURED_DATA = {
   image: "https://www.beneta.lt/og.png",
   description:
     "Independent software engineering practice: web applications, backend systems, API integrations, automation and performance work.",
-  areaServed: "LT",
+  // A remote practice serves an area, not an address. No street address is
+  // published; Google treats this as a service-area business.
+  areaServed: ["LT", "EU"],
   availableLanguage: ["lt", "en"],
   priceRange: "20-300 EUR",
   currenciesAccepted: "EUR",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Klaipeda",
     addressCountry: "LT",
   },
   founder: {

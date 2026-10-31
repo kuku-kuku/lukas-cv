@@ -5,7 +5,9 @@ import {
   METHOD_NODES,
   PROCESS_STEPS,
   PROJECTS,
-  RATE_CARD,
+  PACKAGES,
+  CARE,
+  FAQ,
   SECTIONS,
   STACK_GROUPS,
 } from "./content";
@@ -29,10 +31,16 @@ function collectKeys() {
   const keys = [];
   SECTIONS.forEach((s) => keys.push(s.labelKey));
   CAPABILITIES.forEach((c) => keys.push(c.titleKey, c.bodyKey));
+  SECTIONS.forEach((x) => keys.push(x.labelKey));
   METHOD_NODES.forEach((n) => keys.push(n.titleKey, n.bodyKey));
   PROCESS_STEPS.forEach((s) => keys.push(s.titleKey, s.bodyKey, s.outKey));
   STACK_GROUPS.forEach((g) => keys.push(g.titleKey));
-  RATE_CARD.forEach((r) => keys.push(r.titleKey, r.priceKey));
+  PACKAGES.forEach((p) => {
+    keys.push(p.titleKey, p.forKey);
+    p.includes.forEach((k) => keys.push(k));
+  });
+  CARE.forEach((c) => keys.push(c.titleKey, c.bodyKey));
+  FAQ.forEach((f) => keys.push(f.qKey, f.aKey));
   PROJECTS.forEach((p) => {
     keys.push(p.roleKey, `status.${p.statusKey}`);
     // Every project needs a name and a type. The engineering notes are

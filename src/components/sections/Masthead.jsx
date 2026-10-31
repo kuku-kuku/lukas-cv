@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import LatticeField from "../LatticeField";
-import LiveClock from "../LiveClock";
 import Magnetic from "../motion/Magnetic";
 import { DUR, EASE } from "../../design/motion";
 import { PRACTICE, PROJECTS } from "../../design/content";
@@ -20,7 +19,7 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * and fades as you leave) - the lattice behind it handles its own departure.
  */
 
-const LINES = ["SOFTWARE", "ENGINEERING", "PRACTICE"];
+const LINES = ["Svetainės,", "kurios atneša", "klientų."];
 
 /*
  * A note on the opening.
@@ -58,12 +57,10 @@ export default function Masthead() {
   const y = useTransform(scrollY, [0, vh], [0, -60]);
   const fade = useTransform(scrollY, [vh * 0.5, vh], [1, 0]);
 
-  const specs = [
-    { labelKey: "spec_status", valueKey: "spec_status_value" },
-    { labelKey: "spec_base", valueKey: "spec_base_value" },
-    { labelKey: "spec_languages", valueKey: "spec_languages_value" },
-    { labelKey: "spec_engagement", valueKey: "spec_engagement_value" },
-  ];
+  // Three reasons to keep reading, not four facts about me. The old strip
+  // led with BUSINESS / LOCATION / LANGUAGES, none of which answers the
+  // question a visitor actually has in the first ten seconds.
+  const trust = ["trust_response", "trust_price", "trust_free"];
 
   const goTo = (id) => {
     document.getElementById(id)?.scrollIntoView({
@@ -92,7 +89,7 @@ export default function Masthead() {
 
       <div className="shell relative z-10 flex items-baseline justify-between">
         <span className="label">00 / {t("nav_index", "Index")}</span>
-        <LiveClock className="text-label uppercase text-ink-2" />
+        <span className="label">{t("remote_line")}</span>
       </div>
 
       <motion.div
@@ -122,9 +119,6 @@ export default function Masthead() {
                 }}
               >
                 {line}
-                {i === LINES.length - 1 && (
-                  <span style={{ color: "var(--signal)" }}>.</span>
-                )}
               </motion.span>
             </span>
           ))}
@@ -243,34 +237,25 @@ export default function Masthead() {
       {/* specification strip: facts, at the fold */}
       <div className="shell relative z-10">
         <div className="h-px w-full" style={{ background: "var(--line)" }} />
-        <dl className="grid grid-cols-2 md:grid-cols-4">
-          {specs.map((spec, i) => (
-            <motion.div
-              key={spec.labelKey}
-              className="border-b border-r px-0 py-4 last:border-r-0 md:border-b-0 md:px-0 md:py-5"
+        <ul className="grid grid-cols-1 sm:grid-cols-3">
+          {trust.map((key, i) => (
+            <motion.li
+              key={key}
+              className="flex items-center gap-3 border-b py-4 sm:border-b-0 sm:border-r sm:pr-6 sm:last:border-r-0"
               style={{ borderColor: "var(--line)" }}
               initial={false}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: DUR.slow,
-                ease: EASE,
-                delay: reduced ? 0 : 0.42 + i * 0.06,
-              }}
+              transition={{ duration: DUR.base, ease: EASE, delay: i * 0.06 }}
             >
-              <dt className="label">{t(spec.labelKey)}</dt>
-              <dd className="mt-2 pr-4 text-[0.9375rem] font-medium leading-snug">
-                {spec.labelKey === "spec_status" && (
-                  <span
-                    aria-hidden="true"
-                    className="mr-2 inline-block h-1.5 w-1.5 align-middle animate-signal-pulse"
-                    style={{ background: "var(--signal)" }}
-                  />
-                )}
-                {t(spec.valueKey)}
-              </dd>
-            </motion.div>
+              <span
+                aria-hidden="true"
+                className="h-1.5 w-1.5 shrink-0"
+                style={{ background: "var(--signal)" }}
+              />
+              <span className="text-base font-medium">{t(key)}</span>
+            </motion.li>
           ))}
-        </dl>
+        </ul>
         <div className="h-px w-full" style={{ background: "var(--line)" }} />
 
         <div className="mt-5 flex items-center justify-between">

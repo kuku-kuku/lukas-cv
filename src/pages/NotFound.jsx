@@ -46,7 +46,7 @@ export default function NotFound() {
       <div className="flex items-baseline justify-between">
         <span className="label">{PRACTICE.domain}</span>
         <span className="label">
-          {PRACTICE.locality} - {PRACTICE.country}
+          {t("remote_line")}
         </span>
       </div>
     </div>
