@@ -397,8 +397,6 @@ const resources = {
       faq_meet_a: "Ne. Viską darau nuotoliniu būdu – telefonu, el. paštu arba vaizdo skambučiu.",
       faq_owns_q: "Kas priklauso man – domenas, svetainė, failai?",
       faq_owns_a: "Viskas jūsų: domenas, svetainė ir visi failai. Jei kada norėsite dirbti su kitu žmogumi – viską perduodu be jokių kliūčių.",
-      about_title: "Kas aš",
-      about_body: "Esu Lukas Beneta. Dirbu vienas – kalbate tiesiai su tuo, kuris daro darbą, be projektų vadybininkų ir be perdavimų kitam žmogui. Svetaines kuriu nuo 2022 m.",
       remote_label: "Darbo būdas",
       topic_label: "Kas jus domina?",
       topic_new: "Nauja svetainė",
@@ -413,7 +411,6 @@ const resources = {
       budget_over2000: "2000 € ir daugiau",
       budget_unsure: "Dar nežinau",
       why_label: "Kodėl Beneta",
-      about_body_2: "Pradedame pokalbiu apie tai, ko reikia jūsų verslui. Tada gaunate fiksuotą kainą ir terminą, o paleidus svetainę lieku pasiekiamas – jei kas nors nustoja veikti, pataisau.",
       not_found_code: 'Resursas nerastas',
 
     },
@@ -810,8 +807,6 @@ const resources = {
       faq_meet_a: "No. Everything is done remotely – phone, email or a video call.",
       faq_owns_q: "What do I own?",
       faq_owns_a: "All of it: the domain, the site and every file. If you ever move to someone else, I hand it over without obstruction.",
-      about_title: "Who I am",
-      about_body: "I am Lukas Beneta. I work alone – you speak directly to the person doing the work, with no account managers and no handovers. I have been building websites since 2022.",
       remote_label: "Working",
       topic_label: "What are you after?",
       topic_new: "A new website",
@@ -826,7 +821,6 @@ const resources = {
       budget_over2000: "over EUR 2,000",
       budget_unsure: "Not sure yet",
       why_label: "Why Beneta",
-      about_body_2: "We start with a conversation about what your business actually needs. Then you get a fixed price and a date, and once the site is live I stay reachable – if something stops working, I fix it.",
       not_found_code: "Resource not found",
 
     },

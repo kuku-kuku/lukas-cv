@@ -209,15 +209,22 @@ export default function Contact() {
     CHANNELS.linkedin && {
       key: "linkedin",
       label: "LinkedIn",
-      value: CHANNELS.linkedin.replace(/^https?:\/\/(www\.)?/, ""),
+      value: CHANNELS.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
       href: CHANNELS.linkedin,
       external: true,
     },
-    CHANNELS.github && {
-      key: "github",
-      label: "GitHub",
-      value: CHANNELS.github.replace(/^https?:\/\/(www\.)?/, ""),
-      href: CHANNELS.github,
+    CHANNELS.facebook && {
+      key: "facebook",
+      label: "Facebook",
+      value: CHANNELS.facebook.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
+      href: CHANNELS.facebook,
+      external: true,
+    },
+    CHANNELS.instagram && {
+      key: "instagram",
+      label: "Instagram",
+      value: CHANNELS.instagram.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
+      href: CHANNELS.instagram,
       external: true,
     },
   ].filter(Boolean);

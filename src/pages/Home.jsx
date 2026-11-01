@@ -5,7 +5,6 @@ import Masthead from "../components/sections/Masthead";
 import Capabilities from "../components/sections/Capabilities";
 import Work from "../components/sections/Work";
 import Why from "../components/sections/Why";
-import About from "../components/sections/About";
 import Pricing from "../components/sections/Pricing";
 import Faq from "../components/sections/Faq";
 import QuoteDrawer from "../components/QuoteDrawer";
@@ -79,7 +78,6 @@ export default function Home() {
         <Why />
         <Capabilities onEvidence={openFromEvidence} />
         <Work openId={openProject} onOpen={setOpenProject} />
-        <About />
         <Pricing onChoose={setQuotePackage} />
         <Process />
         <Faq />

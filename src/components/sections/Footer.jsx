@@ -33,10 +33,16 @@ export default function Footer() {
       href: CHANNELS.linkedin,
       external: true,
     },
-    CHANNELS.github && {
-      key: "github",
-      label: "GitHub",
-      href: CHANNELS.github,
+    CHANNELS.facebook && {
+      key: "facebook",
+      label: "Facebook",
+      href: CHANNELS.facebook,
+      external: true,
+    },
+    CHANNELS.instagram && {
+      key: "instagram",
+      label: "Instagram",
+      href: CHANNELS.instagram,
       external: true,
     },
   ].filter(Boolean);

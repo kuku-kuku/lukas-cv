@@ -16,6 +16,12 @@ import { useReducedMotion } from "../design/useMotionPrefs";
  * drawn along its edge. Each index reveals its name on hover and on keyboard
  * focus; numbers alone tell a first-time visitor nothing.
  *
+ * `group` sits on the button, not the li, and the keyboard reveal keys off
+ * :focus-visible rather than :focus-within. With focus-within on the li, a
+ * mouse click left the button focused and the name stayed pinned beside the
+ * number for the rest of the scroll. focus-visible does not fire on a mouse
+ * click, so the name follows the pointer and still appears when tabbed to.
+ *
  * The rail is opaque and stays dark the whole way down. It used to be
  * translucent with a backdrop blur, which turned to grey mud with unreadable
  * numbers wherever the light Process spread passed underneath. An earlier
@@ -131,12 +137,12 @@ export default function CommandRail() {
           {SECTIONS.map((s) => {
             const on = s.id === activeId;
             return (
-              <li key={s.id} className="group relative">
+              <li key={s.id} className="relative">
                 <button
                   type="button"
                   onClick={() => goTo(s.id)}
                   aria-current={on ? "true" : undefined}
-                  className="relative flex h-11 w-full items-center justify-center"
+                  className="group relative flex h-11 w-full items-center justify-center"
                 >
                   <span
                     className="font-mono text-label transition-colors duration-200"
@@ -160,7 +166,7 @@ export default function CommandRail() {
                     />
                   )}
                   {/* The name, on hover and on keyboard focus. */}
-                  <span className="chrome chrome-line pointer-events-none absolute left-[4.5rem] -translate-x-2 whitespace-nowrap border px-3 py-2 text-base font-medium opacity-0 transition-[opacity,transform] duration-150 ease-expo group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100">
+                  <span className="chrome chrome-line pointer-events-none absolute left-[4.5rem] -translate-x-2 whitespace-nowrap border px-3 py-2 text-base font-medium opacity-0 transition-[opacity,transform] duration-150 ease-expo group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
                     {t(s.labelKey)}
                   </span>
                 </button>

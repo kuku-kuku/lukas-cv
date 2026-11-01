@@ -397,19 +397,18 @@ export const FAQ = [
 /**
  * Alternative contact channels, shown beside the form.
  *
- * EDIT THESE. Every one is empty on purpose - a portfolio that links to the
- * wrong profile is worse than one that links to none, so nothing is guessed
- * here. Fill in what you actually want public; each entry renders only when
- * it has a value, so leaving one blank simply hides it.
+ * The public channels. Each entry renders only when it has a value, in the
+ * footer and in the contact section, so removing one here removes it from
+ * both. Nothing is guessed: an entry is here because it was given.
  *
- *   email:    the address you are happy to publish (it will be scraped)
- *   linkedin: full https:// URL
- *   github:   full https:// URL
+ *   email:     the address published on the page (it will be scraped)
+ *   linkedin / facebook / instagram: full https:// URLs
  */
 export const CHANNELS = {
-  email: "",
-  linkedin: "",
-  github: "",
+  email: "lukas.beneta.dev@gmail.com",
+  linkedin: "https://www.linkedin.com/in/lukas-beneta-12589735b/",
+  facebook: "https://www.facebook.com/lukas.beneta/",
+  instagram: "https://www.instagram.com/lukasbeneta/",
 };
 
 /**
