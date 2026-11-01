@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "react-router dev",
     "start": "react-router dev",
-    "build": "node scripts/build-sitemap.mjs && react-router build",
+    "build": "node scripts/check-dashes.mjs && node scripts/build-sitemap.mjs && react-router build",
     "preview": "vite preview",
     "test": "vitest run"
   },

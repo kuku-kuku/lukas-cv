@@ -35,7 +35,7 @@ export default function Why() {
       {/* Unnumbered on purpose - it belongs to the hero block, not the
           running order - but wearing the same label style as the numbered
           sections so it does not look like a stray. */}
-      <span className="label">&mdash; {t("why_label")}</span>
+      <span className="label">- {t("why_label")}</span>
       <h2 id="why-title" className="display-m mt-4">
         {t("why_title")}
       </h2>

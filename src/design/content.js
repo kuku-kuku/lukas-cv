@@ -252,7 +252,7 @@ export const PROJECTS = [
     year: "2026",
     metric: "Lighthouse 99 desktop",
     metricNote: "Lighthouse 99 desktop / 88 mobile, LCP 0.8 s",
-    metricDate: "2026–10–31",
+    metricDate: "2026-10-31",
     notes: true,
     image: "/work-beneta.webp",
     thumb: "/work-beneta-sm.webp",
@@ -319,7 +319,7 @@ export const PACKAGES = [
   {
     id: "onepage",
     price: 490,
-    duration: "1–2 sav.",
+    duration: "1-2 sav.",
     featured: false,
     titleKey: "pkg_onepage_title",
     forKey: "pkg_onepage_for",
@@ -336,7 +336,7 @@ export const PACKAGES = [
   {
     id: "business",
     price: 990,
-    duration: "2–4 sav.",
+    duration: "2-4 sav.",
     featured: true,
     titleKey: "pkg_business_title",
     forKey: "pkg_business_for",
