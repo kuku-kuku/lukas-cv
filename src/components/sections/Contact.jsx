@@ -5,6 +5,7 @@ import emailjs from "@emailjs/browser";
 import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
+import ChannelLinks from "../ChannelLinks";
 import { CHANNELS } from "../../design/content";
 import { BUDGETS } from "../../design/brief";
 import { DUR, EASE } from "../../design/motion";
@@ -198,36 +199,6 @@ export default function Contact() {
     return () => clearTimeout(timer);
   }, [error]);
 
-  const channels = [
-    CHANNELS.email && {
-      key: "email",
-      label: t("channel_email", "Email"),
-      value: CHANNELS.email,
-      href: `mailto:${CHANNELS.email}`,
-      external: false,
-    },
-    CHANNELS.linkedin && {
-      key: "linkedin",
-      label: "LinkedIn",
-      value: CHANNELS.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
-      href: CHANNELS.linkedin,
-      external: true,
-    },
-    CHANNELS.facebook && {
-      key: "facebook",
-      label: "Facebook",
-      value: CHANNELS.facebook.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
-      href: CHANNELS.facebook,
-      external: true,
-    },
-    CHANNELS.instagram && {
-      key: "instagram",
-      label: "Instagram",
-      value: CHANNELS.instagram.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
-      href: CHANNELS.instagram,
-      external: true,
-    },
-  ].filter(Boolean);
 
   const underline = (invalid) => (
     <>
@@ -271,27 +242,24 @@ export default function Contact() {
             </div>
           </dl>
 
-          {channels.length > 0 && (
+          {CHANNELS.email && (
             <>
               <Rule className="my-8" />
-              <dl className="space-y-4">
-                {channels.map((c) => (
-                  <div key={c.key}>
-                    <dt className="label">{c.label}</dt>
-                    <dd className="mt-2">
-                      <a
-                        href={c.href}
-                        className="signal-link text-base"
-                        {...(c.external
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                      >
-                        {c.value}
-                      </a>
-                    </dd>
-                  </div>
-                ))}
+              {/* The address stays as text: it is the one channel someone
+                  reads, copies or dictates over the phone, and an icon
+                  cannot be copied. The rest are icons. */}
+              <dl>
+                <dt className="label">{t("channel_email", "El. paštas")}</dt>
+                <dd className="mt-2">
+                  <a
+                    href={`mailto:${CHANNELS.email}`}
+                    className="signal-link text-base"
+                  >
+                    {CHANNELS.email}
+                  </a>
+                </dd>
               </dl>
+              <ChannelLinks className="mt-5" />
             </>
           )}
 

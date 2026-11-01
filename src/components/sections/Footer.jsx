@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import { CAPABILITIES, CHANNELS, LEGAL, PRACTICE } from "../../design/content";
+import ChannelLinks from "../ChannelLinks";
+import { CAPABILITIES, LEGAL, PRACTICE } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -20,32 +21,6 @@ export default function Footer() {
   ];
   const strip = [...items, ...items];
 
-  const links = [
-    CHANNELS.email && {
-      key: "email",
-      label: CHANNELS.email,
-      href: `mailto:${CHANNELS.email}`,
-      external: false,
-    },
-    CHANNELS.linkedin && {
-      key: "linkedin",
-      label: "LinkedIn",
-      href: CHANNELS.linkedin,
-      external: true,
-    },
-    CHANNELS.facebook && {
-      key: "facebook",
-      label: "Facebook",
-      href: CHANNELS.facebook,
-      external: true,
-    },
-    CHANNELS.instagram && {
-      key: "instagram",
-      label: "Instagram",
-      href: CHANNELS.instagram,
-      external: true,
-    },
-  ].filter(Boolean);
 
   return (
     <footer className="relative z-10">
@@ -90,27 +65,10 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-2 md:items-end">
-          {/* Every channel renders only when CHANNELS has a value for it -
-              see src/design/content.js. Nothing is guessed here. */}
-          {links.length > 0 && (
-            <nav
-              aria-label={t("channels", "Channels")}
-              className="mb-2 flex flex-wrap gap-x-5 gap-y-1 md:justify-end"
-            >
-              {links.map((l) => (
-                <a
-                  key={l.key}
-                  href={l.href}
-                  className="signal-link text-sm font-medium"
-                  {...(l.external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                >
-                  {l.label}
-                </a>
-              ))}
-            </nav>
-          )}
+          {/* Icons rather than a row of words: the email address alone ran
+              wider than the three names beside it and the row read as a
+              ragged list. ChannelLinks is shared with the contact column. */}
+          <ChannelLinks tone="chrome" className="mb-3 md:justify-end" />
 
           <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-end">
             <a
