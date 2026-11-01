@@ -93,7 +93,6 @@ export default function Masthead() {
         <span className="label">
           {indexSection.index} / {t(indexSection.labelKey)}
         </span>
-        <span className="label">{t("remote_line")}</span>
       </div>
 
       <motion.div

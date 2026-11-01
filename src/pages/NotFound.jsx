@@ -45,9 +45,6 @@ export default function NotFound() {
 
       <div className="flex items-baseline justify-between">
         <span className="label">{PRACTICE.domain}</span>
-        <span className="label">
-          {t("remote_line")}
-        </span>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { CAPABILITIES, LEGAL, PRACTICE } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
- * The closing instrument panel: a status ticker, the colophon, and one way
+ * The closing instrument panel: a status ticker, the channels and one way
  * back to the top. The ticker is aria-hidden decoration built from the
  * capability list, so it can never say something the page does not.
  */
@@ -14,11 +14,7 @@ export default function Footer() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
 
-  const items = [
-    t("footer_available"),
-    ...CAPABILITIES.map((c) => t(c.titleKey)),
-    t("remote_line"),
-  ];
+  const items = [t("footer_available"), ...CAPABILITIES.map((c) => t(c.titleKey))];
   const strip = [...items, ...items];
 
 
@@ -59,9 +55,7 @@ export default function Footer() {
           <span className="block text-3xl font-extrabold tracking-tightest md:text-4xl">
             {PRACTICE.mark}
           </span>
-          <p className="mt-2 text-base text-ink-2">
-            {PRACTICE.name} · {t("remote_line")}
-          </p>
+          <p className="mt-2 text-base text-ink-2">{PRACTICE.name}</p>
         </div>
 
         <div className="flex flex-col gap-2 md:items-end">
@@ -92,7 +86,6 @@ export default function Footer() {
           <p className="label">
             © {new Date().getFullYear()} {t("rights", "All rights reserved")}
           </p>
-          <p className="label">{t("colophon")}</p>
         </div>
       </div>
     </footer>

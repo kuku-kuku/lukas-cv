@@ -236,10 +236,6 @@ export default function Contact() {
               <dt className="label">{t("response", "Response")}</dt>
               <dd className="mt-2 text-base">{t("response_value")}</dd>
             </div>
-            <div>
-              <dt className="label">{t("remote_label", "Darbo būdas")}</dt>
-              <dd className="mt-2 text-base">{t("remote_line")}</dd>
-            </div>
           </dl>
 
           {CHANNELS.email && (
