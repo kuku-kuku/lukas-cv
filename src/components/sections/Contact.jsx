@@ -6,6 +6,7 @@ import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
 import { CHANNELS } from "../../design/content";
+import { BUDGETS } from "../../design/brief";
 import { DUR, EASE } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
@@ -127,6 +128,17 @@ export default function Contact() {
    * see and edit exactly what is being sent.
    */
   const [topic, setTopic] = useState(null);
+  const [budget, setBudget] = useState("");
+
+  /* One line summarising the quick choices, written into the brief so it
+     travels inside `message` - see the note in brief.js about why these
+     are not separate form fields. */
+  const compose = (topicId, budgetId) => {
+    const parts = [];
+    if (topicId) parts.push(t(TOPICS.find((o) => o.id === topicId).key));
+    if (budgetId) parts.push(t(BUDGETS.find((b) => b.id === budgetId).key));
+    return parts.length ? parts.join(" · ") : null;
+  };
 
   const applyPrefix = (line) => {
     const el = autosize.current;
@@ -233,7 +245,6 @@ export default function Contact() {
     >
       <SectionHead
         id="contact"
-        index="06"
         eyebrow={t("nav_contact", "Contact")}
         title={t("contact_title_new")}
         lede={t("contact_lede")}
@@ -378,7 +389,7 @@ export default function Contact() {
                             onClick={() => {
                               const next = on ? null : o.id;
                               setTopic(next);
-                              applyPrefix(next ? t(o.key) : null);
+                              applyPrefix(compose(next, budget));
                             }}
                             className="border px-4 py-2 text-base transition-colors"
                             style={{
@@ -391,6 +402,29 @@ export default function Contact() {
                         );
                       })}
                     </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="field-budget" className="label">
+                      {t("budget_label")}
+                    </label>
+                    <select
+                      id="field-budget"
+                      value={budget}
+                      onChange={(e) => {
+                        setBudget(e.target.value);
+                        applyPrefix(compose(topic, e.target.value));
+                      }}
+                      className="select-dark mt-3 w-full border-0 border-b bg-transparent px-0 py-3 text-[1.0625rem] text-ink outline-none"
+                      style={{ borderColor: "var(--line-strong)" }}
+                    >
+                      <option value="">{t("budget_none")}</option>
+                      {BUDGETS.map((b) => (
+                        <option key={b.id} value={b.id}>
+                          {t(b.key)}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="group">

@@ -14,7 +14,7 @@ export default {
    *
    * Case study pages will be added here as /darbai/:slug - see src/routes.js.
    */
-  prerender: ["/", "/en"],
+  prerender: ["/", "/en", "/privatumas"],
 
   /** Keeps the app where it already lives rather than moving it to app/. */
   appDirectory: "src",

@@ -107,7 +107,6 @@ export default function Work({ openId, onOpen }) {
     >
       <SectionHead
         id="work"
-        index="03"
         eyebrow={t("nav_work", "Work")}
         title={t("work_title_new")}
         lede={t("work_lede")}
@@ -138,7 +137,7 @@ export default function Work({ openId, onOpen }) {
               }}
               onMouseEnter={() => setHovered(project.id)}
             >
-              <div className="relative grid grid-cols-[2.25rem_minmax(0,1fr)_1.5rem] items-center gap-x-4 py-5 md:grid-cols-[3.5rem_minmax(0,1fr)_9rem_10rem_6rem_1.5rem] md:gap-x-6 md:py-7">
+              <div className="relative grid grid-cols-[2.25rem_minmax(0,1fr)_1.5rem] items-center gap-x-4 py-5 md:grid-cols-[3.5rem_minmax(0,1fr)_14rem_6rem_1.5rem] md:gap-x-6 md:py-7">
                 <span
                   className="self-start font-mono text-label transition-colors duration-200 md:self-center"
                   style={{ color: lit ? "var(--signal)" : "var(--ink-3)" }}
@@ -170,24 +169,19 @@ export default function Work({ openId, onOpen }) {
                         onClick={() => toggle(project.id)}
                         aria-expanded={open}
                         aria-controls={`work-panel-${project.id}`}
-                        className="block w-full truncate text-left text-[1.25rem] font-semibold tracking-display transition-transform duration-[250ms] ease-expo after:absolute after:inset-0 after:content-[''] md:text-[1.75rem] md:group-hover:translate-x-2"
+                        className="block w-full text-left text-[1.25rem] font-semibold tracking-display transition-transform duration-[250ms] ease-expo after:absolute after:inset-0 after:content-[''] md:text-[1.75rem] md:group-hover:translate-x-2"
                       >
                         {name}
                       </button>
                     </h3>
-                    <span className="mt-0.5 block truncate text-base text-ink-2 md:hidden">
+                    <span className="mt-0.5 block text-base leading-snug text-ink-2 md:hidden">
                       {kind}
                     </span>
                   </div>
                 </div>
 
-                <span className="hidden truncate text-base text-ink-2 md:block">
+                <span className="hidden text-base leading-snug text-ink-2 md:block">
                   {kind}
-                </span>
-
-                {/* A measured, checkable number - never a marketing claim. */}
-                <span className="nums hidden font-mono text-label normal-case text-ink-3 md:block">
-                  {project.metric || ""}
                 </span>
 
                 <span className="hidden items-center gap-2 md:flex">

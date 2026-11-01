@@ -29,7 +29,6 @@ export default function Stack() {
     >
       <SectionHead
         id="stack"
-        index="04"
         eyebrow={t("nav_stack", "Stack")}
         title={t("stack_title")}
         lede={t("stack_lede")}

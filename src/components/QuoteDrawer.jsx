@@ -88,12 +88,23 @@ export default function QuoteDrawer({ packageId, onClose }) {
 
   // A fresh panel each time it opens.
   useEffect(() => {
-    if (open) {
-      setSent(false);
-      setError("");
-      setFieldErrors({});
-      setBudget("");
-    }
+    if (!open) return;
+    setSent(false);
+    setError("");
+    setFieldErrors({});
+    // Pre-select the band the chosen package sits in. Still editable - it
+    // is a starting point, not a commitment.
+    const band = pkg
+      ? pkg.price < 500
+        ? "under500"
+        : pkg.price < 1000
+        ? "500to1000"
+        : pkg.price < 2000
+        ? "1000to2000"
+        : "over2000"
+      : "";
+    setBudget(band);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, packageId]);
 
   const handleSubmit = async (e) => {

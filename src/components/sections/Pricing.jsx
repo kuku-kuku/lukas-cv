@@ -44,19 +44,21 @@ export default function Pricing({ onChoose }) {
       <div className="shell">
         <SectionHead
           id="pricing"
-          index="03"
           eyebrow={t("nav_pricing")}
           title={t("pricing_title")}
           lede={t("pricing_lede")}
         />
 
-        <ol className="grid gap-6 lg:grid-cols-3">
+        {/* Four shared rows - heading, price, list, button - so the
+            buttons land on one line across all three cards no matter how
+            much copy each one carries. */}
+        <ol className="grid gap-6 lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr_auto]">
           {PACKAGES.map((pkg, i) => (
             <motion.li
               key={pkg.id}
-              className={`relative flex flex-col border p-6 md:p-8 ${
-                pkg.featured ? "lg:-mt-4 lg:pb-12" : ""
-              } ${pkg.featured ? "order-first lg:order-none" : ""}`}
+              className={`relative border p-6 md:p-8 lg:row-span-4 lg:grid lg:grid-rows-subgrid ${
+                pkg.featured ? "order-first lg:order-none" : ""
+              }`}
               style={{
                 borderColor: pkg.featured ? "var(--signal)" : "var(--line-strong)",
                 borderWidth: pkg.featured ? 2 : 1,
@@ -79,23 +81,27 @@ export default function Pricing({ onChoose }) {
                 </span>
               )}
 
-              <h3 className="text-2xl font-semibold tracking-display">
-                {t(pkg.titleKey)}
-              </h3>
-              <p className="copy-sm mt-3">{t(pkg.forKey)}</p>
+              <div>
+                <h3 className="text-2xl font-semibold tracking-display">
+                  {t(pkg.titleKey)}
+                </h3>
+                <p className="copy-sm mt-3">{t(pkg.forKey)}</p>
+              </div>
 
-              <p className="mt-6 flex items-baseline gap-2">
+              <div>
+                <p className="flex items-baseline gap-2">
                 <span className="label">{t("pkg_from")}</span>
                 <span className="nums text-4xl font-bold tracking-tightest">
                   {pkg.price} &euro;
                 </span>
               </p>
-              <p className="label mt-2">{pkg.duration}</p>
+                <p className="label mt-2">{pkg.duration}</p>
+              </div>
 
-              <Rule className="my-6" />
-
-              <span className="label">{t("pkg_includes")}</span>
-              <ul className="mt-4 flex-1 space-y-2.5">
+              <div>
+                <Rule className="mb-6" />
+                <span className="label">{t("pkg_includes")}</span>
+                <ul className="mt-4 space-y-2.5">
                 {pkg.includes.map((key) => (
                   <li key={key} className="flex gap-3 text-base leading-snug">
                     <span
@@ -106,7 +112,8 @@ export default function Pricing({ onChoose }) {
                     {t(key)}
                   </li>
                 ))}
-              </ul>
+                </ul>
+              </div>
 
               <button
                 type="button"
@@ -150,8 +157,11 @@ export default function Pricing({ onChoose }) {
                 >
                   <div className="flex items-baseline justify-between gap-6">
                     <h4 className="text-lg font-semibold">{t(plan.titleKey)}</h4>
-                    <span className="nums whitespace-nowrap font-mono text-base">
-                      {t("pkg_from")} {plan.price} &euro;{t("care_month")}
+                    <span className="nums whitespace-nowrap text-xl font-bold tracking-tightest">
+                      {plan.price} &euro;
+                      <span className="text-base font-medium text-ink-2">
+                        {t("care_month")}
+                      </span>
                     </span>
                   </div>
                   <p className="copy-sm mt-2">{t(plan.bodyKey)}</p>

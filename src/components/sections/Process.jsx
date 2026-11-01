@@ -3,7 +3,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import SplitText from "../motion/SplitText";
 import Reveal from "../motion/Reveal";
-import { PROCESS_STEPS } from "../../design/content";
+import { PROCESS_STEPS, SECTIONS } from "../../design/content";
 import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useCompactViewport, useReducedMotion } from "../../design/useMotionPrefs";
 import useReveal from "../../design/useReveal";
@@ -50,7 +50,7 @@ export default function Process() {
         <header className="mb-14 md:mb-20">
           <div className="flex items-baseline justify-between gap-6">
             <span className="label" style={{ color: "var(--signal)" }}>
-              05
+              {SECTIONS.find((x) => x.id === "process").index}
             </span>
             <span className="label flex-1 text-right md:text-left">
               {t("nav_process", "Process")}

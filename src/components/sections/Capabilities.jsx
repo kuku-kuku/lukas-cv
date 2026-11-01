@@ -106,7 +106,6 @@ export default function Capabilities({ onEvidence }) {
     >
       <SectionHead
         id="capabilities"
-        index="01"
         eyebrow={t("nav_capabilities", "Capabilities")}
         title={t("cap_title")}
         lede={t("cap_lede")}

@@ -5,7 +5,7 @@ const resources = {
   lt: {
     translation: {
       // Bendra
-      title: 'Lukas Beneta - Paslaugos',
+      title: 'Lukas Beneta – Paslaugos',
       heroText: 'Labas! Aš tavo puslapio kūrėjas Lukas.',
       services: 'Paslaugos',
       contact: 'Susisiekime',
@@ -34,7 +34,7 @@ const resources = {
       service_5_price: '20 €/val',
 
       service_6_title: 'Konsultacija ar pagalba',
-      // Nemokama - be „Nuo“
+      // Nemokama – be „Nuo“
       service_6_price: 'Pirma konsultacija nemokama',
 
       // Darbai
@@ -133,11 +133,11 @@ const resources = {
       back_home: 'Grįžti į pradžą',
 
       // Apie
-    about_p1: 'Aš esu Lukas Beneta - buvęs barmenas, kuris iškeitė kokteilių plaktuvą į klaviatūrą. Taip, skamba drąsiai, bet ar žinojai, kad programavimas ir barmenavimas turi kažką bendro? Abu reikalauja ritmo, kruopštumo ir... kartais - kantrybės.',
-    about_p2: 'Mokiausi CodeAcademy, kur išmokau nuo nulio kurti funkcionalius, estetiškus ir svarbiausia - veikiančius puslapius. Nuo to laiko - kuriu, eksperimentuoju ir padedu kitiems būti matomiems internete.',
-    about_p3: 'Nuo mažens žaidžiu futbolą ir tą aistrą nešuosi iki dabar - tai mane išmokė komandinio darbo, užsispyrimo ir siekio laimėti kiekviename etape.',
+    about_p1: 'Aš esu Lukas Beneta – buvęs barmenas, kuris iškeitė kokteilių plaktuvą į klaviatūrą. Taip, skamba drąsiai, bet ar žinojai, kad programavimas ir barmenavimas turi kažką bendro? Abu reikalauja ritmo, kruopštumo ir... kartais – kantrybės.',
+    about_p2: 'Mokiausi CodeAcademy, kur išmokau nuo nulio kurti funkcionalius, estetiškus ir svarbiausia – veikiančius puslapius. Nuo to laiko – kuriu, eksperimentuoju ir padedu kitiems būti matomiems internete.',
+    about_p3: 'Nuo mažens žaidžiu futbolą ir tą aistrą nešuosi iki dabar – tai mane išmokė komandinio darbo, užsispyrimo ir siekio laimėti kiekviename etape.',
     about_p4: 'Dirbdamas labiausiai vertinu paprastumą, logišką struktūrą ir tvirtą ryšį su žmogumi, kuriam kuriu. Esu stipriausias tada, kai turiu aiškų tikslą, galiu jį suprasti, suskaidyti į etapus ir nuosekliai įgyvendinti. Man svarbu ne tik techninis rezultatas, bet ir tai, kad jis kurtų vertę žmogui, kuriam jis skirtas.',
-    about_p5: 'Jei nori žmogaus, kuris ne tik suprogramuos, bet ir supras, ko tau reikia - mes tikrai sutarsime.',
+    about_p5: 'Jei nori žmogaus, kuris ne tik suprogramuos, bet ir supras, ko tau reikia – mes tikrai sutarsime.',
 
       // ===== Redesign: navigation =====
       nav_index: 'Pradžia',
@@ -154,7 +154,7 @@ const resources = {
 
       // ===== 00 Masthead =====
       masthead_lede:
-        "Kuriu svetaines ir paprastas internetines sistemas smulkiam verslui - nuo idėjos iki veikiančio rezultato. Visą darbą atlieku nuotoliniu būdu.",
+        "Kuriu svetaines ir paprastas internetines sistemas smulkiam verslui – nuo idėjos iki veikiančio rezultato. Visą darbą atlieku nuotoliniu būdu.",
       cta_brief: "Gauti pasiūlymą",
       cta_model: "Kainos",
       scroll_cue: 'Žemiau',
@@ -174,7 +174,7 @@ const resources = {
         'Susiejimas su paslaugomis, kurias verslas jau naudoja: el. pašto siuntimas, formų apsauga, Firebase, Airtable, trečiųjų šalių API. Integracija laikoma baigta tada, kai turi klaidų apdorojimą, o ne tik veikiantį geriausią atvejį.',
       cap_automation_title: "Daug rankinio darbo",
       cap_automation_body:
-        "Darbai, kurie dabar daromi ranka - užklausos, rezervacijos, ataskaitos - vyks patys. Sujungiu svetainę su sistemomis, kurias jau naudojate: el. paštu, rezervacijomis, apskaita.",
+        "Darbai, kurie dabar daromi ranka – užklausos, rezervacijos, ataskaitos – vyks patys. Sujungiu svetainę su sistemomis, kurias jau naudojate: el. paštu, rezervacijomis, apskaita.",
       cap_performance_title: "Svetainė pasenusi arba lėta",
       cap_performance_body:
         "Atnaujinu išvaizdą ir pagreitinu. Svetainė atsidaro greitai net telefone, todėl lankytojai nebepabėga belaukdami.",
@@ -202,7 +202,7 @@ const resources = {
         'Projektas baigtas ne tada, kai kodas parašytas, o kai jis veikia produkcijoje, turi matavimus ir žmogų, kuris žino, kaip jį atnaujinti.',
       node_brief_title: 'Užduotis',
       node_brief_body:
-        'Ką reikia pasiekti, kam ir kada. Dažniausiai pirminis aprašymas yra rezultatas, o ne sprendimas - ir taip turi būti.',
+        'Ką reikia pasiekti, kam ir kada. Dažniausiai pirminis aprašymas yra rezultatas, o ne sprendimas – ir taip turi būti.',
       node_constraints_title: 'Ribos',
       node_constraints_body:
         'Biudžetas, terminai, esama infrastruktūra, komandos įgūdžiai. Visa tai įeina į architektūrą kaip įvestis, o ne kaip staigmena pabaigoje.',
@@ -211,7 +211,7 @@ const resources = {
         'Kas jau egzistuoja: lentelės, failai, API, skaičiuoklės. Duomenų perkėlimas beveik visada sudėtingesnis, nei atrodo iš pradžių.',
       node_model_title: 'Modelis',
       node_model_body:
-        'Objektai, jų ryšiai ir būsenos. Vienas paveikslas, dėl kurio sutariame prieš darbus - čia pakeitimai kainuoja minutes, ne savaites.',
+        'Objektai, jų ryšiai ir būsenos. Vienas paveikslas, dėl kurio sutariame prieš darbus – čia pakeitimai kainuoja minutes, ne savaites.',
       node_contract_title: 'Kontraktai',
       node_contract_body:
         'API formos, duomenų tipai, klaidų atvejai. Kai jie sutarti, sąsają ir serverį galima kurti nepriklausomai vieną nuo kito.',
@@ -223,13 +223,13 @@ const resources = {
         'Node.js endpointai, autentifikacija, duomenų bazė, integracijos. Veikia be sąsajos ir yra tikrinami atskirai.',
       node_automation_title: 'Automatizacijos',
       node_automation_body:
-        'Suvestinės, eksportas, periodinės užduotys, vidiniai įrankiai - darbas, kurio nebereikia atlikti ranka.',
+        'Suvestinės, eksportas, periodinės užduotys, vidiniai įrankiai – darbas, kurio nebereikia atlikti ranka.',
       node_ship_title: 'Paleidimas',
       node_ship_body:
         'Produkcinis build, aplinkos kintamieji, domenas, matavimai. Paleidimo diena turi būti nuobodi.',
       node_operate_title: 'Priežiūra',
       node_operate_body:
-        'Stebėjimas, atnaujinimai, pataisymai. Tai, kas čia pamatuojama, grįžta atgal į modelį - todėl diagramoje yra grįžtamasis ryšys.',
+        'Stebėjimas, atnaujinimai, pataisymai. Tai, kas čia pamatuojama, grįžta atgal į modelį – todėl diagramoje yra grįžtamasis ryšys.',
       diagram_title: 'Sistemos modelis',
       diagram_hint: 'Spustelk arba naudok rodyklių klavišus',
       diagram_aria: 'Interaktyvi inžinerinio modelio diagrama',
@@ -291,19 +291,19 @@ const resources = {
       step_launch_out: "Gyvą svetainę, prisijungimus ir trumpą paaiškinimą, kaip viskas veikia.",
       step_operate_title: "Priežiūra",
       step_operate_body:
-        "Jei reikia - toliau rūpinuosi svetaine: atnaujinimai, kopijos, pakeitimai.",
+        "Jei reikia – toliau rūpinuosi svetaine: atnaujinimai, kopijos, pakeitimai.",
       step_operate_out: "Ramybę, kad svetaine yra kam pasirūpinti.",
 
       // ===== 06 Contact =====
       contact_title_new: "Papasakokite apie savo verslą",
       contact_lede:
-        "Nebūtina žinoti techninių detalių - užtenka parašyti, ką norite pasiekti.",
+        "Nebūtina žinoti techninių detalių – užtenka parašyti, ką norite pasiekti.",
       contact_note:
-        "Jei pamatysiu, kad jums manęs nereikia arba yra pigesnis būdas - pasakysiu iš karto.",
+        "Jei pamatysiu, kad jums manęs nereikia arba yra pigesnis būdas – pasakysiu iš karto.",
       response: 'Atsakymas',
       response_value: "Paprastai per 24 val. darbo dienomis",
       form_brief_placeholder: "Pvz.: turiu grožio saloną, reikia svetainės su kainoraščiu ir registracija.",
-      form_brief_hint: "Jei turite dabartinę svetainę - įrašykite jos adresą.",
+      form_brief_hint: "Jei turite dabartinę svetainę – įrašykite jos adresą.",
       form_error_unknown: 'Nežinoma klaida',
       form_error_config: 'Žinučių servisas nesukonfigūruotas.',
       form_error_prefix: 'Nepavyko išsiųsti žinutės',
@@ -312,7 +312,7 @@ const resources = {
       err_email: "Įrašykite veikiantį el. pašto adresą.",
       err_message: "Parašykite bent kelis sakinius apie tai, ko norite.",
       form_sent_note:
-        "Atsakysiu per 24 val. darbo dienomis. Jei skubate - parašykite ir apie tai.",
+        "Atsakysiu per 24 val. darbo dienomis. Jei skubate – parašykite ir apie tai.",
       form_send_another: 'Siųsti dar vieną',
       channel_email: 'El. paštas',
       channels: 'Kontaktai',
@@ -323,6 +323,11 @@ const resources = {
 
       // ===== Footer / 404 =====
       footer_available: "Priimu naujus projektus",
+      faq_more_label: "Neradote atsakymo?",
+      faq_more_title: "Paklauskite tiesiai",
+      faq_more_body: "Parašykite, ką norite pasiekti. Atsakau per vieną darbo dieną ir pasakau, ar galiu padėti – net jei atsakymas bus \"ne\".",
+      faq_more_cta: "Parašyti žinutę",
+      nav_privacy: "Privatumo politika",
       colophon: 'React · Tailwind · Vercel',
       rights: 'Visos teisės saugomos',
       nav_pricing: "Kainos",
@@ -344,7 +349,7 @@ const resources = {
       why_speed_title: "Greita svetainė, kurią randa Google",
       why_speed_body: "Greitis ir matomumas sutvarkomi iš karto, o ne po pusmečio.",
       pricing_title: "Kainos",
-      pricing_lede: "Trys paketai. Jei jūsų atvejis netelpa - parašykite, pateiksiu sąmatą.",
+      pricing_lede: "Trys paketai. Jei jūsų atvejis netelpa – parašykite, pateiksiu sąmatą.",
       pkg_from: "nuo",
       pkg_popular: "Dažniausiai renkamasi",
       pkg_includes: "Kas įeina",
@@ -358,42 +363,42 @@ const resources = {
       inc_mobile: "Puikiai atrodo telefone",
       inc_form: "Kontaktų forma",
       inc_google: "Pagrindai, kad jus rastų Google",
-      inc_speed: "Greitis - atsidaro per 1-2 s",
+      inc_speed: "Greitis – atsidaro per 1–2 s",
       inc_analytics: "Lankytojų statistika",
       inc_editing: "Tekstus ir nuotraukas keičiate patys",
-      inc_pages: "3-8 puslapiai",
+      inc_pages: "3–8 puslapiai",
       inc_shop: "Prekės, krepšelis, apmokėjimas",
       inc_booking: "Rezervacijos ar registracija",
       inc_accounts: "Klientų paskyros",
       inc_integrations: "Sujungimas su jūsų sistemomis",
       inc_fixes: "Mėnuo nemokamų pataisymų po paleidimo",
-      inc_ownership: "Domenas, svetainė ir failai - jūsų",
+      inc_ownership: "Domenas, svetainė ir failai – jūsų",
       care_title: "Priežiūra po paleidimo",
       care_lede: "Pasirinktinai. Be jos svetainė vis tiek lieka jūsų.",
       care_calm_title: "Ramybė",
       care_calm_body: "Talpinimas, atnaujinimai, atsarginės kopijos ir smulkūs teksto pakeitimai.",
       care_growth_title: "Augimas",
-      care_growth_body: "Viskas, kas „Ramybėje“, ir kas mėnesį - patobulinimai bei Google ataskaita.",
+      care_growth_body: "Viskas, kas „Ramybėje“, ir kas mėnesį – patobulinimai bei Google ataskaita.",
       care_month: "/mėn.",
       hourly_title: "Vienkartiniai darbai",
-      hourly_body: "Smulkūs pakeitimai ar pagalba - 35 €/val.",
+      hourly_body: "Smulkūs pakeitimai ar pagalba – 35 €/val.",
       faq_title: "Dažniausi klausimai",
       faq_price_q: "Kiek kainuoja svetainė?",
-      faq_price_a: "Vieno puslapio svetainė - nuo 490 €, verslo svetainė - nuo 990 €. Tikslią kainą pasakau po nemokamo pokalbio, kai žinau, ko reikia.",
+      faq_price_a: "Vieno puslapio svetainė – nuo 490 €, verslo svetainė – nuo 990 €. Tikslią kainą pasakau po nemokamo pokalbio, kai žinau, ko reikia.",
       faq_time_q: "Per kiek laiko bus paruošta?",
-      faq_time_a: "Vieno puslapio svetainė - 1-2 savaitės, verslo svetainė - 2-4 savaitės. Daugiausia laiko paprastai užtrunka tekstai ir nuotraukos.",
+      faq_time_a: "Vieno puslapio svetainė – 1-2 savaitės, verslo svetainė – 2-4 savaitės. Daugiausia laiko paprastai užtrunka tekstai ir nuotraukos.",
       faq_edit_q: "Ar galėsiu pats keisti tekstus ir nuotraukas?",
-      faq_edit_a: "Taip. Parodau, kaip tai daroma, ir palieku trumpą paaiškinimą. Jei nenorite - galiu keisti aš.",
+      faq_edit_a: "Taip. Parodau, kaip tai daroma, ir palieku trumpą paaiškinimą. Jei nenorite – galiu keisti aš.",
       faq_broken_q: "Kas nutiks, jei kas nors suges?",
-      faq_broken_a: "Mėnesį po paleidimo pataisau nemokamai. Vėliau - arba pagal priežiūros planą, arba valandiniu įkainiu.",
+      faq_broken_a: "Mėnesį po paleidimo pataisau nemokamai. Vėliau – arba pagal priežiūros planą, arba valandiniu įkainiu.",
       faq_google_q: "Ar svetainė bus rodoma Google?",
-      faq_google_a: "Svetainė paruošiama taip, kad Google ją rastų ir suprastų. Kaip aukštai pakilsite, priklauso nuo konkurencijos ir turinio - to niekas negali garantuoti.",
+      faq_google_a: "Svetainė paruošiama taip, kad Google ją rastų ir suprastų. Kaip aukštai pakilsite, priklauso nuo konkurencijos ir turinio – to niekas negali garantuoti.",
       faq_meet_q: "Ar reikia susitikti gyvai?",
-      faq_meet_a: "Ne. Viską darau nuotoliniu būdu - telefonu, el. paštu arba vaizdo skambučiu.",
-      faq_owns_q: "Kas priklauso man - domenas, svetainė, failai?",
-      faq_owns_a: "Viskas jūsų: domenas, svetainė ir visi failai. Jei kada norėsite dirbti su kitu žmogumi - viską perduodu be jokių kliūčių.",
+      faq_meet_a: "Ne. Viską darau nuotoliniu būdu – telefonu, el. paštu arba vaizdo skambučiu.",
+      faq_owns_q: "Kas priklauso man – domenas, svetainė, failai?",
+      faq_owns_a: "Viskas jūsų: domenas, svetainė ir visi failai. Jei kada norėsite dirbti su kitu žmogumi – viską perduodu be jokių kliūčių.",
       about_title: "Kas aš",
-      about_body: "Esu Lukas Beneta. Dirbu vienas, todėl kalbate tiesiai su tuo, kuris daro darbą - be projektų vadybininkų ir be perdavimų. Svetaines kuriu nuo 2022 m.",
+      about_body: "Esu Lukas Beneta. Dirbu vienas – kalbate tiesiai su tuo, kuris daro darbą, be projektų vadybininkų ir be perdavimų kitam žmogui. Svetaines kuriu nuo 2022 m.",
       remote_label: "Darbo būdas",
       topic_label: "Kas jus domina?",
       topic_new: "Nauja svetainė",
@@ -403,10 +408,12 @@ const resources = {
       budget_label: "Biudžeto rėžis",
       budget_none: "Nenurodyta",
       budget_under500: "iki 500 €",
-      budget_500to1000: "500-1000 €",
-      budget_1000to2000: "1000-2000 €",
+      budget_500to1000: "500–1000 €",
+      budget_1000to2000: "1000–2000 €",
       budget_over2000: "2000 € ir daugiau",
       budget_unsure: "Dar nežinau",
+      why_label: "Kodėl Beneta",
+      about_body_2: "Pradedame pokalbiu apie tai, ko reikia jūsų verslui. Tada gaunate fiksuotą kainą ir terminą, o paleidus svetainę lieku pasiekiamas – jei kas nors nustoja veikti, pataisau.",
       not_found_code: 'Resursas nerastas',
 
     },
@@ -414,7 +421,7 @@ const resources = {
   en: {
     translation: {
       // General
-      title: 'Lukas Beneta - Services',
+      title: 'Lukas Beneta – Services',
       heroText: 'Hi! I’m Lukas, the creator of your website.',
       services: 'Services',
       contact: 'Contact Me',
@@ -539,11 +546,11 @@ const resources = {
       back_home: 'Back to homepage',
 
       // About
-    about_p1: "I'm Lukas Beneta - a former bartender who swapped a cocktail shaker for a keyboard. Sounds bold, right? But did you know bartending and programming share a lot? Both require rhythm, precision, and… sometimes, patience.",
-    about_p2: "I studied at CodeAcademy, where I learned to build functional, aesthetic, and - most importantly - working websites from scratch. Since then, I've been creating, experimenting, and helping others be seen online.",
-    about_p3: "I’ve been playing football since I was a kid - and that passion taught me teamwork, persistence, and the will to win at every stage.",
-    about_p4: "In my work, I value simplicity, logical structure, and a strong connection with the person I’m building for. I’m at my best when there’s a clear goal - I break it down, structure it, and bring it to life step by step. What matters to me is not just the technical outcome, but the real value it creates for the person using it.",
-    about_p5: "If you’re looking for someone who can code and truly understand what you need - chances are we’ll get along great.",
+    about_p1: "I'm Lukas Beneta – a former bartender who swapped a cocktail shaker for a keyboard. Sounds bold, right? But did you know bartending and programming share a lot? Both require rhythm, precision, and… sometimes, patience.",
+    about_p2: "I studied at CodeAcademy, where I learned to build functional, aesthetic, and – most importantly – working websites from scratch. Since then, I've been creating, experimenting, and helping others be seen online.",
+    about_p3: "I’ve been playing football since I was a kid – and that passion taught me teamwork, persistence, and the will to win at every stage.",
+    about_p4: "In my work, I value simplicity, logical structure, and a strong connection with the person I’m building for. I’m at my best when there’s a clear goal – I break it down, structure it, and bring it to life step by step. What matters to me is not just the technical outcome, but the real value it creates for the person using it.",
+    about_p5: "If you’re looking for someone who can code and truly understand what you need – chances are we’ll get along great.",
 
       // ===== Redesign: navigation =====
       nav_index: "Index",
@@ -560,7 +567,7 @@ const resources = {
 
       // ===== 00 Masthead =====
       masthead_lede:
-        "I build websites and simple online tools for small businesses - from the idea to a working result. Everything is done remotely.",
+        "I build websites and simple online tools for small businesses – from the idea to a working result. Everything is done remotely.",
       cta_brief: "Get a quote",
       cta_model: "Pricing",
       scroll_cue: "Scroll",
@@ -580,7 +587,7 @@ const resources = {
         "Wiring software to the services a business already pays for: transactional email, form protection, Firebase, Airtable, third-party APIs. An integration counts as done when it handles failure, not when the happy path works.",
       cap_automation_title: "Too much manual work",
       cap_automation_body:
-        "Work done by hand today - enquiries, bookings, reports - starts happening on its own. I connect the site to the tools you already use.",
+        "Work done by hand today – enquiries, bookings, reports – starts happening on its own. I connect the site to the tools you already use.",
       cap_performance_title: "Your site is dated or slow",
       cap_performance_body:
         "I refresh how it looks and make it fast, so visitors stop leaving while they wait.",
@@ -608,7 +615,7 @@ const resources = {
         "A project is not finished when the code is written. It is finished when it runs in production, reports on itself, and somebody knows how to update it.",
       node_brief_title: "Request",
       node_brief_body:
-        "What has to be achieved, for whom, and by when. The first description is usually an outcome rather than a solution - which is exactly as it should be.",
+        "What has to be achieved, for whom, and by when. The first description is usually an outcome rather than a solution – which is exactly as it should be.",
       node_constraints_title: "Constraints",
       node_constraints_body:
         "Budget, deadlines, existing infrastructure, the skills on hand. All of it enters the architecture as input instead of arriving as a surprise at the end.",
@@ -617,7 +624,7 @@ const resources = {
         "Whatever already exists: tables, files, APIs, spreadsheets. Moving data is almost always harder than it looks from the outside.",
       node_model_title: "Model",
       node_model_body:
-        "Objects, relations and states. One picture we agree on before the build - changes here cost minutes rather than weeks.",
+        "Objects, relations and states. One picture we agree on before the build – changes here cost minutes rather than weeks.",
       node_contract_title: "Contracts",
       node_contract_body:
         "API shapes, data types, failure cases. Once they are agreed, the interface and the services can be built independently of each other.",
@@ -629,7 +636,7 @@ const resources = {
         "Node.js endpoints, authentication, the database, integrations. They run without the interface and are checked on their own.",
       node_automation_title: "Automation",
       node_automation_body:
-        "Summaries, exports, scheduled jobs, internal tools - the work nobody should be doing by hand any more.",
+        "Summaries, exports, scheduled jobs, internal tools – the work nobody should be doing by hand any more.",
       node_ship_title: "Ship",
       node_ship_body:
         "Production build, environment variables, domain, measurement. Launch day is supposed to be boring.",
@@ -703,7 +710,7 @@ const resources = {
       // ===== 06 Contact =====
       contact_title_new: "Tell me about your business",
       contact_lede:
-        "You do not need to know any technical details - just say what you want to achieve.",
+        "You do not need to know any technical details – just say what you want to achieve.",
       contact_note:
         "If I can see you do not need me, or there is a cheaper way, I will say so.",
       response: "Response",
@@ -729,6 +736,11 @@ const resources = {
 
       // ===== Footer / 404 =====
       footer_available: "Available for new work",
+      faq_more_label: "Question not here?",
+      faq_more_title: "Just ask",
+      faq_more_body: "Tell me what you want to achieve. I reply within one working day and say whether I can help – even when the answer is no.",
+      faq_more_cta: "Send a message",
+      nav_privacy: "Privacy policy",
       colophon: "React · Tailwind · Vercel",
       rights: "All rights reserved",
       nav_pricing: "Pricing",
@@ -739,7 +751,7 @@ const resources = {
       remote_line: "Working remotely",
       tech_details: "Technical details",
       cap_seo_title: "Google cannot find you",
-      cap_seo_body: "I fix what decides whether Google finds you: copy, structure and speed - and show you what changed.",
+      cap_seo_body: "I fix what decides whether Google finds you: copy, structure and speed – and show you what changed.",
       cap_shop_title: "You need an online shop",
       cap_shop_body: "An online shop with a basket, payment and delivery. You change the products and prices yourself.",
       why_title: "Why work with Beneta",
@@ -764,10 +776,10 @@ const resources = {
       inc_mobile: "Looks right on a phone",
       inc_form: "Contact form",
       inc_google: "The basics so Google finds you",
-      inc_speed: "Speed - opens in 1-2 s",
+      inc_speed: "Speed – opens in 1-2 s",
       inc_analytics: "Visitor statistics",
       inc_editing: "You change the text and images yourself",
-      inc_pages: "3-8 pages",
+      inc_pages: "3–8 pages",
       inc_shop: "Products, basket, payment",
       inc_booking: "Bookings or registration",
       inc_accounts: "Client accounts",
@@ -782,7 +794,7 @@ const resources = {
       care_growth_body: "Everything in Calm, plus monthly improvements and a Google report.",
       care_month: "/mo",
       hourly_title: "One-off work",
-      hourly_body: "Small changes or help - 35 EUR/h.",
+      hourly_body: "Small changes or help – 35 EUR/h.",
       faq_title: "Common questions",
       faq_price_q: "What does a website cost?",
       faq_price_a: "A one-pager starts at 490 EUR, a business site at 990 EUR. I quote exactly after a free conversation.",
@@ -795,11 +807,11 @@ const resources = {
       faq_google_q: "Will the site show up on Google?",
       faq_google_a: "The site is built so Google can find and understand it. How high you rank depends on competition and content, which nobody can guarantee.",
       faq_meet_q: "Do we need to meet in person?",
-      faq_meet_a: "No. Everything is done remotely - phone, email or a video call.",
+      faq_meet_a: "No. Everything is done remotely – phone, email or a video call.",
       faq_owns_q: "What do I own?",
       faq_owns_a: "All of it: the domain, the site and every file. If you ever move to someone else, I hand it over without obstruction.",
       about_title: "Who I am",
-      about_body: "I am Lukas Beneta. I work alone, so you speak directly to the person doing the work - no account managers, no handovers.",
+      about_body: "I am Lukas Beneta. I work alone – you speak directly to the person doing the work, with no account managers and no handovers. I have been building websites since 2022.",
       remote_label: "Working",
       topic_label: "What are you after?",
       topic_new: "A new website",
@@ -813,6 +825,8 @@ const resources = {
       budget_1000to2000: "EUR 1,000-2,000",
       budget_over2000: "over EUR 2,000",
       budget_unsure: "Not sure yet",
+      why_label: "Why Beneta",
+      about_body_2: "We start with a conversation about what your business actually needs. Then you get a fixed price and a date, and once the site is live I stay reachable – if something stops working, I fix it.",
       not_found_code: "Resource not found",
 
     },

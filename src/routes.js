@@ -26,6 +26,8 @@ export default [
   // ---- en ----
   ...prefix("en", [index("routes/home.en.jsx")]),
 
+  route("privatumas", "routes/privacy.jsx"),
+
   // ---- the demo sandbox: client-side only, not indexed ----
   route("demo", "routes/demo.jsx"),
   route("demo/admin", "routes/demo.admin.jsx"),

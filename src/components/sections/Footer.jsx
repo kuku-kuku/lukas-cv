@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { CAPABILITIES, CHANNELS, LEGAL, PRACTICE } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
@@ -105,13 +106,18 @@ export default function Footer() {
             </nav>
           )}
 
-          <a
-            href={`https://${PRACTICE.domain}`}
-            className="signal-link text-sm font-medium"
-            rel="noreferrer"
-          >
-            {PRACTICE.domain}
-          </a>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-end">
+            <a
+              href={`https://${PRACTICE.domain}`}
+              className="signal-link text-sm font-medium"
+              rel="noreferrer"
+            >
+              {PRACTICE.domain}
+            </a>
+            <Link to="/privatumas" className="signal-link text-sm font-medium">
+              {t("nav_privacy", "Privatumo politika")}
+            </Link>
+          </div>
 
           {(LEGAL.entity || LEGAL.code) && (
             <p className="label">

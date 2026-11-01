@@ -19,7 +19,7 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * and fades as you leave) - the lattice behind it handles its own departure.
  */
 
-const LINES = ["Svetainės,", "kurios atneša", "klientų."];
+const LINES = ["Svetainės,", "kurios atneša", "klientų"];
 
 /*
  * A note on the opening.
@@ -62,6 +62,7 @@ export default function Masthead() {
   // question a visitor actually has in the first ten seconds.
   const trust = ["trust_response", "trust_price", "trust_free"];
   const workSection = SECTIONS.find((x) => x.id === "work");
+  const indexSection = SECTIONS.find((x) => x.id === "index");
 
   const goTo = (id) => {
     document.getElementById(id)?.scrollIntoView({
@@ -77,7 +78,7 @@ export default function Masthead() {
       className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pb-10 pt-20 md:pb-12 md:pt-[4.5rem]"
     >
       {/* ambient system */}
-      <div className="pointer-events-none absolute inset-0 z-0">
+      <div className="hero-mesh pointer-events-none absolute inset-0 z-0">
         <LatticeField />
         <div
           className="absolute inset-0"
@@ -89,7 +90,9 @@ export default function Masthead() {
       </div>
 
       <div className="shell relative z-10 flex items-baseline justify-between">
-        <span className="label">00 / {t("nav_index", "Index")}</span>
+        <span className="label">
+          {indexSection.index} / {t(indexSection.labelKey)}
+        </span>
         <span className="label">{t("remote_line")}</span>
       </div>
 
@@ -103,93 +106,88 @@ export default function Masthead() {
             byline below and by the JSON-LD, which is where it belongs. */}
         <h1
           id="masthead-title"
-          aria-label={LINES.join(" ")}
+          aria-label={`${LINES.join(" ")}.`}
           className="display-xl"
         >
           {LINES.map((line, i) => (
             <span key={line} className="mask-line">
-              <motion.span
-                className="block"
+              <span
+                className="hero-line"
                 aria-hidden="true"
-                initial={false}
-                animate={{ y: "0%" }}
-                transition={{
-                  duration: 1,
-                  ease: EASE,
-                  delay: reduced ? 0 : 0.08 + i * 0.09,
-                }}
+                style={{ "--delay": `${i * 80}ms` }}
               >
                 {line}
-              </motion.span>
+                {i === LINES.length - 1 && (
+                  <span className="hero-dot" style={{ color: "var(--signal)" }}>
+                    .
+                  </span>
+                )}
+              </span>
             </span>
           ))}
         </h1>
 
+        {/* Two columns, not three rows. The lede and its buttons used to
+            sit side by side, which pushed the work index onto a second row
+            and left the whole bottom-left of the fold empty. Stacking them
+            in one column puts the reading order where the eye already is
+            and closes that void. */}
         <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-12">
-          <motion.p
-            className="lede md:col-span-6"
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.18 }}
-          >
-            {t("masthead_lede")}
-          </motion.p>
+          <div className="md:col-span-6">
+            <p className="lede hero-in" style={{ "--delay": "300ms" }}>
+              {t("masthead_lede")}
+            </p>
 
-          <motion.div
-            className="flex flex-wrap items-center gap-3 md:col-span-6"
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.3 }}
-          >
-            <Magnetic>
+            <div
+              className="hero-in mt-8 flex flex-wrap items-center gap-3"
+              style={{ "--delay": "360ms" }}
+            >
+              <Magnetic>
+                <button
+                  type="button"
+                  onClick={() => goTo("contact")}
+                  className="group relative inline-flex items-center gap-3 overflow-hidden border px-6 py-4 text-sm font-semibold"
+                  style={{ borderColor: "var(--signal)" }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 origin-left scale-x-0 transition-transform duration-[300ms] ease-expo group-hover:scale-x-100"
+                    style={{ background: "var(--signal)" }}
+                  />
+                  <span className="relative transition-colors duration-200 group-hover:text-ground">
+                    {t("cta_brief", "Start a brief")}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-ground"
+                  >
+                    →
+                  </span>
+                </button>
+              </Magnetic>
+
               <button
                 type="button"
-                onClick={() => goTo("contact")}
-                className="group relative inline-flex items-center gap-3 overflow-hidden border px-6 py-4 text-sm font-semibold"
-                style={{ borderColor: "var(--signal)" }}
+                onClick={() => goTo("method")}
+                className="group inline-flex items-center gap-2 border-b px-1 py-4 text-sm font-medium"
+                style={{ borderColor: "var(--line-strong)" }}
               >
+                {t("cta_model", "Read the model")}
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 origin-left scale-x-0 transition-transform duration-[300ms] ease-expo group-hover:scale-x-100"
-                  style={{ background: "var(--signal)" }}
-                />
-                <span className="relative transition-colors duration-200 group-hover:text-ground">
-                  {t("cta_brief", "Start a brief")}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="relative font-mono text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:text-ground"
+                  className="font-mono text-xs transition-transform duration-300 group-hover:translate-y-0.5"
                 >
-                  →
+                  ↓
                 </span>
               </button>
-            </Magnetic>
+            </div>
+          </div>
 
-            <button
-              type="button"
-              onClick={() => goTo("method")}
-              className="group inline-flex items-center gap-2 border-b px-1 py-4 text-sm font-medium"
-              style={{ borderColor: "var(--line-strong)" }}
-            >
-              {t("cta_model", "Read the model")}
-              <span
-                aria-hidden="true"
-                className="font-mono text-xs transition-transform duration-300 group-hover:translate-y-0.5"
-              >
-                ↓
-              </span>
-            </button>
-          </motion.div>
-
-          {/* The right column used to be empty below the headline while the
-              copy sat in it. The copy moved left to line up with the
-              headline, and this index of the work takes the space - an
-              entry point rather than a decorative void. */}
-          <motion.div
-            className="hidden md:col-span-4 md:col-start-9 md:block"
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: DUR.slow, ease: EASE, delay: reduced ? 0 : 0.42 }}
+          {/* The work index, holding the right column for the full height of
+              the block it now sits beside. */}
+          <div
+            className="hero-in hidden md:col-span-4 md:col-start-9 md:block"
+            style={{ "--delay": "420ms" }}
           >
             <div className="flex items-baseline justify-between">
               {/* Derived, so renumbering a section cannot leave this stale. */}
@@ -234,7 +232,7 @@ export default function Masthead() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 
@@ -243,13 +241,10 @@ export default function Masthead() {
         <div className="h-px w-full" style={{ background: "var(--line)" }} />
         <ul className="grid grid-cols-1 sm:grid-cols-3">
           {trust.map((key, i) => (
-            <motion.li
+            <li
               key={key}
-              className="flex items-center gap-3 border-b py-4 sm:border-b-0 sm:border-r sm:pr-6 sm:last:border-r-0"
-              style={{ borderColor: "var(--line)" }}
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: DUR.base, ease: EASE, delay: i * 0.06 }}
+              className="hero-in flex items-center gap-3 border-b py-4 sm:border-b-0 sm:border-r sm:pr-6 sm:last:border-r-0"
+              style={{ borderColor: "var(--line)", "--delay": `${480 + i * 60}ms` }}
             >
               <span
                 aria-hidden="true"
@@ -257,7 +252,7 @@ export default function Masthead() {
                 style={{ background: "var(--signal)" }}
               />
               <span className="text-base font-medium">{t(key)}</span>
-            </motion.li>
+            </li>
           ))}
         </ul>
         <div className="h-px w-full" style={{ background: "var(--line)" }} />

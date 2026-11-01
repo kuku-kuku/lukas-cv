@@ -38,6 +38,13 @@ export function urlFor(locale, path = "") {
  * The alternates for one page across every locale, plus x-default.
  * `path` is the page within the locale ("" for the home page,
  * "darbai/bangu-klinika" for a case study).
+ *
+ * The key is lowercase `hreflang`, not React's camelCase `hrefLang`. React
+ * Router writes these props onto the tag verbatim, so camelCase ships a
+ * `hrefLang=` attribute that search engines do not read - which is what
+ * happened the first time. React's dev build warns about the unknown DOM
+ * property; the warning is the price of correct output. Check the built
+ * HTML, not the console, before changing this.
  */
 export function alternates(path = "") {
   const links = Object.keys(LOCALES).map((locale) => ({
@@ -65,6 +72,9 @@ export function alternates(path = "") {
  * @param {string} [o.path]     page within the locale, "" for home
  * @param {string} [o.image]    absolute or site-relative OG image
  * @param {boolean} [o.noIndex] keep the page out of the index
+ * @param {boolean} [o.translated] false for a page that exists in one locale
+ *   only - declaring an hreflang alternate that 404s is worse than
+ *   declaring none.
  */
 export function buildMeta({
   locale,
@@ -73,6 +83,7 @@ export function buildMeta({
   path = "",
   image = "/og.png",
   noIndex = false,
+  translated = true,
 }) {
   const url = urlFor(locale, path);
   const img = image.startsWith("http") ? image : `${SITE}${image}`;
@@ -98,15 +109,17 @@ export function buildMeta({
     { name: "twitter:image", content: img },
   ];
 
-  Object.keys(LOCALES)
-    .filter((l) => l !== locale)
-    .forEach((l) =>
-      tags.push({ property: "og:locale:alternate", content: OG_LOCALE[l] })
-    );
+  if (translated) {
+    Object.keys(LOCALES)
+      .filter((l) => l !== locale)
+      .forEach((l) =>
+        tags.push({ property: "og:locale:alternate", content: OG_LOCALE[l] })
+      );
+  }
 
   if (noIndex) {
     tags.push({ name: "robots", content: "noindex, nofollow" });
-  } else {
+  } else if (translated) {
     tags.push(...alternates(path));
   }
 

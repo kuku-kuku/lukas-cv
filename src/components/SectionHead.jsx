@@ -1,4 +1,5 @@
 import React from "react";
+import { SECTIONS } from "../design/content";
 import Reveal from "./motion/Reveal";
 import Rule from "./motion/Rule";
 import SplitText from "./motion/SplitText";
@@ -8,12 +9,18 @@ import SplitText from "./motion/SplitText";
  * then the title and an optional lede. The repetition is the point - it is
  * what makes the page read as one instrument instead of seven templates.
  */
-export default function SectionHead({ index, eyebrow, title, lede, id }) {
+export default function SectionHead({ eyebrow, title, lede, id, index }) {
+  /* The number comes from SECTIONS, keyed by the section's own id.
+     Every section used to pass its own literal, and three had drifted out
+     of step with the running order - the page showed two 03s and two 05s.
+     A prop is still accepted for sections that are not in the rail. */
+  const derived = SECTIONS.find((s) => s.id === id)?.index ?? index;
+
   return (
     <header className="mb-12 md:mb-20">
       <Reveal className="flex items-baseline justify-between gap-6" y={10}>
         <span className="label" style={{ color: "var(--signal)" }}>
-          {index}
+          {derived}
         </span>
         <span className="label flex-1 text-right md:text-left">{eyebrow}</span>
       </Reveal>

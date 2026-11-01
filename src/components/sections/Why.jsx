@@ -32,7 +32,11 @@ export default function Why() {
       aria-labelledby="why-title"
       className="shell relative z-10 py-16 md:py-24"
     >
-      <h2 id="why-title" className="display-m">
+      {/* Unnumbered on purpose - it belongs to the hero block, not the
+          running order - but wearing the same label style as the numbered
+          sections so it does not look like a stray. */}
+      <span className="label">&mdash; {t("why_label")}</span>
+      <h2 id="why-title" className="display-m mt-4">
         {t("why_title")}
       </h2>
       <Rule className="mt-5" />

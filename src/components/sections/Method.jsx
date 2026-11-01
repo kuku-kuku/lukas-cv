@@ -31,7 +31,6 @@ export default function Method() {
     >
       <SectionHead
         id="method"
-        index="02"
         eyebrow={t("nav_method", "Method")}
         title={t("method_title")}
         lede={t("method_lede")}

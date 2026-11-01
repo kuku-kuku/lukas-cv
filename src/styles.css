@@ -124,11 +124,12 @@
     text-wrap: pretty;
   }
 
-  /* Lithuanian compounds are long; let the browser break them rather than
-     push a line into an overflow. */
-  [lang="lt"] p,
-  [lang="lt"] dd {
-    hyphens: auto;
+  /* Hyphenation off, deliberately. Automatic hyphenation produced
+     "pada-ryta", "fik-suota", "paaiski-nima" in narrow columns, which
+     reads as a broken page rather than as typesetting. text-wrap: pretty
+     handles the ragged edge instead. */
+  html {
+    hyphens: manual;
   }
 
   /* Firefox / WebKit scrollbar, tuned to the palette */
@@ -164,9 +165,12 @@
     color: var(--ink-3);
   }
 
-  /* P1-12: one vertical rhythm for every section on the page. */
+  /* One vertical rhythm for every section on the page.
+     The max was 10rem, which put 320px of nothing between two adjacent
+     sections at 1440 - measured at eight such bands, a quarter of the
+     page's height. 7rem reads as deliberate breathing room instead. */
   .section {
-    padding-block: clamp(6rem, 12vw, 10rem);
+    padding-block: clamp(4.5rem, 9vw, 7rem);
   }
 
   /* Numbers that sit in columns must not jitter between weights. */
