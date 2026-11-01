@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Links,
   Meta,
@@ -13,7 +13,6 @@ import "./styles.css";
 import "./i18n";
 import BackgroundImage from "./components/BackgroundImage";
 import { localeFromPath } from "./design/locale";
-import { initGA, trackPageview } from "./ga";
 import criticalCss from "./critical.css?inline";
 
 /**
@@ -141,34 +140,12 @@ export default function Root() {
   const { pathname } = useLocation();
   const isDemo = pathname.startsWith("/demo");
 
-  // gtag is ~176 kB of third-party JavaScript - larger than this app - and
-  // around 570ms of main-thread work. It waits for the first real
-  // interaction (or 8s), and page views are queued in src/ga until it is
-  // ready. counter.dev already counts visits that never interact.
-  useEffect(() => {
-    let timer = 0;
-    let done = false;
-    const EVENTS = ["pointerdown", "keydown", "scroll", "touchstart"];
-    const start = () => {
-      if (done) return;
-      done = true;
-      EVENTS.forEach((e) => window.removeEventListener(e, start));
-      window.clearTimeout(timer);
-      initGA();
-    };
-    EVENTS.forEach((e) =>
-      window.addEventListener(e, start, { once: true, passive: true })
-    );
-    timer = window.setTimeout(start, 8000);
-    return () => {
-      EVENTS.forEach((e) => window.removeEventListener(e, start));
-      window.clearTimeout(timer);
-    };
-  }, []);
-
-  useEffect(() => {
-    trackPageview(pathname);
-  }, [pathname]);
+  // No Google Analytics here, deliberately. gtag sets cookies and ships
+  // data to Google, which under the GDPR needs a consent banner before it
+  // may load - and a banner is a worse trade than the numbers are worth for
+  // a site this size. counter.dev, in the Layout above, counts visits
+  // without cookies and without identifying anyone, so the privacy policy
+  // can say "no tracking cookies" and have it be true.
 
   return (
     <div className="relative min-h-screen">
