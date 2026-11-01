@@ -16,7 +16,7 @@ export const meta = () =>
   });
 
 /**
- * DRAFT - the badge stays until the owner has read this and said otherwise.
+ * Reviewed and published.
  *
  * Everything here describes what the code actually does, which is why a few
  * things differ from the text this was drafted from:
@@ -139,6 +139,11 @@ export default function Privacy() {
 
   return (
     <div className="shell section">
+      {/* One centred measure for the page. 46rem rather than the 62ch used
+          elsewhere: this is read straight through, and at 62ch inside the
+          shell it sat as a narrow strip against a lot of open space. Much
+          wider than this and the line length starts to hurt. */}
+      <div className="mx-auto max-w-[46rem]">
       <nav aria-label="Breadcrumb" className="label">
         <Link to="/" className="signal-link">
           {t("nav_index")}
@@ -146,16 +151,9 @@ export default function Privacy() {
         / Privatumo politika
       </nav>
 
-      <h1 className="display-l mt-6">Privatumo politika</h1>
+      <h1 className="display-m mt-6">Privatumo politika</h1>
 
-      <p
-        className="label mt-4 inline-block border px-3 py-2"
-        style={{ borderColor: "var(--signal)", color: "var(--signal)" }}
-      >
-        Juodraštis &ndash; peržiūrėti prieš publikuojant
-      </p>
-
-      <div className="mt-12 max-w-[62ch]">
+      <div className="mt-12">
         <p className="lede">
           Ši politika paaiškina, kokius asmens duomenis renku per svetainę{" "}
           {PRACTICE.domain}, kam juos naudoju, kiek laiko saugau ir kokias
@@ -196,6 +194,7 @@ export default function Privacy() {
         ))}
 
         <p className="label mt-14">Atnaujinta: {UPDATED}</p>
+      </div>
       </div>
     </div>
   );
