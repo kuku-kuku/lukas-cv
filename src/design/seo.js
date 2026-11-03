@@ -24,6 +24,9 @@ export const DEFAULT_LOCALE = "lt";
 
 const OG_LOCALE = { lt: "lt_LT", en: "en_US" };
 
+/** What the share card shows, for anyone who cannot see it. */
+const IMAGE_ALT = "Beneta - software engineering practice";
+
 /** Absolute URL for a path within a locale. */
 export function urlFor(locale, path = "") {
   const prefix = LOCALES[locale] ?? "";
@@ -97,8 +100,15 @@ export function buildMeta({
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:image", content: img },
+    // Facebook and Messenger will not render a card until they have fetched
+    // the image themselves; declaring the type and the exact box lets them
+    // lay the card out on the first pass instead of showing a blank frame
+    // while the crawler catches up.
+    { property: "og:image:secure_url", content: img },
+    { property: "og:image:type", content: "image/png" },
     { property: "og:image:width", content: "1200" },
     { property: "og:image:height", content: "630" },
+    { property: "og:image:alt", content: IMAGE_ALT },
     { property: "og:url", content: url },
     { property: "og:type", content: "website" },
     { property: "og:locale", content: OG_LOCALE[locale] },
@@ -107,6 +117,7 @@ export function buildMeta({
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: img },
+    { name: "twitter:image:alt", content: IMAGE_ALT },
   ];
 
   if (translated) {

@@ -13,6 +13,7 @@ import "./styles.css";
 import "./i18n";
 import BackgroundImage from "./components/BackgroundImage";
 import { localeFromPath } from "./design/locale";
+import { CHANNELS } from "./design/content";
 import criticalCss from "./critical.css?inline";
 
 /**
@@ -25,8 +26,17 @@ import criticalCss from "./critical.css?inline";
  */
 
 export const links = () => [
-  { rel: "icon", type: "image/jpeg", href: "/logo.jpg" },
-  { rel: "apple-touch-icon", href: "/logo192.png" },
+  // The brand mark, in every size something asks for it. favicon.ico holds
+  // 16, 32 and 48 for the tab and for Google, which reads the 48 for the
+  // icon beside a search result and ignores anything under it. The explicit
+  // PNGs are what modern browsers take when both are offered; the .ico stays
+  // for the clients that only ever look at /favicon.ico.
+  { rel: "icon", href: "/favicon.ico", sizes: "any" },
+  { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48.png" },
+  { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
+  { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16.png" },
+  // 180 is what iOS wants; anything else it rescales badly.
+  { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
   { rel: "manifest", href: "/manifest.json" },
   // The two display faces, started in parallel with the stylesheet.
   // Lithuanian needs latin-ext, so both subsets are preloaded.
@@ -52,6 +62,18 @@ const STRUCTURED_DATA = {
   name: "Beneta - Lukas Beneta",
   url: "https://www.beneta.lt",
   image: "https://www.beneta.lt/og.png",
+  // The mark, declared as the organisation's logo. This is the field Google
+  // reads for the knowledge panel and the logo beside a result; the square
+  // 512 is the one it asks for, not the 1200x630 share card above.
+  logo: {
+    "@type": "ImageObject",
+    url: "https://www.beneta.lt/logo512.png",
+    width: 512,
+    height: 512,
+  },
+  // Same mark, same name, on every profile that links back here - that is
+  // how a search engine ties the accounts to the site.
+  sameAs: [CHANNELS.linkedin, CHANNELS.facebook, CHANNELS.instagram],
   description:
     "Independent software engineering practice: web applications, backend systems, API integrations, automation and performance work.",
   // A remote practice serves an area, not an address. No street address is
