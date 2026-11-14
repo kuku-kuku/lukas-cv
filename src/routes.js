@@ -1,4 +1,5 @@
 import { index, prefix, route } from "@react-router/dev/routes";
+import { SERVICE_PAGES } from "./design/pages.js";
 
 /**
  * Route table.
@@ -27,6 +28,12 @@ export default [
   ...prefix("en", [index("routes/home.en.jsx")]),
 
   route("privatumas", "routes/privacy.jsx"),
+
+  // ---- service pages (lt only), one module, one route id each ----
+  ...SERVICE_PAGES.map((p) =>
+    route(p.slug, "routes/service.jsx", { id: `service-${p.slug}` })
+  ),
+  route("darbai", "routes/work.jsx"),
 
   // ---- the demo sandbox: client-side only, not indexed ----
   route("demo", "routes/demo.jsx"),

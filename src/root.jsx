@@ -13,7 +13,8 @@ import "./styles.css";
 import "./i18n";
 import BackgroundImage from "./components/BackgroundImage";
 import { localeFromPath } from "./design/locale";
-import { CHANNELS } from "./design/content";
+import { CARE, CHANNELS, HOURLY, PACKAGES } from "./design/content";
+import { ORG_ID, SITE } from "./design/seo";
 import criticalCss from "./critical.css?inline";
 
 /**
@@ -56,12 +57,32 @@ export const links = () => [
   },
 ];
 
-const STRUCTURED_DATA = {
-  "@context": "https://schema.org",
+/*
+ * One business node for the whole site, with a stable @id that the service
+ * pages point at as their provider. Prices are read from content.js - this
+ * block used to hard-code the old 200 / 300 / 60 / 20 EUR list, so Google
+ * was told one set of prices while the page showed another.
+ */
+const offer = (name, spec) => ({
+  "@type": "Offer",
+  itemOffered: { "@type": "Service", name },
+  priceSpecification: {
+    "@type": spec.unitCode ? "UnitPriceSpecification" : "PriceSpecification",
+    priceCurrency: "EUR",
+    valueAddedTaxIncluded: false,
+    ...spec,
+  },
+});
+
+const pkgPrice = (id) => String(PACKAGES.find((p) => p.id === id).price);
+
+const BUSINESS = {
   "@type": "ProfessionalService",
-  name: "Beneta - Lukas Beneta",
-  url: "https://www.beneta.lt",
-  image: "https://www.beneta.lt/og.png",
+  "@id": ORG_ID,
+  name: "Beneta",
+  alternateName: "Beneta - Lukas Beneta",
+  url: `${SITE}/`,
+  image: `${SITE}/og.png`,
   // The mark, declared as the organisation's logo. This is the field Google
   // reads for the knowledge panel and the logo beside a result; the square
   // 512 is the one it asks for, not the 1200x630 share card above.
@@ -75,12 +96,13 @@ const STRUCTURED_DATA = {
   // how a search engine ties the accounts to the site.
   sameAs: [CHANNELS.linkedin, CHANNELS.facebook, CHANNELS.instagram],
   description:
-    "Independent software engineering practice: web applications, backend systems, API integrations, automation and performance work.",
+    "Internetinių svetainių, el. parduotuvių ir verslo sistemų kūrimas, atnaujinimas ir priežiūra Lietuvos verslui. Fiksuota kaina iš anksto, darbas nuotoliniu būdu.",
+  email: CHANNELS.email,
   // A remote practice serves an area, not an address. No street address is
   // published; Google treats this as a service-area business.
-  areaServed: ["LT", "EU"],
+  areaServed: { "@type": "Country", name: "Lietuva" },
   availableLanguage: ["lt", "en"],
-  priceRange: "20-300 EUR",
+  priceRange: `${HOURLY}-${pkgPrice("custom")}+ EUR`,
   currenciesAccepted: "EUR",
   address: {
     "@type": "PostalAddress",
@@ -92,33 +114,47 @@ const STRUCTURED_DATA = {
     jobTitle: "Software Engineer",
   },
   knowsAbout: [
-    "Web application development",
-    "REST API development",
-    "Node.js",
+    "Svetainių kūrimas",
+    "Elektroninių parduotuvių kūrimas",
+    "WordPress",
+    "WooCommerce",
     "React",
-    "Workflow automation",
-    "Technical SEO",
-    "Web performance",
+    "Node.js",
+    "Verslo procesų automatizavimas",
+    "Techninis SEO",
+    "Svetainių greitis",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Services",
+    name: "Paslaugos ir kainos",
     itemListElement: [
-      ["One-page website", { minPrice: "200" }],
-      ["Full website", { minPrice: "300" }],
-      ["Backend and API development", { minPrice: "300" }],
-      ["Server maintenance", { price: "60", unitText: "MONTH" }],
-      ["Website updates and maintenance", { price: "20", unitText: "HOUR" }],
-    ].map(([name, price]) => ({
-      "@type": "Offer",
-      itemOffered: { "@type": "Service", name },
-      priceSpecification: {
-        "@type": "PriceSpecification",
-        priceCurrency: "EUR",
-        ...price,
-      },
-    })),
+      offer("Vieno puslapio svetainė", { minPrice: pkgPrice("onepage") }),
+      offer("Verslo svetainė", { minPrice: pkgPrice("business") }),
+      offer("El. parduotuvė arba individualus sprendimas", { minPrice: pkgPrice("custom") }),
+      ...CARE.map((c) =>
+        offer(`Svetainės priežiūra: ${c.id === "calm" ? "Ramybė" : "Augimas"}`, {
+          price: String(c.price),
+          unitCode: "MON",
+        })
+      ),
+      offer("Vienkartiniai darbai", { price: String(HOURLY), unitCode: "HUR" }),
+    ],
   },
+};
+
+const STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    BUSINESS,
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: `${SITE}/`,
+      name: "Beneta",
+      inLanguage: ["lt", "en"],
+      publisher: { "@id": ORG_ID },
+    },
+  ],
 };
 
 export function Layout({ children }) {

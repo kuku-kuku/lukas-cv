@@ -87,6 +87,7 @@ export function buildMeta({
   image = "/og.png",
   noIndex = false,
   translated = true,
+  type = "website",
 }) {
   const url = urlFor(locale, path);
   const img = image.startsWith("http") ? image : `${SITE}${image}`;
@@ -94,7 +95,9 @@ export function buildMeta({
   const tags = [
     { title },
     { name: "description", content: description },
-    { tagName: "link", rel: "canonical", href: url },
+    // A noindex page (the 404) gets no canonical: pointing it at the home
+    // page would tell Google that every missing URL is the home page.
+    ...(noIndex ? [] : [{ tagName: "link", rel: "canonical", href: url }]),
 
     { property: "og:site_name", content: "Beneta" },
     { property: "og:title", content: title },
@@ -110,7 +113,7 @@ export function buildMeta({
     { property: "og:image:height", content: "630" },
     { property: "og:image:alt", content: IMAGE_ALT },
     { property: "og:url", content: url },
-    { property: "og:type", content: "website" },
+    { property: "og:type", content: type },
     { property: "og:locale", content: OG_LOCALE[locale] },
 
     { name: "twitter:card", content: "summary_large_image" },
@@ -146,16 +149,80 @@ export function buildMeta({
  */
 export function faqJsonLd(locale) {
   const t = i18n.getFixedT(locale);
+  return faqJsonLdFrom(FAQ.map((item) => ({ q: t(item.qKey), a: t(item.aKey) })));
+}
 
+/** FAQPage from plain { q, a } pairs - the service pages carry their own. */
+export function faqJsonLdFrom(items) {
   return {
     "script:ld+json": {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: FAQ.map((item) => ({
+      mainEntity: items.map(({ q, a }) => ({
         "@type": "Question",
-        name: t(item.qKey),
-        acceptedAnswer: { "@type": "Answer", text: t(item.aKey) },
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
       })),
+    },
+  };
+}
+
+/**
+ * The @id of the business node emitted once in root.jsx. Pages refer to it
+ * instead of repeating the business, so every Service on the site resolves
+ * to one provider.
+ */
+export const ORG_ID = `${SITE}/#business`;
+
+/** BreadcrumbList for a page one level below the home page. */
+export function breadcrumbJsonLd(name, path) {
+  return {
+    "script:ld+json": {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Pradžia", item: urlFor("lt") },
+        { "@type": "ListItem", position: 2, name, item: urlFor("lt", path) },
+      ],
+    },
+  };
+}
+
+/** Service node for a service page, priced from the same constants. */
+export function serviceJsonLd(page) {
+  const price = {
+    "@type": "PriceSpecification",
+    priceCurrency: "EUR",
+    minPrice: String(page.priceFrom),
+    valueAddedTaxIncluded: false,
+  };
+  if (page.priceUnit) {
+    price["@type"] = "UnitPriceSpecification";
+    price.price = String(page.priceFrom);
+    price.unitCode = page.priceUnit;
+    delete price.minPrice;
+  }
+  return {
+    "script:ld+json": {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${urlFor("lt", page.slug)}#service`,
+      name: page.serviceName,
+      serviceType: page.serviceType,
+      description: page.description,
+      url: urlFor("lt", page.slug),
+      provider: { "@id": ORG_ID },
+      areaServed: { "@type": "Country", name: "Lietuva" },
+      availableChannel: {
+        "@type": "ServiceChannel",
+        serviceUrl: urlFor("lt", page.slug),
+        availableLanguage: ["lt", "en"],
+      },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "EUR",
+        priceSpecification: price,
+      },
     },
   };
 }

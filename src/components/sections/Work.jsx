@@ -6,6 +6,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import SectionHead from "../SectionHead";
 import { PROJECTS } from "../../design/content";
 import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
@@ -297,6 +298,18 @@ export default function Work({ openId, onOpen }) {
                           </ul>
                         </PanelItem>
 
+                        {i18n.language === "lt" && (
+                          <PanelItem reduced={reduced}>
+                            <Link
+                              to={`/darbai#${project.id}`}
+                              className="signal-link relative z-10 mr-6 mt-7 inline-flex items-center gap-2 text-sm font-semibold"
+                            >
+                              {t("work_more")}
+                              <span aria-hidden="true" className="font-mono text-xs">→</span>
+                            </Link>
+                          </PanelItem>
+                        )}
+
                         {project.liveUrl && (
                           <PanelItem reduced={reduced}>
                             <a
@@ -321,6 +334,18 @@ export default function Work({ openId, onOpen }) {
           );
         })}
       </div>
+
+      {/* The notes above only mount when a row opens, so they are not in
+          the prerendered page. /darbai carries all of them as plain HTML. */}
+      {i18n.language === "lt" && (
+        <Link
+          to="/darbai"
+          className="signal-link mt-10 inline-flex items-center gap-2 text-base font-semibold"
+        >
+          {t("work_more")}
+          <span aria-hidden="true" className="font-mono text-xs">→</span>
+        </Link>
+      )}
 
       {/* Pointer-tracked preview: fixed to the viewport, never interactive,
           desktop only. The same image is in the expanded panel, so nothing

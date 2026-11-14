@@ -54,6 +54,8 @@ export const CAPABILITIES = [
     bodyKey: "cap_performance_body",
     tech: ["Core Web Vitals", "Lighthouse", "WebP / AVIF"],
     evidence: ["beneta", "bangu"],
+    // The service page covering this in full (lt only). None = the home page.
+    page: "svetainiu-atnaujinimas",
   },
   {
     id: "seo",
@@ -62,6 +64,7 @@ export const CAPABILITIES = [
     bodyKey: "cap_seo_body",
     tech: ["Techninis SEO", "Struktūriniai duomenys", "Sitemap"],
     evidence: ["bangu"],
+    page: "svetainiu-atnaujinimas",
   },
   {
     id: "shop",
@@ -70,6 +73,7 @@ export const CAPABILITIES = [
     bodyKey: "cap_shop_body",
     tech: ["WordPress", "WooCommerce", "Shopify"],
     evidence: ["flore"],
+    page: "elektroniniu-parduotuviu-kurimas",
   },
   {
     id: "automation",
@@ -78,6 +82,7 @@ export const CAPABILITIES = [
     bodyKey: "cap_automation_body",
     tech: ["Node.js", "REST API", "Airtable", "Resend"],
     evidence: ["syncara", "velgtilbud"],
+    page: "individualus-programavimas",
   },
   {
     id: "operations",
@@ -86,6 +91,7 @@ export const CAPABILITIES = [
     bodyKey: "cap_operations_body",
     tech: ["Vercel", "Atsarginės kopijos", "Stebėjimas"],
     evidence: [],
+    page: "svetainiu-prieziura",
   },
 ];
 
@@ -388,8 +394,12 @@ export const FAQ = [
   "price",
   "time",
   "edit",
-  "broken",
+  "mobile",
   "google",
+  "template",
+  "refresh",
+  "care",
+  "broken",
   "meet",
   "owns",
 ].map((id) => ({ id, qKey: `faq_${id}_q`, aKey: `faq_${id}_a` }));

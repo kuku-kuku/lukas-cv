@@ -16,15 +16,23 @@ const SITE = "https://www.beneta.lt";
 
 // Routes the crawler should see. The demo sandbox is client-side only and
 // is not in `prerender`, so it never reaches this list.
-const paths = (config.prerender || []).filter((p) => typeof p === "string");
+// "/404" is prerendered only to become 404.html; it is not a page.
+const NOT_PAGES = new Set(["/404"]);
+const paths = (config.prerender || []).filter(
+  (p) => typeof p === "string" && !NOT_PAGES.has(p)
+);
 
 const today = new Date().toISOString().slice(0, 10);
+
+// Google says it ignores <priority>; it is kept as a hint to other crawlers
+// about which pages are the business and which are paperwork.
+const priorityOf = (p) =>
+  p === "/" ? "1.0" : p === "/en" ? "0.8" : p === "/privatumas" ? "0.3" : "0.9";
 
 const urls = paths
   .map((p) => {
     const loc = p === "/" ? `${SITE}/` : `${SITE}${p}`;
-    // The home page is the entry point; everything else sits below it.
-    const priority = p === "/" ? "1.0" : p === "/en" ? "0.9" : "0.4";
+    const priority = priorityOf(p);
     return `  <url>
     <loc>${loc}</loc>
     <lastmod>${today}</lastmod>

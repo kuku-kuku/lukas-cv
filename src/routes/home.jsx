@@ -7,9 +7,12 @@ import { faqJsonLd } from "../design/seo";
 export const meta = () => [
   ...buildMeta({
     locale: "lt",
-    title: "Svetainių kūrimas verslui | Beneta",
+    // "svetainių kūrimas verslui" is the query this page owns; the price in
+    // the title is what every competitor on page one shows, and the one
+    // fact a searcher is scanning for.
+    title: "Svetainių kūrimas verslui nuo 490 € | Beneta",
     description:
-      "Kuriu svetaines smulkiam verslui: nuo 490 EUR, per 1-2 savaites. Greita, aiški svetainė, kurią randa Google. Visą darbą atlieku nuotoliniu būdu.",
+      "Internetinių svetainių kūrimas verslui: nuo 490 €, per 1-2 savaites. Fiksuota kaina iš anksto, progresas kas savaitę, pirma konsultacija nemokama.",
   }),
   faqJsonLd("lt"),
 ];

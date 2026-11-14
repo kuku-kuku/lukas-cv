@@ -7,9 +7,9 @@ import { faqJsonLd } from "../design/seo";
 export const meta = () => [
   ...buildMeta({
     locale: "en",
-    title: "Websites for small business | Beneta",
+    title: "Website development for business from EUR 490 | Beneta",
     description:
-      "Websites for small businesses, from EUR 490 and ready in 1-2 weeks. Fast, clear, and findable on Google. Everything handled remotely.",
+      "Website development for businesses: from EUR 490, ready in 1-2 weeks. A fixed price agreed up front, progress every week, a free first conversation.",
   }),
   faqJsonLd("en"),
 ];

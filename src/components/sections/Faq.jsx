@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import SectionHead from "../SectionHead";
 import Rule from "../motion/Rule";
@@ -90,20 +90,22 @@ export default function Faq() {
                   </button>
                 </h3>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      id={`faq-${item.id}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: reduced ? 0 : DUR.base, ease: EASE }}
-                      className="overflow-hidden"
-                    >
-                      <p className="copy pb-6">{t(item.aKey)}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Always mounted, collapsed by height. The answers used to
+                    mount only when opened, so the prerendered page carried
+                    the questions without a single answer - while the
+                    FAQPage data claimed all eleven. */}
+                <motion.div
+                  id={`faq-${item.id}`}
+                  initial={false}
+                  animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                  transition={{ duration: reduced ? 0 : DUR.base, ease: EASE }}
+                  className="overflow-hidden"
+                  style={isOpen ? undefined : { height: 0, opacity: 0 }}
+                  aria-hidden={!isOpen}
+                  inert={isOpen ? undefined : ""}
+                >
+                  <p className="copy pb-6">{t(item.aKey)}</p>
+                </motion.div>
               </motion.li>
             );
           })}

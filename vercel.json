@@ -6,7 +6,11 @@
   "outputDirectory": "build/client",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/demo",
+      "destination": "/__spa-fallback.html"
+    },
+    {
+      "source": "/demo/:path*",
       "destination": "/__spa-fallback.html"
     }
   ],
@@ -29,5 +33,6 @@
         }
       ]
     }
-  ]
+  ],
+  "trailingSlash": false
 }

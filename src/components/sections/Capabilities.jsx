@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
@@ -25,7 +26,8 @@ import useReveal from "../../design/useReveal";
  * is shared so there is only one description of a capability in the DOM.
  */
 export default function Capabilities({ onEvidence }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isLt = i18n.language === "lt";
   const compact = useCompactViewport();
   const fine = useFinePointer();
   const reduced = useReducedMotion();
@@ -93,6 +95,18 @@ export default function Capabilities({ onEvidence }) {
             })}
           </div>
         </div>
+      )}
+
+      {/* A real link to the page that covers this problem in full. The
+          service pages are Lithuanian only, so /en does not point at them. */}
+      {cap.page && isLt && (
+        <Link
+          to={`/${cap.page}`}
+          className="signal-link mt-7 inline-flex items-center gap-2 text-base font-semibold"
+        >
+          {t("cap_more")}
+          <span aria-hidden="true" className="font-mono text-xs">→</span>
+        </Link>
       )}
     </div>
   );

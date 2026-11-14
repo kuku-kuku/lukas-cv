@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import ChannelLinks from "../ChannelLinks";
 import { CAPABILITIES, LEGAL, PRACTICE } from "../../design/content";
+import { SERVICE_PAGES } from "../../design/pages";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -11,7 +12,8 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * capability list, so it can never say something the page does not.
  */
 export default function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isLt = i18n.language === "lt";
   const reduced = useReducedMotion();
 
   const items = [t("footer_available"), ...CAPABILITIES.map((c) => t(c.titleKey))];
@@ -57,6 +59,33 @@ export default function Footer() {
           </span>
           <p className="mt-2 text-base text-ink-2">{PRACTICE.name}</p>
         </div>
+
+        {/* The services as crawlable links, on every page. Lithuanian only,
+            because the service pages are; /en links to its own home. */}
+        {isLt && (
+          <nav aria-label={t("footer_services")} className="md:order-none">
+            <span className="label">{t("footer_services")}</span>
+            <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+              <li>
+                <Link to="/" className="signal-link text-sm font-medium">
+                  {t("footer_home_service")}
+                </Link>
+              </li>
+              {SERVICE_PAGES.map((p) => (
+                <li key={p.slug}>
+                  <Link to={`/${p.slug}`} className="signal-link text-sm font-medium">
+                    {p.nav}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link to="/darbai" className="signal-link text-sm font-medium">
+                  {t("nav_work")}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        )}
 
         <div className="flex flex-col gap-2 md:items-end">
           {/* Icons rather than a row of words: the email address alone ran

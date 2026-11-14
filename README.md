@@ -16,9 +16,25 @@ build warning-free.
 
 ## Routes
 
-`/` is the whole site (one page, seven sections). `/demo`, `/demo/admin`,
-`/demo/cart` and `/demo/admin-panel` are the e-commerce demo and are code-split;
-anything else renders the 404 page.
+`/` (lt) and `/en` are the one-page site. The Lithuanian service pages
+(`/elektroniniu-parduotuviu-kurimas`, `/svetainiu-atnaujinimas`,
+`/svetainiu-prieziura`, `/individualus-programavimas`) all render from
+`src/routes/service.jsx` with their copy in `src/design/pages.js`; `/darbai`
+is the full work index. Every one of these is prerendered and listed in the
+sitemap automatically (`react-router.config.js` reads `SERVICE_PAGES`).
+
+`/demo/*` is the e-commerce demo, a client-side SPA served by the only rewrite
+in `vercel.json`. Any other path gets `404.html` with a real 404 status
+(`scripts/finish-build.mjs` writes it from the prerendered `/404`).
+
+To check a production build locally with the same routing as Vercel:
+
+```bash
+npm run build && node scripts/serve-build.mjs
+```
+
+The SEO audit behind this structure, and what is still open, is in
+`docs/SEO-AUDIT.md`.
 
 ## Design system
 

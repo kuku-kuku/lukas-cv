@@ -19,7 +19,17 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * and fades as you leave) - the lattice behind it handles its own departure.
  */
 
-const LINES = ["Svetainės,", "kurios atneša", "klientų"];
+/*
+ * The three display lines are the brand statement; the kicker above them is
+ * what the page is about, in the words people type into Google. Both sit
+ * inside the one <h1>, so the heading reads "Internetinių svetainių kūrimas
+ * verslui. Svetainės, kurios atneša klientų." - the service first, the
+ * promise second - without shrinking the typography that makes the page.
+ *
+ * The lines are i18n keys now. They used to be a Lithuanian constant, so
+ * /en rendered a Lithuanian headline.
+ */
+const LINE_KEYS = ["hero_line_1", "hero_line_2", "hero_line_3"];
 
 /*
  * A note on the opening.
@@ -36,6 +46,8 @@ const LINES = ["Svetainės,", "kurios atneša", "klientų"];
 export default function Masthead() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
+  const LINES = LINE_KEYS.map((k) => t(k));
+  const kicker = t("hero_kicker");
 
   // Driven by raw window scroll rather than by measuring this section:
   // the masthead sits at scroll 0, where no scroll event ever fires to
@@ -105,9 +117,19 @@ export default function Masthead() {
             byline below and by the JSON-LD, which is where it belongs. */}
         <h1
           id="masthead-title"
-          aria-label={`${LINES.join(" ")}.`}
+          aria-label={`${kicker}. ${LINES.join(" ")}.`}
           className="display-xl"
         >
+          <span
+            aria-hidden="true"
+            className="hero-in mb-6 flex items-center gap-3 text-lg font-semibold md:mb-8 md:text-2xl"
+            style={{ "--delay": "0ms", letterSpacing: "-0.01em", lineHeight: 1.25 }}
+          >
+            {/* The signal square every list on the site uses, drawn rather
+                than typed so the heading's text starts with the words. */}
+            <span className="h-2 w-2 shrink-0" style={{ background: "var(--signal)" }} />
+            {kicker}
+          </span>
           {LINES.map((line, i) => (
             <span key={line} className="mask-line">
               <span
@@ -167,7 +189,7 @@ export default function Masthead() {
 
               <button
                 type="button"
-                onClick={() => goTo("method")}
+                onClick={() => goTo("pricing")}
                 className="group inline-flex items-center gap-2 border-b px-1 py-4 text-sm font-medium"
                 style={{ borderColor: "var(--line-strong)" }}
               >
