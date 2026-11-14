@@ -62,7 +62,8 @@ export const CAPABILITIES = [
     index: "03",
     titleKey: "cap_seo_title",
     bodyKey: "cap_seo_body",
-    tech: ["Techninis SEO", "Struktūriniai duomenys", "Sitemap"],
+    // { key } entries are words, not product names, so they are translated.
+    tech: [{ key: "tech_seo" }, { key: "tech_schema" }, "Sitemap"],
     evidence: ["bangu"],
     page: "svetainiu-atnaujinimas",
   },
@@ -89,7 +90,7 @@ export const CAPABILITIES = [
     index: "06",
     titleKey: "cap_operations_title",
     bodyKey: "cap_operations_body",
-    tech: ["Vercel", "Atsarginės kopijos", "Stebėjimas"],
+    tech: ["Vercel", { key: "tech_backups" }, { key: "tech_monitoring" }],
     evidence: [],
     page: "svetainiu-prieziura",
   },
@@ -325,7 +326,9 @@ export const PACKAGES = [
   {
     id: "onepage",
     price: 490,
-    duration: "1-2 sav.",
+    // An i18n key, not a string: these used to be Lithuanian literals and
+    // showed as "1-2 sav." on /en.
+    durationKey: "pkg_onepage_time",
     featured: false,
     titleKey: "pkg_onepage_title",
     forKey: "pkg_onepage_for",
@@ -342,7 +345,7 @@ export const PACKAGES = [
   {
     id: "business",
     price: 990,
-    duration: "2-4 sav.",
+    durationKey: "pkg_business_time",
     featured: true,
     titleKey: "pkg_business_title",
     forKey: "pkg_business_for",
@@ -361,7 +364,7 @@ export const PACKAGES = [
   {
     id: "custom",
     price: 1900,
-    duration: "pagal sąmatą",
+    durationKey: "pkg_custom_time",
     featured: false,
     titleKey: "pkg_custom_title",
     forKey: "pkg_custom_for",
@@ -387,8 +390,7 @@ export const CARE = [
 export const HOURLY = 35;
 
 /**
- * FAQ. Rendered as an accordion and as FAQPage structured data, so the
- * answers Google shows are the answers on the page.
+ * FAQ. Rendered as an accordion whose answers are always in the HTML.
  */
 export const FAQ = [
   "price",

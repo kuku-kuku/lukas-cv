@@ -106,8 +106,7 @@ export function BulletList({ items, className = "" }) {
 
 /**
  * FAQ as native <details>. The answers are in the HTML whether or not a
- * question is open, which is what lets the FAQPage data on the same page
- * be honest: Google is shown exactly the text a visitor can read.
+ * question is open, so a search engine reads them without clicking.
  */
 export function FaqList({ items }) {
   return (

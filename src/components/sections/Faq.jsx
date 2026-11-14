@@ -16,8 +16,9 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * thing afterwards. Answering those in public is worth more than any
  * adjective.
  *
- * The same answers are emitted as FAQPage structured data from root.jsx, so
- * what Google shows is what the page says.
+ * Every answer is in the prerendered HTML, collapsed by height, so search
+ * engines read it without clicking. There is deliberately no FAQPage markup
+ * (see src/design/seo.js).
  *
  * The right-hand column used to be four empty grid columns. Someone whose
  * question is not on the list is the most motivated reader on this page, so

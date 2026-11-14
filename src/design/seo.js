@@ -1,6 +1,3 @@
-import i18n from "../i18n";
-import { FAQ } from "./content";
-
 /**
  * Per-route document metadata.
  *
@@ -24,8 +21,11 @@ export const DEFAULT_LOCALE = "lt";
 
 const OG_LOCALE = { lt: "lt_LT", en: "en_US" };
 
-/** What the share card shows, for anyone who cannot see it. */
-const IMAGE_ALT = "Beneta - software engineering practice";
+/** What the share card shows, for anyone who cannot see it. Per locale. */
+const IMAGE_ALT = {
+  lt: "Beneta - internetinių svetainių kūrimas verslui",
+  en: "Beneta - website development for business",
+};
 
 /** Absolute URL for a path within a locale. */
 export function urlFor(locale, path = "") {
@@ -111,7 +111,7 @@ export function buildMeta({
     { property: "og:image:type", content: "image/png" },
     { property: "og:image:width", content: "1200" },
     { property: "og:image:height", content: "630" },
-    { property: "og:image:alt", content: IMAGE_ALT },
+    { property: "og:image:alt", content: IMAGE_ALT[locale] },
     { property: "og:url", content: url },
     { property: "og:type", content: type },
     { property: "og:locale", content: OG_LOCALE[locale] },
@@ -120,7 +120,7 @@ export function buildMeta({
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: img },
-    { name: "twitter:image:alt", content: IMAGE_ALT },
+    { name: "twitter:image:alt", content: IMAGE_ALT[locale] },
   ];
 
   if (translated) {
@@ -140,32 +140,11 @@ export function buildMeta({
   return tags;
 }
 
-/**
- * FAQPage structured data, built from the same strings the page renders.
- *
- * Google can show these answers directly in search results, so they must be
- * the answers on the page - not a separate, friendlier set written for the
- * crawler. Taking them from i18n guarantees that.
+/*
+ * FAQPage markup was removed on purpose (2026-11). Google shows FAQ rich
+ * results only for well-known government and health sites, so the markup
+ * earned nothing here. The FAQ answers are in the prerendered HTML.
  */
-export function faqJsonLd(locale) {
-  const t = i18n.getFixedT(locale);
-  return faqJsonLdFrom(FAQ.map((item) => ({ q: t(item.qKey), a: t(item.aKey) })));
-}
-
-/** FAQPage from plain { q, a } pairs - the service pages carry their own. */
-export function faqJsonLdFrom(items) {
-  return {
-    "script:ld+json": {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: items.map(({ q, a }) => ({
-        "@type": "Question",
-        name: q,
-        acceptedAnswer: { "@type": "Answer", text: a },
-      })),
-    },
-  };
-}
 
 /**
  * The @id of the business node emitted once in root.jsx. Pages refer to it

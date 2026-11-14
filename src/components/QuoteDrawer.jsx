@@ -241,7 +241,7 @@ export default function QuoteDrawer({ packageId, onClose }) {
                 </h2>
                 {pkg && (
                   <p className="nums mt-2 font-mono text-base text-ink-2">
-                    {t("pkg_from")} {pkg.price} &euro; &middot; {pkg.duration}
+                    {t("pkg_from")} {pkg.price} &euro; &middot; {t(pkg.durationKey)}
                   </p>
                 )}
               </div>

@@ -111,25 +111,28 @@ export default function Masthead() {
         className="shell relative z-10 py-10"
         style={reduced ? undefined : { y, opacity: fade }}
       >
-        {/* The accessible name is the visible headline. It used to be a
-            hidden string that said something else, so the page announced a
-            heading nobody could see. The practice name is carried by the
-            byline below and by the JSON-LD, which is where it belongs. */}
+        {/* The H1 is the service, in the words people search with. The
+            three display lines below are the brand statement: same size,
+            same animation as before, but a paragraph, so the page has one
+            descriptive heading instead of a heading that is mostly slogan. */}
         <h1
           id="masthead-title"
-          aria-label={`${kicker}. ${LINES.join(" ")}.`}
+          className="hero-in mb-6 flex items-center gap-3 text-lg font-semibold md:mb-8 md:text-2xl"
+          style={{ "--delay": "0ms", letterSpacing: "-0.01em", lineHeight: 1.25 }}
+        >
+          {/* The signal square every list on the site uses, drawn rather
+              than typed so the heading's text starts with the words. */}
+          <span aria-hidden="true" className="h-2 w-2 shrink-0" style={{ background: "var(--signal)" }} />
+          {kicker}
+        </h1>
+
+        {/* The fragments are aria-hidden for the line-by-line entrance, so
+            the statement is given back as one accessible name. */}
+        <p
+          role="text"
+          aria-label={`${LINES.join(" ")}.`}
           className="display-xl"
         >
-          <span
-            aria-hidden="true"
-            className="hero-in mb-6 flex items-center gap-3 text-lg font-semibold md:mb-8 md:text-2xl"
-            style={{ "--delay": "0ms", letterSpacing: "-0.01em", lineHeight: 1.25 }}
-          >
-            {/* The signal square every list on the site uses, drawn rather
-                than typed so the heading's text starts with the words. */}
-            <span className="h-2 w-2 shrink-0" style={{ background: "var(--signal)" }} />
-            {kicker}
-          </span>
           {LINES.map((line, i) => (
             <span key={line} className="mask-line">
               <span
@@ -146,7 +149,7 @@ export default function Masthead() {
               </span>
             </span>
           ))}
-        </h1>
+        </p>
 
         {/* Two columns, not three rows. The lede and its buttons used to
             sit side by side, which pushed the work index onto a second row

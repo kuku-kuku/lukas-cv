@@ -30,13 +30,16 @@ function missing(lang, key) {
 function collectKeys() {
   const keys = [];
   SECTIONS.forEach((s) => keys.push(s.labelKey));
-  CAPABILITIES.forEach((c) => keys.push(c.titleKey, c.bodyKey));
+  CAPABILITIES.forEach((c) => {
+    keys.push(c.titleKey, c.bodyKey);
+    c.tech.filter((x) => typeof x !== "string").forEach((x) => keys.push(x.key));
+  });
   SECTIONS.forEach((x) => keys.push(x.labelKey));
   METHOD_NODES.forEach((n) => keys.push(n.titleKey, n.bodyKey));
   PROCESS_STEPS.forEach((s) => keys.push(s.titleKey, s.bodyKey, s.outKey));
   STACK_GROUPS.forEach((g) => keys.push(g.titleKey));
   PACKAGES.forEach((p) => {
-    keys.push(p.titleKey, p.forKey);
+    keys.push(p.titleKey, p.forKey, p.durationKey);
     p.includes.forEach((k) => keys.push(k));
   });
   CARE.forEach((c) => keys.push(c.titleKey, c.bodyKey));

@@ -63,11 +63,14 @@ export default function Capabilities({ onEvidence }) {
             {t("tech_details")}
           </summary>
           <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
-            {cap.tech.map((item) => (
-              <li key={item} className="font-mono text-label text-ink-2">
-                {item}
-              </li>
-            ))}
+            {cap.tech.map((item) => {
+              const label = typeof item === "string" ? item : t(item.key);
+              return (
+                <li key={label} className="font-mono text-label text-ink-2">
+                  {label}
+                </li>
+              );
+            })}
           </ul>
         </details>
       )}

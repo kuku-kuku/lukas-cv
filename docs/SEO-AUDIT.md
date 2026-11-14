@@ -208,3 +208,59 @@ and correct `metricNote` (section J).
 - [paslaugos.lt maintenance](https://paslaugos.lt/kainos/interneto-svetainiu-kurimas/interneto-svetainiu-prieziura)
 - [site.lt](https://site.lt/paslaugos/internetiniu-svetainiu-kurimas), [kodexa.lt](https://kodexa.lt/), [myweb.lt](https://myweb.lt/), [saitai.lt](https://saitai.lt/paslaugos/svetainiu-kurimas/), [svetainiudizainas.lt](https://svetainiudizainas.lt/), [webdnr.lt](https://webdnr.lt/wordpress-svetainiu-kurimas/), [studija4d.lt](https://www.studija4d.lt/interneto-svetainiu-kurimas/)
 - [jmedia.lt agency price study 2026](https://jmedia.lt/straipsniai/svetainiu-kainos-tyrimas-2026/)
+
+---
+
+# Second pass (2026-11-14, after deploy of 3d72a90)
+
+Checked against the live site first. Already fixed and live: FAQ answers in
+the HTML (both languages), real 404 status, `/en/` -> `/en` 308, service pages,
+JSON-LD prices. Several points in the second brief described the site before
+that deploy.
+
+## Fixed in this pass
+
+- **H1 split from the slogan.** The H1 is now only "Internetinių svetainių
+  kūrimas verslui" (`/en`: "Website development for business"). "Svetainės,
+  kurios atneša klientų." is a `<p>` with the same size and entrance
+  animation, with one accessible name.
+- **Hero intro** now names websites, online shops and custom digital
+  solutions, plus who they are for.
+- **Lithuanian on /en:** package durations (`1-2 sav.`, `2-4 sav.`,
+  `pagal sąmatą`) are now i18n keys -> "1-2 weeks", "2-4 weeks", "quoted per
+  project", in the pricing cards and the quote drawer. The capability tech
+  labels shown after a click ("Techninis SEO", "Struktūriniai duomenys",
+  "Atsarginės kopijos", "Stebėjimas") are translated too. Tests now cover both.
+- **FAQPage markup removed** from every page. Google limits FAQ rich results
+  to well-known government and health sites (since 2023), so this site is not
+  eligible. The answers stay in the prerendered HTML.
+- **Metadata:** LT title "Internetinių svetainių kūrimas verslui nuo 490 € |
+  Beneta" (57 chars, matches the H1); LT and EN descriptions rewritten (155 /
+  153 chars) to mention sites, shops and systems; `og:image:alt` is now per
+  language.
+
+## Keyword-to-page map (the four service areas)
+
+These pages already exist from the first pass. This map exists to stop them
+competing with each other.
+
+| Area | Owns | Must not target | Overlap risk |
+| --- | --- | --- | --- |
+| `/` website development | internetinių / interneto svetainių kūrimas, svetainių kūrimas verslui, svetainės kūrimo kaina | e-shop, redesign terms | Home vs a future `/svetainiu-kurimas` page - **do not create that page**; the home page owns the query |
+| `/elektroniniu-parduotuviu-kurimas` | el. parduotuvės kūrimas, internetinės parduotuvės kūrimas, el. parduotuvės kaina, WooCommerce / Shopify parduotuvė | "svetainių kūrimas" | Shares "kaina" queries with home; fine, because the intent differs (shop vs site) |
+| `/svetainiu-atnaujinimas` | svetainės atnaujinimas, senos svetainės modernizavimas, dizaino atnaujinimas, lėta svetainė, svetainės neranda Google | "naujos svetainės kūrimas" | SEO terms live here for now. Give SEO its own page only once there is enough original material (e.g. real before/after audits) |
+| `/individualus-programavimas` | individualus programavimas, verslo sistemų kūrimas, internetinių sistemų kūrimas, verslo procesų automatizavimas | e-shop terms | "Automatizavimas" and "programavimas" stay on one page until there are enough automation case studies to fill two |
+
+**What to build next, in order:** (1) a pricing guide article "Kiek kainuoja
+svetainė" - the highest-intent informational query, which home and the
+service pages answer only briefly; (2) case studies for Bangų klinika and FA
+Kaunas, once there is real detail; (3) a separate SEO page only after (2)
+supplies proof. No new thin pages before then.
+
+## Still open
+
+- Lighthouse not run (not installed; needs a download). The last saved mobile
+  report (2026-10-31) shows Performance 61 / LCP 6.9 s, and the "88 mobile"
+  `metricNote` in `content.js` is still unverified.
+- `beneta.lt` -> `www` is still a 307 (Vercel dashboard setting).
+- Search Console: sitemap submission, indexing requests, real query data.

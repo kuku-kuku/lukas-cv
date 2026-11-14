@@ -8,12 +8,7 @@ import Rule from "../components/motion/Rule";
 import { CARE, HOURLY, PROJECTS } from "../design/content";
 import { servicePage, SERVICE_PAGES } from "../design/pages";
 import { useLocale } from "../design/locale";
-import {
-  breadcrumbJsonLd,
-  buildMeta,
-  faqJsonLdFrom,
-  serviceJsonLd,
-} from "../design/seo";
+import { breadcrumbJsonLd, buildMeta, serviceJsonLd } from "../design/seo";
 
 /**
  * One module for every service page. Each is registered in routes.js under
@@ -36,7 +31,7 @@ export const meta = ({ location }) => {
     }),
     serviceJsonLd(page),
     breadcrumbJsonLd(page.nav, page.slug),
-    faqJsonLdFrom(page.faq),
+    // No FAQPage: not eligible for FAQ rich results (see routes/home.jsx).
   ];
 };
 

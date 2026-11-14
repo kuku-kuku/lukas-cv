@@ -95,7 +95,7 @@ export default function Pricing({ onChoose }) {
                   {pkg.price} &euro;
                 </span>
               </p>
-                <p className="label mt-2">{pkg.duration}</p>
+                <p className="label mt-2">{t(pkg.durationKey)}</p>
               </div>
 
               <div>
