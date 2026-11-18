@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { track } from "../design/analytics";
 import { BUDGETS, describeError, sendBrief, validateBrief } from "../design/brief";
 import { PACKAGES } from "../design/content";
 import { DUR, EASE } from "../design/motion";
@@ -141,6 +142,7 @@ export default function QuoteDrawer({ packageId, onClose }) {
     try {
       await sendBrief(form, t);
       setSent(true);
+      track("generate_lead", { form: "quote", package: packageId || "none", budget: budget || "none" });
       form.reset();
     } catch (err) {
       console.error("Email send error:", err);

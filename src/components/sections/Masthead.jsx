@@ -148,7 +148,7 @@ export default function Masthead() {
               style={{ "--delay": "240ms" }}
             >
               <Magnetic>
-                <button
+                <button data-track="cta_brief" data-track-label="hero"
                   type="button"
                   onClick={() => goTo("contact")}
                   className="group relative inline-flex items-center gap-3 overflow-hidden border px-6 py-4 text-sm font-semibold"

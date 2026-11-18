@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
+import { track } from "../../design/analytics";
 import Rule from "../motion/Rule";
 import ChannelLinks from "../ChannelLinks";
 import { CHANNELS } from "../../design/content";
@@ -185,6 +186,7 @@ export default function Contact() {
       form.reset();
       grow(autosize.current);
       setSent(true);
+      track("generate_lead", { form: "contact", topic: topic || "none", budget: budget || "none" });
     } catch (err) {
       console.error("Email send error:", err);
       setError(`${t("form_error_prefix", "Could not send the message")}: ${describe(err)}`);

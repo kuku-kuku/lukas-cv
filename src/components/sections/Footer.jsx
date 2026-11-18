@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import ChannelLinks from "../ChannelLinks";
+import { openConsent } from "../../design/analytics";
 import { CAPABILITIES, LEGAL, PRACTICE } from "../../design/content";
 import { SERVICE_PAGES } from "../../design/pages";
 import { useReducedMotion } from "../../design/useMotionPrefs";
@@ -104,6 +105,13 @@ export default function Footer() {
             <Link to="/privatumas" className="signal-link text-sm font-medium">
               {t("nav_privacy", "Privatumo politika")}
             </Link>
+            <button
+              type="button"
+              onClick={openConsent}
+              className="signal-link text-left text-sm font-medium"
+            >
+              {t("consent_settings")}
+            </button>
           </div>
 
           {(LEGAL.entity || LEGAL.code) && (

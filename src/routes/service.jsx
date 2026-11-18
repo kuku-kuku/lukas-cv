@@ -52,7 +52,7 @@ function ServicePage({ page }) {
       {/* ---- opening ---- */}
       <section className="shell pb-16 pt-12 md:pb-24 md:pt-20" aria-labelledby="page-title">
         <nav aria-label="Kelias" className="label">
-          <Link to="/" className="signal-link">
+          <Link data-track="cta_brief" data-track-label="service_page" to="/" className="signal-link">
             Pradžia
           </Link>{" "}
           / {page.nav}

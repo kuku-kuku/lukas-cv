@@ -15,6 +15,8 @@ import BackgroundImage from "./components/BackgroundImage";
 import { localeFromPath } from "./design/locale";
 import { CARE, CHANNELS, HOURLY, PACKAGES } from "./design/content";
 import { ORG_ID, SITE } from "./design/seo";
+import ConsentBanner from "./components/ConsentBanner";
+import { CONSENT_BOOT } from "./design/analytics";
 import criticalCss from "./critical.css?inline";
 
 /**
@@ -174,6 +176,9 @@ export function Layout({ children }) {
         {/* Self-hosted faces and the page shell, inline so the first paint
             needs no stylesheet round trip. */}
         <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
+        {/* Consent Mode v2 defaults: everything denied until the visitor
+            says yes. Must run before gtag.js - see design/analytics.js. */}
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
@@ -198,18 +203,16 @@ export default function Root() {
   const { pathname } = useLocation();
   const isDemo = pathname.startsWith("/demo");
 
-  // No Google Analytics here, deliberately. gtag sets cookies and ships
-  // data to Google, which under the GDPR needs a consent banner before it
-  // may load - and a banner is a worse trade than the numbers are worth for
-  // a site this size. counter.dev, in the Layout above, counts visits
-  // without cookies and without identifying anyone, so the privacy policy
-  // can say "no tracking cookies" and have it be true.
+  // Google Analytics loads only after consent (ConsentBanner +
+  // design/analytics.js). counter.dev, in the Layout above, keeps counting
+  // visits without cookies for everyone, including people who say no.
 
   return (
     <div className="relative min-h-screen">
       {/* The photographic background belongs to the demo sandbox only. */}
       {isDemo && <BackgroundImage />}
       <Outlet />
+      {!isDemo && <ConsentBanner />}
     </div>
   );
 }

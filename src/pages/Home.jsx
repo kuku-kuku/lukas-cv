@@ -8,6 +8,7 @@ import Why from "../components/sections/Why";
 import Pricing from "../components/sections/Pricing";
 import Faq from "../components/sections/Faq";
 import QuoteDrawer from "../components/QuoteDrawer";
+import { track } from "../design/analytics";
 import Process from "../components/sections/Process";
 import Contact from "../components/sections/Contact";
 import Footer from "../components/sections/Footer";
@@ -78,7 +79,12 @@ export default function Home() {
         <Why />
         <Capabilities onEvidence={openFromEvidence} />
         <Work openId={openProject} onOpen={setOpenProject} />
-        <Pricing onChoose={setQuotePackage} />
+        <Pricing
+          onChoose={(id) => {
+            track("quote_open", { package: id });
+            setQuotePackage(id);
+          }}
+        />
         <Process />
         <Faq />
         <Contact />

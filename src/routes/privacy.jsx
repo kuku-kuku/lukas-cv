@@ -21,8 +21,8 @@ export const meta = () =>
  * Everything here describes what the code actually does, which is why a few
  * things differ from the text this was drafted from:
  *
- *  - Google Analytics was removed rather than disclosed. It sets cookies, so
- *    keeping it would have required a consent banner before gtag may load.
+ *  - Google Analytics 4 is back (2026-11-18), loaded only after consent
+ *    through ConsentBanner; sections 3, 5 and 8 describe it.
  *  - Vercel Web Analytics is not installed; counter.dev already counts
  *    visits without cookies, so section 5 names that instead.
  *  - No reCAPTCHA. The "reCAPTCHA" and "GA4" strings in content.js are
@@ -33,7 +33,7 @@ export const meta = () =>
  * Anything added to this page must be checked against the code the same way.
  */
 
-const UPDATED = "2026-11-01";
+const UPDATED = "2026-11-18";
 
 /** A paragraph, or a list with an optional lead-in. */
 const SECTIONS = [
@@ -63,7 +63,8 @@ const SECTIONS = [
       "Vykdyti sutartį, jei dirbame kartu - sutarties vykdymas (BDAR 6 str. 1 d. b p.).",
       "Išrašyti sąskaitas ir saugoti apskaitos dokumentus - teisinė prievolė (BDAR 6 str. 1 d. c p.).",
       "Užtikrinti svetainės veikimą ir saugumą - teisėtas interesas (BDAR 6 str. 1 d. f p.).",
-      "Anoniminė lankomumo statistika - teisėtas interesas tobulinti svetainę (BDAR 6 str. 1 d. f p.).",
+      "Anoniminė lankomumo statistika (counter.dev) - teisėtas interesas tobulinti svetainę (BDAR 6 str. 1 d. f p.).",
+      "Google Analytics statistika - tik jūsų sutikimu (BDAR 6 str. 1 d. a p.). Sutikimą galite bet kada atšaukti per „Slapukų nustatymai” svetainės apačioje.",
     ],
     after: [
       "Nesiunčiu naujienlaiškių, nenaudoju jūsų duomenų reklamai ir jų neparduodu. Automatizuotų sprendimų ar profiliavimo nevykdau.",
@@ -89,6 +90,7 @@ const SECTIONS = [
       "Google (Gmail) - mano el. pašto paslauga.",
       "Vercel Inc. (JAV) - svetainės priegloba.",
       "counter.dev - anoniminė lankomumo statistika be slapukų.",
+      "Google Ireland Limited (Google Analytics) - lankomumo statistika, tik jei sutinkate. Renkama: aplankyti puslapiai, apsilankymo šaltinis, įrenginio ir naršyklės tipas, apytikslė vieta (šalis, miestas), paspaudimai ant pagrindinių mygtukų. IP adresai Google Analytics 4 nesaugomi. Duomenys saugomi 14 mėnesių.",
     ],
     after: [
       "Dalis šių paslaugų teikėjų duomenis tvarko už Europos ekonominės erdvės ribų (JAV). Tokiu atveju duomenų perdavimas grindžiamas ES-JAV duomenų privatumo sistema arba Europos Komisijos patvirtintomis standartinėmis sutarčių sąlygomis.",
@@ -122,7 +124,9 @@ const SECTIONS = [
   {
     h: "8. Slapukai",
     body: [
-      "Svetainė nenaudoja reklaminių ar sekimo slapukų. Lankomumo statistika renkama be slapukų ir neleidžia jūsų atpažinti. Jei pasirenkate kalbą ar panašius nustatymus, jie gali būti išsaugoti jūsų naršyklėje - tai būtina svetainės veikimui ir sutikimo nereikia.",
+      "Reklaminių slapukų svetainė nenaudoja. Google Analytics slapukai (_ga, _ga_*, galioja iki 2 metų) įrašomi tik paspaudus „Sutinku”. Jei atsisakote, Google Analytics visai neįkeliamas, o counter.dev statistika renkama be slapukų.",
+      "Jūsų pasirinkimas (sutikimas ar atsisakymas) saugomas jūsų naršyklėje, kad nereikėtų klausti kiekvieną kartą. Pakeisti jį galite bet kada per „Slapukų nustatymai” svetainės apačioje.",
+      "Jei pasirenkate kalbą ar panašius nustatymus, jie gali būti išsaugoti jūsų naršyklėje - tai būtina svetainės veikimui ir sutikimo nereikia.",
     ],
   },
   {

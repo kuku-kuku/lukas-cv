@@ -207,7 +207,7 @@ export default function CommandRail() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: DUR.base, ease: EASE }}
           >
-            <button
+            <button data-track="cta_brief" data-track-label="nav"
               type="button"
               onClick={() => goTo("contact")}
               className="group relative inline-flex items-center gap-3 overflow-hidden border px-5 py-3 text-base font-semibold"
@@ -350,7 +350,7 @@ export default function CommandRail() {
             </ul>
 
             <div className="px-5 pt-8">
-              <button
+              <button data-track="cta_brief" data-track-label="nav"
                 type="button"
                 onClick={() => goTo("contact")}
                 className="inline-flex w-full items-center justify-between border px-5 py-4 text-sm font-semibold"
