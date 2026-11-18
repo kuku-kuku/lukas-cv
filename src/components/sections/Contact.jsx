@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
@@ -66,6 +66,25 @@ export default function Contact() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
   const formRef = useRef(null);
+
+  /*
+   * The confirmation is far shorter than the form it replaces, so on a
+   * phone the visitor was left looking at the bottom of the section with
+   * the "sent" card scrolled away above them. When the card mounts, bring
+   * it to the middle of the screen and move focus to it (screen readers
+   * announce it; keyboard users continue from there).
+   */
+  const showSent = useCallback(
+    (node) => {
+      if (!node) return;
+      const r = node.getBoundingClientRect();
+      if (r.top < 80 || r.bottom > window.innerHeight) {
+        node.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+      }
+      node.focus({ preventScroll: true });
+    },
+    [reduced]
+  );
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
@@ -293,11 +312,13 @@ export default function Contact() {
             {sent ? (
               <motion.div
                 key="sent"
+                ref={showSent}
+                tabIndex={-1}
                 initial={reduced ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: DUR.base, ease: EASE }}
-                className="border p-8"
+                className="border p-8 outline-none"
                 style={{ borderColor: "var(--signal)" }}
                 role="status"
               >

@@ -258,7 +258,19 @@ export default function QuoteDrawer({ packageId, onClose }) {
             </div>
 
             {sent ? (
-              <div role="status" className="mt-8 border p-6" style={{ borderColor: "var(--signal)" }}>
+              <div
+                role="status"
+                tabIndex={-1}
+                // Back to the top of the panel: the form was scrolled to its
+                // submit button, and the confirmation is much shorter.
+                ref={(node) => {
+                  if (!node) return;
+                  if (panelRef.current) panelRef.current.scrollTop = 0;
+                  node.focus({ preventScroll: true });
+                }}
+                className="mt-8 border p-6 outline-none"
+                style={{ borderColor: "var(--signal)" }}
+              >
                 <span className="label" style={{ color: "var(--signal)" }}>
                   {t("state_sent")}
                 </span>
