@@ -1,44 +1,38 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { DUR, EASE, VIEWPORT } from "../../design/motion";
-import useReveal from "../../design/useReveal";
+import React, { useEffect, useRef } from "react";
+import { observeReveal } from "../../design/reveal";
 
 /**
- * The default entrance for any block of content.
+ * The one entrance on the site: a clip-path wipe from the top edge down
+ * with a short lift, played once when the element first scrolls in.
  *
- * Renders as finished content until useReveal says otherwise: during
- * prerender, on the first client render, under prefers-reduced-motion, and
- * for anything already on screen when the page hydrates. Only elements that
- * are still below the fold get motion props, so nothing the visitor is
- * already reading is snapped away and replayed.
+ * Use it on the unit that should arrive together - a section header, a list
+ * item, a card - not on every line inside it. `i` staggers siblings (capped
+ * in CSS so a long list never trails).
+ *
+ * It renders a plain element. All state is a data attribute managed by
+ * src/design/reveal.js, so the prerendered HTML is the finished page and
+ * nothing re-renders to animate. See MOTION.md.
  */
 export default function Reveal({
-  children,
   as: Tag = "div",
+  i = 0,
   className = "",
-  delay = 0,
-  y = 18,
-  duration = DUR.slow,
+  style,
+  children,
   ...rest
 }) {
-  const [ref, armed] = useReveal();
-  const MotionTag = motion[Tag] || motion.div;
+  const ref = useRef(null);
 
-  const motionProps = armed
-    ? {
-        initial: "hidden",
-        whileInView: "show",
-        viewport: VIEWPORT,
-        variants: {
-          hidden: { opacity: 0, y },
-          show: { opacity: 1, y: 0, transition: { duration, ease: EASE, delay } },
-        },
-      }
-    : {};
+  useEffect(() => observeReveal(ref.current), []);
 
   return (
-    <MotionTag ref={ref} className={className} {...motionProps} {...rest}>
+    <Tag
+      ref={ref}
+      className={className}
+      style={i ? { ...style, "--i": i } : style}
+      {...rest}
+    >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

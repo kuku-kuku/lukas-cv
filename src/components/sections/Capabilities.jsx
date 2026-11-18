@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
@@ -6,9 +6,8 @@ import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
 import { CAPABILITIES, PROJECTS } from "../../design/content";
-import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
+import { DUR, EASE } from "../../design/motion";
 import { useCompactViewport, useFinePointer, useReducedMotion } from "../../design/useMotionPrefs";
-import useReveal from "../../design/useReveal";
 
 /**
  * 01 - CAPABILITIES
@@ -26,12 +25,15 @@ import useReveal from "../../design/useReveal";
  * is shared so there is only one description of a capability in the DOM.
  */
 export default function Capabilities({ onEvidence }) {
+  const mounted = useRef(false);
+  useEffect(() => {
+    mounted.current = true;
+  }, []);
   const { t, i18n } = useTranslation();
   const isLt = i18n.language === "lt";
   const compact = useCompactViewport();
   const fine = useFinePointer();
   const reduced = useReducedMotion();
-  const [revealRef, armed] = useReveal();
   const [activeId, setActiveId] = useState(CAPABILITIES[0].id);
 
   const projectTitle = (id) => t(`projects.${id}.title`);
@@ -117,7 +119,6 @@ export default function Capabilities({ onEvidence }) {
   return (
     <section
       id="capabilities"
-      ref={revealRef}
       aria-labelledby="capabilities-title"
       className="shell section relative z-10"
     >
@@ -137,18 +138,10 @@ export default function Capabilities({ onEvidence }) {
               const on = cap.id === activeId;
               const isRelated = related.has(cap.id);
               return (
-                <motion.li
+                <Reveal as="li" i={i}
                   key={cap.id}
                   className="border-b"
                   style={{ borderColor: "var(--line)" }}
-                  initial={armed ? { opacity: 0, y: 14 } : false}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={VIEWPORT}
-                  transition={{
-                    duration: DUR.slow,
-                    ease: EASE,
-                    delay: reduced ? 0 : i * STAGGER,
-                  }}
                 >
                   <button
                     type="button"
@@ -224,7 +217,7 @@ export default function Capabilities({ onEvidence }) {
                       )}
                     </AnimatePresence>
                   )}
-                </motion.li>
+                </Reveal>
               );
             })}
           </ul>
@@ -243,7 +236,9 @@ export default function Capabilities({ onEvidence }) {
               <Rule className="mt-3" />
               <motion.div
                 key={active.id}
-                initial={armed ? { opacity: 0, y: 12 } : false}
+                // Cross-fades only on a change of selection, never on the first
+                // render, so the prerendered detail is never hidden.
+                initial={mounted.current && !reduced ? { opacity: 0, y: 12 } : false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: DUR.base, ease: EASE }}
                 className="mt-6"

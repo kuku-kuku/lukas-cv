@@ -43,7 +43,6 @@
 
   /* Motion */
   /* Headroom for the reveal masks - see .mask-line / .mask-word */
-  --mask-pad: 0.26em;
 
   --dur-xs: 180ms;
   --dur-s: 320ms;
@@ -278,26 +277,73 @@
     }
   }
 
-  /* ---- Mask reveal, used by SplitText and Reveal ---- */
-  /* Reveal masks.
-     Tight leading (0.88-0.94) lets ink sit outside the line box, so the clip
-     box is padded on both edges and pulled back by the same amount - the
-     layout is unchanged, the glyphs are not sliced. The top edge matters as
-     much as the bottom in Lithuanian: carons on Z/S/C rise above the cap
-     height, ogoneks on a/e/i/u drop below the baseline.
-     One value, used by both the block and inline variants. */
-  .mask-line,
-  .mask-word {
-    overflow: hidden;
-    padding: var(--mask-pad) 0;
-    margin: calc(var(--mask-pad) * -1) 0;
+  /* ---- The one reveal (src/design/reveal.js, Reveal.jsx) ----
+     A wipe from the top edge down plus a short lift. Reading order is
+     top to bottom, so the wipe uncovers lines in the order they are read
+     without splitting any text. Only clip-path and transform move.
+     No attribute = finished content: that is the prerendered HTML, the
+     no-JS page, anything on screen at load, and every element once its
+     reveal has ended. */
+  [data-reveal="armed"] {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(14px);
   }
-  .mask-line {
-    display: block;
+  [data-reveal="shown"] {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+    transition:
+      clip-path var(--dur-l) var(--ease),
+      transform var(--dur-l) var(--ease);
+    /* One stagger step per sibling, capped so a long list never trails. */
+    transition-delay: min(calc(var(--i, 0) * 70ms), 280ms);
   }
-  .mask-word {
+
+  /* ---- Odometer section numbers (Odometer.jsx) ----
+     The real digit is the text; while a reveal is pending or playing it is
+     held transparent and a ::after column of digits rolls one full turn
+     and lands on it. The column is generated content, so it is never part
+     of the page text. Box size is fixed at all times: no layout shift. */
+  .odo-d {
+    position: relative;
     display: inline-block;
-    vertical-align: baseline;
+    height: 1.25em;
+    line-height: 1.25;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+  [data-reveal] .odo-d {
+    color: transparent;
+  }
+  [data-reveal] .odo-d::after {
+    content: "0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9\A 0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9";
+    white-space: pre;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--signal);
+    transform: translateY(0);
+  }
+  [data-reveal="shown"] .odo-d::after {
+    /* A full turn plus the digit: 01 still visibly rolls. */
+    transform: translateY(calc((10 + var(--n, 0)) * -1.25em));
+    transition: transform 700ms var(--ease);
+    transition-delay: calc(var(--k, 0) * 90ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      clip-path: none !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    [data-reveal] .odo-d {
+      color: inherit;
+    }
+    [data-reveal] .odo-d::after {
+      content: none;
+    }
   }
 
   /* ---- The one signal-coloured interactive affordance ---- */

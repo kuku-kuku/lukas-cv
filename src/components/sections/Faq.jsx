@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import Reveal from "../motion/Reveal";
 import SectionHead from "../SectionHead";
 import Rule from "../motion/Rule";
 import { FAQ } from "../../design/content";
-import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
-import useReveal from "../../design/useReveal";
+import { DUR, EASE } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -27,7 +27,6 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
 export default function Faq() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
-  const [revealRef, armed] = useReveal();
   const [open, setOpen] = useState(null);
 
   // Takes the visitor to the brief rather than opening the drawer: by this
@@ -41,7 +40,6 @@ export default function Faq() {
   return (
     <section
       id="faq"
-      ref={revealRef}
       aria-labelledby="faq-title"
       className="shell section relative z-10"
     >
@@ -57,18 +55,10 @@ export default function Faq() {
           {FAQ.map((item, i) => {
             const isOpen = open === item.id;
             return (
-              <motion.li
+              <Reveal as="li" i={i}
                 key={item.id}
                 className="border-b"
                 style={{ borderColor: "var(--line)" }}
-                initial={armed ? { opacity: 0, y: 12 } : false}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={VIEWPORT}
-                transition={{
-                  duration: DUR.base,
-                  ease: EASE,
-                  delay: reduced ? 0 : i * STAGGER,
-                }}
               >
                 <h3 className="m-0">
                   <button
@@ -107,7 +97,7 @@ export default function Faq() {
                 >
                   <p className="copy pb-6">{t(item.aKey)}</p>
                 </motion.div>
-              </motion.li>
+              </Reveal>
             );
           })}
         </ul>

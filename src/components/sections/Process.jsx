@@ -1,12 +1,10 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import SplitText from "../motion/SplitText";
+import Odometer from "../motion/Odometer";
 import Reveal from "../motion/Reveal";
 import { PROCESS_STEPS, SECTIONS } from "../../design/content";
-import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
 import { useCompactViewport, useReducedMotion } from "../../design/useMotionPrefs";
-import useReveal from "../../design/useReveal";
 
 /**
  * 05 - PROCESS
@@ -24,7 +22,6 @@ import useReveal from "../../design/useReveal";
 export default function Process() {
   const { t } = useTranslation();
   const reduced = useReducedMotion();
-  const [revealRef, armed] = useReveal();
   const compact = useCompactViewport();
   const ref = useRef(null);
 
@@ -40,36 +37,34 @@ export default function Process() {
   return (
     <section
       id="process"
-      ref={revealRef}
       ref={ref}
       aria-labelledby="process-title"
       className="invert-section section relative z-10 border-y"
       style={{ borderColor: "rgba(10,10,11,0.35)" }}
     >
       <div className="shell">
-        <header className="mb-14 md:mb-20">
+        {/* Same opening as SectionHead (one reveal, odometer number,
+            plain-text title), kept local for the stronger rule on the
+            inverted ground. */}
+        <Reveal as="header" className="mb-14 md:mb-20">
           <div className="flex items-baseline justify-between gap-6">
-            <span className="label" style={{ color: "var(--signal)" }}>
-              {SECTIONS.find((x) => x.id === "process").index}
-            </span>
+            <Odometer
+              value={SECTIONS.find((x) => x.id === "process").index}
+              className="label"
+              style={{ color: "var(--signal)" }}
+            />
             <span className="label flex-1 text-right md:text-left">
               {t("nav_process", "Process")}
             </span>
           </div>
           <div className="mt-3 h-px w-full" style={{ background: "var(--line-strong)" }} />
           <div className="mt-6 grid gap-6 md:grid-cols-12 md:gap-10">
-            <h2
-              id="process-title"
-              aria-label={t("process_title")}
-              className="display-l md:col-span-7"
-            >
-              <SplitText text={t("process_title")} stagger={0.045} />
+            <h2 id="process-title" className="display-l md:col-span-7">
+              {t("process_title")}
             </h2>
-            <Reveal as="p" delay={0.12} className="lede md:col-span-5 md:pt-2">
-              {t("process_lede")}
-            </Reveal>
+            <p className="lede md:col-span-5 md:pt-2">{t("process_lede")}</p>
           </div>
-        </header>
+        </Reveal>
 
         {/* scrubbed progress rule */}
         {!compact && (
@@ -87,18 +82,10 @@ export default function Process() {
 
         <ol className="grid gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:grid-rows-[auto_auto_1fr_auto] lg:gap-x-0">
           {PROCESS_STEPS.map((step, i) => (
-            <motion.li
+            <Reveal as="li" i={(i % 3)}
               key={step.id}
               className="border-b pb-8 pt-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               style={{ borderColor: "var(--line)" }}
-              initial={armed ? { opacity: 0, y: 18 } : false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT}
-              transition={{
-                duration: DUR.slow,
-                ease: EASE,
-                delay: reduced ? 0 : (i % 3) * STAGGER,
-              }}
             >
               <div className="flex items-baseline gap-3">
                 <span
@@ -131,7 +118,7 @@ export default function Process() {
                   {t(step.outKey)}
                 </p>
               </div>
-            </motion.li>
+            </Reveal>
           ))}
         </ol>
       </div>

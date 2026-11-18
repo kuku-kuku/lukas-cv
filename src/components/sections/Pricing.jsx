@@ -1,13 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
 import { CARE, HOURLY, PACKAGES } from "../../design/content";
-import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
-import useReveal from "../../design/useReveal";
-import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
  * 03 - PRICING
@@ -25,8 +21,6 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  */
 export default function Pricing({ onChoose }) {
   const { t } = useTranslation();
-  const reduced = useReducedMotion();
-  const [revealRef, armed] = useReveal();
 
   // Opens the quote drawer. Scrolling to the contact section instead would
   // take the visitor away from the prices they are comparing and leave the
@@ -36,7 +30,6 @@ export default function Pricing({ onChoose }) {
   return (
     <section
       id="pricing"
-      ref={revealRef}
       aria-labelledby="pricing-title"
       className="invert-section section relative z-10 border-y"
       style={{ borderColor: "rgba(10,10,11,0.35)" }}
@@ -54,7 +47,7 @@ export default function Pricing({ onChoose }) {
             much copy each one carries. */}
         <ol className="grid gap-6 lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr_auto]">
           {PACKAGES.map((pkg, i) => (
-            <motion.li
+            <Reveal as="li" i={i}
               key={pkg.id}
               className={`relative border p-6 md:p-8 lg:row-span-4 lg:grid lg:grid-rows-subgrid ${
                 pkg.featured ? "order-first lg:order-none" : ""
@@ -62,14 +55,6 @@ export default function Pricing({ onChoose }) {
               style={{
                 borderColor: pkg.featured ? "var(--signal)" : "var(--line-strong)",
                 borderWidth: pkg.featured ? 2 : 1,
-              }}
-              initial={armed ? { opacity: 0, y: 16 } : false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT}
-              transition={{
-                duration: DUR.base,
-                ease: EASE,
-                delay: reduced ? 0 : i * STAGGER,
               }}
             >
               {pkg.featured && (
@@ -136,7 +121,7 @@ export default function Pricing({ onChoose }) {
                   &rarr;
                 </span>
               </button>
-            </motion.li>
+            </Reveal>
           ))}
         </ol>
 
@@ -171,7 +156,7 @@ export default function Pricing({ onChoose }) {
           </div>
 
           <div className="md:col-span-5">
-            <Reveal delay={0.08}>
+            <Reveal i={1}>
               <h3 className="display-m">{t("hourly_title")}</h3>
               <p className="copy mt-3">
                 {t("hourly_body").replace("35", String(HOURLY))}

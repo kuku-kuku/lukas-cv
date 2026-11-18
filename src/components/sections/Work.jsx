@@ -1,21 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import Reveal from "../motion/Reveal";
 import { Link } from "react-router";
 import SectionHead from "../SectionHead";
 import { PROJECTS } from "../../design/content";
-import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
-import {
-  useCompactViewport,
-  useFinePointer,
-  useReducedMotion,
-} from "../../design/useMotionPrefs";
-import useReveal from "../../design/useReveal";
+import { DUR, EASE, STAGGER } from "../../design/motion";
+import { useCompactViewport, useFinePointer, useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
  * 03 - WORK
@@ -43,7 +34,6 @@ export default function Work({ openId, onOpen }) {
   const compact = useCompactViewport();
   const fine = useFinePointer();
   const reduced = useReducedMotion();
-  const [revealRef, armed] = useReveal();
 
   const [hovered, setHovered] = useState(null);
   const listRef = useRef(null);
@@ -102,7 +92,6 @@ export default function Work({ openId, onOpen }) {
   return (
     <section
       id="work"
-      ref={revealRef}
       aria-labelledby="work-title"
       className="shell section relative z-10"
     >
@@ -123,19 +112,11 @@ export default function Work({ openId, onOpen }) {
           const lit = open || hovered === project.id;
 
           return (
-            <motion.article
+            <Reveal as="article" i={i}
               key={project.id}
               id={`work-${project.id}`}
               className="group border-b"
               style={{ borderColor: "var(--line)" }}
-              initial={armed ? { opacity: 0, y: 16 } : false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT}
-              transition={{
-                duration: DUR.base,
-                ease: EASE,
-                delay: reduced ? 0 : i * STAGGER,
-              }}
               onMouseEnter={() => setHovered(project.id)}
             >
               <div className="relative grid grid-cols-[2.25rem_minmax(0,1fr)_1.5rem] items-center gap-x-4 py-5 md:grid-cols-[3.5rem_minmax(0,1fr)_14rem_6rem_1.5rem] md:gap-x-6 md:py-7">
@@ -330,7 +311,7 @@ export default function Work({ openId, onOpen }) {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.article>
+            </Reveal>
           );
         })}
       </div>

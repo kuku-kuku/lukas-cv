@@ -38,7 +38,7 @@ export default function Method() {
 
       <div className="grid items-start gap-x-10 gap-y-10 md:grid-cols-3">
         {PRINCIPLES.map((p, i) => (
-          <Reveal key={p.index} delay={i * 0.08}>
+          <Reveal key={p.index} i={i}>
             <div className="flex items-baseline justify-between">
               <span className="label" style={{ color: "var(--signal)" }}>
                 {p.index}

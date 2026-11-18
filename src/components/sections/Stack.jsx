@@ -1,11 +1,8 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import Reveal from "../motion/Reveal";
 import SectionHead from "../SectionHead";
 import { STACK_GROUPS } from "../../design/content";
-import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
-import { useReducedMotion } from "../../design/useMotionPrefs";
-import useReveal from "../../design/useReveal";
 
 /**
  * 04 - STACK
@@ -17,13 +14,10 @@ import useReveal from "../../design/useReveal";
  */
 export default function Stack() {
   const { t } = useTranslation();
-  const reduced = useReducedMotion();
-  const [revealRef, armed] = useReveal();
 
   return (
     <section
       id="stack"
-      ref={revealRef}
       aria-labelledby="stack-title"
       className="shell section relative z-10"
     >
@@ -37,18 +31,10 @@ export default function Stack() {
       <div className="h-px w-full" style={{ background: "var(--line-strong)" }} />
       <div className="grid md:grid-cols-4">
         {STACK_GROUPS.map((group, gi) => (
-          <motion.div
+          <Reveal as="div" i={gi}
             key={group.id}
             className="border-b md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
             style={{ borderColor: "var(--line)" }}
-            initial={armed ? { opacity: 0, y: 16 } : false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VIEWPORT}
-            transition={{
-              duration: DUR.slow,
-              ease: EASE,
-              delay: reduced ? 0 : gi * STAGGER,
-            }}
           >
             <div className="py-6">
               <div className="flex items-baseline justify-between">
@@ -64,24 +50,16 @@ export default function Stack() {
               </h3>
               <ul className="mt-5 space-y-2">
                 {group.items.map((item, ii) => (
-                  <motion.li
+                  <li
                     key={item}
                     className="font-mono text-[0.8125rem] text-ink-2"
-                    initial={armed ? { opacity: 0, x: -6 } : false}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={VIEWPORT}
-                    transition={{
-                      duration: DUR.base,
-                      ease: EASE,
-                      delay: reduced ? 0 : gi * STAGGER + ii * 0.03,
-                    }}
                   >
                     {item}
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </Reveal>
         ))}
       </div>
       <div className="h-px w-full" style={{ background: "var(--line)" }} />

@@ -1,10 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
-import { DUR, EASE, STAGGER, VIEWPORT } from "../../design/motion";
-import useReveal from "../../design/useReveal";
-import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
  * The band that replaced the engineering "Method" section on the homepage.
@@ -23,12 +20,9 @@ const REASONS = [
 
 export default function Why() {
   const { t } = useTranslation();
-  const reduced = useReducedMotion();
-  const [revealRef, armed] = useReveal();
 
   return (
     <section
-      ref={revealRef}
       aria-labelledby="why-title"
       className="shell relative z-10 py-16 md:py-24"
     >
@@ -43,16 +37,8 @@ export default function Why() {
 
       <ul className="mt-10 grid items-start gap-x-10 gap-y-8 md:grid-cols-3">
         {REASONS.map((r, i) => (
-          <motion.li
+          <Reveal as="li" i={i}
             key={r.id}
-            initial={armed ? { opacity: 0, y: 16 } : false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VIEWPORT}
-            transition={{
-              duration: DUR.base,
-              ease: EASE,
-              delay: reduced ? 0 : i * STAGGER,
-            }}
           >
             <span
               aria-hidden="true"
@@ -63,7 +49,7 @@ export default function Why() {
               {t(r.titleKey)}
             </h3>
             <p className="copy-sm mt-3">{t(r.bodyKey)}</p>
-          </motion.li>
+          </Reveal>
         ))}
       </ul>
     </section>
