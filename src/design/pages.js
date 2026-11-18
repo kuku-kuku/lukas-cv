@@ -332,7 +332,7 @@ export const SERVICE_PAGES = [
       },
       {
         project: "syncara",
-        text: "Analitikos skydo prototipas: duomenys iš Airtable, prisijungimas per Firebase, grafikai ir CSV eksportas. Į produkciją nepaleistas.",
+        text: "Analitikos platformos prototipas: duomenys iš Airtable, prisijungimas per Firebase, grafikai ir CSV eksportas. Į produkciją nepaleistas.",
       },
     ],
     faq: [

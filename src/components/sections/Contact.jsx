@@ -229,8 +229,11 @@ export default function Contact() {
       />
 
       <div className="grid gap-x-10 gap-y-14 md:grid-cols-12">
-        {/* ---- the facts ---- */}
-        <div className="md:col-span-4">
+        {/* ---- the facts ----
+            On a phone the form comes first: it is what the section is for,
+            and with the channels above it the form read as an afterthought
+            further down the page. Desktop keeps facts left, form right. */}
+        <div className="order-2 md:order-none md:col-span-4">
           <dl className="space-y-6">
             <div>
               <dt className="label">{t("response", "Response")}</dt>
@@ -268,8 +271,22 @@ export default function Contact() {
           </Reveal>
         </div>
 
-        {/* ---- the brief ---- */}
-        <div className="md:col-span-7 md:col-start-6">
+        {/* ---- the brief ----
+            A raised card with a signal edge, so on a phone it is obvious
+            where to start typing. Bare underlines on the page ground were
+            too quiet to read as a form. */}
+        <div
+          className="order-1 border p-5 sm:p-8 md:order-none md:col-span-7 md:col-start-6"
+          style={{
+            background: "var(--bg-elev)",
+            borderColor: "var(--line-strong)",
+            borderTopColor: "var(--signal)",
+            borderTopWidth: "2px",
+          }}
+        >
+          <p className="label mb-8" style={{ color: "var(--signal)" }}>
+            {t("form_card_label")}
+          </p>
           <AnimatePresence mode="wait">
             {sent ? (
               <motion.div
@@ -379,6 +396,7 @@ export default function Contact() {
                     <label htmlFor="field-budget" className="label">
                       {t("budget_label")}
                     </label>
+                    <div className="relative mt-3">
                     <select
                       id="field-budget"
                       value={budget}
@@ -386,7 +404,7 @@ export default function Contact() {
                         setBudget(e.target.value);
                         applyPrefix(compose(topic, e.target.value));
                       }}
-                      className="select-dark mt-3 w-full border-0 border-b bg-transparent px-0 py-3 text-[1.0625rem] text-ink outline-none"
+                      className="select-dark block h-auto min-h-[3rem] w-full appearance-none rounded-none border-0 border-b bg-transparent py-3 pl-0 pr-8 text-[1.0625rem] leading-normal text-ink outline-none focus:border-[color:var(--signal)]"
                       style={{ borderColor: "var(--line-strong)" }}
                     >
                       <option value="">{t("budget_none")}</option>
@@ -396,6 +414,16 @@ export default function Contact() {
                         </option>
                       ))}
                     </select>
+                    {/* Native chrome is turned off (appearance-none): on iOS
+                        and Android it drew its own fixed-height box that the
+                        text overflowed. This is the only arrow now. */}
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 font-mono text-xs text-ink-3"
+                    >
+                      ↓
+                    </span>
+                    </div>
                   </div>
 
                   <div className="group">

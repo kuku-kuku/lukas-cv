@@ -96,14 +96,14 @@ const resources = {
         },
         syncara: {
           title: 'Syncara',
-          kind: 'Analitikos skydas',
-          description: 'Analitikos skydas klientų duomenų vizualizacijai ir eksportui.',
+          kind: 'Analitikos platforma',
+          description: 'Analitikos platforma klientų duomenų suvestinėms, grafikams ir eksportui.',
           scope:
             'Prototipas: duomenų traukimas iš Airtable, autentifikacija su Firebase, grafikai su Chart.js, eksportas į CSV.',
           problem:
             'Norėjau patikrinti, kaip rankinis darbas su klientų duomenimis atrodytų, jei suvestines generuotų sistema, o ne žmogus skaičiuoklėse.',
           approach:
-            'Duomenų sluoksnis atskirtas nuo vaizdo: Airtable lieka kaip šaltinis, kurį klientas jau moka naudoti, o skydas tik skaito, sujungia ir eksportuoja. Prototipas nepaleistas į produkciją, todėl pažymėtas kaip demonstracija.',
+            'Duomenų sluoksnis atskirtas nuo vaizdo: Airtable lieka kaip šaltinis, kurį klientas jau moka naudoti, o platforma tik skaito, sujungia ir eksportuoja. Prototipas nepaleistas į produkciją, todėl pažymėtas kaip demonstracija.',
         },
         bangu: {
           title: 'Bangų klinika',
@@ -419,7 +419,8 @@ const resources = {
       topic_refresh: "Atnaujinimas",
       topic_shop: "El. parduotuvė",
       topic_other: "Kita",
-      budget_label: "Biudžeto rėžis",
+      budget_label: "Biudžetas",
+      form_card_label: "Užklausos forma",
       budget_none: "Nenurodyta",
       budget_under500: "iki 500 €",
       budget_500to1000: "500-1000 €",
@@ -849,7 +850,8 @@ const resources = {
       topic_refresh: "A refresh",
       topic_shop: "An online shop",
       topic_other: "Something else",
-      budget_label: "Budget range",
+      budget_label: "Budget",
+      form_card_label: "Enquiry form",
       budget_none: "Prefer not to say",
       budget_under500: "under EUR 500",
       budget_500to1000: "EUR 500-1,000",

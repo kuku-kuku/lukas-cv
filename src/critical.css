@@ -64,40 +64,62 @@ body { margin: 0; background: #111113; color: #edebe6; }
    had already painted, which produced the flicker: content, gone,
    content. Keyframes in the prerendered head cannot do that.
 
-   The headline animates transform only. Opacity on the largest
-   text would delay the LCP measurement; a clipped translate still
-   paints.
+   The headline decodes in place (see HERO DECODE below): its box
+   is laid out and painted from the first frame, and the real
+   letters have all landed within ~0.8s.
    ============================================================ */
-@keyframes hero-rise {
-  from { transform: translateY(105%); }
-  to   { transform: translateY(0); }
-}
 @keyframes hero-in {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: none; }
 }
-@keyframes hero-pop {
-  0%   { transform: scale(0); }
-  70%  { transform: scale(1.14); }
-  100% { transform: scale(1); }
+/* HERO DECODE - the signature. Each letter's real glyph is held
+   transparent while an ::after flicks through three code glyphs
+   (from data attributes, so they are never in textContent), then
+   the real glyph lands and the overlay is hidden. Discrete steps
+   only: nothing interpolates, nothing reflows. Per-letter delay
+   makes a left-to-right wave; the whole line is done in ~0.8s. */
+@keyframes dc-ink {
+  from { color: transparent; }
 }
+@keyframes dc-glyph {
+  0%   { content: attr(data-a); visibility: visible; }
+  33%  { content: attr(data-b); }
+  66%  { content: attr(data-c); }
+  100% { content: ""; visibility: hidden; }
+}
+
 @keyframes hero-mesh {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
 /* animation-fill-mode: both - the first rendered frame is already
-   the start state, so nothing flashes in at full size first. */
-.hero-line {
-  display: block;
-  animation: hero-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: var(--delay, 0ms);
+   the start state, so nothing flashes in finished first. */
+.dc-line { display: block; }
+.dc-word { white-space: nowrap; }
+.dc {
+  position: relative;
+  animation: dc-ink 240ms steps(1, end) both;
+  animation-delay: var(--d, 0ms);
 }
-.hero-dot {
-  display: inline-block;
-  animation: hero-pop 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: 560ms;
+.dc::after {
+  content: "";
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  /* Mono at a lighter weight: every glyph has the same advance, so
+     the flicker sits inside the real letter's box instead of
+     smearing across its neighbours. */
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 400;
+  color: var(--ink-3, #8a8884);
+  animation: dc-glyph 240ms steps(1, end) both;
+  animation-delay: var(--d, 0ms);
+  pointer-events: none;
 }
+.dc-tail { color: var(--signal, #ff4a1c); }
 .hero-in {
   animation: hero-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--delay, 300ms);
@@ -107,10 +129,13 @@ body { margin: 0; background: #111113; color: #edebe6; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-line,
-  .hero-dot,
+  .dc,
   .hero-in,
   .hero-mesh {
+    animation: none;
+  }
+  .dc::after {
+    content: none;
     animation: none;
   }
 }

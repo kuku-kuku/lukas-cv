@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import LatticeField from "../LatticeField";
 import Magnetic from "../motion/Magnetic";
-import { DUR, EASE } from "../../design/motion";
+import DecodeText from "../motion/DecodeText";
 import { PRACTICE, PROJECTS, SECTIONS } from "../../design/content";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
@@ -126,30 +126,11 @@ export default function Masthead() {
           {kicker}
         </h1>
 
-        {/* The fragments are aria-hidden for the line-by-line entrance, so
-            the statement is given back as one accessible name. */}
-        <p
-          role="text"
-          aria-label={`${LINES.join(" ")}.`}
-          className="display-xl"
-        >
-          {LINES.map((line, i) => (
-            <span key={line} className="mask-line">
-              <span
-                className="hero-line"
-                aria-hidden="true"
-                style={{ "--delay": `${i * 80}ms` }}
-              >
-                {line}
-                {i === LINES.length - 1 && (
-                  <span className="hero-dot" style={{ color: "var(--signal)" }}>
-                    .
-                  </span>
-                )}
-              </span>
-            </span>
-          ))}
-        </p>
+        {/* The signature: the statement decodes in place, once. The
+            letters are the real text (with real spaces between lines), so
+            the sentence exists exactly once in the DOM and reads
+            "Svetainės, kurios atneša klientų." to crawlers and readers. */}
+        <DecodeText lines={LINES} tail="." className="display-xl" />
 
         {/* Two columns, not three rows. The lede and its buttons used to
             sit side by side, which pushed the work index onto a second row

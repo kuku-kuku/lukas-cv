@@ -277,20 +277,28 @@ export default function QuoteDrawer({ packageId, onClose }) {
                   <label htmlFor="q-budget" className="label">
                     {t("budget_label")}
                   </label>
-                  <select
-                    id="q-budget"
-                    value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
-                    className="select-dark mt-2 w-full border-0 border-b bg-transparent px-0 py-3 text-base text-ink outline-none"
-                    style={{ borderColor: "var(--line-strong)" }}
-                  >
-                    <option value="">{t("budget_none")}</option>
-                    {BUDGETS.map((b) => (
-                      <option key={b.id} value={b.id}>
-                        {t(b.key)}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative mt-2">
+                    <select
+                      id="q-budget"
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                      className="select-dark block h-auto min-h-[3rem] w-full appearance-none rounded-none border-0 border-b bg-transparent py-3 pl-0 pr-8 text-base leading-normal text-ink outline-none focus:border-[color:var(--signal)]"
+                      style={{ borderColor: "var(--line-strong)" }}
+                    >
+                      <option value="">{t("budget_none")}</option>
+                      {BUDGETS.map((b) => (
+                        <option key={b.id} value={b.id}>
+                          {t(b.key)}
+                        </option>
+                      ))}
+                    </select>
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 font-mono text-xs text-ink-3"
+                    >
+                      ↓
+                    </span>
+                  </div>
                 </div>
 
                 <div>
