@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 /**
  * The hero's signature: each letter flickers through a few code glyphs and
@@ -27,8 +27,9 @@ import React from "react";
  */
 
 const POOL = "01<>/{}[]#_*+=%$&;:ABCDEFHKMNPRSTVXZ";
-const STEP_MS = 16; // left-to-right wave
-const START_MS = 60;
+const STEP_MS = 12; // left-to-right wave
+const START_MS = 40;
+const LETTER_MS = 200; // keep in step with .dc in critical.css
 
 function glyph(i, k) {
   // Cheap deterministic scatter; prime multipliers keep neighbours different.
@@ -36,7 +37,26 @@ function glyph(i, k) {
 }
 
 export default function DecodeText({ lines, tail = null, className = "" }) {
+  const ref = useRef(null);
   let n = 0;
+
+  /*
+   * Belt and braces for WebKit (every browser on iOS). Mobile Safari can
+   * leave some letters frozen on a code glyph: the discrete steps finish
+   * but the inline spans are never repainted. Once the wave is over we
+   * flip a data attribute that turns the animations off outright, which
+   * forces a fresh style and paint of the finished text. Written straight
+   * to the DOM, not React state, so nothing re-renders.
+   */
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const count = el.querySelectorAll(".dc").length;
+    const total = START_MS + count * STEP_MS + LETTER_MS + 60;
+    const left = Math.max(0, total - performance.now());
+    const timer = setTimeout(() => el.setAttribute("data-done", ""), left);
+    return () => clearTimeout(timer);
+  }, []);
 
   const renderChars = (word, extra = "") =>
     Array.from(word).map((ch) => {
@@ -56,7 +76,7 @@ export default function DecodeText({ lines, tail = null, className = "" }) {
     });
 
   return (
-    <p className={className}>
+    <p ref={ref} className={className}>
       {lines.map((line, li) => {
         const words = line.split(" ");
         return (

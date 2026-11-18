@@ -139,13 +139,13 @@ export default function Masthead() {
             and closes that void. */}
         <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-12">
           <div className="md:col-span-6">
-            <p className="lede hero-in" style={{ "--delay": "300ms" }}>
+            <p className="lede hero-in" style={{ "--delay": "180ms" }}>
               {t("masthead_lede")}
             </p>
 
             <div
               className="hero-in mt-8 flex flex-wrap items-center gap-3"
-              style={{ "--delay": "360ms" }}
+              style={{ "--delay": "240ms" }}
             >
               <Magnetic>
                 <button
@@ -192,7 +192,7 @@ export default function Masthead() {
               the block it now sits beside. */}
           <div
             className="hero-in hidden md:col-span-4 md:col-start-9 md:block"
-            style={{ "--delay": "420ms" }}
+            style={{ "--delay": "280ms" }}
           >
             <div className="flex items-baseline justify-between">
               {/* Derived, so renumbering a section cannot leave this stale. */}
@@ -249,7 +249,7 @@ export default function Masthead() {
             <li
               key={key}
               className="hero-in flex items-center gap-3 border-b py-4 sm:border-b-0 sm:border-r sm:pr-6 sm:last:border-r-0"
-              style={{ borderColor: "var(--line)", "--delay": `${480 + i * 60}ms` }}
+              style={{ borderColor: "var(--line)", "--delay": `${320 + i * 40}ms` }}
             >
               <span
                 aria-hidden="true"

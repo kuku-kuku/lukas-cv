@@ -286,16 +286,16 @@
      reveal has ended. */
   [data-reveal="armed"] {
     clip-path: inset(0 0 100% 0);
-    transform: translateY(14px);
+    transform: translateY(10px);
   }
   [data-reveal="shown"] {
     clip-path: inset(0 0 0 0);
     transform: none;
     transition:
-      clip-path var(--dur-l) var(--ease),
-      transform var(--dur-l) var(--ease);
+      clip-path 600ms var(--ease),
+      transform 600ms var(--ease);
     /* One stagger step per sibling, capped so a long list never trails. */
-    transition-delay: min(calc(var(--i, 0) * 70ms), 280ms);
+    transition-delay: min(calc(var(--i, 0) * 50ms), 200ms);
   }
 
   /* ---- Odometer section numbers (Odometer.jsx) ----
@@ -328,8 +328,8 @@
   [data-reveal="shown"] .odo-d::after {
     /* A full turn plus the digit: 01 still visibly rolls. */
     transform: translateY(calc((10 + var(--n, 0)) * -1.25em));
-    transition: transform 700ms var(--ease);
-    transition-delay: calc(var(--k, 0) * 90ms);
+    transition: transform 550ms var(--ease);
+    transition-delay: calc(var(--k, 0) * 70ms);
   }
 
   @media (prefers-reduced-motion: reduce) {

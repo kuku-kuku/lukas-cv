@@ -75,9 +75,9 @@ function getObserver() {
         }
       }
     },
-    // Fires once the element's top has cleared the bottom 8% of the
-    // viewport, so the reveal is under way by the time it is read.
-    { rootMargin: "0px 0px -8% 0px", threshold: 0 }
+    // Fires the moment the element's top edge enters the viewport, so
+    // content is never waiting on the reveal by the time it is read.
+    { rootMargin: "0px", threshold: 0 }
   );
   return io;
 }

@@ -77,7 +77,7 @@ body { margin: 0; background: #111113; color: #edebe6; }
    (from data attributes, so they are never in textContent), then
    the real glyph lands and the overlay is hidden. Discrete steps
    only: nothing interpolates, nothing reflows. Per-letter delay
-   makes a left-to-right wave; the whole line is done in ~0.8s. */
+   makes a left-to-right wave; the whole line is done in ~0.6s. */
 @keyframes dc-ink {
   from { color: transparent; }
 }
@@ -99,7 +99,7 @@ body { margin: 0; background: #111113; color: #edebe6; }
 .dc-word { white-space: nowrap; }
 .dc {
   position: relative;
-  animation: dc-ink 240ms steps(1, end) both;
+  animation: dc-ink 200ms steps(1, end) both;
   animation-delay: var(--d, 0ms);
 }
 .dc::after {
@@ -115,13 +115,17 @@ body { margin: 0; background: #111113; color: #edebe6; }
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-weight: 400;
   color: var(--ink-3, #8a8884);
-  animation: dc-glyph 240ms steps(1, end) both;
+  animation: dc-glyph 200ms steps(1, end) both;
   animation-delay: var(--d, 0ms);
   pointer-events: none;
 }
 .dc-tail { color: var(--signal, #ff4a1c); }
+/* Set by DecodeText once the wave is over: guarantees the finished
+   text on engines that fail to repaint the last step (iOS WebKit). */
+[data-done] .dc { animation: none; }
+[data-done] .dc::after { animation: none; content: none; }
 .hero-in {
-  animation: hero-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--delay, 300ms);
 }
 .hero-mesh {
