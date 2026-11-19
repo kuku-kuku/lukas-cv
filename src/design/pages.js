@@ -39,14 +39,14 @@ export const SERVICE_PAGES = [
     slug: "elektroniniu-parduotuviu-kurimas",
     nav: "El. parduotuvės",
     title: `Elektroninių parduotuvių kūrimas verslui nuo ${eur(pkg("custom").price)} | Beneta`,
-    description: `El. parduotuvės kūrimas nuo ${eur(pkg("custom").price)}: prekės, krepšelis, apmokėjimai ir pristatymas Lietuvoje. Prekes ir kainas valdote patys, kaina fiksuota.`,
+    description: `El. parduotuvės kūrimas nuo ${eur(pkg("custom").price)}: prekės, krepšelis, individuali parduotuvė be platformos mėnesinių mokesčių: prekės, krepšelis, apmokėjimai ir pristatymas. Kaina fiksuota.`,
     serviceType: "El. parduotuvių kūrimas",
     serviceName: "El. parduotuvių kūrimas",
     priceFrom: pkg("custom").price,
     eyebrow: "El. parduotuvės",
     h1: "Elektroninių parduotuvių kūrimas",
     lede:
-      "Norite pardavinėti internetu, bet nežinote, nuo ko pradėti? Sukuriu el. parduotuvę, kurioje prekes, kainas ir užsakymus tvarkote patys, o pirkėjas nuo prekės iki apmokėjimo nueina be klaidžiojimo.",
+      "Norite pardavinėti internetu, bet nežinote, nuo ko pradėti? Sukuriu individualią el. parduotuvę, pritaikytą jūsų prekėms ir darbo eigai, kurioje pirkėjas nuo prekės iki apmokėjimo nueina be klaidžiojimo.",
     sections: [
       {
         h: "Kam tinka",
@@ -70,43 +70,34 @@ export const SERVICE_PAGES = [
         ],
       },
       {
-        h: "WooCommerce ar Shopify?",
+        h: "Individuali parduotuvė ar Shopify / WooCommerce?",
         p: [
-          "Dirbu su abiem, ir renkuosi pagal jūsų situaciją, o ne pagal įprotį.",
-        ],
-        list: [
-          "WooCommerce (WordPress) - parduotuvė veikia jūsų talpinimo serveryje, mėnesinio platformos mokesčio nėra, galima pritaikyti beveik bet kokiam poreikiui. Reikia priežiūros: atnaujinimų ir atsarginių kopijų.",
-          "Shopify - platforma pati rūpinasi serveriais ir saugumu, todėl priežiūros mažiau. Už tai mokate mėnesinį Shopify mokestį, o kai kurias funkcijas tenka pirkti kaip papildinius.",
-        ],
-        after: [
-          "Jei abejojate - per pokalbį palyginsime, kiek kiekvienas variantas kainuotų per metus, ne tik paleidimo dieną.",
+          "Kuriu individualias el. parduotuves - be platformos mėnesinių mokesčių, be nereikalingų įskiepių ir pritaikytas tiksliai jūsų prekėms bei procesams. Jei jūsų poreikiams labiau tinka Shopify ar WooCommerce, pasakysiu tai atvirai. Jau turite parduotuvę šiose platformose? Galiu ją [prižiūrėti](/svetainiu-prieziura), taisyti ir tobulinti.",
         ],
       },
       {
         h: "Apmokėjimai ir pristatymas Lietuvoje",
         p: [
           "Pirkėjas Lietuvoje tikisi mokėti per savo banką arba kortele ir prekę atsiimti paštomate ar gauti per kurjerį. Todėl apmokėjimą ir pristatymą derinu prie to, ką naudoja jūsų pirkėjai, o ne prie to, kas lengviausia įdiegti. Dažniausiai tai Paysera, Montonio ar Stripe mokėjimai ir Omniva, DPD ar LP Express paštomatai bei kurjeriai.",
-          "Mokėjimų tiekėją renkamės kartu: palyginame mokesčius už operaciją, kaip greitai pinigai pasiekia jūsų sąskaitą ir ar tiekėjas veikia su jūsų platforma. Pristatymo kainas galima nustatyti pagal svorį, sumą ar zoną, o nemokamą pristatymą - nuo pasirinktos krepšelio sumos.",
+          "Mokėjimų tiekėją renkamės kartu: palyginame mokesčius už operaciją, kaip greitai pinigai pasiekia jūsų sąskaitą ir kokius mokėjimo būdus jis siūlo jūsų pirkėjams. Pristatymo kainas galima nustatyti pagal svorį, sumą ar zoną, o nemokamą pristatymą - nuo pasirinktos krepšelio sumos.",
         ],
       },
       {
         h: "Kiek kainuoja el. parduotuvė",
         p: [
           `El. parduotuvės kūrimas - nuo ${eur(pkg("custom").price)} (be PVM). Galutinė kaina priklauso nuo prekių kiekio, kiek jų reikia suvesti, kokių apmokėjimo ir pristatymo būdų reikia ir ar parduotuvę reikia jungti su apskaitos ar sandėlio programa.`,
-          `Kainą ir terminą gaunate raštu prieš pradedant darbus. Po paleidimo priežiūra pasirinktinai - nuo ${eur(care("calm").price)} per mėnesį. Shopify ar mokėjimų tiekėjo mokesčius mokate tiesiogiai jiems.`,
+          `Kainą ir terminą gaunate raštu prieš pradedant darbus. Po paleidimo priežiūra pasirinktinai - nuo ${eur(care("calm").price)} per mėnesį. Mokėjimų tiekėjo mokesčius mokate tiesiogiai jam.`,
         ],
       },
     ],
-    evidence: [
-      {
-        project: "flore",
-        text: "Gėlių studijos svetainė su el. parduotuve: autorinės puokštės, vazoniniai augalai ir pristatymas tą pačią dieną. Sukurta su WordPress ir WooCommerce.",
-      },
-    ],
+    // Flore studija is a WordPress + WooCommerce shop: real work, but not
+    // how shops are built now (custom only), so it is evidence on the
+    // maintenance page instead.
+    evidence: [],
     faq: [
       {
         q: "Ar galėsiu pats pridėti prekes ir keisti kainas?",
-        a: "Taip. Prekes, kainas, nuotraukas ir likučius tvarkote patys per administravimo skydą. Paleidimo metu parodau, kaip tai daroma, ir palieku trumpą paaiškinimą.",
+        a: "Jei reikia - taip. Tada kartu su parduotuve sukuriu administravimo skydą prekėms, kainoms, nuotraukoms ir likučiams, o paleidimo metu parodau, kaip juo naudotis. Jei prekių nedaug ir jos keičiasi retai, dažnai paprasčiau, kad pakeitimus padaryčiau aš. Kuris variantas jums tinka, sutariame prieš pradedant.",
       },
       {
         q: "Per kiek laiko sukuriama el. parduotuvė?",
@@ -121,7 +112,7 @@ export const SERVICE_PAGES = [
         a: "Taip. Parduotuvę kuriu pirmiausia telefonui: katalogą, krepšelį ir apmokėjimą tikrinu telefone dar prieš paleidimą.",
       },
       {
-        q: "Ar galite perkelti esamą parduotuvę į naują platformą?",
+        q: "Ar galite perkelti esamą Shopify ar WooCommerce parduotuvę į individualią?",
         a: "Taip. Perkeliu prekes, kategorijas ir nuotraukas, o senus puslapių adresus nukreipiu į naujus, kad Google ir pirkėjai jų nepamestų. Dabartinė parduotuvė veikia, kol nauja peržiūrima ir patvirtinama.",
       },
     ],
@@ -233,7 +224,7 @@ export const SERVICE_PAGES = [
     slug: "svetainiu-prieziura",
     nav: "Svetainių priežiūra",
     title: `Svetainių priežiūra nuo ${care("calm").price} €/mėn. | Beneta`,
-    description: `Svetainių priežiūra nuo ${care("calm").price} €/mėn.: talpinimas, atnaujinimai, atsarginės kopijos ir smulkūs pakeitimai. Prižiūriu ir WordPress svetaines, kurių nekūriau.`,
+    description: `Svetainių priežiūra nuo ${care("calm").price} €/mėn.: talpinimas, atnaujinimai, atsarginės kopijos ir veikimo stebėsena. Prižiūriu ir Shopify, WooCommerce bei WordPress svetaines.`,
     serviceType: "Svetainių priežiūra",
     serviceName: "Svetainių priežiūra ir techninė pagalba",
     priceFrom: care("calm").price,
@@ -286,14 +277,20 @@ export const SERVICE_PAGES = [
         ],
       },
       {
-        h: "WordPress ir kitų kūrėjų svetainių priežiūra",
+        h: "Shopify, WooCommerce ir WordPress svetainių priežiūra",
         p: [
-          "Galiu prižiūrėti ir kito kūrėjo svetainę. Prieš sutardamas pirmiausia ją peržiūriu: kokia platforma, kada paskutinį kartą atnaujinta, ar yra atsarginės kopijos. Jei randu rimtų problemų, pirmiausia pasakau, ką reikia sutvarkyti, ir kiek tai kainuotų.",
+          "Naujų svetainių ir parduotuvių šiose platformose nekuriu, bet prižiūriu tas, kurias sukūrė kiti. Prieš sutardamas pirmiausia ją peržiūriu: kokia platforma, kada paskutinį kartą atnaujinta, ar yra atsarginės kopijos. Jei randu rimtų problemų, pirmiausia pasakau, ką reikia sutvarkyti, ir kiek tai kainuotų.",
+          "Shopify parduotuvėje serveriais ir sistemos atnaujinimais rūpinasi pati platforma, todėl ten daugiausia tvarkau nustatymus, programėles, turinį ir klaidas. WooCommerce ir WordPress svetainėse prižiūriu viską: talpinimą, atnaujinimus ir atsargines kopijas.",
           "Dažniausiai tai WordPress svetainės, kurių papildiniai nebuvo atnaujinti metų metus. Tokiu atveju pirmiausia padarau atsarginę kopiją ir patikrinu, kas sugestų atnaujinus. Po peržiūros gaunate pasirinkimą: priežiūros planą arba vienkartinį sutvarkymą valandiniu įkainiu. Jei svetainė tokios būklės, kad ją pigiau [atnaujinti iš esmės](/svetainiu-atnaujinimas), pasakau tai iš karto.",
         ],
       },
     ],
-    evidence: [],
+    evidence: [
+      {
+        project: "flore",
+        text: "Gėlių studijos el. parduotuvė su WordPress ir WooCommerce, kurią sukūriau anksčiau, todėl tokias parduotuves pažįstu iš vidaus. Naujų šiose platformose nebekuriu, bet esamas prižiūriu ir tobulinu.",
+      },
+    ],
     faq: [
       {
         q: "Kiek kainuoja svetainės priežiūra?",
@@ -308,7 +305,7 @@ export const SERVICE_PAGES = [
         a: "Parašykite el. paštu. Mano sukurtoms svetainėms mėnesį po paleidimo taisau nemokamai, vėliau - pagal priežiūros planą arba valandiniu įkainiu.",
       },
       {
-        q: "Ar galite prižiūrėti WordPress svetainę, kurią kūrė kitas?",
+        q: "Ar galite prižiūrėti Shopify, WooCommerce ar WordPress svetainę, kurią kūrė kitas?",
         a: "Taip, po peržiūros. Pirmiausia patikrinu, kaip svetainė padaryta ir kokios būklės, ir tik tada sutariame dėl priežiūros.",
       },
       {
@@ -510,13 +507,14 @@ export const PRICE_PAGE = {
         `Vienkartiniai darbai - ${HOURLY} €/val., su sąmata iš anksto: nauja skiltis, didesnis pakeitimas ar pagalba be priežiūros plano.`,
       ],
       after: [
+        "Jei priežiūros plano po pirmųjų metų nenorite, nemokamai perkelsiu svetainę į jūsų pasirinktą talpinimą.",
         "Priežiūra neprivaloma. Svetainė, domenas ir failai priklauso jums ir be plano, o mėnesį po paleidimo pataisymai nemokami bet kuriuo atveju.",
       ],
     },
     {
       h: "Individuali svetainė, šablonas ar svetainių kūrimo įrankis?",
       p: [
-        "Sąžiningai: ne kiekvienam verslui reikia individualios svetainės. Šablonas ar svetainių kūrimo įrankis greičiau ir pigiau paleidžiami, tačiau dažnai būna sunkesni ir sunkiau pritaikomi, kai verslas auga. Štai kaip jie skiriasi:",
+        "Kuriu tik individualias svetaines - šablonų ir svetainių kūrimo įrankių nenaudoju. Bet sąžiningai: ne kiekvienam verslui reikia individualios svetainės. Šablonas ar svetainių kūrimo įrankis greičiau ir pigiau paleidžiami, tačiau dažnai būna sunkesni ir sunkiau pritaikomi, kai verslas auga. Štai kaip jie skiriasi:",
       ],
       table: {
         head: ["", "Individuali svetainė", "Paruoštas šablonas", "Svetainių kūrimo įrankis"],
@@ -528,7 +526,7 @@ export const PRICE_PAGE = {
         ],
       },
       after: [
-        "Jei jūsų atveju pakanka šablono ar įrankio, pasakysiu tai per pirmą pokalbį - nėra prasmės mokėti už tai, ko nereikia.",
+        "Jei jūsų atveju pakanka šablono ar įrankio, pasakysiu tai per pirmą pokalbį - tada programuotojo jums nereikia, ir nėra prasmės mokėti už tai, ko nereikia.",
       ],
     },
     {
@@ -564,7 +562,11 @@ export const PRICE_PAGE = {
     },
     {
       q: "Ar domenas ir talpinimas įskaičiuoti į kainą?",
-      a: "Taip, pirmiems metams. Domeną registruoju jūsų vardu, o pirmų metų domeno ir talpinimo mokestis jau įeina į svetainės kainą. Vėliau domeną pratęsiate registratoriui, o talpinimas įeina į priežiūros planą.",
+      a: "Taip, pirmiems metams. Domeną registruoju jūsų vardu, o pirmų metų domeno ir talpinimo mokestis jau įeina į svetainės kainą. Vėliau domeną pratęsiate registratoriui.",
+    },
+    {
+      q: "Kas nutinka talpinimui po pirmųjų metų?",
+      a: "Pirmieji metai įskaičiuoti į kainą. Vėliau talpinimas įeina į priežiūros planą („Ramybė“ arba „Augimas“). Jei priežiūros nenorite, nemokamai perkelsiu svetainę į jūsų pasirinktą talpinimą - svetainė ir failai bet kuriuo atveju priklauso jums.",
     },
     {
       q: "Ar galima mokėti dalimis?",
@@ -600,7 +602,7 @@ export const WORK_PAGE = {
 
 /** Which service page each project best demonstrates, for internal links. */
 export const PROJECT_SERVICE = {
-  flore: "elektroniniu-parduotuviu-kurimas",
+  flore: "svetainiu-prieziura",
   bangu: "svetainiu-atnaujinimas",
   beneta: "svetainiu-atnaujinimas",
   fakaunas: "individualus-programavimas",

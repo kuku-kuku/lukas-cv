@@ -108,8 +108,6 @@ const BUSINESS = {
   knowsAbout: [
     "Svetainių kūrimas",
     "Elektroninių parduotuvių kūrimas",
-    "WordPress",
-    "WooCommerce",
     "React",
     "Node.js",
     "Verslo procesų automatizavimas",

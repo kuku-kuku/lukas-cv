@@ -72,8 +72,9 @@ export const CAPABILITIES = [
     index: "04",
     titleKey: "cap_shop_title",
     bodyKey: "cap_shop_body",
-    tech: ["WordPress", "WooCommerce", "Shopify"],
-    evidence: ["flore"],
+    // Shops are built custom; Flore (WooCommerce) is no longer evidence here.
+    tech: ["React", "Node.js", "Paysera", "Montonio", "Stripe"],
+    evidence: [],
     page: "elektroniniu-parduotuviu-kurimas",
   },
   {

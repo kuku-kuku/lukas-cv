@@ -154,3 +154,75 @@ allowed. Check its terms, or use the paid Solo tier.
 - A separate Shopify page, only if Search Console shows Shopify queries.
 - Google Business Profile as a service-area business.
 - Directory profiles and client-footer credits.
+
+## 8. Positioning update (2026-11-19, later the same day)
+
+**Lukas builds custom sites and shops only. He maintains existing Shopify,
+WooCommerce and WordPress sites but no longer builds on them.**
+
+### `/elektroniniu-parduotuviu-kurimas`
+- **Removed:**
+  - "WooCommerce ar Shopify? / Dirbu su abiem";
+  - the platform wording in the meta description, lede, payments text and price
+    text ("ar tiekėjas veikia su jūsų platforma", "Shopify ... mokesčius").
+- **New H2:** "Individuali parduotuvė ar Shopify / WooCommerce?", with the copy
+  Lukas supplied. "prižiūrėti" links to `/svetainiu-prieziura`. En dashes became
+  hyphens, as the build requires.
+- **Admin panel:** the promise is now "Depends on project", per Lukas. The meta
+  description and lede no longer say "prekes ir kainas valdote patys"; the FAQ
+  says an admin panel is built when needed.
+- **Migration FAQ:** now reads "perkelti esamą Shopify ar WooCommerce
+  parduotuvę į individualią".
+- **Flore studija:**
+  - It is a WordPress + WooCommerce shop that Lukas confirms he built, but he no
+    longer takes that kind of work. It was removed from this page, so the
+    "Kur tai jau padaryta" section no longer renders here.
+  - It is now evidence on `/svetainiu-prieziura` ("sukūriau anksčiau ... esamas
+    prižiūriu ir tobulinu").
+  - On `/darbai` it stays as a built project, with its real stack, and links to
+    the maintenance service.
+- **Home capability "Reikia el. parduotuvės":**
+  - tech list was WordPress / WooCommerce / Shopify; now React, Node.js, Paysera,
+    Montonio, Stripe;
+  - Flore is no longer listed as its evidence;
+  - body text no longer promises self-editing (LT and EN).
+
+### `/svetainiu-prieziura`
+- **H2 rename:** "Shopify, WooCommerce ir WordPress svetainių priežiūra". It
+  states he maintains, not builds, on these platforms, and explains what that
+  covers on Shopify vs WooCommerce/WordPress.
+- **FAQ:** wording updated to match.
+- **Meta description:** set to the brief's text.
+
+### `/svetainiu-kurimo-kaina`
+- **Comparison section:** now opens with "Kuriu tik individualias svetaines -
+  šablonų ir svetainių kūrimo įrankių nenaudoju".
+- **Hosting after year one:**
+  - new FAQ "Kas nutinka talpinimui po pirmųjų metų?";
+  - one sentence in "Išlaidos po paleidimo";
+  - the hosting clause removed from the domain FAQ so the two don't repeat.
+
+### JSON-LD
+Shopify / WordPress / WooCommerce removed from `knowsAbout`, so the business
+entity no longer lists them beside "Elektroninių parduotuvių kūrimas".
+
+### Platform mentions left in the built site (all checked)
+
+| Page | Mention | About |
+|---|---|---|
+| `/svetainiu-prieziura` | meta, H2, intro, FAQ, Flore evidence, Ramybė list ("WordPress, papildiniai") | maintenance |
+| every LT service page + price page | related-service card quoting the maintenance meta description | maintenance |
+| `/elektroniniu-parduotuviu-kurimas` | new H2 and text; migration FAQ | custom vs platform; maintenance; migrating away |
+| `/svetainiu-atnaujinimas` | "Svetainė veikia sename WordPress..." (warning sign) | refreshing an existing site |
+| `/darbai` | Flore: role Programavimas, stack WordPress / WooCommerce | a past build, true per Lukas; links to maintenance |
+
+### Checks
+- Build passes and tests pass (6/6).
+- HTML check: 0 broken internal links, 0 non-www or `/#pricing` links.
+- FAQ JSON-LD = visible FAQs on every page: / 11, /en 11, e-shop 5,
+  atnaujinimas 4, priežiūra 5, sistemos 3, kainos 7.
+
+### Open
+`inc_editing` ("Tekstus ir nuotraukas keičiate patys") is still promised in the
+business-site package (home cards and the price page). For custom builds that
+needs an editing tool, like the shop admin panel. Confirm with Lukas.
