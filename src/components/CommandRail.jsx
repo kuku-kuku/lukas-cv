@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation } from "react-router";
 import { PRACTICE, SECTIONS } from "../design/content";
 import { DUR, EASE, STAGGER } from "../design/motion";
 import useActiveSection from "../design/useActiveSection";
-import { swapLocale } from "../design/locale";
+import { localeFromPath, swapLocale } from "../design/locale";
 import { useReducedMotion } from "../design/useMotionPrefs";
 
 /**
@@ -70,9 +70,14 @@ export default function CommandRail() {
 
   // Language is a URL now, not component state: switching navigates to the
   // other locale so the page can be linked, shared and indexed.
-  const navigate = useNavigate();
   const { pathname } = useLocation();
-  const toggleLanguage = () => navigate(swapLocale(pathname));
+  // A real <a href> rather than a button, so crawlers can follow it from
+  // one language to the other. hreflang/lang name the target's language.
+  // Lowercase `hreflang` on purpose, as in design/seo.js: React would print
+  // camelCase hrefLang= verbatim into the prerendered HTML.
+  const target = swapLocale(pathname);
+  const targetLang = localeFromPath(target);
+  const langLink = { to: target, hreflang: targetLang, lang: targetLang };
 
   const lang = i18n.language?.startsWith("lt") ? "LT" : "EN";
 
@@ -176,9 +181,8 @@ export default function CommandRail() {
         </ul>
 
         <div className="chrome-line border-t">
-          <button
-            type="button"
-            onClick={toggleLanguage}
+          <Link
+            {...langLink}
             className="flex h-[4.5rem] w-full flex-col items-center justify-center gap-1"
             aria-label={`${lang} - ${t("switch_language", "Switch language")}`}
           >
@@ -193,7 +197,7 @@ export default function CommandRail() {
               className="h-px w-5"
               style={{ background: "var(--chrome-line)" }}
             />
-          </button>
+          </Link>
         </div>
       </nav>
 
@@ -258,15 +262,14 @@ export default function CommandRail() {
             >
               {activeSection.index} / {t(activeSection.labelKey)}
             </span>
-            <button
-              type="button"
-              onClick={toggleLanguage}
+            <Link
+              {...langLink}
               className="font-mono text-label"
               style={{ color: "var(--chrome-ink)" }}
               aria-label={`${lang} - ${t("switch_language", "Switch language")}`}
             >
               {lang}
-            </button>
+            </Link>
             <button
               type="button"
               onClick={() => setOpen(true)}

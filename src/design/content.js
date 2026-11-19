@@ -264,7 +264,7 @@ export const PROJECTS = [
     image: "/work-beneta.webp",
     thumb: "/work-beneta-sm.webp",
     imageFallback: "/work-beneta.jpg",
-    liveUrl: "https://beneta.lt",
+    liveUrl: "https://www.beneta.lt",
     repoUrl: null,
     statusKey: "live",
     roleKey: "role_design_build",
