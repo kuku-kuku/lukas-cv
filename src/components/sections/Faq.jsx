@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import Reveal from "../motion/Reveal";
 import SectionHead from "../SectionHead";
 import Rule from "../motion/Rule";
-import { FAQ } from "../../design/content";
+import Rich from "../Rich";
+import { homeFaq } from "../../design/homeFaq";
 import { DUR, EASE } from "../../design/motion";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
@@ -17,15 +18,16 @@ import { useReducedMotion } from "../../design/useMotionPrefs";
  * adjective.
  *
  * Every answer is in the prerendered HTML, collapsed by height, so search
- * engines read it without clicking. There is deliberately no FAQPage markup
- * (see src/design/seo.js).
+ * engines read it without clicking. The FAQPage JSON-LD is generated from
+ * the same items (design/homeFaq.js).
  *
  * The right-hand column used to be four empty grid columns. Someone whose
  * question is not on the list is the most motivated reader on this page, so
  * that space now carries the way to ask it.
  */
 export default function Faq() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const items = homeFaq(t, i18n.language);
   const reduced = useReducedMotion();
   const [open, setOpen] = useState(null);
 
@@ -52,7 +54,7 @@ export default function Faq() {
       <div className="md:grid md:grid-cols-12">
         <ul className="md:col-span-8">
           <li className="h-px w-full" style={{ background: "var(--line-strong)" }} />
-          {FAQ.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = open === item.id;
             return (
               <Reveal as="li" i={i}
@@ -69,7 +71,7 @@ export default function Faq() {
                     className="group flex w-full items-start justify-between gap-6 py-5 text-left"
                   >
                     <span className="text-lg font-semibold tracking-display transition-colors group-hover:text-ink md:text-xl">
-                      {t(item.qKey)}
+                      {item.q}
                     </span>
                     <span
                       aria-hidden="true"
@@ -95,7 +97,9 @@ export default function Faq() {
                   aria-hidden={!isOpen}
                   inert={isOpen ? undefined : ""}
                 >
-                  <p className="copy pb-6">{t(item.aKey)}</p>
+                  <p className="copy pb-6">
+                    <Rich>{item.a}</Rich>
+                  </p>
                 </motion.div>
               </Reveal>
             );

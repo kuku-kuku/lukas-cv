@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import SectionHead from "../SectionHead";
 import Reveal from "../motion/Reveal";
 import Rule from "../motion/Rule";
 import { CARE, HOURLY, PACKAGES } from "../../design/content";
+import { PRICE_PAGE } from "../../design/pages";
 
 /**
  * 03 - PRICING
@@ -20,7 +22,8 @@ import { CARE, HOURLY, PACKAGES } from "../../design/content";
  * chosen, so deciding and enquiring is one movement instead of two.
  */
 export default function Pricing({ onChoose }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isLt = i18n.language === "lt";
 
   // Opens the quote drawer. Scrolling to the contact section instead would
   // take the visitor away from the prices they are comparing and leave the
@@ -124,6 +127,20 @@ export default function Pricing({ onChoose }) {
             </Reveal>
           ))}
         </ol>
+
+        {/* The full breakdown lives on its own page (Lithuanian only, like
+            the service pages); this section stays short. */}
+        {isLt && (
+          <Link
+            to={`/${PRICE_PAGE.slug}`}
+            className="signal-link mt-8 inline-flex items-center gap-2 text-base font-semibold"
+          >
+            {t("pricing_more")}
+            <span aria-hidden="true" className="font-mono text-xs">
+              &rarr;
+            </span>
+          </Link>
+        )}
 
         {/* ---- care plans + hourly ---- */}
         <div className="mt-16 grid gap-10 md:grid-cols-12">

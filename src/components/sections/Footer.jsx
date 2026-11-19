@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import ChannelLinks from "../ChannelLinks";
 import { openConsent } from "../../design/analytics";
 import { CAPABILITIES, LEGAL, PRACTICE } from "../../design/content";
-import { SERVICE_PAGES } from "../../design/pages";
+import { PRICE_PAGE, SERVICE_PAGES } from "../../design/pages";
+import { SITE } from "../../design/seo";
 import { useReducedMotion } from "../../design/useMotionPrefs";
 
 /**
@@ -80,6 +81,11 @@ export default function Footer() {
                 </li>
               ))}
               <li>
+                <Link to={`/${PRICE_PAGE.slug}`} className="signal-link text-sm font-medium">
+                  {t("nav_pricing")}
+                </Link>
+              </li>
+              <li>
                 <Link to="/darbai" className="signal-link text-sm font-medium">
                   {t("nav_work")}
                 </Link>
@@ -95,11 +101,9 @@ export default function Footer() {
           <ChannelLinks tone="chrome" className="mb-3 md:justify-end" />
 
           <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-end">
-            <a
-              href={`https://${PRACTICE.domain}`}
-              className="signal-link text-sm font-medium"
-              rel="noreferrer"
-            >
+            {/* The canonical host. A bare beneta.lt link costs a redirect
+                hop and points crawlers at the non-canonical host. */}
+            <a href={`${SITE}/`} className="signal-link text-sm font-medium">
               {PRACTICE.domain}
             </a>
             <Link to="/privatumas" className="signal-link text-sm font-medium">

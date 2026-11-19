@@ -7,7 +7,8 @@ import Reveal from "../components/motion/Reveal";
 import { PROJECTS } from "../design/content";
 import { PROJECT_SERVICE, SERVICE_PAGES, WORK_PAGE } from "../design/pages";
 import { useLocale } from "../design/locale";
-import { breadcrumbJsonLd, buildMeta } from "../design/seo";
+import { buildMeta } from "../design/seo";
+import { breadcrumbJsonLd, webPageJsonLd } from "../design/schema";
 
 /**
  * /darbai - the whole work index as readable HTML.
@@ -29,6 +30,12 @@ export const meta = () => [
     description: WORK_PAGE.description,
     path: WORK_PAGE.slug,
     translated: false,
+  }),
+  webPageJsonLd({
+    type: "CollectionPage",
+    path: WORK_PAGE.slug,
+    name: WORK_PAGE.title,
+    description: WORK_PAGE.description,
   }),
   breadcrumbJsonLd("Darbai", WORK_PAGE.slug),
 ];

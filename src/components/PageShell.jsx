@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import Footer from "./sections/Footer";
+import Rich from "./Rich";
 import { PRACTICE } from "../design/content";
 import { SERVICE_PAGES } from "../design/pages";
 
@@ -97,7 +98,9 @@ export function BulletList({ items, className = "" }) {
             className="mt-[0.6em] h-1.5 w-1.5 shrink-0"
             style={{ background: "var(--signal)" }}
           />
-          <span>{item}</span>
+          <span>
+            <Rich>{item}</Rich>
+          </span>
         </li>
       ))}
     </ul>
@@ -123,7 +126,9 @@ export function FaqList({ items }) {
               +
             </span>
           </summary>
-          <p className="copy pb-6">{a}</p>
+          <p className="copy pb-6">
+            <Rich>{a}</Rich>
+          </p>
         </details>
       ))}
     </div>

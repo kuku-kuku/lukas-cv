@@ -3,17 +3,23 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useLocale } from "../design/locale";
 import { buildMeta } from "../design/seo";
+import { webPageJsonLd } from "../design/schema";
 import { CHANNELS, LEGAL, PRACTICE } from "../design/content";
 
-export const meta = () =>
-  buildMeta({
+const TITLE = "Privatumo politika | Beneta";
+const DESCRIPTION =
+  "Kokius asmens duomenis renka beneta.lt, kam jie naudojami, kiek saugomi, kam perduodami ir kaip pasinaudoti savo teisėmis.";
+
+export const meta = () => [
+  ...buildMeta({
     locale: "lt",
-    title: "Privatumo politika | Beneta",
-    description:
-      "Kokius asmens duomenis renka beneta.lt, kam jie naudojami, kiek saugomi, kam perduodami ir kaip pasinaudoti savo teisėmis.",
+    title: TITLE,
+    description: DESCRIPTION,
     path: "privatumas",
     translated: false,
-  });
+  }),
+  webPageJsonLd({ path: "privatumas", name: TITLE, description: DESCRIPTION }),
+];
 
 /**
  * Reviewed and published.

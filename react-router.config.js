@@ -1,4 +1,4 @@
-import { SERVICE_PAGES } from "./src/design/pages.js";
+import { PRICE_PAGE, SERVICE_PAGES } from "./src/design/pages.js";
 
 /** @type {import('@react-router/dev/config').Config} */
 export default {
@@ -23,6 +23,7 @@ export default {
     "/",
     "/en",
     ...SERVICE_PAGES.map((p) => `/${p.slug}`),
+    `/${PRICE_PAGE.slug}`,
     "/darbai",
     "/privatumas",
     "/404",

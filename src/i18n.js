@@ -394,6 +394,9 @@ const resources = {
       faq_title: "Dažniausi klausimai",
       faq_price_q: "Kiek kainuoja internetinės svetainės sukūrimas?",
       faq_price_a: "Vieno puslapio svetainė - nuo 490 €, verslo svetainė (3-8 puslapiai) - nuo 990 €, el. parduotuvė ar individualus sprendimas - nuo 1900 €. Kainos be PVM. Tikslią kainą pasakau po nemokamo pokalbio, kai žinau, ko reikia.",
+      // Appended to faq_price_a on / only (the price page is Lithuanian).
+      faq_price_more: "Plačiau - [svetainės kūrimo kainų puslapyje](/svetainiu-kurimo-kaina).",
+      pricing_more: "Kas įeina į kainą ir kokios metinės išlaidos",
       faq_time_q: "Per kiek laiko sukuriama svetainė?",
       faq_time_a: "Vieno puslapio svetainė - 1-2 savaitės, verslo svetainė - 2-4 savaitės. Daugiausia laiko paprastai užtrunka tekstai ir nuotraukos.",
       faq_edit_q: "Ar galėsiu pats keisti tekstus ir nuotraukas?",
@@ -411,7 +414,7 @@ const resources = {
       faq_care_q: "Kiek kainuoja svetainės priežiūra?",
       faq_care_a: "Priežiūros planai - 39 €/mėn. arba 99 €/mėn. Priežiūra neprivaloma: be jos svetainė vis tiek lieka jūsų, o pagalba prireikus kainuoja 35 €/val.",
       faq_meet_q: "Ar reikia susitikti gyvai?",
-      faq_meet_a: "Ne. Viską darau nuotoliniu būdu - telefonu, el. paštu arba vaizdo skambučiu.",
+      faq_meet_a: "Ne. Dirbu nuotoliu su verslais visoje Lietuvoje - Vilniuje, Kaune, Klaipėdoje ir kitur: telefonu, el. paštu arba vaizdo skambučiu.",
       faq_owns_q: "Kas priklauso man - domenas, svetainė, failai?",
       faq_owns_a: "Viskas jūsų: domenas, svetainė ir visi failai. Jei kada norėsite dirbti su kitu žmogumi - viską perduodu be jokių kliūčių.",
       topic_label: "Kas jus domina?",

@@ -1,5 +1,5 @@
 import { index, prefix, route } from "@react-router/dev/routes";
-import { SERVICE_PAGES } from "./design/pages.js";
+import { PRICE_PAGE, SERVICE_PAGES } from "./design/pages.js";
 
 /**
  * Route table.
@@ -33,6 +33,7 @@ export default [
   ...SERVICE_PAGES.map((p) =>
     route(p.slug, "routes/service.jsx", { id: `service-${p.slug}` })
   ),
+  route(PRICE_PAGE.slug, "routes/price.jsx"),
   route("darbai", "routes/work.jsx"),
 
   // ---- the demo sandbox: client-side only, not indexed ----

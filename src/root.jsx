@@ -13,8 +13,7 @@ import "./styles.css";
 import "./i18n";
 import BackgroundImage from "./components/BackgroundImage";
 import { localeFromPath } from "./design/locale";
-import { CARE, CHANNELS, HOURLY, PACKAGES } from "./design/content";
-import { ORG_ID, SITE } from "./design/seo";
+import { SITE_GRAPH } from "./design/schema";
 import ConsentBanner from "./components/ConsentBanner";
 import { CONSENT_BOOT } from "./design/analytics";
 import criticalCss from "./critical.css?inline";
@@ -60,104 +59,10 @@ export const links = () => [
 ];
 
 /*
- * One business node for the whole site, with a stable @id that the service
- * pages point at as their provider. Prices are read from content.js - this
- * block used to hard-code the old 200 / 300 / 60 / 20 EUR list, so Google
- * was told one set of prices while the page showed another.
+ * The site-wide entities (WebSite, the business, its founder) are emitted
+ * once per document; pages point at them by @id. Built in design/schema.js,
+ * priced from content.js.
  */
-const offer = (name, spec) => ({
-  "@type": "Offer",
-  itemOffered: { "@type": "Service", name },
-  priceSpecification: {
-    "@type": spec.unitCode ? "UnitPriceSpecification" : "PriceSpecification",
-    priceCurrency: "EUR",
-    valueAddedTaxIncluded: false,
-    ...spec,
-  },
-});
-
-const pkgPrice = (id) => String(PACKAGES.find((p) => p.id === id).price);
-
-const BUSINESS = {
-  "@type": "ProfessionalService",
-  "@id": ORG_ID,
-  name: "Beneta",
-  alternateName: "Beneta - Lukas Beneta",
-  url: `${SITE}/`,
-  image: `${SITE}/og.png`,
-  // The mark, declared as the organisation's logo. This is the field Google
-  // reads for the knowledge panel and the logo beside a result; the square
-  // 512 is the one it asks for, not the 1200x630 share card above.
-  logo: {
-    "@type": "ImageObject",
-    url: "https://www.beneta.lt/logo512.png",
-    width: 512,
-    height: 512,
-  },
-  // Same mark, same name, on every profile that links back here - that is
-  // how a search engine ties the accounts to the site.
-  sameAs: [CHANNELS.linkedin, CHANNELS.facebook, CHANNELS.instagram],
-  description:
-    "Internetinių svetainių, el. parduotuvių ir verslo sistemų kūrimas, atnaujinimas ir priežiūra Lietuvos verslui. Fiksuota kaina iš anksto, darbas nuotoliniu būdu.",
-  email: CHANNELS.email,
-  // A remote practice serves an area, not an address. No street address is
-  // published; Google treats this as a service-area business.
-  areaServed: { "@type": "Country", name: "Lietuva" },
-  availableLanguage: ["lt", "en"],
-  priceRange: `${HOURLY}-${pkgPrice("custom")}+ EUR`,
-  currenciesAccepted: "EUR",
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "LT",
-  },
-  founder: {
-    "@type": "Person",
-    name: "Lukas Beneta",
-    jobTitle: "Software Engineer",
-  },
-  knowsAbout: [
-    "Svetainių kūrimas",
-    "Elektroninių parduotuvių kūrimas",
-    "WordPress",
-    "WooCommerce",
-    "React",
-    "Node.js",
-    "Verslo procesų automatizavimas",
-    "Techninis SEO",
-    "Svetainių greitis",
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Paslaugos ir kainos",
-    itemListElement: [
-      offer("Vieno puslapio svetainė", { minPrice: pkgPrice("onepage") }),
-      offer("Verslo svetainė", { minPrice: pkgPrice("business") }),
-      offer("El. parduotuvė arba individualus sprendimas", { minPrice: pkgPrice("custom") }),
-      ...CARE.map((c) =>
-        offer(`Svetainės priežiūra: ${c.id === "calm" ? "Ramybė" : "Augimas"}`, {
-          price: String(c.price),
-          unitCode: "MON",
-        })
-      ),
-      offer("Vienkartiniai darbai", { price: String(HOURLY), unitCode: "HUR" }),
-    ],
-  },
-};
-
-const STRUCTURED_DATA = {
-  "@context": "https://schema.org",
-  "@graph": [
-    BUSINESS,
-    {
-      "@type": "WebSite",
-      "@id": `${SITE}/#website`,
-      url: `${SITE}/`,
-      name: "Beneta",
-      inLanguage: ["lt", "en"],
-      publisher: { "@id": ORG_ID },
-    },
-  ],
-};
 
 export function Layout({ children }) {
   const { pathname } = useLocation();
@@ -181,7 +86,7 @@ export function Layout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOT }} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(SITE_GRAPH) }}
         />
       </head>
       <body>

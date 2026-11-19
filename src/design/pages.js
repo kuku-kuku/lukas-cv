@@ -38,13 +38,13 @@ export const SERVICE_PAGES = [
   {
     slug: "elektroniniu-parduotuviu-kurimas",
     nav: "El. parduotuvės",
-    title: "Elektroninių parduotuvių kūrimas verslui | Beneta",
-    description: `El. parduotuvės kūrimas nuo ${eur(pkg("custom").price)}: prekės, krepšelis, apmokėjimas ir pristatymas. Prekes ir kainas tvarkote patys. Fiksuota kaina iš anksto.`,
-    serviceType: "E-commerce development",
-    serviceName: "Elektroninių parduotuvių kūrimas",
+    title: "El. parduotuvių kūrimas su Shopify ir WooCommerce | Beneta",
+    description: `El. parduotuvės kūrimas nuo ${eur(pkg("custom").price)}: Shopify arba WooCommerce, prekės, krepšelis, apmokėjimai ir pristatymas. Prekes ir kainas valdote patys, kaina fiksuota.`,
+    serviceType: "El. parduotuvių kūrimas",
+    serviceName: "El. parduotuvių kūrimas",
     priceFrom: pkg("custom").price,
     eyebrow: "El. parduotuvės",
-    h1: "Elektroninės parduotuvės kūrimas",
+    h1: "Elektroninių parduotuvių kūrimas",
     lede:
       "Norite pardavinėti internetu, bet nežinote, nuo ko pradėti? Sukuriu el. parduotuvę, kurioje prekes, kainas ir užsakymus tvarkote patys, o pirkėjas nuo prekės iki apmokėjimo nueina be klaidžiojimo.",
     sections: [
@@ -83,6 +83,34 @@ export const SERVICE_PAGES = [
         ],
       },
       {
+        h: "Shopify parduotuvės kūrimas",
+        // TODO(lukas): one sentence on your own Shopify experience (apps,
+        // Shopify APIs, cart and checkout logic) - phrased the way you want,
+        // e.g. without naming the employer. Left out of the page until then.
+        p: [
+          "Shopify tinka, kai norite parduotuvės, kuria nereikia rūpintis techniškai: serveriai, saugumas ir atnaujinimai - platformos reikalas. Mano darbas - kad parduotuvė atrodytų kaip jūsų prekės ženklas, o ne kaip dar vienas standartinis šablonas, ir kad pirkėjui būtų paprasta nuo prekės nueiti iki apmokėjimo.",
+        ],
+        list: [
+          "Tema pagal jūsų prekės ženklą: spalvos, šriftai, prekių ir kategorijų puslapiai pritaikomi jūsų prekėms, ne atvirkščiai",
+          "Programėlių parinkimas ir nustatymas: renkuosi tik tas, kurių tikrai reikia, nes kiekviena prideda mėnesinį mokestį ir lėtina puslapį",
+          "Lietuviški apmokėjimo ir pristatymo būdai, kad pirkėjas galėtų mokėti ir atsiimti prekę taip, kaip įpratęs",
+          "Perkėlimas iš kitos platformos: prekės, kategorijos ir seni adresai, nukreipti į naujus, kad neprarastumėte Google pozicijų",
+        ],
+        after: [
+          "Shopify plano ir mokėjimų mokesčius mokate tiesiogiai Shopify ir mokėjimų tiekėjams - jie į mano kainą neįeina ir per mane nekeliauja.",
+        ],
+      },
+      {
+        h: "Apmokėjimai ir pristatymas Lietuvoje",
+        // TODO(lukas): name the payment and shipping providers you actually
+        // integrate (e.g. Paysera, Montonio, Stripe; Omniva, DPD, LP Express).
+        // Until confirmed this section names no brands.
+        p: [
+          "Pirkėjas Lietuvoje tikisi mokėti per savo banką arba kortele ir prekę atsiimti paštomate ar gauti per kurjerį. Todėl apmokėjimą ir pristatymą derinu prie to, ką naudoja jūsų pirkėjai, o ne prie to, kas lengviausia įdiegti.",
+          "Mokėjimų tiekėją renkamės kartu: palyginame mokesčius už operaciją, kaip greitai pinigai pasiekia jūsų sąskaitą ir ar tiekėjas veikia su jūsų platforma. Pristatymo kainas galima nustatyti pagal svorį, sumą ar zoną, o nemokamą pristatymą - nuo pasirinktos krepšelio sumos.",
+        ],
+      },
+      {
         h: "Kiek kainuoja el. parduotuvė",
         p: [
           `El. parduotuvės kūrimas - nuo ${eur(pkg("custom").price)} (be PVM). Galutinė kaina priklauso nuo prekių kiekio, kiek jų reikia suvesti, kokių apmokėjimo ir pristatymo būdų reikia ir ar parduotuvę reikia jungti su apskaitos ar sandėlio programa.`,
@@ -113,6 +141,14 @@ export const SERVICE_PAGES = [
         q: "Ar parduotuvė bus patogi telefone?",
         a: "Taip. Parduotuvę kuriu pirmiausia telefonui: katalogą, krepšelį ir apmokėjimą tikrinu telefone dar prieš paleidimą.",
       },
+      {
+        q: "Ar galite perkelti esamą parduotuvę į Shopify ar WooCommerce?",
+        a: "Taip. Perkeliu prekes, kategorijas ir nuotraukas, o senus puslapių adresus nukreipiu į naujus, kad Google ir pirkėjai jų nepamestų. Dabartinė parduotuvė veikia, kol nauja peržiūrima ir patvirtinama.",
+      },
+      {
+        q: "Kiek kainuoja Shopify parduotuvė per mėnesį?",
+        a: "Mėnesinį planą ir mokėjimų mokesčius mokate tiesiogiai Shopify ir mokėjimų tiekėjams, ne man. Dabartines Shopify kainas rasite [oficialiame Shopify kainų puslapyje](https://www.shopify.com/pricing). Prie jų gali prisidėti mokamos programėlės - kurių reikia, aptariame prieš pradedant.",
+      },
     ],
     related: ["svetainiu-prieziura", "individualus-programavimas"],
     topic: "shop",
@@ -121,9 +157,9 @@ export const SERVICE_PAGES = [
   {
     slug: "svetainiu-atnaujinimas",
     nav: "Svetainės atnaujinimas",
-    title: "Svetainės atnaujinimas ir pagreitinimas | Beneta",
-    description: `Sena, lėta ar Google nerandama svetainė? Įvertinu, ką verta taisyti, o ką kurti iš naujo. Smulkūs darbai ${HOURLY} €/val., nauja svetainė nuo ${eur(pkg("onepage").price)}.`,
-    serviceType: "Website redesign",
+    title: "Svetainės atnaujinimas ir greičio optimizavimas | Beneta",
+    description: `Lėta, pasenusi ar Google nerandama svetainė? Įvertinu, ką verta pataisyti, o ką kurti iš naujo. Greičio optimizavimas ir SEO pataisymai - ${HOURLY} €/val.`,
+    serviceType: "Svetainių atnaujinimas",
     serviceName: "Svetainių atnaujinimas ir modernizavimas",
     priceFrom: HOURLY,
     priceUnit: "HUR",
@@ -151,9 +187,10 @@ export const SERVICE_PAGES = [
         ],
       },
       {
-        h: "Kodėl svetainė lėta",
+        h: "Kodėl svetainė lėta ir kaip ją pagreitinti",
         p: [
           "Dažniausios priežastys paprastos: per didelės nuotraukos, dešimtys papildinių, kurių niekas nenaudoja, sunkūs šriftai ir trečiųjų šalių skriptai, kraunami dar prieš turinį. Greitį matuoju Google Lighthouse ir PageSpeed Insights - prieš darbus ir po jų, kad matytumėte skirtumą skaičiais, o ne žodžiais.",
+          "Pagreitinimas dažniausiai reiškia keturis darbus: nuotraukas suspaudžiu ir paverčiu šiuolaikiniais formatais, nereikalingus įskiepius ir skriptus pašalinu arba įkeliu vėliau, šriftus sumažinu iki tų, kurie tikrai naudojami, o jei lėtas pats serveris - pasiūlau greitesnį talpinimą.",
           "Matuoju telefono režimu, ne tik kompiuterio: telefone rezultatai beveik visada prastesni, o Google svetainę vertina būtent pagal mobilią versiją.",
         ],
       },
@@ -221,11 +258,15 @@ export const SERVICE_PAGES = [
     slug: "svetainiu-prieziura",
     nav: "Svetainių priežiūra",
     title: `Svetainių priežiūra nuo ${care("calm").price} €/mėn. | Beneta`,
-    description: `Svetainės priežiūra nuo ${care("calm").price} €/mėn.: talpinimas, atnaujinimai, atsarginės kopijos ir smulkūs pakeitimai. Vienkartiniai darbai ${HOURLY} €/val.`,
-    serviceType: "Website maintenance",
+    description: `Svetainių priežiūra nuo ${care("calm").price} €/mėn.: talpinimas, atnaujinimai, atsarginės kopijos ir smulkūs pakeitimai. Prižiūriu ir WordPress svetaines, kurių nekūriau.`,
+    serviceType: "Svetainių priežiūra",
     serviceName: "Svetainių priežiūra ir techninė pagalba",
     priceFrom: care("calm").price,
     priceUnit: "MON",
+    offers: [
+      { name: "Ramybė", price: care("calm").price, unitCode: "MON" },
+      { name: "Augimas", price: care("growth").price, unitCode: "MON" },
+    ],
     eyebrow: "Priežiūra",
     h1: "Svetainių priežiūra ir techninė pagalba",
     lede:
@@ -239,19 +280,43 @@ export const SERVICE_PAGES = [
         ],
       },
       {
+        h: "Kas įeina į svetainės priežiūrą",
+        // TODO(lukas): if uptime monitoring is part of the plans, add
+        // "Veikimo stebėsena: jei svetainė neatsidaro, sužinau pirmas." to
+        // the list below. Left out until confirmed.
+        p: ["Kas mėnesį pagal planą „Ramybė“ pasirūpinu:"],
+        list: [
+          "Talpinimu - svetainė veikia serveryje, už kurį atsakau aš, o ne jūs",
+          "Sistemos ir saugumo atnaujinimais - WordPress, papildiniai ir kita programinė įranga atnaujinami tvarkingai, o po atnaujinimo patikrinu, ar svetainė veikia",
+          "Atsarginėmis kopijomis - jei kas nors sugenda, svetainę galima grąžinti į paskutinę veikiančią būseną",
+          "Smulkiais teksto pakeitimais - nauja kaina, darbo laikas ar kontaktai pakeičiami be atskiros sąskaitos",
+        ],
+        after: [
+          "Planas „Augimas“ apima viską, kas yra „Ramybėje“, ir kas mėnesį dar - svetainės patobulinimus bei Google ataskaitą, kad matytumėte, kaip svetainei sekasi paieškoje.",
+        ],
+      },
+      {
         h: "Priežiūros planai",
         plans: true,
       },
       {
-        h: "Be plano",
+        h: "Kaip greitai sureaguoju",
         p: [
-          `Priežiūra pasirinktinai. Jei plano nenorite, svetainė vis tiek lieka jūsų, o kai prireikia pagalbos, dirbu valandiniu įkainiu - ${HOURLY} €/val. Visoms mano sukurtoms svetainėms mėnesį po paleidimo pataisymai nemokami.`,
+          "Į laiškus atsakau per 24 valandas darbo dienomis. Jei svetainė neveikia ar dingo forma, parašykite el. paštu ir trumpai aprašykite, ką matote - pradedu nuo to, kas trukdo klientams su jumis susisiekti ar pirkti.",
+          "Kai priežastis aiški, pasakau, ką taisysiu ir ar tai įeina į jūsų planą. Jei svetainę teko grąžinti iš atsarginės kopijos, paaiškinu, kas nutiko ir ką padariau, kad tai nesikartotų.",
         ],
       },
       {
-        h: "Svetainė, kurios nekūriau",
+        h: "Be plano",
+        p: [
+          `Priežiūra pasirinktinai. Jei plano nenorite, svetainė vis tiek lieka jūsų, o kai prireikia pagalbos, dirbu valandiniu įkainiu - ${HOURLY} €/val. Visoms mano sukurtoms svetainėms mėnesį po paleidimo pataisymai nemokami. Visas kainas palyginti galite [svetainės kūrimo kainų puslapyje](/svetainiu-kurimo-kaina).`,
+        ],
+      },
+      {
+        h: "WordPress ir kitų kūrėjų svetainių priežiūra",
         p: [
           "Galiu prižiūrėti ir kito kūrėjo svetainę. Prieš sutardamas pirmiausia ją peržiūriu: kokia platforma, kada paskutinį kartą atnaujinta, ar yra atsarginės kopijos. Jei randu rimtų problemų, pirmiausia pasakau, ką reikia sutvarkyti, ir kiek tai kainuotų.",
+          "Dažniausiai tai WordPress svetainės, kurių papildiniai nebuvo atnaujinti metų metus. Tokiu atveju pirmiausia padarau atsarginę kopiją ir patikrinu, kas sugestų atnaujinus. Po peržiūros gaunate pasirinkimą: priežiūros planą arba vienkartinį sutvarkymą valandiniu įkainiu. Jei svetainė tokios būklės, kad ją pigiau [atnaujinti iš esmės](/svetainiu-atnaujinimas), pasakau tai iš karto.",
         ],
       },
     ],
@@ -281,24 +346,43 @@ export const SERVICE_PAGES = [
   {
     slug: "individualus-programavimas",
     nav: "Sistemos ir automatizavimas",
-    title: "Individualus programavimas ir automatizavimas verslui | Beneta",
-    description: `Verslo sistemos, integracijos ir procesų automatizavimas: užklausos, registracijos, rezervacijos, ataskaitos. Sujungiu su jūsų įrankiais. Nuo ${eur(pkg("custom").price)}.`,
-    serviceType: "Custom software development",
-    serviceName: "Individualus programavimas ir verslo procesų automatizavimas",
+    title: "Verslo sistemų kūrimas ir automatizavimas | Beneta",
+    description: `Individualių verslo sistemų kūrimas: rezervacijos, registracijos, klientų paskyros, integracijos ir ataskaitos. Sujungiu su jūsų naudojamais įrankiais. Nuo ${eur(pkg("custom").price)}.`,
+    serviceType: "Verslo sistemų kūrimas",
+    serviceName: "Verslo sistemų kūrimas ir automatizavimas",
     priceFrom: pkg("custom").price,
     eyebrow: "Sistemos",
-    h1: "Individualus programavimas ir verslo procesų automatizavimas",
+    h1: "Individualių verslo sistemų kūrimas ir automatizavimas",
     lede:
       "Kai paruoštas įrankis jau nebetinka, o rankinio darbo vis daugėja. Užklausos, registracijos, rezervacijos, ataskaitos - padarau, kad tai vyktų savaime, ir sujungiu su sistemomis, kurias jau naudojate.",
     sections: [
       {
-        h: "Ką dažniausiai automatizuoju",
-        list: [
-          "Užklausų ir registracijos formas, kurios patikimai pasiekia el. paštą, o siuntimo klaidos matomos, ne tyliai pradingsta",
-          "Kelių žingsnių užklausas, kai klientui reikia užduoti daugiau klausimų nei telpa į vieną formą",
-          "Rezervacijas, registracijas ir klientų paskyras",
-          "Suvestines ir ataskaitas, kurios dabar skaičiuojamos ranka skaičiuoklėse",
-          "Duomenų eksportą (pvz., į CSV) ir sujungimą tarp skirtingų programų per API",
+        h: "Kokias sistemas kuriu ir ką automatizuoju",
+        sub: [
+          {
+            h: "Rezervacijų ir registracijų sistemos",
+            p: [
+              "Užklausų ir registracijos formos, kurios patikimai pasiekia el. paštą, o siuntimo klaidos matomos, ne tyliai pradingsta. Kelių žingsnių užklausos, kai klientui reikia užduoti daugiau klausimų nei telpa į vieną formą. Rezervacijos ir registracijos, kurias klientas atlieka pats, o jūs gaunate tvarkingą sąrašą vietoje žinučių srauto.",
+            ],
+          },
+          {
+            h: "Klientų paskyros",
+            p: [
+              "Vieta, kur klientas prisijungia ir mato savo užsakymus, registracijas ar dokumentus. Jums mažiau tų pačių klausimų telefonu, o klientui nereikia laukti atsakymo.",
+            ],
+          },
+          {
+            h: "Integracijos su esamomis programomis",
+            p: [
+              "Duomenų eksportas (pvz., į CSV) ir sujungimas tarp skirtingų programų per API. Tikslas paprastas: tie patys duomenys nevedami ranka dviejose vietose, o informacija iš svetainės pati nukeliauja ten, kur su ja dirbate.",
+            ],
+          },
+          {
+            h: "Vidiniai įrankiai ir ataskaitos",
+            p: [
+              "Suvestinės ir ataskaitos, kurios dabar skaičiuojamos ranka skaičiuoklėse. Kai duomenys renkami vienoje vietoje, ataskaita sudaroma savaime, ir ją galima atsidaryti bet kada, o ne laukti mėnesio pabaigos.",
+            ],
+          },
         ],
       },
       {
@@ -355,6 +439,172 @@ export const SERVICE_PAGES = [
 ];
 
 export const servicePage = (slug) => SERVICE_PAGES.find((p) => p.slug === slug);
+
+/**
+ * PRICE PAGE - owns the price intent ("svetainės kūrimo kaina", "kiek
+ * kainuoja svetainė"). The home page keeps its short pricing section for
+ * conversion and links here; e-shop and maintenance prices stay primary on
+ * their own pages and are only summarised here, with a link.
+ *
+ * Not in SERVICE_PAGES: it is not a service, so it stays out of the header
+ * service nav and the related-service cards. It is linked from the footer,
+ * the home pricing section and FAQ, and every service page's "Visos kainos".
+ */
+export const PRICE_PAGE = {
+  slug: "svetainiu-kurimo-kaina",
+  nav: "Kainos",
+  title: "Svetainės kūrimo kaina: kiek kainuoja svetainė? | Beneta",
+  description: `Kiek kainuoja svetainė: vieno puslapio nuo ${eur(pkg("onepage").price)}, verslo svetainė nuo ${eur(pkg("business").price)}, el. parduotuvė nuo ${eur(pkg("custom").price)}. Kas įeina į kainą ir kokios išlaidos laukia po paleidimo.`,
+  eyebrow: "Kainos",
+  h1: "Svetainės kūrimo kaina",
+  lede:
+    "Svetainės kaina priklauso nuo to, ko jai reikia padaryti: pristatyti paslaugą, rinkti užklausas ar parduoti. Žemiau - mano kainos, kas į jas įeina ir kokios išlaidos laukia po paleidimo. Tikslią sumą raštu gaunate po nemokamo pokalbio, ir ji nesikeičia.",
+  sections: [
+    {
+      h: "Kiek kainuoja svetainė: kainos pagal tipą",
+      p: [
+        "Kainos fiksuotos ir skelbiamos viešai. „Nuo“ reiškia mažiausią tokio tipo projekto kainą: jei jūsų atvejis paprastas, tiek ir sumokėsite, o jei reikia daugiau, kodėl kaina didesnė - matote pasiūlyme.",
+      ],
+      prices: true,
+      after: [
+        "Ką jau esu padaręs už panašią kainą, galite pažiūrėti [mano darbų puslapyje](/darbai) - visos svetainės veikia ir atsidaro.",
+      ],
+    },
+    {
+      h: "Kas įeina į kainą",
+      p: ["Kiekviena svetainė, nesvarbu, kurio tipo, gaunama su tuo pačiu pagrindu:"],
+      list: [
+        "Dizainas, pritaikytas telefonams - dauguma lankytojų jus atidarys būtent telefone",
+        "Kontaktų forma, kurios užklausos pasiekia jūsų el. paštą",
+        "Bazinis paruošimas Google: kiekvienas puslapis turi atskirą pavadinimą ir aprašymą, aiškią antraščių struktūrą",
+        "Greitis - puslapis atsidaro per 1-2 s",
+        "Lankytojų statistika, kad matytumėte, kiek žmonių ateina ir iš kur",
+        "Mėnuo nemokamų pataisymų po paleidimo",
+        "Domenas, svetainė ir visi failai priklauso jums",
+      ],
+      after: [
+        "Verslo svetainėje papildomai galite patys keisti tekstus ir nuotraukas, nelaukdami programuotojo.",
+      ],
+    },
+    {
+      h: "Kas lemia galutinę kainą",
+      sub: [
+        {
+          h: "Puslapių skaičius",
+          p: [
+            "Vieno puslapio svetainė tinka vienai paslaugai ar specialistui. Kai paslaugų daugiau, kiekvienai verta atskiro puslapio - taip ją lengviau rasti Google. Verslo svetainės kainoje numatyti 3-8 puslapiai; daugiau puslapių reiškia daugiau dizaino, tikrinimo ir teksto sudėliojimo.",
+          ],
+        },
+        {
+          h: "Dizainas ir animacijos",
+          p: [
+            "Aiškus, tvarkingas dizainas pagal jūsų prekės ženklą įeina į kainą. Sudėtingesnės animacijos, iliustracijos ar interaktyvūs elementai užima daugiau laiko, todėl juos aptariame atskirai ir darome tik ten, kur jie padeda, o ne puošia.",
+          ],
+        },
+        {
+          h: "Tekstai ir nuotraukos",
+          p: [
+            "Greičiausiai svetainė gimsta tada, kai tekstai ir nuotraukos jau paruošti. Jei jų dar nėra, prieš pradedant susitariame, kas ir kada juos paruoš, kad tai neužtęstų darbų ir nepakeistų sutartos kainos.",
+          ],
+        },
+        {
+          h: "Funkcijos ir integracijos",
+          p: [
+            `Kontaktų forma įeina visada. Rezervacijos, registracijos, klientų paskyros, apmokėjimai ar sujungimas su kitomis programomis - jau individualaus sprendimo darbas, nuo ${eur(pkg("custom").price)} (plačiau - [verslo sistemų puslapyje](/individualus-programavimas)). Prieš pateikdamas kainą patikrinu, ar programa, su kuria reikia jungtis, tai leidžia.`,
+          ],
+        },
+        {
+          h: "Kalbų versijos",
+          p: [
+            "Kiekviena kalba - tai atskiri puslapiai su savo adresais, kad Google rodytų tinkamą versiją tinkamiems žmonėms. Techniškai tai nesudėtinga, bet reikia paruošti ir patikrinti visus tekstus antra kalba, todėl daugiakalbė svetainė kainuoja daugiau.",
+          ],
+        },
+      ],
+    },
+    {
+      h: "Išlaidos po paleidimo",
+      // TODO(lukas): if you state a typical yearly domain price (.lt), add
+      // it here. Until then no number is shown.
+      p: [
+        "Svetainės sukūrimas - vienkartinė išlaida, bet ne vienintelė. Kad nebūtų netikėtumų, štai kas laukia vėliau:",
+      ],
+      list: [
+        "Domenas - pratęsiamas kasmet ir apmokamas domenų registratoriui. Domenas registruojamas jūsų vardu ir priklauso jums.",
+        `Talpinimas ir priežiūra - planas „Ramybė“ ${care("calm").price} €/mėn. arba „Augimas“ ${care("growth").price} €/mėn. Kas įeina į kiekvieną, aprašyta [svetainių priežiūros puslapyje](/svetainiu-prieziura).`,
+        `Vienkartiniai darbai - ${HOURLY} €/val., su sąmata iš anksto: nauja skiltis, didesnis pakeitimas ar pagalba be priežiūros plano.`,
+      ],
+      after: [
+        "Priežiūra neprivaloma. Svetainė, domenas ir failai priklauso jums ir be plano, o mėnesį po paleidimo pataisymai nemokami bet kuriuo atveju.",
+      ],
+    },
+    {
+      h: "Individuali svetainė, šablonas ar svetainių kūrimo įrankis?",
+      p: [
+        "Sąžiningai: ne kiekvienam verslui reikia individualios svetainės. Šablonas ar svetainių kūrimo įrankis greičiau ir pigiau paleidžiami, tačiau dažnai būna sunkesni ir sunkiau pritaikomi, kai verslas auga. Štai kaip jie skiriasi:",
+      ],
+      table: {
+        head: ["", "Individuali svetainė", "Paruoštas šablonas", "Svetainių kūrimo įrankis"],
+        rows: [
+          ["Kaina pradžioje", "Didesnė", "Mažesnė", "Mažiausia, bet mokama kas mėnesį"],
+          ["Greitis", "Kraunama tik tai, ko reikia", "Daug nenaudojamo kodo", "Priklauso nuo platformos"],
+          ["Lankstumas", "Daroma pagal jūsų turinį ir klientus", "Ribojama šablono", "Ribojama įrankio galimybių"],
+          ["Kas valdo", "Jūs: kodas, domenas ir failai", "Jūs, bet priklausote nuo šablono kūrėjo", "Platforma: išsikelti ne visada paprasta"],
+        ],
+      },
+      after: [
+        "Jei jūsų atveju pakanka šablono ar įrankio, pasakysiu tai per pirmą pokalbį - nėra prasmės mokėti už tai, ko nereikia.",
+      ],
+    },
+    {
+      h: "Kaip palyginti kelis svetainės kūrimo pasiūlymus",
+      p: [
+        "Du pasiūlymai su ta pačia suma gali reikšti visai skirtingus dalykus. Prieš rinkdamiesi, užduokite kiekvienam kūrėjui (ir man) tuos pačius klausimus:",
+      ],
+      list: [
+        "Ar kaina fiksuota, ar gali augti darbų eigoje?",
+        "Kas tiksliai įeina į kainą, o kas mokama atskirai?",
+        "Kiek pataisymų įskaičiuota ir kiek laiko po paleidimo jie nemokami?",
+        "Kam priklausys domenas, svetainės kodas ir prieigos?",
+        "Kas talpins svetainę ir kiek tai kainuos per metus?",
+        "Ar svetainė bus greita telefone - ir ar tai išmatuosite?",
+        "Kas nutinka po paleidimo, jei kas nors sugenda?",
+        "Ar matysiu, kaip vyksta darbas, ar tik galutinį rezultatą?",
+      ],
+      after: [
+        "Mano atsakymai: kaina fiksuota raštu, mėnuo nemokamų pataisymų, viskas priklauso jums, o veikiančią versiją matote kas savaitę.",
+      ],
+    },
+  ],
+  evidence: [],
+  faqTitle: "Dažni klausimai apie svetainės kainą",
+  // TODO(lukas): two more questions from the brief, left out until you
+  // confirm the answers: "Ar domenas ir talpinimas įskaičiuoti į kainą?" and
+  // "Ar galima mokėti dalimis?".
+  faq: [
+    {
+      q: "Kodėl svetainių kainos taip skiriasi?",
+      a: "Nes po žodžiu „svetainė“ slepiasi labai skirtingi darbai: vienas kūrėjas įdiegia šabloną, kitas kuria pagal jūsų turinį, matuoja greitį ir paruošia svetainę Google. Skiriasi ir tai, kas įeina: pataisymai, talpinimas, priežiūra. Todėl lyginkite ne sumas, o tai, ką už jas gaunate.",
+    },
+    {
+      q: "Ar kaina gali pasikeisti darbo eigoje?",
+      a: "Ne, jei nesikeičia darbų apimtis. Kainą ir terminą sutariame raštu prieš pradedant. Jei darbų eigoje panorėsite ko nors papildomai, pirmiausia pasakysiu, kiek tai kainuotų, ir darysiu tik jums sutikus.",
+    },
+    {
+      q: "Kiek kainuoja svetainės priežiūra?",
+      a: `Planas „Ramybė“ - ${care("calm").price} €/mėn., planas „Augimas“ - ${care("growth").price} €/mėn., vienkartiniai darbai - ${HOURLY} €/val. Plačiau - [svetainių priežiūros puslapyje](/svetainiu-prieziura).`,
+    },
+    {
+      q: "Kiek kainuoja el. parduotuvė?",
+      a: `Nuo ${eur(pkg("custom").price)} be PVM. Kaina priklauso nuo prekių kiekio, apmokėjimo ir pristatymo būdų bei integracijų. Plačiau - [el. parduotuvės kūrimo puslapyje](/elektroniniu-parduotuviu-kurimas).`,
+    },
+  ],
+  related: [
+    "elektroniniu-parduotuviu-kurimas",
+    "svetainiu-atnaujinimas",
+    "svetainiu-prieziura",
+    "individualus-programavimas",
+  ],
+};
 
 /** The projects page: everything in PROJECTS, in full, on one URL. */
 export const WORK_PAGE = {
