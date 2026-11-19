@@ -82,15 +82,31 @@ In the browser:
 - **Hero / LCP:** not changed. The decode animation was reworked in
   `a7c2166` and the text is in the prerendered HTML.
 
-## 5. Open TODOs for Lukas
+## 5. Answers from Lukas (applied 2026-11-19)
 
-| Where | Question |
-|---|---|
-| `src/design/pages.js:87` | How do you want to describe your own Shopify work (apps, APIs, checkout), e.g. without naming your employer? |
-| `src/design/pages.js:105` | Which payment and shipping providers do you actually integrate? The section currently names no brands. |
-| `src/design/pages.js:284` | Do the care plans include uptime monitoring? |
-| `src/design/pages.js:526` | Do you want to state a typical yearly `.lt` domain price? |
-| `src/design/pages.js:580` | Answers for "Ar domenas ir talpinimas įskaičiuoti į kainą?" and "Ar galima mokėti dalimis?" Also from the brief: "Ar galiu nutraukti priežiūrą bet kada?" (maintenance page). |
+All five TODO(lukas) markers are resolved; none remain in the code.
+
+| Question | Answer | Applied |
+|---|---|---|
+| Shopify experience | Not a Shopify theme developer: avoid the Shopify angle | Shopify section, Shopify FAQs and "Shopify" in the title, description and `knowsAbout` removed. Title is now `Elektroninių parduotuvių kūrimas verslui nuo 1 900 € \| Beneta`. The existing "WooCommerce ar Shopify?" comparison (earlier copy) stays |
+| Payment and shipping providers | Paysera, Montonio, Stripe; Omniva, DPD, LP Express (Lukas also ticked "name no brands") | Named once, as the usual choices, in "Apmokėjimai ir pristatymas Lietuvoje" |
+| Uptime monitoring | "Research and choose" | Included in both plans (see below) |
+| Domain and hosting in the build price | First year included | Price page: added to "Kas įeina", "Išlaidos po paleidimo", the quote checklist answer and a new FAQ |
+| Instalments | 50% before starting, 50% at launch | New price-page FAQ |
+| Cancelling care | Any month | New maintenance FAQ |
+
+**Monitoring decision.** Included in both plans ("Augimas" contains everything in
+"Ramybė"). Reasons:
+- The maintenance page already promised "tai pastebiu aš, ir anksčiau", and that
+  promise needs monitoring.
+- Lithuanian competitors put monitoring in their higher tier (about 69 €/mėn.),
+  so having it at 39 € sets this plan apart.
+- It costs little to run.
+
+**Lukas must set it up for every client site before this copy is true**, for
+example UptimeRobot, Better Stack or similar. UptimeRobot's free plan has 50
+monitors at 5-minute checks, but sources disagree on whether commercial use is
+allowed. Check its terms, or use the paid Solo tier.
 
 ## 6. Manual tasks outside the repo
 
@@ -113,10 +129,19 @@ In the browser:
   2026-11 because there is no rich-result eligibility. It is back because the
   brief asks for it; it is harmless.
 - **Two meta descriptions run past 160 characters:** `/individualus-programavimas`
-  (164) and the price page (162). The text is exactly as the brief gave it. Trim
+  (164) and the price page (162). The e-shop description is now 141. The text is exactly as the brief gave it. Trim
   if wanted.
 - **Copying the sitemap lastmod on Vercel:** it reuses the committed value, so
   run `npm run build` locally before committing content changes to refresh it.
+- **react-dom 18.2 put stray NUL bytes in the HTML:**
+  - The bug was already there before this work. When a multi-byte letter (š, ž)
+    falls on a 2048-byte boundary of the server stream, a zero byte is written
+    into the text.
+  - In this build it affected `/darbai` and `/svetainiu-kurimo-kaina`; which
+    pages are hit depends only on where letters land.
+  - `scripts/finish-build.mjs` now strips these bytes after every build.
+  - The proper fix is upgrading `react`/`react-dom` to 18.3.1. That is a
+    dependency change, so it waits for approval.
 - **The site-wide JSON-LD graph is on every page,** including `/en`, as before.
   The LT business description appears on `/en` as well.
 

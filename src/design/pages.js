@@ -38,8 +38,8 @@ export const SERVICE_PAGES = [
   {
     slug: "elektroniniu-parduotuviu-kurimas",
     nav: "El. parduotuvės",
-    title: "El. parduotuvių kūrimas su Shopify ir WooCommerce | Beneta",
-    description: `El. parduotuvės kūrimas nuo ${eur(pkg("custom").price)}: Shopify arba WooCommerce, prekės, krepšelis, apmokėjimai ir pristatymas. Prekes ir kainas valdote patys, kaina fiksuota.`,
+    title: `Elektroninių parduotuvių kūrimas verslui nuo ${eur(pkg("custom").price)} | Beneta`,
+    description: `El. parduotuvės kūrimas nuo ${eur(pkg("custom").price)}: prekės, krepšelis, apmokėjimai ir pristatymas Lietuvoje. Prekes ir kainas valdote patys, kaina fiksuota.`,
     serviceType: "El. parduotuvių kūrimas",
     serviceName: "El. parduotuvių kūrimas",
     priceFrom: pkg("custom").price,
@@ -83,30 +83,9 @@ export const SERVICE_PAGES = [
         ],
       },
       {
-        h: "Shopify parduotuvės kūrimas",
-        // TODO(lukas): one sentence on your own Shopify experience (apps,
-        // Shopify APIs, cart and checkout logic) - phrased the way you want,
-        // e.g. without naming the employer. Left out of the page until then.
-        p: [
-          "Shopify tinka, kai norite parduotuvės, kuria nereikia rūpintis techniškai: serveriai, saugumas ir atnaujinimai - platformos reikalas. Mano darbas - kad parduotuvė atrodytų kaip jūsų prekės ženklas, o ne kaip dar vienas standartinis šablonas, ir kad pirkėjui būtų paprasta nuo prekės nueiti iki apmokėjimo.",
-        ],
-        list: [
-          "Tema pagal jūsų prekės ženklą: spalvos, šriftai, prekių ir kategorijų puslapiai pritaikomi jūsų prekėms, ne atvirkščiai",
-          "Programėlių parinkimas ir nustatymas: renkuosi tik tas, kurių tikrai reikia, nes kiekviena prideda mėnesinį mokestį ir lėtina puslapį",
-          "Lietuviški apmokėjimo ir pristatymo būdai, kad pirkėjas galėtų mokėti ir atsiimti prekę taip, kaip įpratęs",
-          "Perkėlimas iš kitos platformos: prekės, kategorijos ir seni adresai, nukreipti į naujus, kad neprarastumėte Google pozicijų",
-        ],
-        after: [
-          "Shopify plano ir mokėjimų mokesčius mokate tiesiogiai Shopify ir mokėjimų tiekėjams - jie į mano kainą neįeina ir per mane nekeliauja.",
-        ],
-      },
-      {
         h: "Apmokėjimai ir pristatymas Lietuvoje",
-        // TODO(lukas): name the payment and shipping providers you actually
-        // integrate (e.g. Paysera, Montonio, Stripe; Omniva, DPD, LP Express).
-        // Until confirmed this section names no brands.
         p: [
-          "Pirkėjas Lietuvoje tikisi mokėti per savo banką arba kortele ir prekę atsiimti paštomate ar gauti per kurjerį. Todėl apmokėjimą ir pristatymą derinu prie to, ką naudoja jūsų pirkėjai, o ne prie to, kas lengviausia įdiegti.",
+          "Pirkėjas Lietuvoje tikisi mokėti per savo banką arba kortele ir prekę atsiimti paštomate ar gauti per kurjerį. Todėl apmokėjimą ir pristatymą derinu prie to, ką naudoja jūsų pirkėjai, o ne prie to, kas lengviausia įdiegti. Dažniausiai tai Paysera, Montonio ar Stripe mokėjimai ir Omniva, DPD ar LP Express paštomatai bei kurjeriai.",
           "Mokėjimų tiekėją renkamės kartu: palyginame mokesčius už operaciją, kaip greitai pinigai pasiekia jūsų sąskaitą ir ar tiekėjas veikia su jūsų platforma. Pristatymo kainas galima nustatyti pagal svorį, sumą ar zoną, o nemokamą pristatymą - nuo pasirinktos krepšelio sumos.",
         ],
       },
@@ -142,12 +121,8 @@ export const SERVICE_PAGES = [
         a: "Taip. Parduotuvę kuriu pirmiausia telefonui: katalogą, krepšelį ir apmokėjimą tikrinu telefone dar prieš paleidimą.",
       },
       {
-        q: "Ar galite perkelti esamą parduotuvę į Shopify ar WooCommerce?",
+        q: "Ar galite perkelti esamą parduotuvę į naują platformą?",
         a: "Taip. Perkeliu prekes, kategorijas ir nuotraukas, o senus puslapių adresus nukreipiu į naujus, kad Google ir pirkėjai jų nepamestų. Dabartinė parduotuvė veikia, kol nauja peržiūrima ir patvirtinama.",
-      },
-      {
-        q: "Kiek kainuoja Shopify parduotuvė per mėnesį?",
-        a: "Mėnesinį planą ir mokėjimų mokesčius mokate tiesiogiai Shopify ir mokėjimų tiekėjams, ne man. Dabartines Shopify kainas rasite [oficialiame Shopify kainų puslapyje](https://www.shopify.com/pricing). Prie jų gali prisidėti mokamos programėlės - kurių reikia, aptariame prieš pradedant.",
       },
     ],
     related: ["svetainiu-prieziura", "individualus-programavimas"],
@@ -281,13 +256,11 @@ export const SERVICE_PAGES = [
       },
       {
         h: "Kas įeina į svetainės priežiūrą",
-        // TODO(lukas): if uptime monitoring is part of the plans, add
-        // "Veikimo stebėsena: jei svetainė neatsidaro, sužinau pirmas." to
-        // the list below. Left out until confirmed.
         p: ["Kas mėnesį pagal planą „Ramybė“ pasirūpinu:"],
         list: [
           "Talpinimu - svetainė veikia serveryje, už kurį atsakau aš, o ne jūs",
           "Sistemos ir saugumo atnaujinimais - WordPress, papildiniai ir kita programinė įranga atnaujinami tvarkingai, o po atnaujinimo patikrinu, ar svetainė veikia",
+          "Veikimo stebėsena - jei svetainė nustoja atsidaryti, apie tai sužinau automatiškai, dažnai anksčiau nei jūs",
           "Atsarginėmis kopijomis - jei kas nors sugenda, svetainę galima grąžinti į paskutinę veikiančią būseną",
           "Smulkiais teksto pakeitimais - nauja kaina, darbo laikas ar kontaktai pakeičiami be atskiros sąskaitos",
         ],
@@ -337,6 +310,10 @@ export const SERVICE_PAGES = [
       {
         q: "Ar galite prižiūrėti WordPress svetainę, kurią kūrė kitas?",
         a: "Taip, po peržiūros. Pirmiausia patikrinu, kaip svetainė padaryta ir kokios būklės, ir tik tada sutariame dėl priežiūros.",
+      },
+      {
+        q: "Ar galiu nutraukti priežiūrą bet kada?",
+        a: "Taip, bet kurį mėnesį. Planas tiesiog nebepratęsiamas kitam mėnesiui, be jokių baudų, o svetainė, domenas ir failai lieka jūsų.",
       },
     ],
     related: ["svetainiu-atnaujinimas", "elektroniniu-parduotuviu-kurimas"],
@@ -480,6 +457,7 @@ export const PRICE_PAGE = {
         "Greitis - puslapis atsidaro per 1-2 s",
         "Lankytojų statistika, kad matytumėte, kiek žmonių ateina ir iš kur",
         "Mėnuo nemokamų pataisymų po paleidimo",
+        "Domenas ir talpinimas pirmiems metams",
         "Domenas, svetainė ir visi failai priklauso jums",
       ],
       after: [
@@ -523,14 +501,12 @@ export const PRICE_PAGE = {
     },
     {
       h: "Išlaidos po paleidimo",
-      // TODO(lukas): if you state a typical yearly domain price (.lt), add
-      // it here. Until then no number is shown.
       p: [
-        "Svetainės sukūrimas - vienkartinė išlaida, bet ne vienintelė. Kad nebūtų netikėtumų, štai kas laukia vėliau:",
+        "Svetainės sukūrimas - vienkartinė išlaida, bet ne vienintelė. Pirmi domeno ir talpinimo metai įskaičiuoti į kainą, o štai kas laukia vėliau:",
       ],
       list: [
-        "Domenas - pratęsiamas kasmet ir apmokamas domenų registratoriui. Domenas registruojamas jūsų vardu ir priklauso jums.",
-        `Talpinimas ir priežiūra - planas „Ramybė“ ${care("calm").price} €/mėn. arba „Augimas“ ${care("growth").price} €/mėn. Kas įeina į kiekvieną, aprašyta [svetainių priežiūros puslapyje](/svetainiu-prieziura).`,
+        "Domenas - nuo antrųjų metų pratęsiamas kasmet ir apmokamas domenų registratoriui. Domenas registruojamas jūsų vardu ir priklauso jums.",
+        `Talpinimas ir priežiūra - po pirmų metų talpinimas įeina į priežiūros planą: „Ramybė“ ${care("calm").price} €/mėn. arba „Augimas“ ${care("growth").price} €/mėn. Kas įeina į kiekvieną, aprašyta [svetainių priežiūros puslapyje](/svetainiu-prieziura).`,
         `Vienkartiniai darbai - ${HOURLY} €/val., su sąmata iš anksto: nauja skiltis, didesnis pakeitimas ar pagalba be priežiūros plano.`,
       ],
       after: [
@@ -571,15 +547,12 @@ export const PRICE_PAGE = {
         "Ar matysiu, kaip vyksta darbas, ar tik galutinį rezultatą?",
       ],
       after: [
-        "Mano atsakymai: kaina fiksuota raštu, mėnuo nemokamų pataisymų, viskas priklauso jums, o veikiančią versiją matote kas savaitę.",
+        "Mano atsakymai: kaina fiksuota raštu, mėnuo nemokamų pataisymų, pirmi domeno ir talpinimo metai įskaičiuoti, viskas priklauso jums, o veikiančią versiją matote kas savaitę.",
       ],
     },
   ],
   evidence: [],
   faqTitle: "Dažni klausimai apie svetainės kainą",
-  // TODO(lukas): two more questions from the brief, left out until you
-  // confirm the answers: "Ar domenas ir talpinimas įskaičiuoti į kainą?" and
-  // "Ar galima mokėti dalimis?".
   faq: [
     {
       q: "Kodėl svetainių kainos taip skiriasi?",
@@ -588,6 +561,14 @@ export const PRICE_PAGE = {
     {
       q: "Ar kaina gali pasikeisti darbo eigoje?",
       a: "Ne, jei nesikeičia darbų apimtis. Kainą ir terminą sutariame raštu prieš pradedant. Jei darbų eigoje panorėsite ko nors papildomai, pirmiausia pasakysiu, kiek tai kainuotų, ir darysiu tik jums sutikus.",
+    },
+    {
+      q: "Ar domenas ir talpinimas įskaičiuoti į kainą?",
+      a: "Taip, pirmiems metams. Domeną registruoju jūsų vardu, o pirmų metų domeno ir talpinimo mokestis jau įeina į svetainės kainą. Vėliau domeną pratęsiate registratoriui, o talpinimas įeina į priežiūros planą.",
+    },
+    {
+      q: "Ar galima mokėti dalimis?",
+      a: "Taip, dviem dalimis: 50 % prieš pradedant darbus ir 50 %, kai svetainė paleidžiama.",
     },
     {
       q: "Kiek kainuoja svetainės priežiūra?",
