@@ -458,7 +458,7 @@ export const PRICE_PAGE = {
         "Domenas, svetainė ir visi failai priklauso jums",
       ],
       after: [
-        "Verslo svetainėje papildomai galite patys keisti tekstus ir nuotraukas, nelaukdami programuotojo.",
+        "Verslo svetainei, jei reikia, sukuriu ir redagavimo skydą, kad tekstus ir nuotraukas galėtumėte keisti patys, nelaukdami programuotojo. Ar jo reikia, sutariame prieš pradedant.",
       ],
     },
     {

@@ -222,7 +222,8 @@ entity no longer lists them beside "Elektroninių parduotuvių kūrimas".
 - FAQ JSON-LD = visible FAQs on every page: / 11, /en 11, e-shop 5,
   atnaujinimas 4, priežiūra 5, sistemos 3, kainos 7.
 
-### Open
-`inc_editing` ("Tekstus ir nuotraukas keičiate patys") is still promised in the
-business-site package (home cards and the price page). For custom builds that
-needs an editing tool, like the shop admin panel. Confirm with Lukas.
+### Self-editing (resolved)
+Lukas: "depends on project". The business package line (`inc_editing`), the
+home FAQ "Ar galėsiu pats keisti tekstus ir nuotraukas?" (LT and EN) and the
+price page's "Kas įeina" note now say an editing panel is built when the
+project needs it, agreed before work starts.
