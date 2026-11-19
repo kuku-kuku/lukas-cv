@@ -140,8 +140,9 @@ allowed. Check its terms, or use the paid Solo tier.
   - In this build it affected `/darbai` and `/svetainiu-kurimo-kaina`; which
     pages are hit depends only on where letters land.
   - `scripts/finish-build.mjs` now strips these bytes after every build.
-  - The proper fix is upgrading `react`/`react-dom` to 18.3.1. That is a
-    dependency change, so it waits for approval.
+  - Upgrading to react-dom 18.3.1 was tried and does **not** fix it: that
+    version has the same buffer code, so the upgrade was reverted. The real
+    fix only comes with React 19. Until then, the post-build step handles it.
 - **The site-wide JSON-LD graph is on every page,** including `/en`, as before.
   The LT business description appears on `/en` as well.
 

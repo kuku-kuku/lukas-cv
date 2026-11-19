@@ -14,8 +14,9 @@
  *    (š, ž, ū...) does not fit at the end of a chunk it flushes the whole
  *    buffer, unused zero byte included. The text around it is intact, so the
  *    NUL is pure padding: in the HTML it shows up in crawled text and makes
- *    hydration see a text mismatch. Fixed upstream in react-dom 18.3; this
- *    step can go once the project is on it.
+ *    hydration see a text mismatch. react-dom 18.3.1 has the same code (checked
+ *    2026-11-19); React 19's server renderer chunks differently. Keep this
+ *    step until the project moves to React 19, then check the build output.
  *
  * Runs as part of `npm run build`.
  */
